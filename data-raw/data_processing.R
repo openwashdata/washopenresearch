@@ -3,6 +3,8 @@ library(readr)
 library(stringr)
 library(dplyr)
 
+
+# WASHDEV DATA -----------------------------------------------------------
 washdev <- read_csv("data-raw/washdev.csv")[2:28]
 # clean country/region names ---------------------------------------------------
 ## first author
@@ -34,7 +36,13 @@ washdev <- washdev |>
 
 
 # UNCNEWSLETTER DATA -----------------------------------------------------------
-manual <- readr::read_csv("./data-raw/unc-article-url-manual-collection.csv")
+uncnewsletter <- readr::read_csv("./data-raw/unc-article-url-manual-collection.csv")
+
+## Tidy column format
+uncnewsletter <- uncnewsletter |>
+  dplyr::rename(paperid = `...1`) |>
+  dplyr::mutate(paper_info = NULL) |>
+  dplyr::mutate(supp_file_type = stringr::str_to_lower(supp_file_type))
 
 usethis::use_data(washdev, overwrite = TRUE)
 usethis::use_data(uncnewsletter, overwrite = TRUE)
