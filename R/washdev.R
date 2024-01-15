@@ -13,12 +13,12 @@
 #'   \item{num_authors}{Number of the authors}
 #'   \item{first_author_name}{Name of the first author}
 #'   \item{first_author_affiliation}{Academic affiliation of the first author}
-#'   \item{first_author_affiliation_country}{Country or region of the first author parsed from first_author_affiliation variable}
+#'   \item{first_author_affiliation_region}{Country or region of the first author parsed from first_author_affiliation variable}
 #'   \item{first_author_email}{Email of the first author}
 #'   \item{first_author_orcid}{ORCID of the first author}
 #'   \item{correspondence_author_name}{Name of the correspondence author}
 #'   \item{correspondence_author_affiliation}{Academic affiliation of the correspondence author}
-#'   \item{correspondence_author_affiliation_country}{Country or region of the correspondence author parsed from correspondence_author_affiliation variable}
+#'   \item{correspondence_author_affiliation_region}{Country or region of the correspondence author parsed from correspondence_author_affiliation variable}
 #'   \item{correspondence_author_email}{Email of the correspondence author}
 #'   \item{correspondence_author_orcid}{ORCID of the correspondence author}
 #'   \item{has_das}{Whether the paper has a data availability statement}
