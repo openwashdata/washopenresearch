@@ -47,8 +47,8 @@ uncnewsletter <- readr::read_csv("./data-raw/unc-article-url-manual-collection.c
 
 ## Tidy column format
 uncnewsletter <- uncnewsletter |>
-  dplyr::rename(paperid = `...1`) |>
   dplyr::mutate(paper_info = NULL) |>
+  dplyr::filter(!is.na(title)) |>
   dplyr::mutate(supp_file_type = stringr::str_to_lower(supp_file_type))
 
 usethis::use_data(washdev, overwrite = TRUE)
