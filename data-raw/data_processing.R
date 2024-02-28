@@ -51,5 +51,14 @@ uncnewsletter <- uncnewsletter |>
   dplyr::filter(!is.na(title)) |>
   dplyr::mutate(supp_file_type = stringr::str_to_lower(supp_file_type))
 
+# Write to R data object -------------------------------------------------------
 usethis::use_data(washdev, overwrite = TRUE)
 usethis::use_data(uncnewsletter, overwrite = TRUE)
+
+# Export processed data to csv and xlsx files ----------------------------------
+readr::write_csv(washdev, here::here("inst", "extdata", "washdev.csv"))
+openxlsx::write.xlsx(washdev, here::here("inst", "extdata", "washdev.xlsx"))
+
+readr::write_csv(uncnewsletter, here::here("inst", "extdata", "uncnewsletter.csv"))
+openxlsx::write.xlsx(uncnewsletter, here::here("inst", "extdata", "uncnewsletter.xlsx"))
+
