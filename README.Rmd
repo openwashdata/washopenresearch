@@ -1,5 +1,10 @@
 ---
 output: github_document
+always_allow_html: true
+editor_options: 
+  markdown: 
+    wrap: 72
+  chunk_output_type: console
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -19,6 +24,8 @@ library(tidyverse)
 
 <!-- badges: start -->
 
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+
 <!-- badges: end -->
 
 The goal of washopenresearch is to provide an overview of open research data related to Water Sanitation and Hygiene (WASH). The current version contains two datasets from the following sources:
@@ -37,8 +44,7 @@ You can install the development version of washopenresearch from [GitHub](https:
 devtools::install_github("openwashdata/washopenresearch")
 ```
 
-Alternatively, you can download the individual datasets as a CSV or XLSX
-file from the table below.
+Alternatively, you can download the individual datasets as a CSV or XLSX file from the table below.
 
 ```{r, echo=FALSE}
 
@@ -57,23 +63,90 @@ read_csv("data-raw/dictionary.csv") |>
 ```
 
 ## Data
-The package provides access to two datasets `washdev` and `uncnewsletter`. Each dataset collects information on scientific articles about (1) article metadata (e.g. title, first author, correspondence author), (2)supplementary material information, (3) data availability statement, and (4) semantic information (e.g. keywords)
+
+The package provides access to two datasets `washdev` and `uncnewsletter`. Each dataset collects information on scientific articles about (1) article metadata (e.g. title, first author, correspondence author), (2) supplementary material information, (3) data availability statement, and (4) semantic information (e.g. keywords)
 
 ```{r}
 library(washopenresearch)
 ```
 
 ### washdev
+
 The dataset `washdev` contains data on open access articles of the *Journal of Water, Sanitation & Hygiene for Development* (Vol.1 Issue 1 - Vol.13 Issue 11). It has 924 observations from March 2011 to November 2023.
 
+```{r}
+washdev |> 
+  head() |> 
+  gt::gt()
+```
+
+For an overview of the variable names, see the following table.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+readr::read_csv("data-raw/dictionary.csv") |>
+  dplyr::filter(file_name == "washdev.rda") |>
+  dplyr::select(variable_name:description) |> 
+  knitr::kable() |> 
+  kableExtra::kable_styling() |> 
+  kableExtra::scroll_box(height = "400px")
+```
+
 ### uncnewsletter
-The dataset `uncnewsletter` contains data on a curated list of articles published at the Research section of the newsletter North Carolina Water News. 
+
+The dataset `uncnewsletter` contains data on a curated list of articles published at the Research section of the newsletter North Carolina Water News.
+
+```{r}
+uncnewsletter |> 
+  head() |> 
+  gt::gt()
+```
+
+For an overview of the variable descriptions, see the following table.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+readr::read_csv("data-raw/dictionary.csv") |>
+  dplyr::filter(file_name == "uncnewsletter.rda") |>
+  dplyr::select(variable_name:description) |> 
+  knitr::kable() |> 
+  kableExtra::kable_styling() |> 
+  kableExtra::scroll_box(height = "400px")
+```
 
 ## Example
 
-```{r example}
+What are the top 10 countries(or regions) the first authors from?
+
+```{r}
 library(washopenresearch)
-## basic example code
+
+washdev |> 
+  group_by(first_author_affiliation_region) |>
+  summarise(count=n()) |>
+  arrange(desc(count)) |>
+  head(10) |>
+  ggplot() +
+    geom_bar(aes(x = first_author_affiliation_region, y = count), stat = "identity")
+```
+
+What are the top choices of keywords in WASH Dev?
+
+Each publication may provide a list of keywords, typically 5-7, to summarize the topics of the article. Here we compile all keywords and calculate their frequency to be used.
+
+```{r, echo=TRUE}
+keywords_freq <- washdev$keywords |>
+    purrr::map(function(x) str_extract_all(x, pattern = "(?<=')[^',]*?(?='\\s*)")[[1]]) |>
+    unlist() |>
+    str_to_lower() |>
+  table() |>
+  as.data.frame() |>
+  as_tibble() |>
+  arrange(desc(Freq))
+
+# Top 30 keywords
+ggplot(data = head(keywords_freq, 30)) +
+  geom_bar(aes(x = reorder(Var1, Freq), y=Freq), stat = "identity") +
+  coord_flip() +
+  labs(x = "Keywords", y = "Count")
 ```
 
 ## License
@@ -81,9 +154,9 @@ library(washopenresearch)
 Data are available as [CC-BY](https://github.com/openwashdata/wasteskipsblantyre/blob/main/LICENSE.md).
 
 ## Citation
+
 Please cite this package using:
 
 ```{r}
 citation("washopenresearch")
 ```
-
