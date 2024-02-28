@@ -2,3 +2,9 @@
 ^washopenresearch\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
+^README\.Rmd$
+^CITATION\.cff$
+^vignettes/articles$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
