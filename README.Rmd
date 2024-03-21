@@ -91,7 +91,7 @@ library(washopenresearch)
 
 The dataset `washdev` contains data on open access articles of the
 *Journal of Water, Sanitation & Hygiene for Development* (Vol.1 Issue
-1 - Vol.13 Issue 11). It has `nrow(washdev)` observations from March 2011 to
+1 - Vol.13 Issue 11). It has `r nrow(washdev)` observations from March 2011 to
 November 2023.
 
 ```{r}
@@ -116,7 +116,7 @@ readr::read_csv("data-raw/dictionary.csv") |>
 
 The dataset `uncnewsletter` contains data on a curated list of articles
 published at the Research section of the newsletter North Carolina Water
-News. It has `nrow(uncnewsletter)` observations from 2020 to 2023.
+News. It has `r nrow(uncnewsletter)` observations from 2020 to 2023.
 
 ```{r}
 uncnewsletter |> 
