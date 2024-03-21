@@ -41,6 +41,10 @@ washdev <- washdev |>
   mutate(das_type = str_replace(das_type, pattern = ".*available on Zenodo.*", replacement = "available in online repository")) |>
   mutate(das_type = str_replace(das_type, pattern = "^All relevant data are included in the paper.*", replacement = "in paper")) |>
   mutate(das_type = str_replace(das_type, pattern = ".+readers should contact the corresponding author.*", replacement = "on request"))
+# modify supp type into list-column
+washdev <- washdev |>
+  mutate(supp_file_type = strsplit(supp_file_type, " & "))
+
 
 # UNCNEWSLETTER DATA -----------------------------------------------------------
 uncnewsletter <- readr::read_csv("./data-raw/unc-article-url-manual-collection.csv")
@@ -49,7 +53,9 @@ uncnewsletter <- readr::read_csv("./data-raw/unc-article-url-manual-collection.c
 uncnewsletter <- uncnewsletter |>
   dplyr::mutate(paper_info = NULL) |>
   dplyr::filter(!is.na(title)) |>
-  dplyr::mutate(supp_file_type = stringr::str_to_lower(supp_file_type))
+  dplyr::mutate(supp_file_type = stringr::str_to_lower(supp_file_type)) |>
+  tidyr::replace_na(num_supp, 0) |>
+  mutate(supp_file_type = strsplit(supp_file_type, " & "))
 
 # Write to R data object -------------------------------------------------------
 usethis::use_data(washdev, overwrite = TRUE)

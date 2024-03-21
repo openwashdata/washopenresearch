@@ -207,6 +207,9 @@ publication, we retrieve the needed variables from the publication's
 html file. The retrieval is rule-based to find relevant fields (e.g.
 supplementary materials) and extract the value.
 
+To reproduce the collection, you need to have python3 installed. Python
+libraries `beautifulsoup`
+
 ### uncnewsletter
 
 The collection of `uncnewsletter` is a combination of web scraping and
@@ -228,4 +231,3 @@ Please cite this package using:
 ```{r}
 citation("washopenresearch")
 ```
-
