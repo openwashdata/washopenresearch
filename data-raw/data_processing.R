@@ -3,6 +3,7 @@ library(readr)
 library(stringr)
 library(dplyr)
 library(countrycode)
+library(forcats)
 
 # WASHDEV DATA -----------------------------------------------------------
 washdev <- read_csv("data-raw/washdev.csv")[2:28]
@@ -29,6 +30,8 @@ tmp_region <- washdev |>
   filter(is.na(first_author_affiliation_region)) |>
   select(paperid, first_author_affiliation)
 print(tmp_region, n = nrow(tmp_region))
+
+
 ### Select to-be-fixed ids and annoate the values
 ids <- c(28744, 30021, 30022, 29809, 29810, 30281,
          30290, 30308, 30315, 30322, 30328, 30330,
@@ -54,18 +57,6 @@ washdev <- washdev |>
                               patter = "Canada .*",
                               replacement = "Canada"))
 
-cty_names <- unique(countryname_dict$country.name.en)
-tmp <- washdev |>
-  mutate(region = str_extract(first_author_affiliation_region, paste(cty_names, collapse = "|")))
-tmp <- tmp |>
-  filter(is.na(region)) |>
-  select(first_author_affiliation_region) |>
-  unique()
-# change data type -------------------------------------------------------------
-washdev <- washdev |>
-  dplyr::mutate(across(c(paperid, volume, issue, num_supp, num_authors), as.integer)) |>
-  dplyr::mutate(across(c(supp_file_type, das_type), as.factor))
-
 # modify das type --------------------------------------------------------------
 washdev <- washdev |>
   dplyr::mutate(das_type = str_replace(das_type, pattern = "^All relevant data are available from.*", replacement = "available in online repository")) |>
@@ -73,6 +64,11 @@ washdev <- washdev |>
   dplyr::mutate(das_type = str_replace(das_type, pattern = ".*available on Zenodo.*", replacement = "available in online repository")) |>
   dplyr::mutate(das_type = str_replace(das_type, pattern = "^All relevant data are included in the paper.*", replacement = "in paper")) |>
   dplyr::mutate(das_type = str_replace(das_type, pattern = ".+readers should contact the corresponding author.*", replacement = "on request"))
+
+# change data type -------------------------------------------------------------
+washdev <- washdev |>
+  dplyr::mutate(across(c(paperid, volume, issue, num_supp, num_authors), as.integer)) |>
+  dplyr::mutate(across(c(supp_file_type, das_type), as.factor))
 
 # modify supp type into list-column
 # washdev <- washdev |>
@@ -88,7 +84,12 @@ uncnewsletter <- uncnewsletter |>
   dplyr::filter(!is.na(title)) |>
   dplyr::mutate(supp_file_type = stringr::str_to_lower(supp_file_type)) |>
   dplyr::mutate(num_supp = tidyr::replace_na(num_supp, 0)) |>
-  mutate(supp_file_type = strsplit(supp_file_type, " & "))
+  dplyr::mutate(supp_file_type = strsplit(supp_file_type, " & "))
+
+uncnewsletter <- uncnewsletter |>
+  dplyr::mutate(das_type = str_replace(das_type, pattern = "data not sharable", replacement = "not shareable")) |>
+  dplyr::mutate(das_type = str_replace(das_type, pattern = "no datasets were generated during the study", replacement = "no data generated")) |>
+  dplyr::mutate(das_type = as.factor(das_type))
 
 # Write to R data object -------------------------------------------------------
 usethis::use_data(washdev, overwrite = TRUE)
