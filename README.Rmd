@@ -96,7 +96,7 @@ The dataset `washdev` contains data on open access articles of the
 
 ```{r}
 washdev |> 
-  head() |> 
+  head(3) |> 
   gt::gt() |>
   gt::as_raw_html()
 ```
@@ -109,7 +109,7 @@ readr::read_csv("data-raw/dictionary.csv") |>
   dplyr::select(variable_name:description) |> 
   knitr::kable() |> 
   kableExtra::kable_styling() |> 
-  kableExtra::scroll_box(height = "400px")
+  kableExtra::scroll_box(height = "200px")
 ```
 
 ### uncnewsletter
@@ -120,7 +120,7 @@ News. It has `r nrow(uncnewsletter)` observations from 2020 to 2023.
 
 ```{r}
 uncnewsletter |> 
-  head() |> 
+  head(3) |> 
   gt::gt() |>
   gt::as_raw_html()
 ```
@@ -133,7 +133,7 @@ readr::read_csv("data-raw/dictionary.csv") |>
   dplyr::select(variable_name:description) |> 
   knitr::kable() |> 
   kableExtra::kable_styling() |> 
-  kableExtra::scroll_box(height = "400px")
+  kableExtra::scroll_box(height = "200px")
 ```
 
 ## Example

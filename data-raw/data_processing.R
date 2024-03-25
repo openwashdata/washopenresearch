@@ -2,7 +2,7 @@
 library(readr)
 library(stringr)
 library(dplyr)
-
+library(countrycode)
 
 # WASHDEV DATA -----------------------------------------------------------
 washdev <- read_csv("data-raw/washdev.csv")[2:28]
@@ -15,8 +15,33 @@ washdev <- washdev |>
                               replacement = "")) |>
   dplyr::mutate(first_author_affiliation_region =
                   str_replace(string = first_author_affiliation_region,
-                              patter = "Canada .*",
-                              replacement = "Canada"))
+                              pattern = "Canada .*",
+                              replacement = "Canada")) |>
+  dplyr::mutate(first_author_affiliation_region =
+                  str_replace(string = first_author_affiliation_region,
+                              pattern = "USA?|U\\.S\\.A|((GA|MI|FL|CA).*)|(United States)",
+                              replacement = "United States of America")) |>
+  dplyr::mutate(first_author_affiliation_region =
+                  country_name(first_author_affiliation_region, to = "UN_en", fuzzy_match = FALSE))
+
+## Manual inspection on what affiliation can be fixed
+tmp_region <- washdev |>
+  filter(is.na(first_author_affiliation_region)) |>
+  select(paperid, first_author_affiliation)
+print(tmp_region, n = nrow(tmp_region))
+### Select to-be-fixed ids and annoate the values
+ids <- c(28744, 30021, 30022, 29809, 29810, 30281,
+         30290, 30308, 30315, 30322, 30328, 30330,
+         30323, 30357, 30072, 30431, 30438, 30126,
+         30432, 38048, 39044, 39027, 39033, 39028,
+         39043, 39034, 39039, 39035, 39014, 74015,
+         84262, 93160, 95562)
+washdev$first_author_affiliation_region[which(washdev$paperid %in% ids)] <- country_name(c("India", "Brazil", "Norway", "Australia", "Nepal", "Nigeria",
+                                                                                           "Fiji Islands", "United States of America", "Nepal", "India", "United Kingdom", "India",
+                                                                                           "New Zealand", "Australia", "Canada", "India", "United States of America", "United States of America",
+                                                                                           "Mexico", "China", "United Kingdom", "France", "Tanzania", "India",
+                                                                                           "Netherlands", "Brazil", "India", "Ethiopia", "South Africa", "Taiwan",
+                                                                                           "Nigeria", "The Democratic Republic of Congo", "Sri Lanka"), to = "UN_en")
 
 ## correspondence author
 washdev <- washdev |>
@@ -29,6 +54,13 @@ washdev <- washdev |>
                               patter = "Canada .*",
                               replacement = "Canada"))
 
+cty_names <- unique(countryname_dict$country.name.en)
+tmp <- washdev |>
+  mutate(region = str_extract(first_author_affiliation_region, paste(cty_names, collapse = "|")))
+tmp <- tmp |>
+  filter(is.na(region)) |>
+  select(first_author_affiliation_region) |>
+  unique()
 # change data type -------------------------------------------------------------
 washdev <- washdev |>
   dplyr::mutate(across(c(paperid, volume, issue, num_supp, num_authors), as.integer)) |>
