@@ -196,28 +196,34 @@ webshot("man/figures/wc.html", "man/figures/washdev_wordcloud.png", delay = 3)
 ## Method
 
 We describe the raw data collection procedure of each dataset in this
-section.
+section. To reproduce the collection, you need to have python3 installed
+and install python libraries
+
+```
+pip install requirements.txt
+```
 
 ### washdev
 
 The collection of `washdev` is via web scraping using Python. The script
-can be found in `inst/python`. First, each publication link is scraped
-from iterating the table of contents of all volumes. Then, for each
-publication, we retrieve the needed variables from the publication's
-html file. The retrieval is rule-based to find relevant fields (e.g.
-supplementary materials) and extract the value.
+can be found in `inst/python/washdev_scraping.py`. First, each publication link is scraped
+from iterating the table of contents of all volumes. This step delivers a table 
+containing the variables paper ID, volume number, issue number, publication url,
+journal title, publication title, and published year. This table will be merged 
+to get the final dataset.
 
-To reproduce the collection, you need to have python3 installed. Python
-libraries `beautifulsoup`
+Then, for each publication, we retrieve the needed variables from the publication's
+html file using the publication url. 
+The retrieval is rule-based to find relevant fields (e.g. supplementary materials) and extract the value.
 
 ### uncnewsletter
 
 The collection of `uncnewsletter` is a combination of web scraping and
 manual annotation. We first use the newsletter archive to scrape all
-publication website links. Two annotators worked on the manual
-extraction of the needed variables on these publications. For each
-publication, an annotator follows the guide to fill in the value on an
-collaborative spreadsheet.
+publication website links. The code can be found at `inst/python/uncnewsletter_scraping.py`. 
+Two annotators worked on the manual extraction of the needed variables on these publications. 
+For each publication, an annotator follows the guide to fill in the value on an collaborative spreadsheet. 
+The guide is converted into the data dictionary for this dataset.
 
 ## License
 
