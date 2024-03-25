@@ -23,7 +23,7 @@ data,washdev.rda,correspondence_author_email,character,Email of the corresponden
 data,washdev.rda,correspondence_author_orcid,character,ORCID of the correspondence author
 data,washdev.rda,has_das,logical,Whether the paper has a data availability statement
 data,washdev.rda,das,character,Original data availability statement of the paper
-data,washdev.rda,das_type,factor,Type of the data availability statement #todo
+data,washdev.rda,das_type,factor,Type of the data availability statement including "in paper" "on request" "available in online repository" "not sharable" "NA"
 data,washdev.rda,das_repo_url,character,Website url of the data if the relevant data of the paper is shared on a public repository
 data,washdev.rda,keywords,vector,List of keywords of the paper
 data,uncnewsletter.rda,paperid,integer,ID number of the paper on the journal website
