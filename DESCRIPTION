@@ -1,9 +1,14 @@
 Package: washopenresearch
 Title: Dataset about open research data information in Water, Sanitation, and Hygiene
 Version: 0.0.1
-Authors@R: 
+Authors@R: c(
     person("Mian", "Zhong", , "mzhong@ethz.ch", role = c("aut", "cre"),
-           comment = c(ORCID = "0009-0009-4546-7214"))
+           comment = c(ORCID = "0009-0009-4546-7214")),
+    person("Ludwig", "Luz", , "lluz@ethz.ch", role = "aut",
+           comment = c(ORCID = "0009-0007-9248-3204")),
+    person("Lars", "Schöbitz", , "lschoebitz@ethz.ch", role = "aut",
+           comment = c(ORCID = "0000-0003-2196-5015"))
+  )
 Description: The goal of washopenresearch is to provide an overview of open research data related to Water Sanitation and Hygiene (WASH). The package provides access to two datasets `washdev` and `uncnewsletter`. Each dataset collects information on scientific articles about (1) article metadata (e.g. title, first author, correspondence author), (2) supplementary material information, (3) data availability statement, and (4) semantic information (e.g. keywords).
 License: CC BY 4.0
 Encoding: UTF-8
