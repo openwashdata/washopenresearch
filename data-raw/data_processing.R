@@ -57,7 +57,7 @@ washdev <- washdev |>
                               patter = "Canada .*",
                               replacement = "Canada"))
 
-# modify das type --------------------------------------------------------------
+## modify das type -------------------------------------------------------------
 washdev <- washdev |>
   dplyr::mutate(das_type = str_replace(das_type, pattern = "^All relevant data are available from.*", replacement = "available in online repository")) |>
   dplyr::mutate(das_type = str_replace(das_type, pattern = "^All relevant data used in this study are available from online repositories.*", replacement = "available in online repository")) |>
@@ -65,7 +65,7 @@ washdev <- washdev |>
   dplyr::mutate(das_type = str_replace(das_type, pattern = "^All relevant data are included in the paper.*", replacement = "in paper")) |>
   dplyr::mutate(das_type = str_replace(das_type, pattern = ".+readers should contact the corresponding author.*", replacement = "on request"))
 
-# change data type -------------------------------------------------------------
+## change data type ------------------------------------------------------------
 washdev <- washdev |>
   dplyr::mutate(across(c(paperid, volume, issue, num_supp, num_authors), as.integer)) |>
   dplyr::mutate(across(c(supp_file_type, das_type), as.factor))
@@ -74,6 +74,12 @@ washdev <- washdev |>
 # washdev <- washdev |>
 #  dplyr::mutate(supp_file_type = strsplit(supp_file_type, " & "))
 # manually added misc stuff
+
+## create and rename columns to be uniform with other datasets -----------------
+washdev <- washdev |>
+  dplyr::rename(paper_url = url) |>
+  dplyr::mutate(url_source = "iwaponline.com")
+
 
 # UNCNEWSLETTER DATA -----------------------------------------------------------
 uncnewsletter <- readr::read_csv("./data-raw/unc-article-url-manual-collection.csv")
@@ -90,6 +96,14 @@ uncnewsletter <- uncnewsletter |>
   dplyr::mutate(das_type = str_replace(das_type, pattern = "data not sharable", replacement = "not shareable")) |>
   dplyr::mutate(das_type = str_replace(das_type, pattern = "no datasets were generated during the study", replacement = "no data generated")) |>
   dplyr::mutate(das_type = as.factor(das_type))
+
+uncnewsletter <- uncnewsletter |>
+  dplyr::mutate(das_repo_url = str_extract(das_repo_url, "(?<=\\[)(.*?)(?=\\]\\s*)")) |>
+  dplyr::mutate(das_repo_url = strsplit(das_repo_url, ","))
+
+## create and rename columns to be uniform with other datasets -----------------
+uncnewsletter <- uncnewsletter |>
+  dplyr::rename(supp_url = supp_link)
 
 # Write to R data object -------------------------------------------------------
 usethis::use_data(washdev, overwrite = TRUE)
