@@ -129,6 +129,8 @@ washdev <- washdev |>
   ### modify supp url ----------------------------------------------------------
   dplyr::mutate(supp_url = na_if(supp_url, "[]")) |>
   dplyr::mutate(supp_url = purrr::map(supp_url, function(x) str_extract_all(x, pattern = "(?<=')[^',]*?(?='\\s*)")[[1]])) |>
+  dplyr::mutate(keywords = na_if(keywords, "[]")) |>
+  ### modify keywords ----------------------------------------------------------
   dplyr::mutate(keywords = purrr::map(keywords, function(x) str_extract_all(x, pattern = "(?<=')[^',]*?(?='\\s*)")[[1]]))
 
 
@@ -174,7 +176,10 @@ uncnewsletter <- uncnewsletter |>
   dplyr::mutate(das_repo_url = str_extract(das_repo_url, "(?<=\\[)(.*?)(?=\\]\\s*)")) |>
   dplyr::mutate(das_repo_url = strsplit(das_repo_url, ",")) |>
   ### Make keywords a list-column ----------------------------------------------
-  dplyr::mutate(keywords = purrr::map(keywords, function(x) str_extract_all(x, pattern = "(?<=')[^',]*?(?='\\s*)")[[1]]))
+  dplyr::mutate(keywords = na_if(keywords, "[]")) |>
+  dplyr::mutate(keywords = str_replace_all(keywords, " ", "")) |>
+  dplyr::mutate(keywords = str_replace_all(keywords, "\"", "'")) |>
+  dplyr::mutate(keywords = purrr::map(keywords, function(x) str_extract_all(x, pattern = "(?<=')[^', ]*?(?='\\s*)")[[1]]))
 
 ## Unify DAS type --------------------------------------------------------------
 uncnewsletter <- uncnewsletter |>
@@ -195,9 +200,13 @@ usethis::use_data(washdev, overwrite = TRUE)
 usethis::use_data(uncnewsletter, overwrite = TRUE)
 
 # Export processed data to csv and xlsx files ----------------------------------
-readr::write_csv(washdev, here::here("inst", "extdata", "washdev.csv"))
-openxlsx::write.xlsx(washdev, here::here("inst", "extdata", "washdev.xlsx"))
+washdev_ext <- washdev |>
+  dplyr::mutate(across(c(supp_file_type, supp_url, das_repo_url, keywords), as.character))
+readr::write_csv(washdev_ext, here::here("inst", "extdata", "washdev.csv"))
+openxlsx::write.xlsx(washdev_ext, here::here("inst", "extdata", "washdev.xlsx"))
 
-readr::write_csv(uncnewsletter, here::here("inst", "extdata", "uncnewsletter.csv"))
-openxlsx::write.xlsx(uncnewsletter, here::here("inst", "extdata", "uncnewsletter.xlsx"))
+uncnewsletter_ext <- uncnewsletter |>
+  dplyr::mutate(across(c(supp_file_type, supp_url, das_repo_url, keywords), as.character))
+readr::write_csv(uncnewsletter_ext, here::here("inst", "extdata", "uncnewsletter.csv"))
+openxlsx::write.xlsx(uncnewsletter_ext, here::here("inst", "extdata", "uncnewsletter.xlsx"))
 

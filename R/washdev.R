@@ -1,4 +1,7 @@
-#' Dataset about data availability in the Journal of Water, Sanitation and Hygiene for Development}
+#' Dataset about data availability in the Journal of Water, Sanitation and Hygiene for Development
+#'
+#' @format ## `washdev`
+#'
 #' \describe{
 #'   \item{paperid}{ID number of the paper on the journal website}
 #'   \item{volume}{Volume number of the journal}
