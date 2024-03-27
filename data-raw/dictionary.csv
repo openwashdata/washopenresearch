@@ -40,16 +40,16 @@ data,uncnewsletter.rda,supp_url,character,Website url of the supplementary mater
 data,uncnewsletter.rda,num_authors,integer,Number of the authors
 data,uncnewsletter.rda,first_author_name,character,Name of the first author
 data,uncnewsletter.rda,first_author_affiliation,character,Academic affiliation of the first author
-data,uncnewsletter.rda,first_author_affiliation_region,character,Country or region of the first author parsed from first_author_affiliation variable
+data,uncnewsletter.rda,first_author_affiliation_country,character,Country of the first author directly parsed from first_author_affiliation variable encoded with United Nation names
 data,uncnewsletter.rda,first_author_email,character,Email of the first author
 data,uncnewsletter.rda,first_author_orcid,character,ORCID of the first author
 data,uncnewsletter.rda,correspondence_author_name,character,Name of the correspondence author
 data,uncnewsletter.rda,correspondence_author_affiliation,character,Academic affiliation of the correspondence author
-data,uncnewsletter.rda,correspondence_author_affiliation_region,character,Country or region of the correspondence author parsed from correspondence_author_affiliation variable
+data,uncnewsletter.rda,correspondence_author_affiliation_country,character,Country or region of the correspondence author directly parsed from correspondence_author_affiliation variable encoded with United Nation names
 data,uncnewsletter.rda,correspondence_author_email,character,Email of the correspondence author
 data,uncnewsletter.rda,correspondence_author_orcid,character,ORCID of the correspondence author
 data,uncnewsletter.rda,has_das,logical,Whether the paper has a data availability statement
 data,uncnewsletter.rda,das,character,Original data availability statement of the paper
-data,uncnewsletter.rda,das_type,factor,Type of the data availability statement #todo
+data,uncnewsletter.rda,das_type,factor,Type of the data availability statement including "in paper"(data in full paper scope like supplementary material or appendix or main content) "on request"(data available on request to the authors) "available in online repository"(data is shared in a public online repository) ""
 data,uncnewsletter.rda,das_repo_url,character,Website url of the data if the relevant data of the paper is shared on a public repository
 data,uncnewsletter.rda,keywords,vector,List of keywords of the paper
