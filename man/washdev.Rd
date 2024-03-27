@@ -3,11 +3,12 @@
 \docType{data}
 \name{washdev}
 \alias{washdev}
-\title{\describe{
+\title{Dataset about data availability in the Journal of Water, Sanitation and Hygiene for Development}
+\describe{
 \item{paperid}{ID number of the paper on the journal website}
 \item{volume}{Volume number of the journal}
 \item{issue}{Issue number of the journal}
-\item{url}{Official website url of the paper}
+\item{paper_url}{Official website url of the paper}
 \item{journal}{Full name of the journal}
 \item{title}{Title of the paper}
 \item{published_year}{Year of publication}
@@ -27,23 +28,24 @@
 \item{correspondence_author_email}{Email of the correspondence author}
 \item{correspondence_author_orcid}{ORCID of the correspondence author}
 \item{has_das}{Whether the paper has a data availability statement}
-\item{das}{Original data availability statement of the paper}
-\item{das_type}{Type of the data availability statement #todo}
+\item{das}{Original data availability statement of the paper.  NA if it does not have a data availability statement.}
+\item{das_type}{Type of the data availability statement including in paper(data in full paper scope like supplementary material or appendix or main content) on request(data available on request to the authors) available in online repository(data is shared in a public online repository) not shareable(data is not shareable). NA if it does not have a data availability statement.}
 \item{das_repo_url}{Website url of the data if the relevant data of the paper is shared on a public repository}
 \item{keywords}{List of keywords of the paper}
 }}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 924 rows and 27 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 924 rows and 28 columns.
 }
 \usage{
 washdev
 }
 \description{
+Dataset about data availability in the Journal of Water, Sanitation and Hygiene for Development}
 \describe{
 \item{paperid}{ID number of the paper on the journal website}
 \item{volume}{Volume number of the journal}
 \item{issue}{Issue number of the journal}
-\item{url}{Official website url of the paper}
+\item{paper_url}{Official website url of the paper}
 \item{journal}{Full name of the journal}
 \item{title}{Title of the paper}
 \item{published_year}{Year of publication}
@@ -63,8 +65,8 @@ washdev
 \item{correspondence_author_email}{Email of the correspondence author}
 \item{correspondence_author_orcid}{ORCID of the correspondence author}
 \item{has_das}{Whether the paper has a data availability statement}
-\item{das}{Original data availability statement of the paper}
-\item{das_type}{Type of the data availability statement #todo}
+\item{das}{Original data availability statement of the paper.  NA if it does not have a data availability statement.}
+\item{das_type}{Type of the data availability statement including in paper(data in full paper scope like supplementary material or appendix or main content) on request(data available on request to the authors) available in online repository(data is shared in a public online repository) not shareable(data is not shareable). NA if it does not have a data availability statement.}
 \item{das_repo_url}{Website url of the data if the relevant data of the paper is shared on a public repository}
 \item{keywords}{List of keywords of the paper}
 }

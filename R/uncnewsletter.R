@@ -1,3 +1,4 @@
+#' Dataset about data availability in the UNC Water Newsletter
 #' \describe{
 #'   \item{url_source}{Publisher website of the paper}
 #'   \item{paperid}{ID number of the paper on the journal website}
