@@ -66,10 +66,10 @@ washdev |>
   gt::as_raw_html()
 ```
 
-<div id="eefzyxuuyg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="hpnofkwkga" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   &#10;  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
-    &#10;    <tr class="gt_col_headings" style="border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;">
+    <tr class="gt_col_headings" style="border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;">
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="paperid" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: right; font-variant-numeric: tabular-nums;" bgcolor="#FFFFFF" valign="bottom" align="right">paperid</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="volume" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: right; font-variant-numeric: tabular-nums;" bgcolor="#FFFFFF" valign="bottom" align="right">volume</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="issue" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: right; font-variant-numeric: tabular-nums;" bgcolor="#FFFFFF" valign="bottom" align="right">issue</th>
@@ -190,7 +190,7 @@ For an overview of the variable names, see the following table.
 
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; ">
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
+<table class="table" style="color: black; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -240,7 +240,7 @@ Issue number of the journal
 </tr>
 <tr>
 <td style="text-align:left;">
-url
+paper_url
 </td>
 <td style="text-align:left;">
 character
@@ -309,7 +309,7 @@ Number of supplementary material files
 supp_file_type
 </td>
 <td style="text-align:left;">
-character
+list
 </td>
 <td style="text-align:left;">
 File type of the supplementary materials
@@ -468,7 +468,8 @@ das
 character
 </td>
 <td style="text-align:left;">
-Original data availability statement of the paper
+Original data availability statement of the paper. NA if it does not
+have a data availability statement.
 </td>
 </tr>
 <tr>
@@ -479,8 +480,12 @@ das_type
 factor
 </td>
 <td style="text-align:left;">
-Type of the data availability statement including “in paper” “on
-request” “available in online repository” “not sharable” “NA”
+Type of the data availability statement including “in paper”(data in
+full paper scope like supplementary material or appendix or main
+content) “on request”(data available on request to the authors)
+“available in online repository”(data is shared in a public online
+repository) “not shareable”(data is not shareable). NA if it does not
+have a data availability statement.
 </td>
 </tr>
 <tr>
@@ -488,7 +493,7 @@ request” “available in online repository” “not sharable” “NA”
 das_repo_url
 </td>
 <td style="text-align:left;">
-character
+list
 </td>
 <td style="text-align:left;">
 Website url of the data if the relevant data of the paper is shared on a
@@ -500,10 +505,21 @@ public repository
 keywords
 </td>
 <td style="text-align:left;">
-vector
+list
 </td>
 <td style="text-align:left;">
 List of keywords of the paper
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+url_source
+</td>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:left;">
+Publisher website of the paper
 </td>
 </tr>
 </tbody>
@@ -524,10 +540,10 @@ uncnewsletter |>
   gt::as_raw_html()
 ```
 
-<div id="tawearzqpd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ebzvresonq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   &#10;  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
-    &#10;    <tr class="gt_col_headings" style="border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;">
+    <tr class="gt_col_headings" style="border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;">
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="paper_id" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: right; font-variant-numeric: tabular-nums;" bgcolor="#FFFFFF" valign="bottom" align="right">paper_id</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="issue_url" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: left;" bgcolor="#FFFFFF" valign="bottom" align="left">issue_url</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="paper_url" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: left;" bgcolor="#FFFFFF" valign="bottom" align="left">paper_url</th>
@@ -648,7 +664,7 @@ For an overview of the variable descriptions, see the following table.
 
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; ">
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
+<table class="table" style="color: black; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -676,7 +692,7 @@ ID number of the paper on the journal website
 </tr>
 <tr>
 <td style="text-align:left;">
-volume
+issue_url
 </td>
 <td style="text-align:left;">
 integer
@@ -687,24 +703,24 @@ Volume number of the journal
 </tr>
 <tr>
 <td style="text-align:left;">
-issue
-</td>
-<td style="text-align:left;">
-integer
-</td>
-<td style="text-align:left;">
-Issue number of the journal
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-url
+paper_url
 </td>
 <td style="text-align:left;">
 character
 </td>
 <td style="text-align:left;">
 Official website url of the paper
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+url_source
+</td>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:left;">
+Publisher website of the paper
 </td>
 </tr>
 <tr>
@@ -767,7 +783,7 @@ Number of supplementary material files
 supp_file_type
 </td>
 <td style="text-align:left;">
-character
+list
 </td>
 <td style="text-align:left;">
 File type of the supplementary materials
@@ -778,7 +794,7 @@ File type of the supplementary materials
 supp_url
 </td>
 <td style="text-align:left;">
-character
+list
 </td>
 <td style="text-align:left;">
 Website url of the supplementary materials
@@ -819,14 +835,14 @@ Academic affiliation of the first author
 </tr>
 <tr>
 <td style="text-align:left;">
-first_author_affiliation_region
+first_author_affiliation_country
 </td>
 <td style="text-align:left;">
 character
 </td>
 <td style="text-align:left;">
-Country or region of the first author parsed from
-first_author_affiliation variable
+Country of the first author directly parsed from
+first_author_affiliation variable encoded with United Nation names
 </td>
 </tr>
 <tr>
@@ -875,14 +891,15 @@ Academic affiliation of the correspondence author
 </tr>
 <tr>
 <td style="text-align:left;">
-correspondence_author_affiliation_region
+correspondence_author_affiliation_country
 </td>
 <td style="text-align:left;">
 character
 </td>
 <td style="text-align:left;">
-Country or region of the correspondence author parsed from
-correspondence_author_affiliation variable
+Country or region of the correspondence author directly parsed from
+correspondence_author_affiliation variable encoded with United Nation
+names
 </td>
 </tr>
 <tr>
@@ -926,7 +943,8 @@ das
 character
 </td>
 <td style="text-align:left;">
-Original data availability statement of the paper
+Original data availability statement of the paper. NA if it does not
+have a data availability statement.
 </td>
 </tr>
 <tr>
@@ -937,7 +955,12 @@ das_type
 factor
 </td>
 <td style="text-align:left;">
-Type of the data availability statement \#todo
+Type of the data availability statement including “in paper”(data in
+full paper scope like supplementary material or appendix or main
+content) “on request”(data available on request to the authors)
+“available in online repository”(data is shared in a public online
+repository) “not shareable”(data is not shareable). NA if it does not
+have a data availability statement.
 </td>
 </tr>
 <tr>
@@ -945,7 +968,7 @@ Type of the data availability statement \#todo
 das_repo_url
 </td>
 <td style="text-align:left;">
-character
+list
 </td>
 <td style="text-align:left;">
 Website url of the data if the relevant data of the paper is shared on a
