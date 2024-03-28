@@ -145,15 +145,15 @@ readr::read_csv("data-raw/dictionary.csv") |>
 library(washopenresearch)
 
 washdev |> 
-  group_by(first_author_affiliation_region) |>
+  group_by(first_author_affiliation_country) |>
   summarise(count=n()) |>
   arrange(desc(count)) |>
   head(10) |>
   ggplot() +
-    geom_bar(aes(x = reorder(first_author_affiliation_region, count), y = count), stat = "identity") +
+    geom_bar(aes(x = reorder(first_author_affiliation_country, count), y = count), stat = "identity") +
    labs(title = "Top 10 countries of first author",
         subtitle = "in the Journal of Water, Sanitation and Hygiene for Development",
-        x = "First Author Region", y = "Count")
+        x = "First Author Country", y = "Count")
 ```
 
 2.  What are the top choices of keywords in WASH Dev?
@@ -232,7 +232,7 @@ dictionary for this dataset.
 ## License
 
 Data are available as
-[CC-BY](https://github.com/openwashdata/wasteskipsblantyre/blob/main/LICENSE.md).
+[CC-BY](https://github.com/openwashdata/washopenresearch/blob/main/LICENSE.md).
 
 ## Citation
 
