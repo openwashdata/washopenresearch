@@ -91,12 +91,12 @@ library(washopenresearch)
 
 The dataset `washdev` contains data on open access articles of the
 *Journal of Water, Sanitation & Hygiene for Development* (Vol.1 Issue
-1 - Vol.13 Issue 11). It has `r nrow(washdev)` observations from March 2011 to
-November 2023.
+1 - Vol.13 Issue 11). It has `r nrow(washdev)` observations from March
+2011 to November 2023.
 
 ```{r}
 washdev |> 
-  head() |> 
+  head(3) |> 
   gt::gt() |>
   gt::as_raw_html()
 ```
@@ -109,7 +109,7 @@ readr::read_csv("data-raw/dictionary.csv") |>
   dplyr::select(variable_name:description) |> 
   knitr::kable() |> 
   kableExtra::kable_styling() |> 
-  kableExtra::scroll_box(height = "400px")
+  kableExtra::scroll_box(height = "200px")
 ```
 
 ### uncnewsletter
@@ -120,7 +120,7 @@ News. It has `r nrow(uncnewsletter)` observations from 2020 to 2023.
 
 ```{r}
 uncnewsletter |> 
-  head() |> 
+  head(3) |> 
   gt::gt() |>
   gt::as_raw_html()
 ```
@@ -133,7 +133,7 @@ readr::read_csv("data-raw/dictionary.csv") |>
   dplyr::select(variable_name:description) |> 
   knitr::kable() |> 
   kableExtra::kable_styling() |> 
-  kableExtra::scroll_box(height = "400px")
+  kableExtra::scroll_box(height = "200px")
 ```
 
 ## Example
@@ -145,15 +145,15 @@ readr::read_csv("data-raw/dictionary.csv") |>
 library(washopenresearch)
 
 washdev |> 
-  group_by(first_author_affiliation_region) |>
+  group_by(first_author_affiliation_country) |>
   summarise(count=n()) |>
   arrange(desc(count)) |>
   head(10) |>
   ggplot() +
-    geom_bar(aes(x = reorder(first_author_affiliation_region, count), y = count), stat = "identity") +
+    geom_bar(aes(x = reorder(first_author_affiliation_country, count), y = count), stat = "identity") +
    labs(title = "Top 10 countries of first author",
         subtitle = "in the Journal of Water, Sanitation and Hygiene for Development",
-        x = "First Author Region", y = "Count")
+        x = "First Author Country", y = "Count")
 ```
 
 2.  What are the top choices of keywords in WASH Dev?
@@ -193,10 +193,46 @@ saveWidget(wc, "man/figures/wc.html", selfcontained = F)
 webshot("man/figures/wc.html", "man/figures/washdev_wordcloud.png", delay = 3)
 ```
 
+## Method
+
+We describe the raw data collection procedure of each dataset in this
+section. To reproduce the collection, you need to have python3 installed
+and install python libraries
+
+```         
+pip install requirements.txt
+```
+
+### washdev
+
+The collection of `washdev` is via web scraping using Python. The script
+can be found in `inst/python/washdev_scraping.py`. First, each
+publication link is scraped from iterating the table of contents of all
+volumes. This step delivers a table containing the variables paper ID,
+volume number, issue number, publication url, journal title, publication
+title, and published year. This table will be merged to get the final
+dataset.
+
+Then, for each publication, we retrieve the needed variables from the
+publication's html file using the publication url. The retrieval is
+rule-based to find the relevant fields (e.g. supplementary materials)
+and extract the value.
+
+### uncnewsletter
+
+The collection of `uncnewsletter` is a combination of web scraping and
+manual annotation. We first use the newsletter archive to scrape all
+publication website links. The code can be found at
+`inst/python/uncnewsletter_scraping.py`. Two annotators worked on the
+manual extraction of the needed variables on these publications. For
+each publication, an annotator follows the guide to fill in the value on
+an collaborative spreadsheet. The guide is converted into the data
+dictionary for this dataset.
+
 ## License
 
 Data are available as
-[CC-BY](https://github.com/openwashdata/wasteskipsblantyre/blob/main/LICENSE.md).
+[CC-BY](https://github.com/openwashdata/washopenresearch/blob/main/LICENSE.md).
 
 ## Citation
 
