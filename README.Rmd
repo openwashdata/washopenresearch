@@ -155,12 +155,12 @@ washdev |>
   ggplot() +
     geom_col(aes(x = reorder(first_author_affiliation_country, count), 
                  y = count)) +
-   labs(title = "Top 10 countries of first author",
+    labs(title = "Top 10 countries of first author",
         subtitle = "in the Journal of Water, Sanitation and Hygiene for Development",
         x = "First Author Country", y = "Count") +
-   scale_x_discrete(labels = scales::label_wrap(15))+
-   coord_flip() +
-   theme_classic()
+    scale_x_discrete(labels = scales::label_wrap(15))+
+    coord_flip() +
+    theme_classic()
 ```
 
 2.  What are the top choices of keywords in WASH Dev?
@@ -261,7 +261,7 @@ dictionary for this dataset.
 ## License
 
 Data are available as
-[CC-BY](https://github.com/openwashdata/wasteskipsblantyre/blob/main/LICENSE.md).
+[CC-BY](https://github.com/openwashdata/washopenresearch/blob/main/LICENSE.md).
 
 ## Citation
 
