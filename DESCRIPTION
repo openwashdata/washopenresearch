@@ -19,3 +19,5 @@ Depends:
 LazyData: true
 Config/Needs/website: rmarkdown
 Date: 2024-03-01
+URL: https://github.com/openwashdata/washopenresearch
+BugReports: https://github.com/openwashdata/washopenresearch/issues
