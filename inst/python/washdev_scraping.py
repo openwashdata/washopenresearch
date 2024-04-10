@@ -12,9 +12,6 @@ from tqdm import tqdm
 
 
 # This script contains the code of scraping the data of Journal of Water, Sanitation and Hygiene for Development. 
-headers = {
-    'User-Agent': 'user'
-} # need a header for authentification, otherwise get 403 back
 
 
 # # Overview of all journal issues
@@ -24,11 +21,10 @@ headers = {
 # as its first volume and made several changes on publication cycles. Since 2022, the journal publishes monthly.
 
 # table of contents 
-root = "https://iwaponline.com/washdev/issue" #volumne number/issue number
 
 def get_issue_page(root, volume_id, issue_id, headers = {"User-Agent": "user"}):
     """
-    
+    Retrieve an issue html content for WASH Development 
     """
     issue_url = os.path.join(root, str(volume_id), str(issue_id))
     page = requests.get(issue_url, headers=headers)
@@ -48,26 +44,6 @@ def get_issue_page(root, volume_id, issue_id, headers = {"User-Agent": "user"}):
         }
     return issue
 
-# volume 1 (2011) - volume 13 (2023)
-## Get all issues, access by volume 13 issue 11 
-num_vol = 13
-all_issues = []
-for vol in range(1, num_vol+1):
-    if vol <= 10:
-        for i in range(1, 5):
-            all_issues.append(get_issue_page(root, vol, i))
-            
-    elif vol == 11:
-        for i in range(1, 7):
-            all_issues.append(get_issue_page(root, vol, i))
-    else:
-        if vol == num_vol:
-            for i in range(1, datetime.datetime.today().month): ## last month 
-                all_issues.append(get_issue_page(root, vol, i))
-        else:
-            for i in range(1, 13):
-                all_issues.append(get_issue_page(root, vol, i))
-# TODO: update from current data, so we don't need to scrape all issues
 
 # Retrieve data of each publication on supplementary materials, author, and data availability statement
 # Supplementary data existence
@@ -126,6 +102,9 @@ def get_supp(soup):
 
 # First author (correspondence author) information
 def get_author_info(soup):
+    """
+    Collect metadata of first and correspondence author
+    """
     try:
         first_author = soup.find("div", {"class": "info-card-author"})
         if first_author is not None:
@@ -182,13 +161,18 @@ def get_author_info(soup):
     author = [num_authors] + first_author_info + corr_author_info
     return author
 
-
 # data availability statement variables
 def has_das(soup):
+    """
+    True if the publication has a data availability statement
+    """
     das = soup.find("h2", {"data-section-title": "DATA AVAILABILITY STATEMENT"})
     return True if das is not None else False
 
 def get_das_text(soup):
+    """
+    Get original text of data availability statement
+    """
     if has_das(soup):
         das = soup.find("h2", {"data-section-title": "DATA AVAILABILITY STATEMENT"})
         das_text = soup.find("div", {"data-section-parent-id": das["id"]}).text
@@ -198,8 +182,10 @@ def get_das_text(soup):
         das_text = None
     return das_text
 
-
 def get_das_repo(das):
+    """
+    Get online repository url if the data availability is online repository
+    """
     if das is not None:
         das = das.strip()
         online = "All relevant data are available from an online repository or repositories"
@@ -221,6 +207,9 @@ def get_das_repo(das):
     return repo
 
 def get_das_info(soup):
+    """
+    Collect all relevant metadata about data availability statement
+    """
     das_text = get_das_text(soup)
     das_type = None
     online = "All relevant data are available from an online repository or repositories"
@@ -231,9 +220,11 @@ def get_das_info(soup):
     das_repo_url = get_das_repo(das_text)
     return [has_das(soup), das_text, das_type, das_repo_url]
 
-    
 # Keywords
 def get_keywords(soup):
+    """
+    Get keywords of the publication
+    """
     keywords = []
     has_keyword = soup.find("div", {"class": "kwd-group"})
     if has_keyword:
@@ -250,20 +241,76 @@ def get_paper_metadata(url):
     metadata = get_supp(soup) + get_author_info(soup) + get_das_info(soup) + [get_keywords(soup)] 
     return metadata
 
+def get_issues(start_vol, end_vol, end_issue):
+    #end_issue = datetime.datetime.today().month - 1 ## last month from current date
+    issues = []
+    for vol in range(start_vol, end_vol+1):
+        if vol == end_vol:
+            if end_vol <= 10 and end_issue > 4:
+                raise AssertionError("Volume 1-10 only has 4 issues each, end_issue has to be smaller or equal to 4")
+            elif end_vol == 11 and end_issue > 6:
+                raise AssertionError("Volume 11 only has 6 issues, end_issue has to be smaller or equal to 6") 
+            else:
+                assert raise AssertionError("End_issue has to be smaller or equal to 12") 
+            for i in range(1, end_issue+1):
+              issues.append(get_issue_page(root, vol, i))
+        else:
+            if vol <= 10:
+                for i in range(1, 5):
+                    issues.append(get_issue_page(root, vol, i))
+            elif vol == 11:
+                for i in range(1, 7):
+                    issues.append(get_issue_page(root, vol, i))
+            else:
+                for i in range(1, 13):
+                    issues.append(get_issue_page(root, vol, i))
+    return issues
 
-# Main scraping 
-metadata = []
-for url in tqdm(overview_df["url"]):
-    metadata.append(get_paper_metadata(url))
-metadata_columns = ["is_supp", "num_supp", "supp_file_type", "supp_link",
+def build_overview_table(issues):
+    article_tbl = []
+    root = "https://iwaponline.com"
+    journal_name = "Journal of Water, Sanitation & Hygiene for Development"
+    for issue in issues:
+        issue_page = issue["page"]
+        soup = bs4.BeautifulSoup(issue_page, "html.parser")
+        article_list = soup.find("div", {"id":"ArticleList"})
+        articles = article_list.find_all("a", {"href":re.compile("/washdev/article/"), "class":None})
+        for a in articles:
+            url = root + a["href"]
+            title = a.text
+            data_resource_id = a.parent["data-resource-id-access"]
+            published_year = issue["volume"]+2010
+            article_tbl.append([data_resource_id, issue["volume"], issue["issue"], url, journal_name, title, published_year])
+    overview_df = pd.DataFrame(article_tbl, columns=['paperid', 'volume', 'issue', 'url', 'journal','title', 'published_year'])
+    return overview_df
+
+def build_metadata_table(overview_df):
+    metadata = []
+    for url in tqdm(overview_df["url"]):
+        metadata.append(get_paper_metadata(url))
+    metadata_columns = ["is_supp", "num_supp", "supp_file_type", "supp_link",
                     "num_authors", "first_author_name", "first_author_affiliation", "first_author_affiliation_country", 
                     "first_author_email", "first_author_orcid", "correspondence_author_name", "correspondence_author_affiliation",
                     "correspondence_author_affiliation_country", "correspondence_author_email", "correspondence_author_orcid",
                     "has_das", "das", "das_type", "das_repo_url", "keywords"]
-metadata_df = pd.DataFrame(metadata, columns=metadata_columns)
+    metadata_df = pd.DataFrame(metadata, columns=metadata_columns)
+    return metadata_df
 
-# Concatenate overview and metadata
-## TODO: revise
-article_df = pd.read_csv("../data/raw/washdev-article-overview.csv", index_col=0)
-metadata_df = pd.read_csv("../data/raw/washdev.csv", index_col=0)
-washdev_df = pd.concat([article_df, metadata_df], axis=1)
+if __name__ == "__main__":
+    # Main scraping
+    headers = {
+        'User-Agent': 'user'
+    } # need a header for authentification, otherwise get 403 back
+    root = "https://iwaponline.com/washdev/issue" # Structure: https://iwaponline.com/washdev/issue/volumne number/issue number
+
+    # volume 1 (2011) - volume 13 (2023)
+    ## Get all issues, v0.0.1 access by volume 13 issue 11 
+  
+    issues = get_issues(start_vol = 1, end_vol = 13, end_issue = 11)  
+    overview_df = build_overview_table(issues)
+    metadata_df = build_metadata_table(overview_df)
+  
+    # Concatenate overview and metadata
+    ## TODO: revise
+    washdev_df = pd.concat([overview_df, metadata_df], axis=1)
+    # TODO: update from current data, so we don't need to scrape all issues\
