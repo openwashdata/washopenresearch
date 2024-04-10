@@ -138,6 +138,8 @@ readr::read_csv("data-raw/dictionary.csv") |>
 
 ## Example
 
+### washdev
+
 1.  What are the top 10 countries(or regions) the first authors from in
     the *Journal of Water, Sanitation and Hygiene for Development*?
 
@@ -145,15 +147,20 @@ readr::read_csv("data-raw/dictionary.csv") |>
 library(washopenresearch)
 
 washdev |> 
-  group_by(first_author_affiliation_region) |>
+  filter(!is.na(first_author_affiliation_country)) |>
+  group_by(first_author_affiliation_country) |>
   summarise(count=n()) |>
   arrange(desc(count)) |>
   head(10) |>
   ggplot() +
-    geom_bar(aes(x = reorder(first_author_affiliation_region, count), y = count), stat = "identity") +
+    geom_col(aes(x = reorder(first_author_affiliation_country, count), 
+                 y = count)) +
    labs(title = "Top 10 countries of first author",
         subtitle = "in the Journal of Water, Sanitation and Hygiene for Development",
-        x = "First Author Region", y = "Count")
+        x = "First Author Country", y = "Count") +
+   scale_x_discrete(labels = scales::label_wrap(15))+
+   coord_flip() +
+   theme_classic()
 ```
 
 2.  What are the top choices of keywords in WASH Dev?
@@ -162,9 +169,8 @@ Each publication may provide a list of keywords, typically 5-7, to
 summarize the topics of the article. Here we compile all keywords and
 calculate their frequency to be used.
 
-```{r, echo=TRUE}
+```{r washdev_keyword_frequency, echo=TRUE}
 keywords_freq <- washdev$keywords |>
-    purrr::map(function(x) str_extract_all(x, pattern = "(?<=')[^',]*?(?='\\s*)")[[1]]) |>
     unlist() |>
     str_to_lower() |>
   table() |>
@@ -172,14 +178,15 @@ keywords_freq <- washdev$keywords |>
   as_tibble() |>
   arrange(desc(Freq))
 
-# Top 30 keywords
+# Top 20 keywords
 ggplot(data = head(keywords_freq, 20)) +
   geom_bar(aes(x = reorder(Var1, Freq), y=Freq), stat = "identity") +
   coord_flip() +
-  labs(title = "Top 20 Keywords in WASH Dev Journal", x = "Keywords", y = "Count")
+  labs(title = "Top 20 Keywords in WASH Dev Journal", x = "Keywords", y = "Count") +
+  theme_bw()
 ```
 
-```{r, echo=FALSE, eval=FALSE}
+```{r washdev_wordcloud, echo=FALSE, eval=FALSE}
 
 keywords_freq <- keywords_freq |>
   rename(word=Var1, freq=Freq) |>
@@ -191,6 +198,28 @@ library("htmlwidgets")
 # webshot::install_phantomjs()
 saveWidget(wc, "man/figures/wc.html", selfcontained = F)
 webshot("man/figures/wc.html", "man/figures/washdev_wordcloud.png", delay = 3)
+```
+
+### uncnewsletter
+
+1.  What are the top 10 source websites of the publications selected by
+    the newsletter?
+
+```{r}
+uncnewsletter |> 
+  group_by(url_source) |>
+  summarise(count=n()) |>
+  arrange(desc(count)) |>
+  head(10) |>
+  ggplot() +
+    geom_col(aes(x = reorder(url_source, count), 
+                 y = count)) +
+   labs(title = "Top 10 publication websites",
+        subtitle = "in the selection of North Carolina Water News",
+        x = "Website URL", y = "Count") +
+   scale_x_discrete(labels = scales::label_wrap(15))+
+   coord_flip() +
+   theme_classic()
 ```
 
 ## Method

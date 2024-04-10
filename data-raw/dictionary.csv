@@ -53,4 +53,4 @@ data,uncnewsletter.rda,has_das,logical,Whether the paper has a data availability
 data,uncnewsletter.rda,das,character,Original data availability statement of the paper. NA if it does not have a data availability statement.
 data,uncnewsletter.rda,das_type,factor,Type of the data availability statement including "in paper"(data in full paper scope like supplementary material or appendix or main content) "on request"(data available on request to the authors) "available in online repository"(data is shared in a public online repository) "not shareable"(data is not shareable). NA if it does not have a data availability statement.
 data,uncnewsletter.rda,das_repo_url,list,Website url of the data if the relevant data of the paper is shared on a public repository
-data,uncnewsletter.rda,keywords,vector,List of keywords of the paper
+data,uncnewsletter.rda,keywords,list,List of keywords of the paper
