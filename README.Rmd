@@ -108,7 +108,7 @@ readr::read_csv("data-raw/dictionary.csv") |>
   dplyr::filter(file_name == "washdev.rda") |>
   dplyr::select(variable_name:description) |> 
   knitr::kable() |> 
-  kableExtra::kable_styling() |> 
+  kableExtra::kable_styling("striped") |> 
   kableExtra::scroll_box(height = "200px")
 ```
 
@@ -132,9 +132,10 @@ readr::read_csv("data-raw/dictionary.csv") |>
   dplyr::filter(file_name == "uncnewsletter.rda") |>
   dplyr::select(variable_name:description) |> 
   knitr::kable() |> 
-  kableExtra::kable_styling() |> 
+  kableExtra::kable_styling("striped") |> 
   kableExtra::scroll_box(height = "200px")
 ```
+
 
 ## Example
 
