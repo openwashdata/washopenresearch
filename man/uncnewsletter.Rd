@@ -3,11 +3,16 @@
 \docType{data}
 \name{uncnewsletter}
 \alias{uncnewsletter}
-\title{\describe{
+\title{Dataset about data availability in the UNC Water Newsletter}
+\format{
+\subsection{\code{uncnewsletter}}{
+
+\describe{
+\item{url_source}{Publisher website of the paper}
 \item{paperid}{ID number of the paper on the journal website}
-\item{volume}{Volume number of the journal}
-\item{issue}{Issue number of the journal}
-\item{url}{Official website url of the paper}
+\item{issue_url}{Volume number of the journal}
+\item{paper_url}{Official website url of the paper}
+\item{url_source}{Publisher website of the paper}
 \item{journal}{Full name of the journal}
 \item{title}{Title of the paper}
 \item{published_year}{Year of publication}
@@ -18,55 +23,26 @@
 \item{num_authors}{Number of the authors}
 \item{first_author_name}{Name of the first author}
 \item{first_author_affiliation}{Academic affiliation of the first author}
-\item{first_author_affiliation_region}{Country or region of the first author parsed from first_author_affiliation variable}
+\item{first_author_affiliation_country}{Country of the first author directly parsed from first_author_affiliation variable encoded with United Nation names}
 \item{first_author_email}{Email of the first author}
 \item{first_author_orcid}{ORCID of the first author}
 \item{correspondence_author_name}{Name of the correspondence author}
 \item{correspondence_author_affiliation}{Academic affiliation of the correspondence author}
-\item{correspondence_author_affiliation_region}{Country or region of the correspondence author parsed from correspondence_author_affiliation variable}
+\item{correspondence_author_affiliation_country}{Country or region of the correspondence author directly parsed from correspondence_author_affiliation variable encoded with United Nation names}
 \item{correspondence_author_email}{Email of the correspondence author}
 \item{correspondence_author_orcid}{ORCID of the correspondence author}
 \item{has_das}{Whether the paper has a data availability statement}
-\item{das}{Original data availability statement of the paper}
-\item{das_type}{Type of the data availability statement #todo}
+\item{das}{Original data availability statement of the paper. NA if it does not have a data availability statement.}
+\item{das_type}{Type of the data availability statement including in paper(data in full paper scope like supplementary material or appendix or main content) on request(data available on request to the authors) available in online repository(data is shared in a public online repository) not shareable(data is not shareable). NA if it does not have a data availability statement.}
 \item{das_repo_url}{Website url of the data if the relevant data of the paper is shared on a public repository}
 \item{keywords}{List of keywords of the paper}
-}}
-\format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 173 rows and 27 columns.
+}
+}
 }
 \usage{
 uncnewsletter
 }
 \description{
-\describe{
-\item{paperid}{ID number of the paper on the journal website}
-\item{volume}{Volume number of the journal}
-\item{issue}{Issue number of the journal}
-\item{url}{Official website url of the paper}
-\item{journal}{Full name of the journal}
-\item{title}{Title of the paper}
-\item{published_year}{Year of publication}
-\item{is_supp}{Whether the paper has supplementary materials}
-\item{num_supp}{Number of supplementary material files}
-\item{supp_file_type}{File type of the supplementary materials}
-\item{supp_url}{Website url of the supplementary materials}
-\item{num_authors}{Number of the authors}
-\item{first_author_name}{Name of the first author}
-\item{first_author_affiliation}{Academic affiliation of the first author}
-\item{first_author_affiliation_region}{Country or region of the first author parsed from first_author_affiliation variable}
-\item{first_author_email}{Email of the first author}
-\item{first_author_orcid}{ORCID of the first author}
-\item{correspondence_author_name}{Name of the correspondence author}
-\item{correspondence_author_affiliation}{Academic affiliation of the correspondence author}
-\item{correspondence_author_affiliation_region}{Country or region of the correspondence author parsed from correspondence_author_affiliation variable}
-\item{correspondence_author_email}{Email of the correspondence author}
-\item{correspondence_author_orcid}{ORCID of the correspondence author}
-\item{has_das}{Whether the paper has a data availability statement}
-\item{das}{Original data availability statement of the paper}
-\item{das_type}{Type of the data availability statement #todo}
-\item{das_repo_url}{Website url of the data if the relevant data of the paper is shared on a public repository}
-\item{keywords}{List of keywords of the paper}
-}
+Dataset about data availability in the UNC Water Newsletter
 }
 \keyword{datasets}
