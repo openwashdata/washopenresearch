@@ -91,12 +91,12 @@ library(washopenresearch)
 
 The dataset `washdev` contains data on open access articles of the
 *Journal of Water, Sanitation & Hygiene for Development* (Vol.1 Issue
-1 - Vol.13 Issue 11). It has `r nrow(washdev)` observations from March 2011 to
-November 2023.
+1 - Vol.13 Issue 11). It has `r nrow(washdev)` observations from March
+2011 to November 2023.
 
 ```{r}
 washdev |> 
-  head() |> 
+  head(3) |> 
   gt::gt() |>
   gt::as_raw_html()
 ```
@@ -108,8 +108,8 @@ readr::read_csv("data-raw/dictionary.csv") |>
   dplyr::filter(file_name == "washdev.rda") |>
   dplyr::select(variable_name:description) |> 
   knitr::kable() |> 
-  kableExtra::kable_styling() |> 
-  kableExtra::scroll_box(height = "400px")
+  kableExtra::kable_styling("striped") |> 
+  kableExtra::scroll_box(height = "200px")
 ```
 
 ### uncnewsletter
@@ -120,7 +120,7 @@ News. It has `r nrow(uncnewsletter)` observations from 2020 to 2023.
 
 ```{r}
 uncnewsletter |> 
-  head() |> 
+  head(3) |> 
   gt::gt() |>
   gt::as_raw_html()
 ```
@@ -132,11 +132,14 @@ readr::read_csv("data-raw/dictionary.csv") |>
   dplyr::filter(file_name == "uncnewsletter.rda") |>
   dplyr::select(variable_name:description) |> 
   knitr::kable() |> 
-  kableExtra::kable_styling() |> 
-  kableExtra::scroll_box(height = "400px")
+  kableExtra::kable_styling("striped") |> 
+  kableExtra::scroll_box(height = "200px")
 ```
 
+
 ## Example
+
+### washdev
 
 1.  What are the top 10 countries(or regions) the first authors from in
     the *Journal of Water, Sanitation and Hygiene for Development*?
@@ -145,15 +148,20 @@ readr::read_csv("data-raw/dictionary.csv") |>
 library(washopenresearch)
 
 washdev |> 
-  group_by(first_author_affiliation_region) |>
+  filter(!is.na(first_author_affiliation_country)) |>
+  group_by(first_author_affiliation_country) |>
   summarise(count=n()) |>
   arrange(desc(count)) |>
   head(10) |>
   ggplot() +
-    geom_bar(aes(x = reorder(first_author_affiliation_region, count), y = count), stat = "identity") +
-   labs(title = "Top 10 countries of first author",
+    geom_col(aes(x = reorder(first_author_affiliation_country, count), 
+                 y = count)) +
+    labs(title = "Top 10 countries of first author",
         subtitle = "in the Journal of Water, Sanitation and Hygiene for Development",
-        x = "First Author Region", y = "Count")
+        x = "First Author Country", y = "Count") +
+    scale_x_discrete(labels = scales::label_wrap(15))+
+    coord_flip() +
+    theme_classic()
 ```
 
 2.  What are the top choices of keywords in WASH Dev?
@@ -162,9 +170,8 @@ Each publication may provide a list of keywords, typically 5-7, to
 summarize the topics of the article. Here we compile all keywords and
 calculate their frequency to be used.
 
-```{r, echo=TRUE}
+```{r washdev_keyword_frequency, echo=TRUE}
 keywords_freq <- washdev$keywords |>
-    purrr::map(function(x) str_extract_all(x, pattern = "(?<=')[^',]*?(?='\\s*)")[[1]]) |>
     unlist() |>
     str_to_lower() |>
   table() |>
@@ -172,14 +179,15 @@ keywords_freq <- washdev$keywords |>
   as_tibble() |>
   arrange(desc(Freq))
 
-# Top 30 keywords
+# Top 20 keywords
 ggplot(data = head(keywords_freq, 20)) +
   geom_bar(aes(x = reorder(Var1, Freq), y=Freq), stat = "identity") +
   coord_flip() +
-  labs(title = "Top 20 Keywords in WASH Dev Journal", x = "Keywords", y = "Count")
+  labs(title = "Top 20 Keywords in WASH Dev Journal", x = "Keywords", y = "Count") +
+  theme_bw()
 ```
 
-```{r, echo=FALSE, eval=FALSE}
+```{r washdev_wordcloud, echo=FALSE, eval=FALSE}
 
 keywords_freq <- keywords_freq |>
   rename(word=Var1, freq=Freq) |>
@@ -193,10 +201,68 @@ saveWidget(wc, "man/figures/wc.html", selfcontained = F)
 webshot("man/figures/wc.html", "man/figures/washdev_wordcloud.png", delay = 3)
 ```
 
+### uncnewsletter
+
+1.  What are the top 10 source websites of the publications selected by
+    the newsletter?
+
+```{r}
+uncnewsletter |> 
+  group_by(url_source) |>
+  summarise(count=n()) |>
+  arrange(desc(count)) |>
+  head(10) |>
+  ggplot() +
+    geom_col(aes(x = reorder(url_source, count), 
+                 y = count)) +
+   labs(title = "Top 10 publication websites",
+        subtitle = "in the selection of North Carolina Water News",
+        x = "Website URL", y = "Count") +
+   scale_x_discrete(labels = scales::label_wrap(15))+
+   coord_flip() +
+   theme_classic()
+```
+
+## Method
+
+We describe the raw data collection procedure of each dataset in this
+section. To reproduce the collection, you need to have python3 installed
+and install python libraries
+
+```         
+pip install requirements.txt
+```
+
+### washdev
+
+The collection of `washdev` is via web scraping using Python. The script
+can be found in `inst/python/washdev_scraping.py`. First, each
+publication link is scraped from iterating the table of contents of all
+volumes. This step delivers a table containing the variables paper ID,
+volume number, issue number, publication url, journal title, publication
+title, and published year. This table will be merged to get the final
+dataset.
+
+Then, for each publication, we retrieve the needed variables from the
+publication's html file using the publication url. The retrieval is
+rule-based to find the relevant fields (e.g. supplementary materials)
+and extract the value.
+
+### uncnewsletter
+
+The collection of `uncnewsletter` is a combination of web scraping and
+manual annotation. We first use the newsletter archive to scrape all
+publication website links. The code can be found at
+`inst/python/uncnewsletter_scraping.py`. Two annotators worked on the
+manual extraction of the needed variables on these publications. For
+each publication, an annotator follows the guide to fill in the value on
+an collaborative spreadsheet. The guide is converted into the data
+dictionary for this dataset.
+
 ## License
 
 Data are available as
-[CC-BY](https://github.com/openwashdata/wasteskipsblantyre/blob/main/LICENSE.md).
+[CC-BY](https://github.com/openwashdata/washopenresearch/blob/main/LICENSE.md).
 
 ## Citation
 
