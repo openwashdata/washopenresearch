@@ -4,7 +4,7 @@ template:
   bootstrap: 5
   includes:
     in_header: |
-      <script defer data-domain="openwashdata.github.io/washopenresearch" src="https://plausible.io/js/script.js"></script>
+      <script defer data-domain="openwashdata.github.io" src="https://plausible.io/js/script.js"></script>
 
 home:
   links:
