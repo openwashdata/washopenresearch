@@ -1,7 +1,7 @@
-# -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.5.0
+# --------------------------------------------
+# CITATION file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
-# -----------------------------------------------------------
+# --------------------------------------------
  
 cff-version: 1.2.0
 message: 'To cite package "washopenresearch" in publications use:'
@@ -10,6 +10,7 @@ license: CC-BY-4.0
 title: 'washopenresearch: Dataset about open research data information in Water, Sanitation,
   and Hygiene'
 version: 0.0.1
+doi: 10.5281/zenodo.11185699
 abstract: The goal of washopenresearch is to provide an overview of open research
   data related to Water Sanitation and Hygiene (WASH). The package provides access
   to two datasets `washdev` and `uncnewsletter`. Each dataset collects information
@@ -21,22 +22,27 @@ authors:
   given-names: Mian
   email: mzhong@ethz.ch
   orcid: https://orcid.org/0009-0009-4546-7214
-date-released: '2024-02-28'
+- family-names: Luz
+  given-names: Ludwig
+  email: lluz@ethz.ch
+  orcid: https://orcid.org/0009-0007-9248-3204
+- family-names: Schöbitz
+  given-names: Lars
+  email: lschoebitz@ethz.ch
+  orcid: https://orcid.org/0000-0003-2196-5015
+repository-code: https://github.com/openwashdata/washopenresearch
+url: https://github.com/openwashdata/washopenresearch
+date-released: '2024-05-13'
 contact:
 - family-names: Zhong
   given-names: Mian
   email: mzhong@ethz.ch
   orcid: https://orcid.org/0009-0009-4546-7214
-references:
-- type: software
-  title: 'R: A Language and Environment for Statistical Computing'
-  notes: Depends
-  url: https://www.R-project.org/
-  authors:
-  - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2024'
-  institution:
-    name: R Foundation for Statistical Computing
-  version: '>= 2.10'
+keywords:
+- open-data
+- open-research-data
+- open-science
+- openwashdata
+- sanitation
+- wash
+
