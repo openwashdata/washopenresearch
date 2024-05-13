@@ -311,6 +311,6 @@ if __name__ == "__main__":
     metadata_df = build_metadata_table(overview_df)
   
     # Concatenate overview and metadata
-    ## TODO: revise
     washdev_df = pd.concat([overview_df, metadata_df], axis=1)
+    # washdev_df.to_csv("path/to/rawdata-directory/washdev.csv")
     # TODO: update from current data, so we don't need to scrape all issues\

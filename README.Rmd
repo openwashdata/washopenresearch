@@ -81,7 +81,7 @@ The package provides access to two datasets `washdev` and
 `uncnewsletter`. Each dataset collects information on scientific
 articles about (1) article metadata (e.g. title, first author,
 correspondence author), (2) supplementary material information, (3) data
-availability statement, and (4) semantic information (e.g. keywords)
+availability statement, and (4) semantic information (e.g. keywords).
 
 ```{r}
 library(washopenresearch)
