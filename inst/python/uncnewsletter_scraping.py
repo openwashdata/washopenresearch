@@ -50,12 +50,14 @@ def build_paperselection_table(archive_df):
     paper_df = pd.DataFrame({"issue_url": issue, "paper_url": paper_url, "paper_info": paper_info})
     paper_df['url_source'] = paper_df["paper_url"].apply(lambda x: x.split("/")[2])
     return paper_df
-  
-# UNC Newsletter issue release date and its url
-unc_newletter_url = "https://us12.campaign-archive.com/home/?u=b41c2458c63f1551b2a7a6f44&id=681984abd7"
-archive_df = build_newsletter_archive_table(newsletter_url)
-paper_df = build_paperselection_table(archive_df)
-paper_df.merge(archive_df, how = "left", on = "issue_url")
 
+
+if __name__ == "__main__":
+    # UNC Newsletter issue release date and its url
+    unc_newletter_url = "https://us12.campaign-archive.com/home/?u=b41c2458c63f1551b2a7a6f44&id=681984abd7"
+    archive_df = build_newsletter_archive_table(unc_newletter_url)
+    paper_df = build_paperselection_table(archive_df)
+    paper_df.merge(archive_df, how = "left", on = "issue_url")
+    # paper_df.to_csv("path/to/rawdata-directory/uncnewsletter.csv")
 ## scrape all issues from beginning
 ## TODO: can select which issue to start and end for scraping
