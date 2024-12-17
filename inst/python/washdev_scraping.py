@@ -22,7 +22,26 @@ from tqdm import tqdm
 
 # table of contents 
 
-def get_issue_page(root, volume_id, issue_id, headers = {"User-Agent": "user"}):
+def get_issue_page(root, volume_id, issue_id, headers = {
+    'authority': 'iwaponline.com',
+    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+    'accept-encoding': 'gzip, deflate, br, zstd',
+    'accept-language': 'en-GB,en;q=0.9',
+    'cache-control': 'no-cache',
+    'cookie': 'IWA_SessionId=zuyybaut1fwgaznhkwn4xoy1; IWA_PublishingMachineID=638687257138192646; __cf_bm=bcXc7a9CdQj0mKSGWjXWky3okalFY4OHqqiWjT3bVK4-1733128915-1.0.1.1-KG88hdja.tHV._iAzudPfhBAmbTIwTZyOkiTiLTr_AvZLe30x102bUB.PziQplGHWl9stORseTDoU8OidjRDfg; cf_clearance=iJ0MNhDMwrathuNvgK8AOzphcPLFQtlSJ494VagWb68-1733128916-1.2.1.1-ha1Zud7P.ht0PXsCO2XMyTHP7fVH.rom3Nvj.4fKhAcSH3NLvXLEYLWCxJK_X7FBRRCWkrvwMyyH4tVaQ6I1rKoLokI1DgsgLSSRkDvSYMSSX0P.xX7n9mCyZnmdaiOrCsHcD_KLspPMrGeuO69DzK2_UKWfvypDFLwzsm._ThFVYAUHaVFRXDDSFzRulBQTJke9Rki1CtAFLNIUCz0yJrWjGfwdt5PYigKgt9CcRM6Ms2IICgPMND1jCNiUhfwMgAwHSeGh4dhyQnZN6BtDCurf8YuKOxTgzDNOv.olxEnNPC5d2ofKQYwejXxJdeSYh.iN3GPnZNLEN2icsTEDhTWBo7sFY5wKWa9zY7smc54xCkU_vAXS9Col7UCWrnm0wKajLzeWo_b1B3yMzM9NTw; __stripe_mid=468fb8f0-78a4-4f50-b588-ccb0b9d35e27a60682; __stripe_sid=fd3c1942-8316-47ee-acb8-521474dd0ceeaf4999',
+    'pragma': 'no-cache',
+    'referer': 'https://www.google.com/',
+    'sec-ch-ua': '"Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"macOS"',
+    'sec-fetch-dest': 'document',
+    'sec-fetch-mode': 'navigate',
+    'sec-fetch-site': 'same-origin',
+    'sec-fetch-user': '?1',
+    'sec-gpc': '1',
+    'upgrade-insecure-requests': '1',
+    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
+}):
     """
     Retrieve an issue html content for WASH Development 
     """
@@ -251,7 +270,7 @@ def get_issues(start_vol, end_vol, end_issue):
             elif end_vol == 11 and end_issue > 6:
                 raise AssertionError("Volume 11 only has 6 issues, end_issue has to be smaller or equal to 6") 
             else:
-                assert raise AssertionError("End_issue has to be smaller or equal to 12") 
+                raise AssertionError("End_issue has to be smaller or equal to 12") 
             for i in range(1, end_issue+1):
               issues.append(get_issue_page(root, vol, i))
         else:
@@ -299,8 +318,25 @@ def build_metadata_table(overview_df):
 if __name__ == "__main__":
     # Main scraping
     headers = {
-        'User-Agent': 'user'
-    } # need a header for authentification, otherwise get 403 back
+    'authority': 'iwaponline.com',
+    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+    'accept-encoding': 'gzip, deflate, br, zstd',
+    'accept-language': 'en-GB,en;q=0.9',
+    'cache-control': 'no-cache',
+    'cookie': 'IWA_SessionId=zuyybaut1fwgaznhkwn4xoy1; IWA_PublishingMachineID=638687257138192646; __cf_bm=bcXc7a9CdQj0mKSGWjXWky3okalFY4OHqqiWjT3bVK4-1733128915-1.0.1.1-KG88hdja.tHV._iAzudPfhBAmbTIwTZyOkiTiLTr_AvZLe30x102bUB.PziQplGHWl9stORseTDoU8OidjRDfg; cf_clearance=iJ0MNhDMwrathuNvgK8AOzphcPLFQtlSJ494VagWb68-1733128916-1.2.1.1-ha1Zud7P.ht0PXsCO2XMyTHP7fVH.rom3Nvj.4fKhAcSH3NLvXLEYLWCxJK_X7FBRRCWkrvwMyyH4tVaQ6I1rKoLokI1DgsgLSSRkDvSYMSSX0P.xX7n9mCyZnmdaiOrCsHcD_KLspPMrGeuO69DzK2_UKWfvypDFLwzsm._ThFVYAUHaVFRXDDSFzRulBQTJke9Rki1CtAFLNIUCz0yJrWjGfwdt5PYigKgt9CcRM6Ms2IICgPMND1jCNiUhfwMgAwHSeGh4dhyQnZN6BtDCurf8YuKOxTgzDNOv.olxEnNPC5d2ofKQYwejXxJdeSYh.iN3GPnZNLEN2icsTEDhTWBo7sFY5wKWa9zY7smc54xCkU_vAXS9Col7UCWrnm0wKajLzeWo_b1B3yMzM9NTw; __stripe_mid=468fb8f0-78a4-4f50-b588-ccb0b9d35e27a60682; __stripe_sid=fd3c1942-8316-47ee-acb8-521474dd0ceeaf4999',
+    'pragma': 'no-cache',
+    'referer': 'https://www.google.com/',
+    'sec-ch-ua': '"Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"macOS"',
+    'sec-fetch-dest': 'document',
+    'sec-fetch-mode': 'navigate',
+    'sec-fetch-site': 'same-origin',
+    'sec-fetch-user': '?1',
+    'sec-gpc': '1',
+    'upgrade-insecure-requests': '1',
+    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
+} # need a header for authentification, otherwise get 403 back
     root = "https://iwaponline.com/washdev/issue" # Structure: https://iwaponline.com/washdev/issue/volumne number/issue number
 
     # volume 1 (2011) - volume 13 (2023)
