@@ -17,8 +17,8 @@
 \item{published_year}{Year of publication}
 \item{is_supp}{Whether the paper has supplementary materials}
 \item{num_supp}{Number of supplementary material files}
-\item{supp_file_type}{File type of the supplementary materials}
-\item{supp_url}{Website url of the supplementary materials}
+\item{supp_file_type}{File types of the supplementary materials, separated by "; " when there are multiple}
+\item{supp_url}{Website urls of the supplementary materials, separated by "; " when there are multiple}
 \item{num_authors}{Number of the authors}
 \item{first_author_name}{Name of the first author}
 \item{first_author_affiliation}{Academic affiliation of the first author}
@@ -33,8 +33,8 @@
 \item{has_das}{Whether the paper has a data availability statement}
 \item{das}{Original data availability statement of the paper.  NA if it does not have a data availability statement.}
 \item{das_type}{Type of the data availability statement including in paper(data in full paper scope like supplementary material or appendix or main content) on request(data available on request to the authors) available in online repository(data is shared in a public online repository) not shareable(data is not shareable). NA if it does not have a data availability statement.}
-\item{das_repo_url}{Website url of the data if the relevant data of the paper is shared on a public repository}
-\item{keywords}{List of keywords of the paper}
+\item{das_repo_url}{Website urls of the data if the relevant data of the paper is shared on a public repository, separated by "; " when there are multiple}
+\item{keywords}{Keywords of the paper, separated by "; "}
 }
 }
 }

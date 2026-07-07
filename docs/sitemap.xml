@@ -1,42 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://github.com/openwashdata/washopenresearch/404.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/openwashdata/washopenresearch/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/openwashdata/washopenresearch/articles/articles/data-availability-washdev.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/openwashdata/washopenresearch/articles/articles/examples.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/openwashdata/washopenresearch/articles/data-availability-washdev.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/openwashdata/washopenresearch/articles/examples.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/openwashdata/washopenresearch/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/openwashdata/washopenresearch/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/openwashdata/washopenresearch/index.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/openwashdata/washopenresearch/reference/figures/wc.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/openwashdata/washopenresearch/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/openwashdata/washopenresearch/reference/uncnewsletter.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/openwashdata/washopenresearch/reference/washdev.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://github.com/openwashdata/washopenresearch/404.html</loc></url>
+<url><loc>https://github.com/openwashdata/washopenresearch/LICENSE.html</loc></url>
+<url><loc>https://github.com/openwashdata/washopenresearch/articles/data-availability-washdev.html</loc></url>
+<url><loc>https://github.com/openwashdata/washopenresearch/articles/examples.html</loc></url>
+<url><loc>https://github.com/openwashdata/washopenresearch/articles/index.html</loc></url>
+<url><loc>https://github.com/openwashdata/washopenresearch/authors.html</loc></url>
+<url><loc>https://github.com/openwashdata/washopenresearch/index.html</loc></url>
+<url><loc>https://github.com/openwashdata/washopenresearch/news/index.html</loc></url>
+<url><loc>https://github.com/openwashdata/washopenresearch/reference/figures/wc.html</loc></url>
+<url><loc>https://github.com/openwashdata/washopenresearch/reference/index.html</loc></url>
+<url><loc>https://github.com/openwashdata/washopenresearch/reference/uncnewsletter.html</loc></url>
+<url><loc>https://github.com/openwashdata/washopenresearch/reference/washdev.html</loc></url>
 </urlset>
+
