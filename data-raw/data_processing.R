@@ -107,7 +107,18 @@ washdev <- washdev |>
   dplyr::mutate(across(c(paperid, volume, issue, num_supp, num_authors), as.integer)) |>
   dplyr::mutate(das_type = as.factor(das_type))
 
-## Make list-columns: supp_file_type, supp_url, das_repo_url, keywords, --------
+# Helper: collapse a list-column into a "; "-delimited character column -------
+# list-columns break flat-file exports (issue #8), so multi-value fields are
+# split into lists for cleaning, then collapsed before the data is saved
+collapse_list_col <- function(x) {
+  purrr::map_chr(x, function(values) {
+    values <- trimws(values[!is.na(values)])
+    values <- values[values != ""]
+    if (length(values) == 0) NA_character_ else paste(values, collapse = "; ")
+  })
+}
+
+## Split multi-value columns: supp_file_type, supp_url, das_repo_url, keywords -
 ### modify supp file type ------------------------------------------------------
 #### manually added misc stuff -------------------------------------------------
 washdev |>
@@ -133,6 +144,11 @@ washdev <- washdev |>
   ### modify keywords ----------------------------------------------------------
   dplyr::mutate(keywords = purrr::map(keywords, function(x) str_extract_all(x, pattern = "(?<=')[^',]*?(?='\\s*)")[[1]]))
 
+## Collapse multi-value columns into "; "-delimited strings --------------------
+washdev <- washdev |>
+  dplyr::mutate(across(c(supp_file_type, supp_url, das_repo_url, keywords),
+                       collapse_list_col))
+
 
 # UNCNEWSLETTER DATA -----------------------------------------------------------
 uncnewsletter <- readr::read_csv("./data-raw/unc-article-url-manual-collection.csv")
@@ -146,7 +162,7 @@ uncnewsletter <- uncnewsletter |>
   # create and rename columns to be uniform with other datasets ----------------
   dplyr::rename(supp_url = supp_link)
 
-## Make list-columns: supp_file_type, supp_url, das_repo_ur, keywords ----------
+## Split multi-value columns: supp_file_type, supp_url, das_repo_url, keywords -
 ### modify supp type -----------------------------------------------------------
 #### manually added misc stuff -------------------------------------------------
 uncnewsletter |>
@@ -181,6 +197,11 @@ uncnewsletter <- uncnewsletter |>
   dplyr::mutate(keywords = str_replace_all(keywords, "\"", "'")) |>
   dplyr::mutate(keywords = purrr::map(keywords, function(x) str_extract_all(x, pattern = "(?<=')[^', ]*?(?='\\s*)")[[1]]))
 
+## Collapse multi-value columns into "; "-delimited strings --------------------
+uncnewsletter <- uncnewsletter |>
+  dplyr::mutate(across(c(supp_file_type, supp_url, das_repo_url, keywords),
+                       collapse_list_col))
+
 ## Unify DAS type --------------------------------------------------------------
 uncnewsletter <- uncnewsletter |>
   dplyr::mutate(das_type = str_replace(das_type, pattern = "data not sharable", replacement = "not shareable")) |>
@@ -200,13 +221,9 @@ usethis::use_data(washdev, overwrite = TRUE)
 usethis::use_data(uncnewsletter, overwrite = TRUE)
 
 # Export processed data to csv and xlsx files ----------------------------------
-washdev_ext <- washdev |>
-  dplyr::mutate(across(c(supp_file_type, supp_url, das_repo_url, keywords), as.character))
-readr::write_csv(washdev_ext, here::here("inst", "extdata", "washdev.csv"))
-openxlsx::write.xlsx(washdev_ext, here::here("inst", "extdata", "washdev.xlsx"))
+readr::write_csv(washdev, here::here("inst", "extdata", "washdev.csv"))
+openxlsx::write.xlsx(washdev, here::here("inst", "extdata", "washdev.xlsx"))
 
-uncnewsletter_ext <- uncnewsletter |>
-  dplyr::mutate(across(c(supp_file_type, supp_url, das_repo_url, keywords), as.character))
-readr::write_csv(uncnewsletter_ext, here::here("inst", "extdata", "uncnewsletter.csv"))
-openxlsx::write.xlsx(uncnewsletter_ext, here::here("inst", "extdata", "uncnewsletter.xlsx"))
+readr::write_csv(uncnewsletter, here::here("inst", "extdata", "uncnewsletter.csv"))
+openxlsx::write.xlsx(uncnewsletter, here::here("inst", "extdata", "uncnewsletter.xlsx"))
 

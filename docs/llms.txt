@@ -1,0 +1,328 @@
+# washopenresearch
+
+The goal of washopenresearch is to provide an overview of open research
+data related to Water Sanitation and Hygiene (WASH). The current version
+contains two datasets from the following sources:
+
+- `washdev`: Open access journal [*Journal of Water, Sanitation and
+  Hygiene for Development*](https://iwaponline.com/washdev)
+- `uncnewsletter`: Research section of the newsletter [North Carolina
+  Water
+  News](https://waterinstitute.unc.edu/our-work/nc-water-news-newsletter)
+
+![Word cloud of the most frequent keywords in articles of the Journal of
+Water, Sanitation and Hygiene for Development, with water, sanitation,
+and hygiene appearing largest](reference/figures/washdev_wordcloud.png)
+
+Word cloud of the most frequent keywords in articles of the Journal of
+Water, Sanitation and Hygiene for Development, with water, sanitation,
+and hygiene appearing largest
+
+## Installation
+
+You can install the development version of washopenresearch from
+[GitHub](https://github.com/) with:
+
+``` r
+
+# install.packages("devtools")
+devtools::install_github("openwashdata/washopenresearch")
+```
+
+Alternatively, you can download the individual datasets as a CSV or XLSX
+file from the table below.
+
+| dataset | CSV | XLSX |
+|:---|:---|:---|
+| washdev | [Download CSV](https://github.com/openwashdata/washopenresearch/raw/main/inst/extdata/washdev.csv) | [Download XLSX](https://github.com/openwashdata/washopenresearch/raw/main/inst/extdata/washdev.xlsx) |
+| uncnewsletter | [Download CSV](https://github.com/openwashdata/washopenresearch/raw/main/inst/extdata/uncnewsletter.csv) | [Download XLSX](https://github.com/openwashdata/washopenresearch/raw/main/inst/extdata/uncnewsletter.xlsx) |
+
+## Data
+
+The package provides access to two datasets `washdev` and
+`uncnewsletter`. Each dataset collects information on scientific
+articles about (1) article metadata (e.g. title, first author,
+correspondence author), (2) supplementary material information, (3) data
+availability statement, and (4) semantic information (e.g. keywords).
+
+``` r
+
+library(washopenresearch)
+```
+
+### washdev
+
+The dataset `washdev` contains data on open access articles of the
+*Journal of Water, Sanitation & Hygiene for Development* (Vol.1 Issue
+1 - Vol.13 Issue 11). It has 924 observations from March 2011 to
+November 2023.
+
+``` r
+
+washdev |> 
+  head(3) |> 
+  gt::gt() |>
+  gt::as_raw_html()
+```
+
+| paperid | volume | issue | paper_url | journal | title | published_year | is_supp | num_supp | supp_file_type | supp_url | num_authors | first_author_name | first_author_affiliation | first_author_affiliation_country | first_author_email | first_author_orcid | correspondence_author_name | correspondence_author_affiliation | correspondence_author_affiliation_country | correspondence_author_email | correspondence_author_orcid | has_das | das | das_type | das_repo_url | keywords | url_source |
+|---:|---:|---:|:---|:---|:---|---:|:--:|---:|:---|:---|---:|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:--:|:---|:--:|:---|:---|:---|
+| 28742 | 1 | 1 | <https://iwaponline.com/washdev/article/1/1/1/28742/Editorial> | Journal of Water, Sanitation & Hygiene for Development | Editorial | 2011 | FALSE | 0 | NA | NA | 6 | Jamie Bartram | Journal of Water, Sanitation and Hygiene for Development | NA | NA | NA | NA | NA | NA | NA | NA | FALSE | NA | NA | NA | NA | iwaponline.com |
+| 28745 | 1 | 1 | <https://iwaponline.com/washdev/article/1/1/3/28745/The-sanitation-ladder-a-need-for-a-revamp> | Journal of Water, Sanitation & Hygiene for Development | The sanitation ladder – a need for a revamp? | 2011 | FALSE | 0 | NA | NA | 5 | E. Kvarnström | Stockholm Environment Institute, Kräftriket 2B, SE-10691 Stockholm, Sweden | Sweden | <elisabeth.kvarnstrom@sei.se> | NA | E. Kvarnström | Stockholm Environment Institute, Kräftriket 2B, SE-10691 Stockholm, Sweden | Sweden | <elisabeth.kvarnstrom@sei.se> | NA | FALSE | NA | NA | NA | function-based; sanitation technologies; sustainability; the sanitation ladder | iwaponline.com |
+| 28743 | 1 | 1 | <https://iwaponline.com/washdev/article/1/1/13/28743/Vertical-flow-constructed-wetlands-as-an-emerging> | Journal of Water, Sanitation & Hygiene for Development | Vertical-flow constructed wetlands as an emerging solution for faecal sludge dewatering in developing countries | 2011 | FALSE | 0 | NA | NA | 6 | I. M. Kengne | Laboratory of Plant Biotechnology and Environment, Faculty of Science, University Yaoundé I, PO Box 812, Yaoundé, Cameroon | Cameroon | NA | NA | E. Soh Kengne | Laboratory of Plant Biotechnology and Environment, Faculty of Science, University Yaoundé I, PO Box 812, Yaoundé, Cameroon | Cameroon | <ives_kengne@yahoo.fr> | NA | FALSE | NA | NA | NA | biosolid accumulation; Cyperus papyrus; Echinochloa pyramidalis; faecal sludge dewatering; pollutant removal efficiencies; vertical-flow constructed wetlands | iwaponline.com |
+
+For an overview of the variable names, see the following table.
+
+| variable_name | variable_type | description |
+|:---|:---|:---|
+| paperid | integer | ID number of the paper on the journal website |
+| volume | integer | Volume number of the journal |
+| issue | integer | Issue number of the journal |
+| paper_url | character | Official website url of the paper |
+| journal | character | Full name of the journal |
+| title | character | Title of the paper |
+| published_year | integer | Year of publication |
+| is_supp | logical | Whether the paper has supplementary materials |
+| num_supp | integer | Number of supplementary material files |
+| supp_file_type | character | File types of the supplementary materials separated by a semicolon when there are multiple |
+| supp_url | character | Website urls of the supplementary materials separated by a semicolon when there are multiple |
+| num_authors | integer | Number of the authors |
+| first_author_name | character | Name of the first author |
+| first_author_affiliation | character | Academic affiliation of the first author |
+| first_author_affiliation_region | character | Country or region of the first author parsed from first_author_affiliation variable |
+| first_author_email | character | Email of the first author |
+| first_author_orcid | character | ORCID of the first author |
+| correspondence_author_name | character | Name of the correspondence author |
+| correspondence_author_affiliation | character | Academic affiliation of the correspondence author |
+| correspondence_author_affiliation_region | character | Country or region of the correspondence author parsed from correspondence_author_affiliation variable |
+| correspondence_author_email | character | Email of the correspondence author |
+| correspondence_author_orcid | character | ORCID of the correspondence author |
+| has_das | logical | Whether the paper has a data availability statement |
+| das | character | Original data availability statement of the paper. NA if it does not have a data availability statement. |
+| das_type | factor | Type of the data availability statement including “in paper”(data in full paper scope like supplementary material or appendix or main content) “on request”(data available on request to the authors) “available in online repository”(data is shared in a public online repository) “not shareable”(data is not shareable). NA if it does not have a data availability statement. |
+| das_repo_url | character | Website urls of the data if the relevant data of the paper is shared on a public repository separated by a semicolon when there are multiple |
+| keywords | character | Keywords of the paper separated by a semicolon |
+| url_source | character | Publisher website of the paper |
+
+### uncnewsletter
+
+The dataset `uncnewsletter` contains data on a curated list of articles
+published at the Research section of the newsletter North Carolina Water
+News. It has 173 observations from 2020 to 2023.
+
+``` r
+
+uncnewsletter |> 
+  head(3) |> 
+  gt::gt() |>
+  gt::as_raw_html()
+```
+
+| paperid | issue_url | paper_url | url_source | journal | title | published_year | is_supp | num_supp | supp_file_type | supp_url | num_authors | first_author_name | first_author_affiliation | first_author_affiliation_country | first_author_email | first_author_orcid | correspondence_author_name | correspondence_author_affiliation | correspondence_author_affiliation_country | correspondence_author_email | correspondence_author_orcid | has_das | das | das_type | das_repo_url | citations | keywords |
+|---:|:---|:---|:---|:---|:---|---:|:--:|---:|:---|:---|---:|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:--:|:---|:--:|:---|---:|:---|
+| 198 | <http://eepurl.com/hWz3Yf> | <https://aiche.onlinelibrary.wiley.com/doi/abs/10.1002/ep.13800> | aiche.onlinelibrary.wiley.com | Environmental Progress & Sustainable Energy | Mitigation of PFAS in U.S. Public Water Systems: Future steps for ensuring safer drinking water | 2022 | TRUE | 1 | docx | <https://aiche.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fep.13800&file=ep13800-sup-0001-Supinfo.docx> | 1 | Alexis Voulgaropoulos | North Carolina State University | NA | <anvoulga@ncsu.edu> | 0000-0002-5778-354X | NA | NA | NA | NA | NA | FALSE | NA | NA | NA | 2 | drinkingwater; environmentalpolicy; healthandsafety |
+| 89 | <http://eepurl.com/ieh0rf> | <https://ajph.aphapublications.org/doi/abs/10.2105/AJPH.2022.307108> | ajph.aphapublications.org | American Journal of Public Health | Timing and Trends for Municipal Wastewater, Lab-Confirmed Case, and Syndromic Case Surveillance of COVID-19 in Raleigh, North Carolina | 2023 | TRUE | 1 | docx | <https://ajph.aphapublications.org/doi/suppl/10.2105/AJPH.2022.307108/suppl_file/kotlarz_suppl-figures_tables.docx> | 17 | Nadine Kotlarz | North Carolina State University | NA | <nkotlar@ncsu.ede> | NA | NA | NA | NA | NA | NA | FALSE | NA | NA | NA | 3 | NA |
+| 200 | <http://eepurl.com/hWz3Yf> | <https://aslopubs.onlinelibrary.wiley.com/doi/abs/10.1002/lom3.10469> | aslopubs.onlinelibrary.wiley.com | Limnology and Oceanography: Methods | OpenOBS: Open-source, low-cost optical backscatter sensors for water quality and sediment-transport research | 2022 | TRUE | 1 | pdf | <https://aslopubs.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Flom3.10469&file=lom310469-sup-0001-Supinfo.pdf> | 4 | Emily F. Eidam | University of North Carolina | NA | <efe@unc.edu> | 0000-0002-1906-8692 | NA | NA | NA | NA | NA | TRUE | The code, wiring diagram, hardware bill of materials, and 3D-printed endcap design files are available at <https://github.com/tedlanghorst/OpenOBS>. | available in online repository | <https://github.com/tedlanghorst/OpenOBS> | 4 | NA |
+
+For an overview of the variable descriptions, see the following table.
+
+| variable_name | variable_type | description |
+|:---|:---|:---|
+| paperid | integer | ID number of the paper on the journal website |
+| issue_url | integer | Volume number of the journal |
+| paper_url | character | Official website url of the paper |
+| url_source | character | Publisher website of the paper |
+| journal | character | Full name of the journal |
+| title | character | Title of the paper |
+| published_year | integer | Year of publication |
+| is_supp | logical | Whether the paper has supplementary materials |
+| num_supp | integer | Number of supplementary material files |
+| supp_file_type | character | File types of the supplementary materials separated by a semicolon when there are multiple |
+| supp_url | character | Website urls of the supplementary materials separated by a semicolon when there are multiple |
+| num_authors | integer | Number of the authors |
+| first_author_name | character | Name of the first author |
+| first_author_affiliation | character | Academic affiliation of the first author |
+| first_author_affiliation_country | character | Country of the first author directly parsed from first_author_affiliation variable encoded with United Nation names |
+| first_author_email | character | Email of the first author |
+| first_author_orcid | character | ORCID of the first author |
+| correspondence_author_name | character | Name of the correspondence author |
+| correspondence_author_affiliation | character | Academic affiliation of the correspondence author |
+| correspondence_author_affiliation_country | character | Country or region of the correspondence author directly parsed from correspondence_author_affiliation variable encoded with United Nation names |
+| correspondence_author_email | character | Email of the correspondence author |
+| correspondence_author_orcid | character | ORCID of the correspondence author |
+| has_das | logical | Whether the paper has a data availability statement |
+| das | character | Original data availability statement of the paper. NA if it does not have a data availability statement. |
+| das_type | factor | Type of the data availability statement including “in paper”(data in full paper scope like supplementary material or appendix or main content) “on request”(data available on request to the authors) “available in online repository”(data is shared in a public online repository) “not shareable”(data is not shareable). NA if it does not have a data availability statement. |
+| das_repo_url | character | Website urls of the data if the relevant data of the paper is shared on a public repository separated by a semicolon when there are multiple |
+| keywords | character | Keywords of the paper separated by a semicolon |
+
+## Example
+
+### washdev
+
+1.  What are the top 10 countries(or regions) the first authors from in
+    the *Journal of Water, Sanitation and Hygiene for Development*?
+
+``` r
+
+library(washopenresearch)
+
+washdev |> 
+  filter(!is.na(first_author_affiliation_country)) |>
+  group_by(first_author_affiliation_country) |>
+  summarise(count=n()) |>
+  arrange(desc(count)) |>
+  head(10) |>
+  ggplot() +
+    geom_col(aes(x = reorder(first_author_affiliation_country, count), 
+                 y = count)) +
+    labs(title = "Top 10 countries of first author",
+        subtitle = "in the Journal of Water, Sanitation and Hygiene for Development",
+        x = "First Author Country", y = "Count") +
+    scale_x_discrete(labels = scales::label_wrap(15))+
+    coord_flip() +
+    theme_classic()
+```
+
+![](reference/figures/README-unnamed-chunk-8-1.png)
+
+2.  What are the top choices of keywords in WASH Dev?
+
+Each publication may provide a list of keywords, typically 5-7, to
+summarize the topics of the article. Here we compile all keywords and
+calculate their frequency to be used.
+
+``` r
+
+keywords_freq <- washdev$keywords |>
+    str_split("; ") |>
+    unlist() |>
+    str_to_lower() |>
+  table() |>
+  as.data.frame() |>
+  as_tibble() |>
+  arrange(desc(Freq))
+
+# Top 20 keywords
+ggplot(data = head(keywords_freq, 20)) +
+  geom_bar(aes(x = reorder(Var1, Freq), y=Freq), stat = "identity") +
+  coord_flip() +
+  labs(title = "Top 20 Keywords in WASH Dev Journal", x = "Keywords", y = "Count") +
+  theme_bw()
+```
+
+![](reference/figures/README-washdev_keyword_frequency-1.png)
+
+### uncnewsletter
+
+1.  What are the top 10 source websites of the publications selected by
+    the newsletter?
+
+``` r
+
+uncnewsletter |> 
+  group_by(url_source) |>
+  summarise(count=n()) |>
+  arrange(desc(count)) |>
+  head(10) |>
+  ggplot() +
+    geom_col(aes(x = reorder(url_source, count), 
+                 y = count)) +
+   labs(title = "Top 10 publication websites",
+        subtitle = "in the selection of North Carolina Water News",
+        x = "Website URL", y = "Count") +
+   scale_x_discrete(labels = scales::label_wrap(15))+
+   coord_flip() +
+   theme_classic()
+```
+
+![](reference/figures/README-unnamed-chunk-9-1.png)
+
+## Method
+
+We describe the raw data collection procedure of each dataset in this
+section. To reproduce the collection, you need to have python3 installed
+and install python libraries
+
+``` R
+pip install requirements.txt
+```
+
+### washdev
+
+The collection of `washdev` is via web scraping using Python. The script
+can be found in `inst/python/washdev_scraping.py`. First, each
+publication link is scraped from iterating the table of contents of all
+volumes. This step delivers a table containing the variables paper ID,
+volume number, issue number, publication url, journal title, publication
+title, and published year. This table will be merged to get the final
+dataset.
+
+Then, for each publication, we retrieve the needed variables from the
+publication’s html file using the publication url. The retrieval is
+rule-based to find the relevant fields (e.g. supplementary materials)
+and extract the value.
+
+### uncnewsletter
+
+The collection of `uncnewsletter` is a combination of web scraping and
+manual annotation. We first use the newsletter archive to scrape all
+publication website links. The code can be found at
+`inst/python/uncnewsletter_scraping.py`. Two annotators worked on the
+manual extraction of the needed variables on these publications. For
+each publication, an annotator follows the guide to fill in the value on
+an collaborative spreadsheet. The guide is converted into the data
+dictionary for this dataset.
+
+## License
+
+Data are available as
+[CC-BY](https://github.com/openwashdata/washopenresearch/blob/main/LICENSE.md).
+
+## Citation
+
+Please cite this package using:
+
+``` r
+
+citation("washopenresearch")
+#> To cite package 'washopenresearch' in publications use:
+#> 
+#>   Zhong M, Luz L, Schöbitz L (2026). "washopenresearch: Dataset about
+#>   open research data information in Water, Sanitation, and Hygiene."
+#>   doi:10.5281/zenodo.11185699
+#>   <https://doi.org/10.5281/zenodo.11185699>.
+#>   <https://github.com/openwashdata/washopenresearch>.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Misc{zhong_etall:2026,
+#>     title = {washopenresearch: Dataset about open research data information in Water, Sanitation, and Hygiene},
+#>     author = {Mian Zhong and Ludwig Luz and Lars Schöbitz},
+#>     year = {2026},
+#>     doi = {10.5281/zenodo.11185699},
+#>     url = {https://github.com/openwashdata/washopenresearch},
+#>     abstract = {The goal of washopenresearch is to provide an overview of open research data related to Water Sanitation and Hygiene (WASH). The package provides access to two datasets `washdev` and `uncnewsletter`. Each dataset collects information on scientific articles about (1) article metadata (e.g. title, first author, correspondence author), (2) supplementary material information, (3) data availability statement, and (4) semantic information (e.g. keywords).},
+#>     keywords = {open-data,open-research-data,open-science,openwashdata,sanitation,wash},
+#>     version = {0.1.0},
+#>   }
+```
+
+# Package index
+
+## All functions
+
+- [`uncnewsletter`](https://github.com/openwashdata/washopenresearch/reference/uncnewsletter.md)
+  : Dataset about data availability in the UNC Water Newsletter
+- [`washdev`](https://github.com/openwashdata/washopenresearch/reference/washdev.md)
+  : Dataset about data availability in the Journal of Water, Sanitation
+  and Hygiene for Development
+
+# Articles
+
+### All vignettes
+
+- [Missed Opportunity: where is WASH research data
+  gone?](https://github.com/openwashdata/washopenresearch/articles/data-availability-washdev.md):
+- [Case Study I: Authors in WASH for
+  Development](https://github.com/openwashdata/washopenresearch/articles/examples.md):
