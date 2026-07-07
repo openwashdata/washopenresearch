@@ -124,12 +124,12 @@ From the above analysis, we can see that many people opt for data available with
 Answers to these questions are important to understand the data accessibility. Data stored and uploaded in pdf reports are less ideal for reuse and reproducibility. Therefore, in this section, we look at the supplementary mateirials with the variable `supp_file_type` that lists out the file types of supplementary materials. 
 
 ### 1. Data Preparation
-We look at the Supplementary Material of all articles published in 2020 or later. In particular, the variable `supp_file_type` was built as a list-column to contain a list of file types of an article. We use `unnest` to expand information as follows.
+We look at the Supplementary Material of all articles published in 2020 or later. In particular, the variable `supp_file_type` stores the file types of an article as a single string separated by `"; "` when an article has several files. We use `separate_rows` to expand information as follows.
 ```{r}
-washdev_supp_file_type_n <- washdev_das_type |> 
-    filter(das_policy == "2020 or later") |> 
-    select(paperid, das_type, supp_file_type) |> 
-    unnest(supp_file_type) |> 
+washdev_supp_file_type_n <- washdev_das_type |>
+    filter(das_policy == "2020 or later") |>
+    select(paperid, das_type, supp_file_type) |>
+    separate_rows(supp_file_type, sep = "; ") |>
     mutate(supp_file_type = case_when(
         is.na(supp_file_type) ~ "missing",
         TRUE ~ supp_file_type

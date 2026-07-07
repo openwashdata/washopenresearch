@@ -8,8 +8,8 @@ data,washdev.rda,title,character,Title of the paper
 data,washdev.rda,published_year,integer,Year of publication
 data,washdev.rda,is_supp,logical,Whether the paper has supplementary materials
 data,washdev.rda,num_supp,integer,Number of supplementary material files
-data,washdev.rda,supp_file_type,list,File type of the supplementary materials
-data,washdev.rda,supp_url,character,Website url of the supplementary materials
+data,washdev.rda,supp_file_type,character,File types of the supplementary materials separated by a semicolon when there are multiple
+data,washdev.rda,supp_url,character,Website urls of the supplementary materials separated by a semicolon when there are multiple
 data,washdev.rda,num_authors,integer,Number of the authors
 data,washdev.rda,first_author_name,character,Name of the first author
 data,washdev.rda,first_author_affiliation,character,Academic affiliation of the first author
@@ -24,8 +24,8 @@ data,washdev.rda,correspondence_author_orcid,character,ORCID of the corresponden
 data,washdev.rda,has_das,logical,Whether the paper has a data availability statement
 data,washdev.rda,das,character,Original data availability statement of the paper.  NA if it does not have a data availability statement.
 data,washdev.rda,das_type,factor,Type of the data availability statement including "in paper"(data in full paper scope like supplementary material or appendix or main content) "on request"(data available on request to the authors) "available in online repository"(data is shared in a public online repository) "not shareable"(data is not shareable). NA if it does not have a data availability statement.
-data,washdev.rda,das_repo_url,list,Website url of the data if the relevant data of the paper is shared on a public repository
-data,washdev.rda,keywords,list,List of keywords of the paper
+data,washdev.rda,das_repo_url,character,Website urls of the data if the relevant data of the paper is shared on a public repository separated by a semicolon when there are multiple
+data,washdev.rda,keywords,character,Keywords of the paper separated by a semicolon
 data,washdev.rda,url_source,character,Publisher website of the paper
 data,uncnewsletter.rda,paperid,integer,ID number of the paper on the journal website
 data,uncnewsletter.rda,issue_url,integer,Volume number of the journal
@@ -36,8 +36,8 @@ data,uncnewsletter.rda,title,character,Title of the paper
 data,uncnewsletter.rda,published_year,integer,Year of publication
 data,uncnewsletter.rda,is_supp,logical,Whether the paper has supplementary materials
 data,uncnewsletter.rda,num_supp,integer,Number of supplementary material files
-data,uncnewsletter.rda,supp_file_type,list,File type of the supplementary materials
-data,uncnewsletter.rda,supp_url,list,Website url of the supplementary materials
+data,uncnewsletter.rda,supp_file_type,character,File types of the supplementary materials separated by a semicolon when there are multiple
+data,uncnewsletter.rda,supp_url,character,Website urls of the supplementary materials separated by a semicolon when there are multiple
 data,uncnewsletter.rda,num_authors,integer,Number of the authors
 data,uncnewsletter.rda,first_author_name,character,Name of the first author
 data,uncnewsletter.rda,first_author_affiliation,character,Academic affiliation of the first author
@@ -52,5 +52,5 @@ data,uncnewsletter.rda,correspondence_author_orcid,character,ORCID of the corres
 data,uncnewsletter.rda,has_das,logical,Whether the paper has a data availability statement
 data,uncnewsletter.rda,das,character,Original data availability statement of the paper. NA if it does not have a data availability statement.
 data,uncnewsletter.rda,das_type,factor,Type of the data availability statement including "in paper"(data in full paper scope like supplementary material or appendix or main content) "on request"(data available on request to the authors) "available in online repository"(data is shared in a public online repository) "not shareable"(data is not shareable). NA if it does not have a data availability statement.
-data,uncnewsletter.rda,das_repo_url,list,Website url of the data if the relevant data of the paper is shared on a public repository
-data,uncnewsletter.rda,keywords,list,List of keywords of the paper
+data,uncnewsletter.rda,das_repo_url,character,Website urls of the data if the relevant data of the paper is shared on a public repository separated by a semicolon when there are multiple
+data,uncnewsletter.rda,keywords,character,Keywords of the paper separated by a semicolon
