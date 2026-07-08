@@ -19,7 +19,10 @@ repair_encoding <- function(x) {
 }
 
 # WASHDEV DATA -----------------------------------------------------------
-washdev <- read_csv("data-raw/washdev.csv")[2:28]
+# Drop the index column written by the scraper; keep everything else,
+# including the doi column collected since the R port (#11, #20)
+washdev <- read_csv("data-raw/washdev.csv") |>
+  dplyr::select(-1)
 washdev <- washdev |>
   dplyr::mutate(across(where(is.character), repair_encoding))
 ## create and rename columns to be uniform with other datasets -----------------
@@ -114,6 +117,24 @@ washdev <- washdev |>
   dplyr::mutate(das_type = str_replace(das_type, pattern = "^All relevant data are included in the paper.*", replacement = "in paper")) |>
   dplyr::mutate(das_type = str_replace(das_type, pattern = ".+readers should contact the corresponding author.*", replacement = "on request"))
 
+#### Review file (issue #12): das_type values no rule mapped -------------------
+# No manual fixes without approval; das statements that stayed unmapped
+# (that is, the das_type still carries the full statement text) go here
+washdev |>
+  dplyr::filter(has_das,
+                !das_type %in% c("available in online repository", "in paper", "on request")) |>
+  dplyr::select(paperid, volume, issue, das_type) |>
+  readr::write_csv("data-raw/washdev-das-review.csv")
+
+#### Review file (issue #12): affiliations without a standardized country ------
+washdev |>
+  dplyr::filter(
+    (is.na(first_author_affiliation_country) & !is.na(first_author_affiliation)) |
+      (is.na(correspondence_author_affiliation_country) & !is.na(correspondence_author_affiliation))
+  ) |>
+  dplyr::select(paperid, volume, issue, first_author_affiliation, correspondence_author_affiliation) |>
+  readr::write_csv("data-raw/washdev-country-review.csv")
+
 ## change data type ------------------------------------------------------------
 washdev <- washdev |>
   dplyr::mutate(across(c(paperid, volume, issue, num_supp, num_authors), as.integer)) |>
@@ -163,6 +184,10 @@ washdev <- washdev |>
 
 
 # UNCNEWSLETTER DATA -----------------------------------------------------------
+# The per-article metadata was collected manually into this CSV; a scraper
+# only ever gathered candidate URLs from the newsletter archive. The
+# newsletter ceased publication in May 2024, so this is a frozen source
+# covering papers from 2020 to 2023 (see issue #17).
 uncnewsletter <- readr::read_csv("./data-raw/unc-article-url-manual-collection.csv")
 
 ## Tidy column format ----------------------------------------------------------
@@ -228,9 +253,81 @@ uncnewsletter <- uncnewsletter |>
                   countries::country_name(correspondence_author_affiliation_country, to = "UN_en", fuzzy_match = FALSE))
 
 skimr::skim(uncnewsletter)
+
+# PLOSWATER DATA ----------------------------------------------------------
+# Raw file produced by data-raw/ploswater.R (issue #14); multi-value
+# columns arrive "; "-delimited already, so no list-column handling needed
+ploswater <- readr::read_csv("data-raw/ploswater.csv")
+
+## create and rename columns to be uniform with other datasets -------------
+ploswater <- ploswater |>
+  dplyr::mutate(
+    paperid = doi,
+    url_source = "journals.plos.org"
+  ) |>
+  dplyr::relocate(
+    paperid, volume, issue, paper_url, journal, title, published_year,
+    is_supp, num_supp, supp_file_type, supp_url, num_authors,
+    dplyr::starts_with("first_author"),
+    dplyr::starts_with("correspondence_author"),
+    has_das, das, das_repo_url, das_repo_name, keywords,
+    url_source, doi, article_type, publication_date
+  )
+
+## classify das type (issue #15) --------------------------------------------
+# PLOS statements are free-form; these rules map them onto the factor
+# levels shared with washdev and uncnewsletter. Precedence: no data
+# generated > online repository > in paper > on request > not shareable.
+# Whatever no rule catches stays NA and goes into the review file below.
+ploswater <- ploswater |>
+  dplyr::mutate(das_type = dplyr::case_when(
+    !has_das ~ NA_character_,
+    str_detect(das, regex("no (new )?data ?(sets)?( were| was| are| is)? (generated|created|produced|collected)|no data (are |is )?associated|did not (produce|generate|collect) (any )?data|no datasets", ignore_case = TRUE)) ~ "no data generated",
+    !is.na(das_repo_url) ~ "available in online repository",
+    str_detect(das, regex("(available|deposited|accessible|archived|hosted|obtained|downloaded|found)[^.]{0,60}(repositor|zenodo|dryad|figshare|osf|github|dataverse|data exchange|sequence read archive|NCBI)", ignore_case = TRUE)) ~ "available in online repository",
+    str_detect(das, regex("supplementar[a-z]* (information|material|file|table|document)|supporting information|supplemental (information|material|file|table|document)|uploaded as supplementary|S\\d+ (Dataset|Table|File|Text)", ignore_case = TRUE)) ~ "in paper",
+    str_detect(das, regex("within (the|this) (paper|manuscript|article|publication)|in (the|this|its) (paper|manuscript|article|published article|publication)|part of the (submitted|summitted) (article|manuscript)|within the (submitted|summitted) manuscript|uploaded along(side)?( with)? (this )?(the )?submission", ignore_case = TRUE)) ~ "in paper",
+    str_detect(das, regex("upon (reasonable )?request|on request|by request|contact(ing)? the (corresponding )?author", ignore_case = TRUE)) ~ "on request",
+    str_detect(das, regex("cannot be (shared|made)|not (be )?(publicly )?(available|shared)|restrictions apply|third[- ]party", ignore_case = TRUE)) ~ "not shareable",
+    .default = NA_character_
+  )) |>
+  dplyr::mutate(das_type = factor(das_type, levels = c(
+    "available in online repository", "in paper", "on request",
+    "not shareable", "no data generated"
+  ))) |>
+  dplyr::relocate(das_type, .after = das)
+
+## change data type ---------------------------------------------------------
+ploswater <- ploswater |>
+  dplyr::mutate(across(c(volume, issue, num_supp, num_authors, published_year),
+                       as.integer))
+
+## clean country/region names ----------------------------------------------
+ploswater <- ploswater |>
+  dplyr::mutate(first_author_affiliation_country =
+                  countries::country_name(first_author_affiliation_country, to = "UN_en", fuzzy_match = FALSE)) |>
+  dplyr::mutate(correspondence_author_affiliation_country =
+                  countries::country_name(correspondence_author_affiliation_country, to = "UN_en", fuzzy_match = FALSE))
+
+## review files (issues #12, #15): no manual fixes without approval --------
+# DAS texts no rule classified
+ploswater |>
+  dplyr::filter(has_das, is.na(das_type)) |>
+  dplyr::select(paperid, das) |>
+  readr::write_csv("data-raw/ploswater-das-review.csv")
+# affiliations whose country could not be standardized
+ploswater |>
+  dplyr::filter(
+    (is.na(first_author_affiliation_country) & !is.na(first_author_affiliation)) |
+      (is.na(correspondence_author_affiliation_country) & !is.na(correspondence_author_affiliation))
+  ) |>
+  dplyr::select(paperid, first_author_affiliation, correspondence_author_affiliation) |>
+  readr::write_csv("data-raw/ploswater-country-review.csv")
+
 # Write to R data object -------------------------------------------------------
 usethis::use_data(washdev, overwrite = TRUE)
 usethis::use_data(uncnewsletter, overwrite = TRUE)
+usethis::use_data(ploswater, overwrite = TRUE)
 
 # Export processed data to csv and xlsx files ----------------------------------
 readr::write_csv(washdev, here::here("inst", "extdata", "washdev.csv"))
@@ -238,4 +335,7 @@ openxlsx::write.xlsx(washdev, here::here("inst", "extdata", "washdev.xlsx"))
 
 readr::write_csv(uncnewsletter, here::here("inst", "extdata", "uncnewsletter.csv"))
 openxlsx::write.xlsx(uncnewsletter, here::here("inst", "extdata", "uncnewsletter.xlsx"))
+
+readr::write_csv(ploswater, here::here("inst", "extdata", "ploswater.csv"))
+openxlsx::write.xlsx(ploswater, here::here("inst", "extdata", "ploswater.xlsx"))
 
