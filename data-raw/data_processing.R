@@ -8,8 +8,20 @@ library(forcats)
 library(countries)
 library(purrr)
 
+# Helper: repair invalid UTF-8 -------------------------------------------
+# A few cells in the raw washdev.csv carry Mac Roman bytes (e.g. 0x90 for
+# "ê" in "Inês"); openxlsx refuses to write them
+repair_encoding <- function(x) {
+  if (!is.character(x)) return(x)
+  bad <- !is.na(x) & !validUTF8(x)
+  x[bad] <- iconv(x[bad], from = "macintosh", to = "UTF-8")
+  x
+}
+
 # WASHDEV DATA -----------------------------------------------------------
 washdev <- read_csv("data-raw/washdev.csv")[2:28]
+washdev <- washdev |>
+  dplyr::mutate(across(where(is.character), repair_encoding))
 ## create and rename columns to be uniform with other datasets -----------------
 washdev <- washdev |>
   dplyr::rename(paper_url = url) |>
@@ -181,9 +193,9 @@ missing_type <- c("xlsx & xlsx & docx", "xlsx & xlsx & docx", "docx & xlsx & zip
                   "pdf & xlsx & xlsx", "docx & zip", paste(c(paste(rep("xlsx", 10), collapse = " & "), "docx", "docx"), collapse = " & "),
                   "xlsx & xlsx & docx", "pdf & docx", "xlsx & xlsx & docx",
                    "xlsx & docx & docx")
-uncnewsletter$num_supp[which(washdev$paperid == 115)] <- 2
-uncnewsletter$num_supp[which(washdev$paperid == 146)] <- 2
-uncnewsletter$supp_file_type[which(washdev$paperid %in% ids)] <- missing_type
+uncnewsletter$num_supp[which(uncnewsletter$paperid == 115)] <- 2
+uncnewsletter$num_supp[which(uncnewsletter$paperid == 146)] <- 2
+uncnewsletter$supp_file_type[which(uncnewsletter$paperid %in% ids)] <- missing_type
 uncnewsletter <- uncnewsletter |>
   dplyr::mutate(supp_file_type = strsplit(supp_file_type, " & ")) |>
   ### Make supp url a list-column ----------------------------------------------
@@ -212,7 +224,7 @@ uncnewsletter <- uncnewsletter |>
 uncnewsletter <- uncnewsletter |>
   dplyr::mutate(first_author_affiliation_country =
                   countries::country_name(first_author_affiliation_country, to = "UN_en", fuzzy_match = FALSE)) |>
-  dplyr::mutate(first_author_affiliation_country =
+  dplyr::mutate(correspondence_author_affiliation_country =
                   countries::country_name(correspondence_author_affiliation_country, to = "UN_en", fuzzy_match = FALSE))
 
 skimr::skim(uncnewsletter)
