@@ -9,4 +9,4 @@
 ^docs$
 ^pkgdown$
 ^\.github$
-^inst
+^python-scripts-lesson\.md$

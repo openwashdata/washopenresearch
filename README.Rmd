@@ -38,13 +38,15 @@ library(wordcloud2)
 
 The goal of washopenresearch is to provide an overview of open research
 data related to Water Sanitation and Hygiene (WASH). The current version
-contains two datasets from the following sources:
+contains three datasets from the following sources:
 
 -   `washdev`: Open access journal [*Journal of Water, Sanitation and
     Hygiene for Development*](https://iwaponline.com/washdev)
 -   `uncnewsletter`: Research section of the newsletter [North Carolina
     Water
     News](https://waterinstitute.unc.edu/our-work/nc-water-news-newsletter)
+-   `ploswater`: Open access journal [*PLOS
+    Water*](https://journals.plos.org/water/)
 
 ![Word cloud of the most frequent keywords in articles of the Journal of Water, Sanitation and Hygiene for Development, with water, sanitation, and hygiene appearing largest](man/figures/washdev_wordcloud.png){width="515"}
 
@@ -79,11 +81,12 @@ read_csv("data-raw/dictionary.csv") |>
 
 ## Data
 
-The package provides access to two datasets `washdev` and
-`uncnewsletter`. Each dataset collects information on scientific
-articles about (1) article metadata (e.g. title, first author,
-correspondence author), (2) supplementary material information, (3) data
-availability statement, and (4) semantic information (e.g. keywords).
+The package provides access to three datasets `washdev`,
+`uncnewsletter`, and `ploswater`. Each dataset collects information on
+scientific articles about (1) article metadata (e.g. title, first
+author, correspondence author), (2) supplementary material information,
+(3) data availability statement, and (4) semantic information (e.g.
+keywords).
 
 ```{r}
 library(washopenresearch)
@@ -92,9 +95,11 @@ library(washopenresearch)
 ### washdev
 
 The dataset `washdev` contains data on open access articles of the
-*Journal of Water, Sanitation & Hygiene for Development* (Vol.1 Issue
-1 - Vol.13 Issue 11). It has `r nrow(washdev)` observations from March
-2011 to November 2023.
+*Journal of Water, Sanitation & Hygiene for Development* (Vol. 1
+Issue 1 to Vol. `r max(washdev$volume)` Issue
+`r max(washdev$issue[washdev$volume == max(washdev$volume)])`). It has
+`r nrow(washdev)` observations from March 2011 to
+`r max(washdev$published_year)`.
 
 ```{r}
 washdev |> 
@@ -119,6 +124,8 @@ readr::read_csv("data-raw/dictionary.csv") |>
 The dataset `uncnewsletter` contains data on a curated list of articles
 published at the Research section of the newsletter North Carolina Water
 News. It has `r nrow(uncnewsletter)` observations from 2020 to 2023.
+The newsletter ceased publication in May 2024, so this dataset is a
+frozen source.
 
 ```{r}
 uncnewsletter |> 
@@ -132,12 +139,40 @@ For an overview of the variable descriptions, see the following table.
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 readr::read_csv("data-raw/dictionary.csv") |>
   dplyr::filter(file_name == "uncnewsletter.rda") |>
-  dplyr::select(variable_name:description) |> 
-  knitr::kable() |> 
-  kableExtra::kable_styling("striped") |> 
+  dplyr::select(variable_name:description) |>
+  knitr::kable() |>
+  kableExtra::kable_styling("striped") |>
   kableExtra::scroll_box(height = "200px")
 ```
 
+### ploswater
+
+The dataset `ploswater` contains data on all articles of the journal
+[*PLOS Water*](https://journals.plos.org/water/) from its first volume
+(2022) onward, collected through the public PLOS API rather than web
+scraping. It has `r nrow(ploswater)` observations. Data availability
+statements are mandatory at PLOS, so the interesting variation lies in
+`das_type`, `das_repo_url`, and `das_repo_name`, which describe how and
+where the data behind each article is stored. All article types are
+included; use `article_type` to restrict to research articles.
+
+```{r}
+ploswater |>
+  head(3) |>
+  gt::gt() |>
+  gt::as_raw_html()
+```
+
+For an overview of the variable descriptions, see the following table.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+readr::read_csv("data-raw/dictionary.csv") |>
+  dplyr::filter(file_name == "ploswater.rda") |>
+  dplyr::select(variable_name:description) |>
+  knitr::kable() |>
+  kableExtra::kable_styling("striped") |>
+  kableExtra::scroll_box(height = "200px")
+```
 
 ## Example
 
