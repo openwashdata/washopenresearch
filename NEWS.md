@@ -1,3 +1,25 @@
+# washopenresearch (development version)
+
+## New features
+
+- New scripted acquisition pipeline for a third dataset, `datapapers`, covering
+  WASH-related data papers in seven dedicated data journals (Scientific Data,
+  Data in Brief, Gates Open Research, F1000Research, GigaScience, GigaByte,
+  and Data (MDPI)) (#28). The pipeline lives in
+  `data-raw/01_datapapers_acquire.R` (Crossref/Europe PMC harvest with a
+  committed raw snapshot), `data-raw/02_datapapers_screen.R` (relevance
+  screening captured in a committed decision sheet keyed on DOI), and
+  `data-raw/03_datapapers_process.R` (harmonisation to the shared schema and
+  export). The dataset itself is added once the first harvest and screening
+  round are complete.
+
+## Minor improvements and fixes
+
+- The list-column collapsing helper and shared country-cleaning steps moved to
+  `data-raw/helpers.R`, sourced by all processing scripts.
+- `data-raw/README.md` documents the run order and provenance of every
+  committed snapshot and decision sheet.
+
 # washopenresearch 0.1.0
 
 ## Breaking changes
