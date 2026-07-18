@@ -1,6 +1,6 @@
 Package: washopenresearch
 Title: Dataset about open research data information in Water, Sanitation, and Hygiene
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R: c(
     person("Mian", "Zhong", , "mzhong@ethz.ch", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0009-4546-7214")),
@@ -13,8 +13,11 @@ Description: The goal of washopenresearch is to provide an overview of open rese
 License: CC BY 4.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-Depends: 
+Depends:
     R (>= 3.5)
+Suggests:
+    europepmc,
+    rcrossref
 LazyData: true
 Config/Needs/website: rmarkdown
 Date: 2026-07-07

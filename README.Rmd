@@ -38,13 +38,23 @@ library(wordcloud2)
 
 The goal of washopenresearch is to provide an overview of open research
 data related to Water Sanitation and Hygiene (WASH). The current version
-contains two datasets from the following sources:
+contains three datasets from the following sources:
 
 -   `washdev`: Open access journal [*Journal of Water, Sanitation and
     Hygiene for Development*](https://iwaponline.com/washdev)
 -   `uncnewsletter`: Research section of the newsletter [North Carolina
     Water
     News](https://waterinstitute.unc.edu/our-work/nc-water-news-newsletter)
+-   `datapapers`: WASH-related data papers in seven dedicated data
+    journals ([Scientific
+    Data](https://www.nature.com/sdata/), [Data in
+    Brief](https://www.sciencedirect.com/journal/data-in-brief), [Gates
+    Open Research](https://gatesopenresearch.org),
+    [F1000Research](https://f1000research.com),
+    [GigaScience](https://academic.oup.com/gigascience),
+    [GigaByte](https://gigabytejournal.com), and
+    [Data](https://www.mdpi.com/journal/data)), harvested from Crossref
+    and Europe PMC
 
 ![Word cloud of the most frequent keywords in articles of the Journal of Water, Sanitation and Hygiene for Development, with water, sanitation, and hygiene appearing largest](man/figures/washdev_wordcloud.png){width="515"}
 
@@ -79,11 +89,12 @@ read_csv("data-raw/dictionary.csv") |>
 
 ## Data
 
-The package provides access to two datasets `washdev` and
-`uncnewsletter`. Each dataset collects information on scientific
-articles about (1) article metadata (e.g. title, first author,
-correspondence author), (2) supplementary material information, (3) data
-availability statement, and (4) semantic information (e.g. keywords).
+The package provides access to three datasets `washdev`,
+`uncnewsletter`, and `datapapers`. Each dataset collects information on
+scientific articles about (1) article metadata (e.g. title, first
+author, correspondence author), (2) supplementary material information,
+(3) data availability statement or linked data repository, and (4)
+semantic information (e.g. keywords or abstract).
 
 ```{r}
 library(washopenresearch)
@@ -138,6 +149,34 @@ readr::read_csv("data-raw/dictionary.csv") |>
   kableExtra::scroll_box(height = "200px")
 ```
 
+
+### datapapers
+
+The dataset `datapapers` contains WASH-related data papers published in
+seven dedicated data journals, identified from Crossref and Europe PMC
+metadata and screened for relevance (see `data-raw/README.md` for the
+pipeline). It has `r nrow(datapapers)` observations. Because a data
+paper exists to describe a shared dataset, `data_repo_url` and
+`data_repo` take the role that the data availability statement variables
+play in the other two datasets.
+
+```{r}
+datapapers |>
+  head(3) |>
+  gt::gt() |>
+  gt::as_raw_html()
+```
+
+For an overview of the variable descriptions, see the following table.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+readr::read_csv("data-raw/dictionary.csv") |>
+  dplyr::filter(file_name == "datapapers.rda") |>
+  dplyr::select(variable_name:description) |>
+  knitr::kable() |>
+  kableExtra::kable_styling("striped") |>
+  kableExtra::scroll_box(height = "200px")
+```
 
 ## Example
 
@@ -226,6 +265,20 @@ uncnewsletter |>
    theme_classic()
 ```
 
+### datapapers
+
+1.  How many papers per journal, and how many resolve to a data
+    repository?
+
+```{r}
+datapapers |>
+  group_by(journal) |>
+  summarise(papers = n(),
+            with_repository_link = sum(!is.na(data_repo_url))) |>
+  arrange(desc(papers)) |>
+  knitr::kable()
+```
+
 ## Method
 
 We describe the raw data collection procedure of each dataset in this
@@ -250,6 +303,17 @@ Then, for each publication, we retrieve the needed variables from the
 publication's html file using the publication url. The retrieval is
 rule-based to find the relevant fields (e.g. supplementary materials)
 and extract the value.
+
+### datapapers
+
+The collection of `datapapers` is fully scripted in R. Crossref is
+queried by journal ISSN and Europe PMC by journal name (for the
+F1000-platform journals) with a fixed list of WASH search terms; the
+harvest is committed as a raw snapshot with the retrieval date and
+matching query terms recorded per row. Relevance screening and country
+corrections are captured in committed CSV decision sheets keyed on DOI,
+so the pipeline runs end-to-end non-interactively. See
+`data-raw/README.md` for the run order.
 
 ### uncnewsletter
 

@@ -54,3 +54,21 @@ data,uncnewsletter.rda,das,character,Original data availability statement of the
 data,uncnewsletter.rda,das_type,factor,Type of the data availability statement including "in paper"(data in full paper scope like supplementary material or appendix or main content) "on request"(data available on request to the authors) "available in online repository"(data is shared in a public online repository) "not shareable"(data is not shareable). NA if it does not have a data availability statement.
 data,uncnewsletter.rda,das_repo_url,character,Website urls of the data if the relevant data of the paper is shared on a public repository separated by a semicolon when there are multiple
 data,uncnewsletter.rda,keywords,character,Keywords of the paper separated by a semicolon
+data,datapapers.rda,paperid,integer,ID number of the paper within this dataset
+data,datapapers.rda,doi,character,DOI of the data paper
+data,datapapers.rda,paper_url,character,Official url of the paper (DOI resolver link)
+data,datapapers.rda,url_source,character,Publisher website of the paper
+data,datapapers.rda,journal,character,Full name of the journal
+data,datapapers.rda,title,character,Title of the paper
+data,datapapers.rda,published_year,integer,Year of publication
+data,datapapers.rda,num_authors,integer,Number of the authors
+data,datapapers.rda,first_author_name,character,Name of the first author
+data,datapapers.rda,first_author_affiliation,character,Academic affiliation of the first author
+data,datapapers.rda,first_author_affiliation_country,character,Country of the first author parsed from first_author_affiliation variable encoded with United Nations names
+data,datapapers.rda,data_repo_url,character,Website urls of the repository holding the dataset the paper describes separated by a semicolon when there are multiple
+data,datapapers.rda,data_repo,character,Name of the data repository (e.g. Zenodo Dryad Figshare OSF Dataverse) parsed from data_repo_url
+data,datapapers.rda,license,character,License url of the paper from Crossref metadata
+data,datapapers.rda,related_paper_doi,character,DOI of a linked research article if any separated by a semicolon when there are multiple
+data,datapapers.rda,abstract,character,Abstract of the paper as provided by the metadata source
+data,datapapers.rda,query_term,character,WASH search term(s) that retrieved the paper separated by a semicolon
+data,datapapers.rda,retrieval_date,date,Date the paper metadata was harvested from the API
