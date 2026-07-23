@@ -72,6 +72,35 @@ datapapers_search_terms <- function() {
   )
 }
 
+# Rewrite an expired Silverchair pre-signed CDN link to a stable DOI URL
+# (issue #10). The CDN links (iwa.silverchair-cdn.com/...pdf?Expires=...&
+# Signature=...) carry a January 2024 expiry, so they are dead for reusers,
+# and the high-entropy Signature trips secret scanners. The article DOI is
+# embedded in the path (e.g. .../10.2166_washdev.2011.015/...), so it is
+# recovered mechanically with no re-collection. A non-Silverchair value is
+# returned unchanged.
+canonicalize_silverchair_url <- function(url) {
+  is_cdn <- !is.na(url) & stringr::str_detect(url, "silverchair-cdn\\.com")
+  doi_token <- stringr::str_match(
+    url, "/(10\\.[0-9]+_[a-z0-9]+\\.[0-9]+\\.[0-9]+)/"
+  )[, 2]
+  doi <- stringr::str_replace(doi_token, "_", "/")
+  ifelse(is_cdn & !is.na(doi), paste0("https://doi.org/", doi), url)
+}
+
+# Decode the target URL out of a Google Scholar alert redirect (issue #10).
+# uncnewsletter carries a few paper_url values of the form
+# https://scholar.google.com/scholar_url?url=<target>&...&scisig=... The target
+# is URL-encoded in the `url=` parameter; the scisig token also trips secret
+# scanners. A value that is not a Scholar redirect is returned unchanged.
+decode_scholar_redirect <- function(url) {
+  is_scholar <- !is.na(url) & stringr::str_detect(url, "scholar\\.google\\.com/scholar_url")
+  target <- stringr::str_match(url, "[?&]url=([^&]+)")[, 2]
+  decoded <- vapply(target, function(t) if (is.na(t)) NA_character_ else utils::URLdecode(t),
+                    character(1), USE.NAMES = FALSE)
+  ifelse(is_scholar & !is.na(decoded), decoded, url)
+}
+
 # Parse a repository name from a data-repository URL.
 parse_repo_name <- function(url) {
   dplyr::case_when(
