@@ -36,7 +36,7 @@
 \item{das_repo_url}{Website urls of the data if the relevant data of the paper is shared on a public repository, separated by "; " when there are multiple}
 \item{keywords}{Keywords of the paper, separated by "; "}
 \item{url_source}{Publisher website of the paper}
-\item{doi}{DOI of the paper. Collected since the R port of the scraper; NA for articles scraped earlier, to be backfilled via Crossref.}
+\item{doi}{DOI of the paper. Collected by the R scraper for recent articles and backfilled via Crossref for legacy rows (issue #20); NA where no Crossref match was found.}
 }
 }
 }

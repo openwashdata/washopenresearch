@@ -27,7 +27,7 @@ data,washdev.rda,das_type,factor,Type of the data availability statement includi
 data,washdev.rda,das_repo_url,character,Website urls of the data if the relevant data of the paper is shared on a public repository separated by a semicolon when there are multiple
 data,washdev.rda,keywords,character,Keywords of the paper separated by a semicolon
 data,washdev.rda,url_source,character,Publisher website of the paper
-data,washdev.rda,doi,character,DOI of the paper. Collected since the R port of the scraper; NA for articles scraped earlier
+data,washdev.rda,doi,character,DOI of the paper. Collected by the R scraper for recent articles and backfilled via Crossref for legacy rows (issue #20); NA where no Crossref match was found (see data-raw/washdev-doi-review.csv)
 data,uncnewsletter.rda,paperid,integer,ID number of the paper on the journal website
 data,uncnewsletter.rda,issue_url,character,URL of the newsletter issue that featured the paper
 data,uncnewsletter.rda,paper_url,character,Official website url of the paper
@@ -55,6 +55,7 @@ data,uncnewsletter.rda,das,character,Original data availability statement of the
 data,uncnewsletter.rda,das_type,factor,Type of the data availability statement including "in paper"(data in full paper scope like supplementary material or appendix or main content) "on request"(data available on request to the authors) "available in online repository"(data is shared in a public online repository) "not shareable"(data is not shareable). NA if it does not have a data availability statement.
 data,uncnewsletter.rda,das_repo_url,character,Website urls of the data if the relevant data of the paper is shared on a public repository separated by a semicolon when there are multiple
 data,uncnewsletter.rda,keywords,character,Keywords of the paper separated by a semicolon
+data,uncnewsletter.rda,doi,character,DOI of the paper backfilled via a Crossref title search (issue #20); NA where no match cleared the title-similarity threshold (see data-raw/uncnewsletter-doi-review.csv)
 data,ploswater.rda,paperid,character,DOI of the paper; identical to the doi variable
 data,ploswater.rda,volume,integer,Volume number of the journal; volume 1 is 2022
 data,ploswater.rda,issue,integer,Issue number of the journal
@@ -87,3 +88,21 @@ data,ploswater.rda,url_source,character,Publisher website of the paper
 data,ploswater.rda,doi,character,DOI of the paper
 data,ploswater.rda,article_type,character,Article type e.g. Research Article or Opinion or Review
 data,ploswater.rda,publication_date,date,Date of publication (ISO 8601)
+data,datapapers.rda,paperid,integer,ID number of the paper within this dataset
+data,datapapers.rda,doi,character,DOI of the data paper
+data,datapapers.rda,paper_url,character,Official url of the paper (DOI resolver link)
+data,datapapers.rda,url_source,character,Publisher website of the paper
+data,datapapers.rda,journal,character,Full name of the journal
+data,datapapers.rda,title,character,Title of the paper
+data,datapapers.rda,published_year,integer,Year of publication
+data,datapapers.rda,num_authors,integer,Number of the authors
+data,datapapers.rda,first_author_name,character,Name of the first author
+data,datapapers.rda,first_author_affiliation,character,Academic affiliation of the first author
+data,datapapers.rda,first_author_affiliation_country,character,Country of the first author parsed from first_author_affiliation variable encoded with United Nations names
+data,datapapers.rda,data_repo_url,character,Website urls of the repository holding the dataset the paper describes separated by a semicolon when there are multiple
+data,datapapers.rda,data_repo,character,Name of the data repository (e.g. Zenodo Dryad Figshare OSF Dataverse) parsed from data_repo_url
+data,datapapers.rda,license,character,License url of the paper from Crossref metadata
+data,datapapers.rda,related_paper_doi,character,DOI of a linked research article if any separated by a semicolon when there are multiple
+data,datapapers.rda,abstract,character,Abstract of the paper as provided by the metadata source
+data,datapapers.rda,query_term,character,WASH search term(s) that retrieved the paper separated by a semicolon
+data,datapapers.rda,retrieval_date,date,Date the paper metadata was harvested from the API
