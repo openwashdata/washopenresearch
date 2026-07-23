@@ -1,0 +1,303 @@
+source_id,venue,source_type,matched_works,rank_matched,researcher_works,rank_researcher,venue_total_works,is_candidate
+S4306525036,PubMed,repository,30420,1,1386,8,8038081,FALSE
+S52566953,Water Research,journal,9629,12,3285,1,31611,TRUE
+S4306400562,Zenodo (CERN European Organization for Nuclear Research),repository,25530,2,359,36,12656832,FALSE
+S2738498342,EFSA Journal,journal,NA,NA,2459,2,9327,TRUE
+S4210172589,SSRN Electronic Journal,repository,25162,3,1248,11,1644009,FALSE
+S86852077,The Science of The Total Environment,journal,11303,8,1863,3,83936,TRUE
+S4377196282,Figshare,repository,20483,4,679,18,8663536,FALSE
+S13479253,Environmental Science & Technology,journal,6531,20,1858,4,70421,TRUE
+S140251998,Journal of Biological Chemistry,journal,20002,5,NA,NA,214122,TRUE
+S4210170078,Oncology Times,journal,1791,80,1525,5,14301,TRUE
+S4306401280,DOAJ (DOAJ: Directory of Open Access Journals),repository,14306,6,161,87,2232416,FALSE
+S21442059,Bioresource Technology,journal,3837,36,1486,6,35530,TRUE
+S4306525896,Research Square,repository,14070,7,438,29,474662,FALSE
+S149937609,Chemical Engineering Journal,journal,6716,19,1472,7,77381,TRUE
+S200071133,Blood,journal,10210,9,802,15,197721,TRUE
+S53450646,Water Science & Technology,journal,8309,17,1342,9,29752,TRUE
+S168522863,Cancer Research,journal,9715,10,84,161,159450,TRUE
+S203465130,Chemosphere,journal,5733,24,1264,10,51194,TRUE
+S202381698,PLoS ONE,journal,9663,11,566,20,342054,TRUE
+S4306463230,Elsevier eBooks,ebook platform,9477,13,1123,12,1195001,FALSE
+S145089992,Journal of Hazardous Materials,journal,4701,29,1064,13,43126,TRUE
+S4306402567,bioRxiv (Cold Spring Harbor Laboratory),repository,9318,14,532,23,337935,FALSE
+S4306400478,Ghent University Academic Bibliography (Ghent University),repository,NA,NA,1026,14,203072,FALSE
+S4306402641,LA Referencia (Red Federada de Repositorios Institucionales de Publicaciones Científicas),repository,8568,15,NA,NA,2533457,FALSE
+S134216166,Water,journal,8550,16,396,31,32158,TRUE
+S69753523,Separation and Purification Technology,journal,4279,32,722,16,31055,TRUE
+S86512602,Desalination,journal,3670,38,720,17,21035,TRUE
+S196734849,Scientific Reports,journal,8296,18,383,32,305072,TRUE
+S46544255,PLoS neglected tropical diseases,journal,1900,73,649,19,13478,TRUE
+S87561820,Environmental Science and Pollution Research,journal,6385,21,529,24,48867,TRUE
+S3005729997,medRxiv,repository,2216,65,551,21,85190,FALSE
+S119469986,Journal of Membrane Science,journal,1867,76,551,21,26837,TRUE
+S4210195883,IOP Conference Series Earth and Environmental Science,conference,6287,22,NA,NA,123923,FALSE
+S25293849,The FASEB Journal,journal,6016,23,NA,NA,138991,TRUE
+S4406922384,Open MIND,repository,5665,25,NA,NA,1906711,FALSE
+S124203677,Desalination and Water Treatment,journal,5290,27,523,25,19886,TRUE
+S44455300,Journal of Environmental Management,journal,5315,26,515,26,30628,TRUE
+S100045985,American Journal of Tropical Medicine and Hygiene,journal,1362,133,474,27,23854,TRUE
+S2764859491,Journal of environmental chemical engineering,journal,4770,28,348,38,24208,TRUE
+S58516903,Journal of Cleaner Production,journal,3847,35,457,28,49915,TRUE
+S2764434589,Journal of Water Process Engineering,journal,4356,30,364,35,10526,TRUE
+S158228368,Applied and Environmental Microbiology,journal,2967,45,437,30,38773,TRUE
+S4306402512,HAL (Le Centre pour la Communication Scientifique Directe),repository,4282,31,231,57,2286084,FALSE
+S15137598,Journal of Clinical Oncology,journal,4074,33,176,80,174096,TRUE
+S47215897,Antimicrobial Agents and Chemotherapy,journal,1178,157,380,33,33936,TRUE
+S10134376,Sustainability,journal,3978,34,140,102,107652,TRUE
+S4306402388,Queensland's institutional digital repository (The University of Queensland),repository,NA,NA,373,34,181560,FALSE
+S4210200103,Proceedings of the Water Environment Federation,journal,3742,37,252,46,19732,TRUE
+S134307298,Applied Catalysis B: Environmental,journal,1066,178,352,37,19887,TRUE
+S11732831,Environmental Monitoring and Assessment,journal,3636,39,119,123,19763,TRUE
+S201530359,Environmental Pollution,journal,2541,51,339,39,29030,TRUE
+S6309402219,Preprints.org,repository,3287,40,NA,NA,132049,FALSE
+S7407056385,Institutional Repositories DataBase (IRDB),repository,3287,40,NA,NA,3817850,FALSE
+S72684844,Journal of Animal Science,journal,1642,96,331,40,48305,TRUE
+S35825460,Journal of Environmental Sciences,journal,1225,150,331,40,8519,TRUE
+S2484704948,Frontiers in Microbiology,journal,3186,42,191,73,41429,TRUE
+S70979998,Applied Microbiology and Biotechnology,journal,1785,81,317,42,21897,TRUE
+S83853393,International Journal of Biological Macromolecules,journal,3137,43,NA,NA,52315,FALSE
+S173943867,Environmental Research,journal,2523,54,313,43,23369,FALSE
+S10623703,International Journal of Molecular Sciences,journal,3029,44,NA,NA,113294,FALSE
+S80413395,Parasites & Vectors,journal,NA,NA,265,44,8915,FALSE
+S2481244646,RSC Advances,journal,1207,155,262,45,82919,FALSE
+S55737203,Journal of Hydrology,journal,2885,46,237,51,29562,FALSE
+S156179317,Journal of Environmental Engineering,journal,1344,134,252,46,7024,FALSE
+S2735126445,Open Forum Infectious Diseases,journal,2754,47,132,110,31513,FALSE
+S145577119,American Journal Of Pathology,journal,2646,48,NA,NA,10686,FALSE
+S151564723,Biotechnology and Bioengineering,journal,975,195,251,48,19914,FALSE
+S156652029,Water Air & Soil Pollution,journal,2605,49,145,99,17706,FALSE
+S72350973,Clinical Infectious Diseases,journal,NA,NA,249,49,37454,FALSE
+S67425620,Advanced materials research,journal,2544,50,76,179,149651,FALSE
+S4210190644,Environmental Science Water Research & Technology,journal,NA,NA,240,50,2659,FALSE
+S37011080,Environmental Technology,journal,1776,82,237,51,9478,FALSE
+S128227336,Infection and Immunity,journal,1633,98,237,51,34308,FALSE
+S49861241,The Lancet,journal,2528,52,137,105,475740,FALSE
+S15239247,International Journal of Environmental Research and Public Health,journal,2525,53,235,55,66850,FALSE
+S190456265,Acta Tropica,journal,NA,NA,236,54,8332,FALSE
+S133274750,Journal of Bacteriology,journal,2511,55,83,165,55692,FALSE
+S4210186093,E3S Web of Conferences,journal,2508,56,NA,NA,61886,FALSE
+S2737837740,Infectious Diseases of Poverty,journal,NA,NA,232,56,1530,FALSE
+S124453322,Water Science & Technology Water Supply,journal,2505,57,213,65,4978,TRUE
+S25650217,Annals of the Rheumatic Diseases,journal,2500,58,NA,NA,73003,FALSE
+S4210201235,ACS ES&T Water,journal,1076,175,230,58,2745,TRUE
+S143352558,Gastroenterology,journal,2442,59,86,158,160434,FALSE
+S7407051488,UNC Libraries,repository,1191,156,227,59,75872,FALSE
+S66401815,Journal of Food Protection,journal,2389,60,NA,NA,12982,FALSE
+S64187185,Nature Communications,journal,1417,121,225,60,90934,FALSE
+S2764879708,China Water & Wastewater,journal,2385,61,NA,NA,5579,TRUE
+S27359860,Vaccine,journal,1157,158,223,61,33207,FALSE
+S4306400194,arXiv (Cornell University),repository,2381,62,102,141,3256941,FALSE
+S4306400705,"Technical University of Denmark, DTU Orbit (Technical University of Denmark, DTU)",repository,NA,NA,221,62,159558,FALSE
+S53087977,Journal of Clinical Microbiology,journal,NA,NA,221,62,33485,FALSE
+S4306402266,Digital Repository (National Repository of Grey Literature),repository,2375,63,NA,NA,516328,FALSE
+S4210168594,ECS Meeting Abstracts,journal,2360,64,NA,NA,106955,FALSE
+S54542293,The Journal of Infectious Diseases,journal,NA,NA,215,64,38980,FALSE
+S24940445,American Water Works Association,journal,2209,66,178,77,25743,FALSE
+S54036783,Canadian Journal of Animal Science,journal,NA,NA,212,66,6236,FALSE
+S2764696622,AIP conference proceedings,journal,2197,67,70,192,281673,FALSE
+S143381477,Environment International,journal,NA,NA,206,67,14854,FALSE
+S98085912,Biophysical Journal,journal,2193,68,NA,NA,83990,FALSE
+S176136234,Journal of Chromatography A,journal,NA,NA,205,68,68824,FALSE
+S198573919,Environmental Earth Sciences,journal,2090,69,NA,NA,12946,FALSE
+S4306401731,VBN Forskningsportal (Aalborg Universitet),repository,NA,NA,198,69,175147,FALSE
+S108911230,Molecules,journal,1976,70,NA,NA,64951,FALSE
+S125754415,Proceedings of the National Academy of Sciences,journal,1517,104,197,70,171465,FALSE
+S4306401271,RePEc: Research Papers in Economics,repository,1958,71,NA,NA,1335007,FALSE
+S189281586,Emerging infectious diseases,journal,NA,NA,193,71,15243,FALSE
+S4306401293,Dialnet (Universidad de la Rioja),repository,1925,72,NA,NA,2103532,FALSE
+S23772524,The Lancet Infectious Diseases,journal,NA,NA,192,72,10881,FALSE
+S41454044,Annals of Oncology,journal,1877,74,NA,NA,67745,FALSE
+S124275759,Journal of Antimicrobial Chemotherapy,journal,1485,113,189,74,22206,FALSE
+S4210187594,Journal of Physics Conference Series,journal,1875,75,NA,NA,218382,FALSE
+S4306400274,Murdoch Research Repository (Murdoch University),repository,NA,NA,188,75,30731,FALSE
+S4210189194,IOP Conference Series Materials Science and Engineering,conference,1867,76,NA,NA,100275,FALSE
+S4306501062,AGU Fall Meeting Abstracts,journal,1506,106,184,76,180687,FALSE
+S26443501,Journal of Water and Health,journal,1433,120,178,77,2044,TRUE
+S154451576,American Journal of Infection Control,journal,1826,78,99,144,15984,FALSE
+S2595292759,Frontiers in Immunology,journal,1803,79,NA,NA,55798,FALSE
+S127754761,Journal of Water Resources Planning and Management,journal,NA,NA,177,79,3747,FALSE
+S48860480,International Journal of Hydrogen Energy,journal,975,195,176,80,60105,FALSE
+S2765038927,Oncology Times UK,journal,NA,NA,174,82,1119,FALSE
+S4306402487,OSTI OAI (U.S. Department of Energy Office of Scientific and Technical Information),repository,1772,83,NA,NA,1150637,FALSE
+S2737606590,Antimicrobial Resistance and Infection Control,journal,NA,NA,171,83,2778,FALSE
+S2764832999,Scientific investigations report,journal,1746,84,NA,NA,4843,TRUE
+S166351637,Process Safety and Environmental Protection,journal,1674,93,168,84,20804,FALSE
+S151589183,Biochemical and Biophysical Research Communications,journal,1732,85,NA,NA,102104,FALSE
+S4306401023,Loughborough University Institutional Repository (Loughborough University),repository,1732,85,NA,NA,17288,FALSE
+S112095004,Journal of Chemical Technology & Biotechnology,journal,NA,NA,167,85,11145,FALSE
+S4210192793,The handbook of environmental chemistry,book series,NA,NA,164,86,2815,FALSE
+S104641133,Agricultural Water Management,journal,1729,87,NA,NA,10411,FALSE
+S4210228842,Journal of Water Supply Research and Technology—AQUA,journal,1120,168,161,87,1522,TRUE
+S18188872,Analytical and Bioanalytical Chemistry,journal,NA,NA,161,87,47549,FALSE
+S2898612692,Heliyon,journal,1698,88,NA,NA,45555,FALSE
+S38008053,The Journal of Immunology,journal,1687,89,NA,NA,105687,FALSE
+S66441642,The American Journal of Gastroenterology,journal,1684,90,NA,NA,92168,FALSE
+S161475033,Parasitology,journal,NA,NA,158,90,12836,FALSE
+S130511131,Water Environment Research,journal,1681,91,126,117,6062,TRUE
+S6919857,Environmental Microbiology,journal,NA,NA,155,91,8146,FALSE
+S4306402433,"Portuguese National Funding Agency for Science, Research and Technology (RCAAP Project by FCT)",repository,1680,92,NA,NA,784585,FALSE
+S148484591,Tropical Medicine & International Health,journal,NA,NA,153,92,6124,FALSE
+S4210193712,Frontiers of Environmental Science & Engineering,journal,NA,NA,153,92,1741,FALSE
+S128754310,Applied Mechanics and Materials,journal,1674,93,NA,NA,115388,FALSE
+S200437886,BMC Public Health,journal,1113,170,149,94,34857,FALSE
+S4210205812,Applied Sciences,journal,1663,95,NA,NA,90687,FALSE
+S4306463484,IWA Publishing eBooks,ebook platform,1156,159,148,95,2290,FALSE
+S113611870,Environmental Modelling & Software,journal,NA,NA,148,95,5945,FALSE
+S164001016,ACS Applied Materials & Interfaces,journal,1639,97,91,152,69870,FALSE
+S204609040,Journal of Colloid and Interface Science,journal,1218,151,147,97,50588,FALSE
+S83450999,International Journal of Hygiene and Environmental Health,journal,NA,NA,146,98,2988,FALSE
+S4210178770,Lecture notes in civil engineering,book series,1629,99,NA,NA,41959,FALSE
+S81083566,Journal of Environmental Quality,journal,1577,102,145,99,11085,FALSE
+S4306401559,KTH Publication Database DiVA (KTH Royal Institute of Technology),repository,1602,100,NA,NA,338726,FALSE
+S35071406,International Journal of Infectious Diseases,journal,1597,101,127,115,20103,FALSE
+S64920681,TrAC Trends in Analytical Chemistry,journal,NA,NA,142,101,9206,FALSE
+S28607811,Journal of Investigative Dermatology,journal,1557,103,NA,NA,45694,FALSE
+S134185576,Ecological Engineering,journal,1390,126,138,103,7613,FALSE
+S4306401357,UTS ePRESS (University of Technology Sydney),repository,NA,NA,138,103,22274,FALSE
+S13733787,Ecotoxicology and Environmental Safety,journal,1509,105,127,115,20211,FALSE
+S39794811,Journal of Applied Microbiology,journal,1392,125,137,105,11098,FALSE
+S186546955,Clinical Lymphoma Myeloma & Leukemia,journal,NA,NA,137,105,16637,FALSE
+S4306401840,DergiPark (Istanbul University),repository,1505,107,NA,NA,525885,FALSE
+S94313546,Colloids and Surfaces A Physicochemical and Engineering Aspects,journal,1505,107,114,124,34456,FALSE
+S4306402607,QUT ePrints (Queensland University of Technology),repository,NA,NA,135,108,39984,FALSE
+S30525748,The Journal of Urology,journal,1501,109,NA,NA,153618,FALSE
+S4306400487,Infoscience (Ecole Polytechnique Fédérale de Lausanne),repository,NA,NA,133,109,63604,FALSE
+S183492911,"Proceedings of SPIE, the International Society for Optical Engineering/Proceedings of SPIE",journal,1497,110,NA,NA,436477,FALSE
+S4210222090,Microorganisms,journal,1497,110,NA,NA,18575,FALSE
+S4220651000,Abstracts with programs - Geological Society of America,journal,NA,NA,132,110,50733,FALSE
+S4210194219,Antarctica A Keystone in a Changing World,journal,1490,112,NA,NA,37023,FALSE
+S129317210,Transactions of the Royal Society of Tropical Medicine and Hygiene,journal,NA,NA,131,112,20237,FALSE
+S136710263,Environmental Toxicology and Chemistry,journal,1046,181,129,113,18320,FALSE
+S4306462995,Cambridge University Press eBooks,ebook platform,1482,114,NA,NA,718107,FALSE
+S61175029,Epidemiology and Infection,journal,NA,NA,128,114,9650,FALSE
+S17551360,Water Resources Management,journal,1468,115,104,138,6503,FALSE
+S204847658,Water Resources Research,journal,1468,115,109,129,23395,FALSE
+S2738950867,Cureus,journal,1458,117,NA,NA,114625,FALSE
+S9184782,Protein Expression and Purification,journal,1439,118,NA,NA,6718,FALSE
+S87161179,Journal of Hospital Infection,journal,1073,176,123,118,11558,FALSE
+S90458436,Advances in Parasitology/Advances in parasitology,book series,NA,NA,123,118,1701,FALSE
+S42323631,Applied Surface Science,journal,1437,119,103,140,69149,FALSE
+S1905899,Environmental Engineering Science,journal,NA,NA,121,120,2897,FALSE
+S4393917029,Journal of Environmental Science and Health Part A,journal,NA,NA,121,120,4693,FALSE
+S85680945,International Journal of Environmental Science and Technology,journal,1414,122,82,167,7795,FALSE
+S129764719,Infection Control and Hospital Epidemiology,journal,NA,NA,120,122,18550,FALSE
+S133896805,Poultry Science,journal,1405,123,NA,NA,35411,FALSE
+S11400418,Journal of Lipid Research,journal,1396,124,NA,NA,13243,FALSE
+S202680183,Industrial & Engineering Chemistry Research,journal,1217,152,113,125,46562,FALSE
+S79054089,BMJ Open,journal,NA,NA,113,125,45097,FALSE
+S194154261,Ecological Indicators,journal,1389,127,NA,NA,15196,FALSE
+S2764476807,Environmental Science & Technology Letters,journal,NA,NA,112,127,2171,FALSE
+S4306400115,eScholarship (California Digital Library),repository,1385,128,NA,NA,208106,FALSE
+S4210176958,The Lancet Global Health,journal,NA,NA,111,128,4865,FALSE
+S67716761,Journal of Alloys and Compounds,journal,1379,129,NA,NA,93406,FALSE
+S191963794,Analytical Chemistry,journal,1228,149,109,129,140693,FALSE
+S4306401501,University of Salford Institutional Repository (University of Salford),repository,NA,NA,109,129,15040,FALSE
+S4377196297,cIRcle (University of British Columbia),repository,1374,130,NA,NA,1128198,FALSE
+S101229256,Marine Pollution Bulletin,journal,1372,131,75,182,28216,FALSE
+S34954451,FEMS Microbiology Letters,journal,1371,132,NA,NA,33962,FALSE
+S171282171,FEMS Microbiology Ecology,journal,NA,NA,108,132,7384,FALSE
+S71414007,Clinical Microbiology and Infection,journal,NA,NA,107,133,10670,FALSE
+S2764789360,Computer-aided chemical engineering/Computer aided chemical engineering,book series,NA,NA,106,134,10158,FALSE
+S2736332253,Antibiotics,journal,1342,135,NA,NA,10398,FALSE
+S168210271,Biochemical Engineering Journal,journal,NA,NA,105,135,7002,FALSE
+S197355279,Separation Science and Technology,journal,NA,NA,105,135,9843,FALSE
+S45645249,Procedia Engineering,journal,NA,NA,105,135,29378,FALSE
+S171015910,BMC Infectious Diseases,journal,1313,136,NA,NA,17536,FALSE
+S4306400248,VTechWorks (Virginia Tech),repository,1308,137,NA,NA,88235,FALSE
+S129060628,Diabetes,journal,1305,138,NA,NA,45565,FALSE
+S4210208841,Psychiatric News,journal,1305,138,NA,NA,17608,FALSE
+S4210225467,Membranes,journal,NA,NA,104,138,5180,FALSE
+S110533041,International Journal of Radiation Oncology*Biology*Physics,journal,1289,140,NA,NA,85849,FALSE
+S137656717,Water Practice & Technology,journal,1269,141,NA,NA,2695,TRUE
+S198098182,Energies,journal,1258,142,NA,NA,63478,FALSE
+S2495644771,Journal of Water Sanitation and Hygiene for Development,journal,1051,179,101,142,1185,TRUE
+S109565702,Applied Energy,journal,NA,NA,101,142,28279,FALSE
+S4306463708,Oxford University Press eBooks,ebook platform,1250,143,NA,NA,859171,FALSE
+S45445671,Fertility and Sterility,journal,1244,144,NA,NA,62401,FALSE
+S132626406,International Journal of Food Microbiology,journal,1242,145,NA,NA,12554,FALSE
+S207935976,Critical Reviews in Environmental Science and Technology,journal,NA,NA,98,145,1343,FALSE
+S4306401616,"AgEcon Search (University of Minnesota, USA)",repository,1239,146,NA,NA,157181,FALSE
+S4210211913,ACS ES&T Engineering,journal,NA,NA,97,146,1457,FALSE
+S154719635,Membrane Technology,journal,1231,147,NA,NA,9427,FALSE
+S118716465,Asian-Australasian Journal of Animal Sciences,journal,NA,NA,95,147,6622,FALSE
+S173499201,Process Biochemistry,journal,NA,NA,95,147,9152,FALSE
+S104038378,Biochemistry,journal,1229,148,NA,NA,71088,FALSE
+S106174089,Geophysics,journal,NA,NA,93,149,15545,FALSE
+S171407314,Animal Feed Science and Technology,journal,NA,NA,92,150,8922,FALSE
+S18051569,Resources Conservation and Recycling,journal,NA,NA,92,150,8100,FALSE
+S4210197683,Medical Entomology and Zoology,journal,1217,152,NA,NA,1871287,FALSE
+S3880285,Science,journal,NA,NA,90,153,387158,FALSE
+S4406923047,theses.fr (ABES),repository,1214,154,NA,NA,219420,FALSE
+S27796801,Urban Water Journal,journal,NA,NA,88,154,1532,FALSE
+S4306501063,AGUFM,journal,NA,NA,88,154,112997,FALSE
+S137773608,Nature,journal,NA,NA,87,156,449227,FALSE
+S164770093,Fuel,journal,NA,NA,87,156,46789,FALSE
+S4210201176,mBio,journal,NA,NA,86,158,9032,FALSE
+S4210239500,ACS Omega,journal,1156,159,NA,NA,35844,FALSE
+S199810014,American Journal of Hematology,journal,NA,NA,85,160,13902,FALSE
+S119525064,Food Control,journal,1148,161,NA,NA,13474,FALSE
+S193409603,Geospatial health,journal,NA,NA,84,161,852,FALSE
+S2502047864,ACS Sustainable Chemistry & Engineering,journal,NA,NA,84,161,19531,FALSE
+S68497187,Renewable and Sustainable Energy Reviews,journal,NA,NA,84,161,16927,FALSE
+S4210201879,Processes,journal,1146,162,NA,NA,21055,FALSE
+S106928643,Ceramics International,journal,1145,163,NA,NA,56273,FALSE
+S102549058,Molecular Microbiology,journal,1129,164,NA,NA,15732,FALSE
+S106908163,Neuro-Oncology,journal,1128,165,NA,NA,29963,FALSE
+S79392371,Journal of Hydroinformatics,journal,NA,NA,83,165,1745,FALSE
+S126644158,Oncotarget,journal,1127,166,NA,NA,27840,FALSE
+S104261359,Aquaculture,journal,1125,167,NA,NA,27396,FALSE
+S198339081,Electrochimica Acta,journal,NA,NA,82,167,53874,FALSE
+S38407038,Arabian Journal of Geosciences,journal,1114,169,NA,NA,12380,FALSE
+S10446503,Environmental Health Perspectives,journal,NA,NA,80,169,25791,FALSE
+S2737916383,Tropical Medicine and Infectious Disease,journal,NA,NA,80,169,2598,FALSE
+S4210223900,Systems Biology,journal,NA,NA,80,169,389,FALSE
+S108427512,Alzheimer s & Dementia,journal,1089,171,NA,NA,66068,FALSE
+S2765017008,International Journal of Current Microbiology and Applied Sciences,journal,1088,172,NA,NA,24071,FALSE
+S182099265,Journal of Biotechnology,journal,NA,NA,79,172,15904,FALSE
+S197055754,Korean Journal of Chemical Engineering,journal,NA,NA,79,172,11729,FALSE
+S205053445,ACS symposium series,book series,NA,NA,79,172,36424,FALSE
+S108525051,Journal of Allergy and Clinical Immunology,journal,1086,173,NA,NA,56884,FALSE
+S123288148,Polymers,journal,1078,174,NA,NA,32250,FALSE
+S124795565,Talanta,journal,NA,NA,78,175,37061,FALSE
+S19266977,Waste Management,journal,NA,NA,78,175,12163,FALSE
+S2497375143,Energy,journal,NA,NA,78,175,44469,FALSE
+S4306508951,EGU General Assembly Conference Abstracts,conference,NA,NA,78,175,65707,FALSE
+S2764931087,Applied Water Science,journal,1072,177,NA,NA,2867,TRUE
+S102276873,Journal of Photochemistry and Photobiology A Chemistry,journal,NA,NA,76,179,15955,FALSE
+S138354367,International Biodeterioration & Biodegradation,journal,NA,NA,76,179,5438,FALSE
+S4220650854,Proceedings,journal,1047,180,NA,NA,20519,FALSE
+S4306400261,TSpace (University of Toronto),repository,1045,182,NA,NA,76433,FALSE
+S4306401843,Data Archiving and Networked Services (DANS),repository,1045,182,NA,NA,1085807,FALSE
+S81024170,Stochastic Environmental Research and Risk Assessment,journal,NA,NA,75,182,3772,FALSE
+S815301,Renewable Energy,journal,NA,NA,75,182,28318,FALSE
+S132108250,Frontiers in Pharmacology,journal,1042,184,NA,NA,31762,FALSE
+S4210238371,Hydrobiologia,journal,1042,184,NA,NA,23509,FALSE
+S24124513,Journal of Microbiological Methods,journal,NA,NA,74,185,7597,FALSE
+S2764869649,Anhui nongye kexue,journal,1032,186,NA,NA,45930,FALSE
+S134919500,Comprehensive analytical chemistry,book series,NA,NA,72,186,2100,FALSE
+S149218730,The ISME Journal,journal,NA,NA,72,186,4502,FALSE
+S163169856,International Journal for Parasitology,journal,NA,NA,72,186,8148,FALSE
+S192559872,Analytica Chimica Acta,journal,NA,NA,72,186,47018,FALSE
+S4210201231,Socio-Environmental Systems Modeling,journal,NA,NA,72,186,218420,FALSE
+S88719806,Environmental Chemistry Letters,journal,NA,NA,72,186,2010,FALSE
+S18714766,Materials,journal,1022,187,NA,NA,57441,FALSE
+S4210172139,Methods in molecular biology,book series,1015,188,NA,NA,61393,FALSE
+S4306463447,InTech eBooks,ebook platform,1010,189,NA,NA,51572,FALSE
+S4306529776,Shanxi Architecture,journal,1000,190,NA,NA,51564,FALSE
+S4393918830,ChemRxiv,repository,1000,190,NA,NA,62272,FALSE
+S104550190,Molecular & Cellular Proteomics,journal,991,192,NA,NA,6106,FALSE
+S75830442,Hydrological Processes,journal,989,193,NA,NA,11400,FALSE
+S33892871,Chemical Engineering Science,journal,NA,NA,69,193,34252,FALSE
+S5248501,International Journal of Antimicrobial Agents,journal,NA,NA,69,193,12012,FALSE
+S76900504,CHEST Journal,journal,980,194,NA,NA,85259,FALSE
+S4377196327,Digital Commons - USU (Utah State University),repository,975,195,NA,NA,80163,FALSE
+S114575275,Clinical and Vaccine Immunology,journal,NA,NA,68,195,3840,FALSE
+S145420111,Journal of Industrial and Engineering Chemistry,journal,NA,NA,68,195,9758,FALSE
+S154078021,Journal of Medical Microbiology,journal,NA,NA,68,195,9681,FALSE
+S189140625,Journal of Molecular Liquids,journal,NA,NA,68,195,28721,FALSE
+S22004576,Bulletin of the World Health Organization,journal,NA,NA,68,195,5485,FALSE
+S2764968653,Environmental Science Nano,journal,NA,NA,68,195,3660,FALSE
+S4306401716,Duo Research Archive (University of Oslo),repository,964,198,NA,NA,253258,FALSE
+S97303050,Kidney International,journal,964,198,NA,NA,25302,FALSE
+S37976914,JAWRA Journal of the American Water Resources Association,journal,963,200,NA,NA,8613,FALSE

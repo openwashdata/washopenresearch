@@ -49,3 +49,11 @@ re-harvest. Do not drop these columns to save space.
 
 1996–2026. Rationale in issue #18: prominence and journal identification are
 mismeasured in a 15-year window; OpenAlex metadata degrades before ~1995.
+
+## Matching note
+
+The ranking steps (harvest_corpus.R steps 1-5) match on OpenAlex
+`title_and_abstract.search`, not fulltext `search`: fulltext matches ~9.6M
+works with noisy author rankings, title+abstract ~2.1M with the expected WASH
+researchers on top. The corpus pull for the tables above should use the same
+filter so corpus membership matches the rankings.
