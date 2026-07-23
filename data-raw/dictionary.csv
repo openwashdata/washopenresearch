@@ -13,12 +13,12 @@ data,washdev.rda,supp_url,character,Website urls of the supplementary materials 
 data,washdev.rda,num_authors,integer,Number of the authors
 data,washdev.rda,first_author_name,character,Name of the first author
 data,washdev.rda,first_author_affiliation,character,Academic affiliation of the first author
-data,washdev.rda,first_author_affiliation_region,character,Country or region of the first author parsed from first_author_affiliation variable
+data,washdev.rda,first_author_affiliation_country,character,Country of the first author parsed from first_author_affiliation variable encoded with United Nations names
 data,washdev.rda,first_author_email,character,Email of the first author
 data,washdev.rda,first_author_orcid,character,ORCID of the first author
 data,washdev.rda,correspondence_author_name,character,Name of the correspondence author
 data,washdev.rda,correspondence_author_affiliation,character,Academic affiliation of the correspondence author
-data,washdev.rda,correspondence_author_affiliation_region,character,Country or region of the correspondence author parsed from correspondence_author_affiliation variable
+data,washdev.rda,correspondence_author_affiliation_country,character,Country of the correspondence author parsed from correspondence_author_affiliation variable encoded with United Nations names
 data,washdev.rda,correspondence_author_email,character,Email of the correspondence author
 data,washdev.rda,correspondence_author_orcid,character,ORCID of the correspondence author
 data,washdev.rda,has_das,logical,Whether the paper has a data availability statement
@@ -27,8 +27,9 @@ data,washdev.rda,das_type,factor,Type of the data availability statement includi
 data,washdev.rda,das_repo_url,character,Website urls of the data if the relevant data of the paper is shared on a public repository separated by a semicolon when there are multiple
 data,washdev.rda,keywords,character,Keywords of the paper separated by a semicolon
 data,washdev.rda,url_source,character,Publisher website of the paper
+data,washdev.rda,doi,character,DOI of the paper. Collected since the R port of the scraper; NA for articles scraped earlier
 data,uncnewsletter.rda,paperid,integer,ID number of the paper on the journal website
-data,uncnewsletter.rda,issue_url,integer,Volume number of the journal
+data,uncnewsletter.rda,issue_url,character,URL of the newsletter issue that featured the paper
 data,uncnewsletter.rda,paper_url,character,Official website url of the paper
 data,uncnewsletter.rda,url_source,character,Publisher website of the paper
 data,uncnewsletter.rda,journal,character,Full name of the journal
@@ -54,3 +55,35 @@ data,uncnewsletter.rda,das,character,Original data availability statement of the
 data,uncnewsletter.rda,das_type,factor,Type of the data availability statement including "in paper"(data in full paper scope like supplementary material or appendix or main content) "on request"(data available on request to the authors) "available in online repository"(data is shared in a public online repository) "not shareable"(data is not shareable). NA if it does not have a data availability statement.
 data,uncnewsletter.rda,das_repo_url,character,Website urls of the data if the relevant data of the paper is shared on a public repository separated by a semicolon when there are multiple
 data,uncnewsletter.rda,keywords,character,Keywords of the paper separated by a semicolon
+data,ploswater.rda,paperid,character,DOI of the paper; identical to the doi variable
+data,ploswater.rda,volume,integer,Volume number of the journal; volume 1 is 2022
+data,ploswater.rda,issue,integer,Issue number of the journal
+data,ploswater.rda,paper_url,character,Official website url of the paper
+data,ploswater.rda,journal,character,Full name of the journal
+data,ploswater.rda,title,character,Title of the paper
+data,ploswater.rda,published_year,integer,Year of publication
+data,ploswater.rda,is_supp,logical,Whether the paper has supplementary materials
+data,ploswater.rda,num_supp,integer,Number of supplementary material files
+data,ploswater.rda,supp_file_type,character,File types of the supplementary materials separated by a semicolon when there are multiple
+data,ploswater.rda,supp_url,character,Website urls of the supplementary materials separated by a semicolon when there are multiple. Stable download endpoints that do not expire
+data,ploswater.rda,num_authors,integer,Number of the authors
+data,ploswater.rda,first_author_name,character,Name of the first author
+data,ploswater.rda,first_author_affiliation,character,Academic affiliation of the first author
+data,ploswater.rda,first_author_affiliation_country,character,Country of the first author parsed from first_author_affiliation encoded with United Nations names
+data,ploswater.rda,first_author_email,character,Email of the first author. Only available when the first author is the correspondence author because PLOS publishes only the correspondence email
+data,ploswater.rda,first_author_orcid,character,ORCID of the first author
+data,ploswater.rda,correspondence_author_name,character,Name of the correspondence author
+data,ploswater.rda,correspondence_author_affiliation,character,Academic affiliation of the correspondence author
+data,ploswater.rda,correspondence_author_affiliation_country,character,Country of the correspondence author parsed from correspondence_author_affiliation encoded with United Nations names
+data,ploswater.rda,correspondence_author_email,character,Email of the correspondence author
+data,ploswater.rda,correspondence_author_orcid,character,ORCID of the correspondence author
+data,ploswater.rda,has_das,logical,Whether the paper has a data availability statement
+data,ploswater.rda,das,character,Original data availability statement of the paper. NA if it does not have a data availability statement
+data,ploswater.rda,das_type,factor,"Type of the data availability statement including ""available in online repository""(data is shared in a public online repository) ""in paper""(data in full paper scope like supplementary material or appendix or main content) ""on request""(data available on request to the authors) ""not shareable""(data is not shareable) ""no data generated""(the study produced no datasets). NA if it does not have a data availability statement or no classification rule matched"
+data,ploswater.rda,das_repo_url,character,Website urls and dataset DOIs mentioned in the data availability statement separated by a semicolon when there are multiple
+data,ploswater.rda,das_repo_name,character,Recognized data repositories behind das_repo_url (e.g. zenodo dryad figshare osf github dataverse) separated by a semicolon when there are multiple
+data,ploswater.rda,keywords,character,Subject terms of the paper from the PLOS search API separated by a semicolon. PLOS Water articles carry no author keywords in their XML
+data,ploswater.rda,url_source,character,Publisher website of the paper
+data,ploswater.rda,doi,character,DOI of the paper
+data,ploswater.rda,article_type,character,Article type e.g. Research Article or Opinion or Review
+data,ploswater.rda,publication_date,date,Date of publication (ISO 8601)
