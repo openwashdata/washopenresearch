@@ -33,6 +33,14 @@ library(ggthemes)
 library(gt)
 ```
 
+## Where WASH data is meant to go
+
+The WASH sector has built its own places to put data. Two of them are the largest. The first is mWater, a free platform where people collect water, sanitation, and health data with survey tools and can share it. mWater has run since 2012, covers 198 countries, and holds records for more than four million sites. The second is Project W, a catalogue built by the Aquaya Institute that gathers WASH datasets from more than 900 organisations into one searchable place across 190 or more geographies. mWater generates data. Project W compiles data that already exists.
+
+Both platforms let researchers store or find data, but they document it unevenly. mWater lets you download record-level data, offers an API, and provides a data dictionary, so the data can be reused by machine. It does not assign a license to the shared public data, and it gives datasets no DOI or version, so a paper cannot cite an mWater dataset the way it cites a journal article. Project W is harder to assess because it is still in beta and asks you to sign in before you use it. We could not confirm from its public pages whether it offers downloads, an API, a license, or persistent identifiers.
+
+The platforms exist, but WASH authors rarely point to them. We searched the data availability statements of 1,782 papers in this package (the `washdev`, `uncnewsletter`, and `ploswater` datasets) for mentions of thirteen WASH data platforms. Neither mWater nor Project W appears once. The platforms that do appear are the large household-survey programmes and general repositories that are not WASH-specific: the Demographic and Health Surveys (twelve papers), the Humanitarian Data Exchange (three papers), and the Multiple Indicator Cluster Surveys (two papers). So when WASH authors do share data through a platform, they reach for a general one rather than a sector platform. The sector built mWater and Project W to hold WASH data, and the published record so far routes around both. That gap is the missed opportunity this article is about.
+
 ## How is WASH research data available in the journal?
 In 2020, the journal implemented a policy change to ask for including a data availability statement (DAS) for publications. In this section, the goal is to understand the impact of the DAS policy change and the distribution of different types of DAS. 
 

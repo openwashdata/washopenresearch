@@ -1,0 +1,35 @@
+platform,dimension,item,value,source_url,accessed_date
+mWater,access,view_without_account,"Yes (public map of 4M+ shared sites); not stated on a single official page",https://portal.mwater.co/,2026-07-23
+mWater,access,downloadable,"Yes; users can download any data they manage, admins can bulk-download all site and survey data",https://www.mwater.co/faqs,2026-07-23
+mWater,access,granularity,"Record-level (individual survey responses and site records)",https://portal.mwater.co/resource_center.html,2026-07-23
+mWater,access,registration_tiers,"No paywall; all features free for unlimited use, optional paid support for large orgs",https://www.mwater.co/platform,2026-07-23
+mWater,access,machine_access,"Yes; documented API, Integrator bulk import/export, DHIS2/Excel connectors, CSV/Excel export",https://portal.mwater.co/resource_center.html,2026-07-23
+mWater,access,licensing,"Not found as a named license; policy asserts user data ownership, no CC/ODbL applied to public data",https://www.mwater.co/policies,2026-07-23
+mWater,documentation,metadata_standard,"Not found (no DDI, schema.org/Dataset, or Dublin Core); custom internal data model",https://portal.mwater.co/resource_center.html,2026-07-23
+mWater,documentation,data_dictionary,"Yes; a Data Dictionary feature exists under Manage",https://portal.mwater.co/resource_center.html,2026-07-23
+mWater,documentation,persistent_identifiers,"Not found (no DOIs or PIDs assigned to datasets)",https://portal.mwater.co/resource_center.html,2026-07-23
+mWater,documentation,versioning,"Not found as a documented dataset-versioning feature",https://portal.mwater.co/resource_center.html,2026-07-23
+mWater,research_linkage,researchers_use,"Yes; mWater states academic researchers use the platform for data collection and analysis",https://www.mwater.co/blog/inclusive-digital-development,2026-07-23
+mWater,research_linkage,dataset_to_paper,"Yes; Adhikari & Mahajan (2024) name mWater as a WASH data source",https://doi.org/10.3126/arj.v5i1.73556,2026-07-23
+mWater,research_linkage,platform_links_to_publications,"Not found as a structured publications index on the platform",https://www.mwater.co/,2026-07-23
+Project W,access,view_without_account,"Likely requires sign-in; landing CTA is Sign in to get started, unconfirmed whether browsing is possible without login",https://www.projectwdata.net/,2026-07-23
+Project W,access,downloadable,"Not found explicitly; link-to-source model implies it points to record-level data hosted elsewhere",https://www.projectwdata.net/,2026-07-23
+Project W,access,granularity,"Not found; catalogue links out to source datasets rather than hosting downloads",https://recombine.net/projects/projectw.html,2026-07-23
+Project W,access,registration_tiers,"Not found; a sign-in exists but whether registration is free or tiered is not stated",https://www.projectwdata.net/,2026-07-23
+Project W,access,machine_access,"Not found; no API or bulk download mentioned",https://aquaya.org/project-w/,2026-07-23
+Project W,access,licensing,"Not found; no data or catalogue license stated",https://www.projectwdata.net/,2026-07-23
+Project W,documentation,metadata_standard,"Not found; custom human-curated scheme with 180+ topic tags, no named standard",https://aquaya.org/project-w/,2026-07-23
+Project W,documentation,data_dictionary,"Not found on public pages",https://www.projectwdata.net/,2026-07-23
+Project W,documentation,persistent_identifiers,"Not found",https://www.projectwdata.net/,2026-07-23
+Project W,documentation,versioning,"Not found",https://www.projectwdata.net/,2026-07-23
+Project W,research_linkage,researchers_use,"Not found as a deposit-and-cite store; positioned as a discovery catalogue for practitioners, researchers, decision-makers",https://aquaya.org/project-w/,2026-07-23
+Project W,research_linkage,dataset_to_paper,"Not found; no documented dataset-to-paper link",https://aquaya.org/project-w/,2026-07-23
+Project W,research_linkage,platform_links_to_publications,"Not found; no publication list on the platform",https://www.projectwdata.net/,2026-07-23
+WPdx,access,view_without_account,"Yes; open access, no account required",https://www.waterpointdata.org/access-data/,2026-07-23
+WPdx,access,downloadable,"Yes; per-country CSV bulk download",https://www.waterpointdata.org/access-data/,2026-07-23
+WPdx,access,granularity,"Record-level (individual water point records)",https://www.waterpointdata.org/access-data/,2026-07-23
+WPdx,access,machine_access,"Yes; Socrata SODA API and OData",https://dev.socrata.com/foundry/data.waterpointdata.org/eqje-vguj,2026-07-23
+WPdx,documentation,metadata_standard,"WPdx data standard (WPdx-Basic and WPdx+ harmonised schema)",https://www.waterpointdata.org/access-data/,2026-07-23
+WPdx,research_linkage,researchers_use,"Yes; researchers, governments, and NGOs upload and harmonise data to the exchange",https://www.waterpointdata.org/access-data/,2026-07-23
+IBNET,access,downloadable,"Dashboards and tariff database public; utility-level bulk/API access not clearly documented",https://www.ib-net.org/,2026-07-23
+IBNET,access,granularity,"Utility-level performance indicators (KPIs, tariffs)",https://www.ib-net.org/,2026-07-23
