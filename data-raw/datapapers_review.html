@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Datapapers Screening Desk - washopenresearch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f3eee2;
+    --paper-deep: #eae3d1;
+    --card: #fbf8f0;
+    --ink: #23262d;
+    --ink-soft: #61656d;
+    --line: #d9d0ba;
+    --line-soft: #e5ddc9;
+    --teal: #0e6a72;
+    --teal-deep: #0a5058;
+    --teal-wash: #dce9e6;
+    --madder: #a63f2e;
+    --madder-wash: #f0ddd6;
+    --gold: #a97f26;
+    --gold-wash: #f0e6cd;
+    --mark: #f5e19a;
+    --serif-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --serif-body: "Source Serif 4", Georgia, serif;
+    --mono: "IBM Plex Mono", "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    margin: 0;
+    font-family: var(--serif-body);
+    color: var(--ink);
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.14 0 0 0 0 0.13 0 0 0 0 0.11 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ---------- header ---------- */
+
+  header {
+    flex: none;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(to bottom, rgba(251,248,240,.92), rgba(243,238,226,.92));
+    padding: 14px 26px 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 26px;
+  }
+
+  .masthead .kicker {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+
+  .masthead h1 {
+    margin: 2px 0 0;
+    font-family: var(--serif-display);
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: -.01em;
+  }
+
+  .tally {
+    margin-left: auto;
+    display: flex;
+    align-items: baseline;
+    gap: 22px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  .tally b { color: var(--ink); font-weight: 600; }
+  .tally .inc b { color: var(--teal); }
+  .tally .exc b { color: var(--madder); }
+
+  #export-btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    color: var(--card);
+    background: var(--ink);
+    border: 1px solid var(--ink);
+    padding: 9px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    box-shadow: 3px 3px 0 rgba(35,38,45,.18);
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  #export-btn:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 rgba(35,38,45,.22); }
+  #export-btn:active { transform: translate(1px,1px); box-shadow: 1px 1px 0 rgba(35,38,45,.2); }
+
+  #progress {
+    flex: none;
+    height: 5px;
+    background: var(--paper-deep);
+    display: flex;
+  }
+  #progress .p-inc { background: var(--teal); transition: width .3s ease; }
+  #progress .p-exc { background: var(--madder); transition: width .3s ease; }
+
+  /* ---------- layout ---------- */
+
+  main { flex: 1; display: flex; min-height: 0; }
+
+  /* ---------- queue rail ---------- */
+
+  #rail {
+    flex: none;
+    width: 340px;
+    border-right: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    background: rgba(234,227,209,.45);
+  }
+
+  .filters {
+    flex: none;
+    padding: 12px 14px 10px;
+    border-bottom: 1px solid var(--line-soft);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .chip {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: .04em;
+    padding: 4px 9px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--card);
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all .12s ease;
+  }
+  .chip:hover { border-color: var(--ink-soft); color: var(--ink); }
+  .chip.on { background: var(--ink); border-color: var(--ink); color: var(--card); }
+
+  #queue {
+    flex: 1;
+    overflow-y: auto;
+    padding: 6px 0 30px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+  }
+
+  .q-item {
+    padding: 9px 14px 9px 12px;
+    border-left: 3px solid transparent;
+    border-bottom: 1px solid var(--line-soft);
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 14px 1fr;
+    gap: 4px 8px;
+    transition: background .1s ease;
+  }
+  .q-item:hover { background: rgba(251,248,240,.8); }
+  .q-item.active { background: var(--card); border-left-color: var(--teal); }
+  .q-item.active.is-excluded { border-left-color: var(--madder); }
+
+  .q-dot {
+    grid-row: 1 / span 2;
+    width: 9px; height: 9px;
+    margin-top: 4px;
+    border-radius: 50%;
+    border: 1.5px solid var(--ink-soft);
+    background: transparent;
+  }
+  .q-item.is-included .q-dot { background: var(--teal); border-color: var(--teal); }
+  .q-item.is-excluded .q-dot { background: var(--madder); border-color: var(--madder); }
+
+  .q-title {
+    font-family: var(--serif-body);
+    font-size: 12.5px;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .q-meta {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: .03em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+  .q-meta .abs { color: var(--gold); font-weight: 600; }
+
+  .rail-foot {
+    flex: none;
+    border-top: 1px solid var(--line);
+    padding: 10px 14px;
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+  .rail-foot code { color: var(--ink); }
+
+  /* ---------- reading pane ---------- */
+
+  #pane {
+    flex: 1;
+    min-width: 0;
+    overflow-y: auto;
+    padding: 34px 44px 140px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+  }
+
+  #card {
+    position: relative;
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    box-shadow: 5px 5px 0 rgba(35,38,45,.07);
+    padding: 34px 42px 38px;
+  }
+
+  .c-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    background: var(--paper);
+  }
+  .tag.journal { color: var(--teal-deep); border-color: var(--teal-wash); background: var(--teal-wash); }
+  .tag.warn { color: var(--gold); border-color: var(--gold-wash); background: var(--gold-wash); }
+
+  #c-title {
+    font-family: var(--serif-display);
+    font-weight: 600;
+    font-size: 27px;
+    line-height: 1.22;
+    letter-spacing: -.012em;
+    margin: 0 0 14px;
+  }
+
+  .c-byline {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .c-byline b { color: var(--ink); font-weight: 600; }
+
+  .c-doi {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    margin-bottom: 22px;
+  }
+  .c-doi a { color: var(--teal-deep); text-decoration-color: var(--teal-wash); text-underline-offset: 3px; }
+  .c-doi a:hover { text-decoration-color: var(--teal); }
+
+  .c-rule {
+    border: 0;
+    border-top: 1px solid var(--line-soft);
+    margin: 0 0 20px;
+  }
+
+  .c-section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+  }
+
+  #c-abstract {
+    font-size: 16px;
+    line-height: 1.68;
+    hyphens: auto;
+  }
+
+  #c-abstract.empty {
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+
+  mark {
+    background: var(--mark);
+    color: inherit;
+    padding: 0 2px;
+    border-radius: 2px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  /* rubber stamp */
+  #stamp {
+    position: absolute;
+    top: 22px;
+    right: 26px;
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    padding: 6px 12px 6px 15px;
+    border: 3px double currentColor;
+    border-radius: 3px;
+    transform: rotate(-7deg);
+    opacity: 0;
+    pointer-events: none;
+  }
+  #stamp.show-inc, #stamp.show-exc {
+    animation: thump .18s cubic-bezier(.2, 1.6, .4, 1) forwards;
+  }
+  #stamp.show-inc { color: var(--teal); }
+  #stamp.show-exc { color: var(--madder); }
+  @keyframes thump {
+    from { opacity: 0; transform: rotate(-16deg) scale(1.9); }
+    60%  { opacity: .92; transform: rotate(-6deg) scale(.96); }
+    to   { opacity: .88; transform: rotate(-7deg) scale(1); }
+  }
+
+  /* ---------- decision bar ---------- */
+
+  #decide {
+    position: fixed;
+    left: 340px; right: 0; bottom: 0;
+    border-top: 1px solid var(--line);
+    background: rgba(251,248,240,.96);
+    backdrop-filter: blur(4px);
+    padding: 14px 44px 16px;
+  }
+
+  .d-inner { max-width: 760px; margin: 0 auto; }
+
+  .d-reasons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .d-row { display: flex; gap: 10px; align-items: center; }
+
+  #reason {
+    flex: 1;
+    font-family: var(--serif-body);
+    font-size: 13.5px;
+    padding: 9px 12px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: var(--card);
+    color: var(--ink);
+  }
+  #reason:focus { outline: 2px solid var(--teal-wash); border-color: var(--teal); }
+
+  .btn {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    padding: 10px 18px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: transform .1s ease, box-shadow .1s ease;
+    white-space: nowrap;
+  }
+  .btn kbd {
+    font-size: 10px;
+    font-weight: 400;
+    opacity: .75;
+    margin-left: 7px;
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    padding: 0 4px;
+  }
+  .btn:active { transform: translateY(1px); }
+
+  #btn-inc {
+    color: var(--card);
+    background: var(--teal);
+    border: 1px solid var(--teal-deep);
+    box-shadow: 3px 3px 0 rgba(10,80,88,.25);
+  }
+  #btn-inc:hover { background: var(--teal-deep); }
+
+  #btn-exc {
+    color: var(--madder);
+    background: transparent;
+    border: 1px solid var(--madder);
+  }
+  #btn-exc:hover { background: var(--madder-wash); }
+
+  #btn-clear {
+    color: var(--ink-soft);
+    background: transparent;
+    border: 1px solid transparent;
+  }
+  #btn-clear:hover { color: var(--ink); border-color: var(--line); }
+
+  .d-hints {
+    margin-top: 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .04em;
+    color: var(--ink-soft);
+  }
+  .d-hints kbd {
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 0 4px;
+    background: var(--card);
+  }
+
+  #toast {
+    position: fixed;
+    bottom: 110px;
+    left: 50%;
+    transform: translateX(calc(-50% + 170px)) translateY(10px);
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--ink);
+    color: var(--card);
+    padding: 10px 16px;
+    border-radius: 2px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease;
+    max-width: 480px;
+    line-height: 1.5;
+  }
+  #toast.show { opacity: 1; transform: translateX(calc(-50% + 170px)) translateY(0); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="masthead">
+    <div class="kicker">washopenresearch &middot; issue #28</div>
+    <h1>Datapapers Screening Desk</h1>
+  </div>
+  <div class="tally">
+    <span class="inc">included <b id="t-inc">0</b></span>
+    <span class="exc">excluded <b id="t-exc">0</b></span>
+    <span>pending <b id="t-pen">0</b></span>
+    <span>abstract queue <b id="t-abs">0/0</b></span>
+  </div>
+  <button id="export-btn" title="Download decisions as CSV">Export CSV</button>
+</header>
+
+<div id="progress"><div class="p-inc"></div><div class="p-exc"></div></div>
+
+<main>
+  <aside id="rail">
+    <div class="filters" id="f-queue">
+      <button class="chip on" data-q="abstract">With abstract</button>
+      <button class="chip" data-q="titleonly">Title only</button>
+      <button class="chip" data-q="all">All</button>
+      <span style="flex-basis:100%;height:0"></span>
+      <button class="chip on" data-s="all">Any status</button>
+      <button class="chip" data-s="pending">Pending</button>
+      <button class="chip" data-s="included">Included</button>
+      <button class="chip" data-s="excluded">Excluded</button>
+    </div>
+    <div id="queue"></div>
+    <div class="rail-foot">
+      Save the export to <code>data-raw/datapapers_decisions.csv</code>, then run
+      <code>Rscript data-raw/apply_datapapers_decisions.R</code> to fill the
+      screening sheet. Decisions persist in this browser until exported.
+    </div>
+  </aside>
+
+  <section id="pane">
+    <article id="card">
+      <div id="stamp"></div>
+      <div class="c-top" id="c-tags"></div>
+      <h2 id="c-title"></h2>
+      <div class="c-byline" id="c-byline"></div>
+      <div class="c-doi" id="c-doi"></div>
+      <hr class="c-rule">
+      <div class="c-section-label">Abstract</div>
+      <div id="c-abstract"></div>
+    </article>
+  </section>
+</main>
+
+<div id="decide">
+  <div class="d-inner">
+    <div class="d-reasons" id="d-reasons"></div>
+    <div class="d-row">
+      <input id="reason" type="text" placeholder="Reason (stored with the decision; edit any time)" autocomplete="off">
+      <button class="btn" id="btn-inc">Include<kbd>I</kbd></button>
+      <button class="btn" id="btn-exc">Exclude<kbd>X</kbd></button>
+      <button class="btn" id="btn-clear">Clear<kbd>U</kbd></button>
+    </div>
+    <div class="d-hints">
+      <kbd>&uarr;</kbd><kbd>&darr;</kbd> navigate &nbsp; <kbd>I</kbd> include &nbsp;
+      <kbd>X</kbd> exclude &nbsp; <kbd>U</kbd> clear decision &nbsp; <kbd>R</kbd> focus reason &nbsp;
+      decisions auto-advance to the next pending paper
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const PAPERS = [{"doi":"10.1016/j.dib.2016.06.048","journal":"Data in Brief","published_year":2016,"title":"Data on daily fluoride intake based on drinking water consumption prepared by household desalinators working by reverse osmosis process","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Vahid Noroozi Karbasdehi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2016.09.050","journal":"Data in Brief","published_year":2016,"title":"Data on fluoride concentration level in villages of Asara (Alborz, Iran) and daily fluoride intake based on drinking water consumption","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Giti Akhavan","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2015.12.020","journal":"Data in Brief","published_year":2016,"title":"Dataset of producing and curing concrete using domestic treated wastewater","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Gholamreza Asadollahfardi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2016.01.066","journal":"Data in Brief","published_year":2016,"title":"Experimental data for synthesis of bi-metalized chitosan particle for attenuating of an azo dye from wastewater","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Abdollah Hajivandi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2017.06.029","journal":"Data in Brief","published_year":2017,"title":"Advanced treatment of saline municipal wastewater by Ruppia maritima: A data set","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Mehdi Ahmadi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2017.08.054","journal":"Data in Brief","published_year":2017,"title":"Calculating fluoride concentrations data using ambient temperatures in drinking water distribution networks in select provinces of Iran","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Mohammad Ali Zazouli","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2017.07.015","journal":"Data in Brief","published_year":2017,"title":"Data of added-value lipid production, Arachidonic acid, among other lipids by Mortierella elongata, using low cost simulated wastewater","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Bruna Soares Fernandes","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2017.10.048","journal":"Data in Brief","published_year":2017,"title":"Data on metagenomic profiles of activated sludge from a full-scale wastewater treatment plant","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"faecal sludge; wastewater","first_author_name":"Jianhua Guo","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2016.11.054","journal":"Data in Brief","published_year":2017,"title":"Data on metal levels in the inlet and outlet wastewater treatment plant of hospitals in Bushehr province, Iran","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Fereshte Babaahmadi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2017.10.052","journal":"Data in Brief","published_year":2017,"title":"Data on water quality index for the groundwater in rural area Neyshabur County, Razavi province, Iran","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Mahmood Yousefi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2017.05.045","journal":"Data in Brief","published_year":2017,"title":"Fluoride concentration level in rural area in Poldasht city and daily fluoride intake based on drinking water consumption with temperature","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Ali Akbar Mohammadi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2017.07.010","journal":"Data in Brief","published_year":2017,"title":"Synthesis of adsorbent from Tamarix hispida and modified by lanthanum metal for fluoride ions removal from wastewater: Adsorbent characteristics and real wastewater treatment data","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Nasim Habibi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2017.04.031","journal":"Data in Brief","published_year":2017,"title":"Zinc, nickel, and cobalt ions removal from aqueous solution and plating plant wastewater by modified Aspergillus flavus biomass: A dataset","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Rauf Foroutan","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.05.060","journal":"Data in Brief","published_year":2018,"title":"Adsorption of organic pollutants from real refinery wastewater on prepared cross-linked starch by epichlorohydrin","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Riyadh K. Abid","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2017.11.003","journal":"Data in Brief","published_year":2018,"title":"Assessment of groundwater quality and evaluation of scaling and corrosiveness potential of drinking water samples in villages of Chabahr city, Sistan and Baluchistan province in Iran","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Abbas Abbasnia","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.04.120","journal":"Data in Brief","published_year":2018,"title":"Assessment of groundwater quality by water quality indices for irrigation and drinking in South West Delhi, India","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Sanigdha Acharya","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.03.117","journal":"Data in Brief","published_year":2018,"title":"Data for comparison of chlorine dioxide and chlorine disinfection power in a real dairy wastewater effluent","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Maliheh Akhlaghi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.04.053","journal":"Data in Brief","published_year":2018,"title":"Data for distribution of various species of fecal coliforms in urban, rural and private drinking water sources in ten years period – A case study: Kermanshah, Iran","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Reza Davoodi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.05.021","journal":"Data in Brief","published_year":2018,"title":"Data for interventional role of training in changing the knowledge and attitudes of urban mothers towards food hygiene (A case study of Ravansar Township, Kermanshah, Iran)","matched_in_title":"hygiene","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"hygiene","first_author_name":"Yahya Safari","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.09.125","journal":"Data in Brief","published_year":2018,"title":"Data of thematic analysis of farmer׳s use behavior of recycled industrial wastewater","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Loai Aljerf","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.07.026","journal":"Data in Brief","published_year":2018,"title":"Data on Legionella prevalence and water quality in showers of retirement homes and group homes in the Province of Rome, Lazio Region, Italy","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Patrizia De Filippis","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.08.180","journal":"Data in Brief","published_year":2018,"title":"Data on aluminum concentration in drinking water distribution network of rural water supply in Sistan and Baluchistan province, Iran","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Hesam Akbari","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.05.086","journal":"Data in Brief","published_year":2018,"title":"Data on assessment of physical, chemical and biological characteristics of effluent from wastewater treatment in Torbat Heydarieh, Iran","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Elham AlSadat Heidari","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.10.143","journal":"Data in Brief","published_year":2018,"title":"Data on bioassay of toxicity reduction of treated textile wastewater by using nanophotocatalytic process by Daphnia magna","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Marjan Ghanbarian","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2017.11.099","journal":"Data in Brief","published_year":2018,"title":"Data on corrosion and scaling potential of drinking water resources using stability indices in Jolfa, East Azerbaijan, Iran","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Mahmood Yousefi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2017.12.057","journal":"Data in Brief","published_year":2018,"title":"Data on corrosive water in the sources and distribution network of drinking water in north of Iran","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Javad Alimoradi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.08.022","journal":"Data in Brief","published_year":2018,"title":"Data on drinking water quality using water quality index (WQI) and assessment of groundwater quality for irrigation purposes in Qorveh&amp;Dehgolan, Kurdistan, Iran","matched_in_title":"drinking water; water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Hamed Soleimani","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.06.076","journal":"Data in Brief","published_year":2018,"title":"Data on effluent toxicity and physicochemical parameters of municipal wastewater treatment plant using Daphnia Magna","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Fathollah Gholami-Borujeni","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.04.045","journal":"Data in Brief","published_year":2018,"title":"Data on fluoride concentration and health risk assessment of drinking water in Khorasan Razavi province, Iran","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Mansour Ghaderpoori","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.05.112","journal":"Data in Brief","published_year":2018,"title":"Data on fluoride concentration in drinking water resources in Iran: A case study of Fars province; Larestan region","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Mohammad Hadi Dehghani","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.06.062","journal":"Data in Brief","published_year":2018,"title":"Data on groundwater quality, scaling potential and corrosiveness of water samples in Torbat-e-Heydariyeh rural drinking water resources, Khorasan-e-Razavi province, Iran","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"A.A. Babaeia","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.08.139","journal":"Data in Brief","published_year":2018,"title":"Data on health risk assessment of fluoride in drinking water in the Khash city of Sistan and Baluchistan province, Iran","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Abooalfazl Azhdarpoor","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.11.007","journal":"Data in Brief","published_year":2018,"title":"Data on health risk assessment to the nitrate in drinking water of rural areas in the Khash city, Iran","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Majid Radfard","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.08.087","journal":"Data in Brief","published_year":2018,"title":"Data on ion composition and X-ray diffraction patterns of biosolids from wastewater treatment plants in Lufkin and Nacogdoches, Texas, USA","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Kefa K. Onchoke","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.02.003","journal":"Data in Brief","published_year":2018,"title":"Data on microbiological quality assessment of rural drinking water supplies in Poldasht county","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Mahmood Yousefi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.04.004","journal":"Data in Brief","published_year":2018,"title":"Data on microbiological quality assessment of rural drinking water supplies in Tiran County, Isfahan province, Iran","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Khadijeh Jafari","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.04.026","journal":"Data in Brief","published_year":2018,"title":"Data on performance of air stripping tower- PAC integrated system for removing of odor, taste, dye and organic materials from drinking water-A case study in Saqqez, Iran","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Meghdad Pirsaheb","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.06.058","journal":"Data in Brief","published_year":2018,"title":"Data on physicochemical quality of drinking water in the rural area in Divandarreh county, Kurdistan, Iran","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Afshin Maleki","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2017.11.042","journal":"Data in Brief","published_year":2018,"title":"Data on pollutants content in the influent and effluent from wastewater treatment plant of Rasht in Guilan Province, Iran","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Salar Hosseinipour Dizgah","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.04.020","journal":"Data in Brief","published_year":2018,"title":"Data on treatment of sewage wastewater by electrocoagulation using punched aluminum electrode and characterization of generated sludge","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"faecal sludge; wastewater","first_author_name":"Vinita Khandegar","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2017.12.034","journal":"Data in Brief","published_year":2018,"title":"Data on wastewater treatment plant by using wetland method, Babol, Iran","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Yousef Dadban Shahamat","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.04.108","journal":"Data in Brief","published_year":2018,"title":"Dataset for effect comparison of irrigation by wastewater and ground water on amount of heavy metals in soil and vegetables: Accumulation, transfer factor and health risk assessment","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; wastewater; water quality; water sanitation","first_author_name":"Elhameh Cheshmazar","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.09.078","journal":"Data in Brief","published_year":2018,"title":"Dataset on assessment of physical and chemical quality of groundwater in rural drinking water, west Azerbaijan Province in Iran","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Majid Radfard","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.06.053","journal":"Data in Brief","published_year":2018,"title":"Dataset on the assessment of water quality and water quality index of Ubogo and Egini rivers, Udu LGA, Delta State Nigeria","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"A.S. Ejoh","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2017.12.053","journal":"Data in Brief","published_year":2018,"title":"Draft genome sequence of Brevibacterium epidermidis EZ-K02 isolated from nitrocellulose-contaminated wastewater environments","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Elvira E. Ziganshina","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2017.11.087","journal":"Data in Brief","published_year":2018,"title":"Drinking water pollution with respective of fluoride in the semi-arid region of Basara, Nirmal district, Telangana State, India","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Adimalla Narsimha","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.06.094","journal":"Data in Brief","published_year":2018,"title":"Efficiency of sequencing batch reactor for removal of organic matter in the effluent of petroleum wastewater","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Abdolkazem Neisi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.03.113","journal":"Data in Brief","published_year":2018,"title":"Evaluation and comparison the performance of titanium and zirconium(IV) tetrachloride in textile wastewater treatment","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Hamidi Abdul Aziz","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.03.007","journal":"Data in Brief","published_year":2018,"title":"Evaluation of water quality and stability in the drinking water distribution network in the Azogues city, Ecuador","matched_in_title":"drinking water; water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Fernando García-Ávila","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.05.061","journal":"Data in Brief","published_year":2018,"title":"Groundwater quality assessment for irrigation purposes based on irrigation water quality index and its zoning with GIS in the villages of Chabahar, Sistan and Baluchistan, Iran","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Abbas Abbasnia","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2017.11.078","journal":"Data in Brief","published_year":2018,"title":"Heavy metals analysis and quality assessment in drinking water – Khorramabad city, Iran","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Mansour Ghaderpoori","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.05.068","journal":"Data in Brief","published_year":2018,"title":"Links between data on chemical and biological quality parameters in wastewater-impacted river sediment and water samples","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; wastewater; water quality; water sanitation","first_author_name":"Miren Martínez-Santos","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.08.049","journal":"Data in Brief","published_year":2018,"title":"Microbiological dataset of rural drinking water supplies in Zahedan, Iran","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Majid RadFard","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.02.075","journal":"Data in Brief","published_year":2018,"title":"Neuro-fuzzy inference system Prediction of stability indices and Sodium absorption ratio in Lordegan rural drinking water resources in west Iran","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Afshin Takdastan","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.02.069","journal":"Data in Brief","published_year":2018,"title":"The concentration data of fluoride and health risk assessment in drinking water in the Ardakan city of Yazd province, Iran","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Majid Mirzabeygi (Rad Fard)","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.08.167","journal":"Data in Brief","published_year":2018,"title":"The data of Escherichia coli strains genes in different types of wastewater","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Mojtaba Afsharnia","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2018.01.072","journal":"Data in Brief","published_year":2018,"title":"Water quality assessment for groundwater around a municipal waste dumpsite","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Olusola T. Kayode","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2019.103739","journal":"Data in Brief","published_year":2019,"title":"Data on microbial community composition of sludge from high altitude wastewater treatment plants determined by 16S rRNA gene sequencing","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"faecal sludge; wastewater","first_author_name":"Chen Chen","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2019.104438","journal":"Data in Brief","published_year":2019,"title":"Data on population density, growth, survival, water quality, larval stage index and ingestion rate of selected microalgae of portunids crabs at different feeding regimes","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Muhammad Nur Syafaat","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2019.103736","journal":"Data in Brief","published_year":2019,"title":"Data on the trend of corrosivity and scale formation potential of Shiraz groundwater drinking water resources during 2001–2007","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Mansooreh Dehghani","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2019.103846","journal":"Data in Brief","published_year":2019,"title":"Data on water quality index development for groundwater quality assessment from Obulavaripalli Mandal, YSR district, A.P India","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"M. Prasad","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2019.104813","journal":"Data in Brief","published_year":2019,"title":"Dataset for a wireless sensor network based drinking-water quality monitoring and notification system","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Mhambi Phila Philadephian Sithole","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2019.104308","journal":"Data in Brief","published_year":2019,"title":"Dataset of the aqueous solution and petrochemical wastewater treatment containing ammonia using low cost and efficient bio-adsorbents","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Golan Yeganeh","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2019.01.010","journal":"Data in Brief","published_year":2019,"title":"Dataset on the assessment of water quality of surface water in Kalingarayan Canal for heavy metal pollution, Tamil Nadu","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"T. Mohanakavitha","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2019.104462","journal":"Data in Brief","published_year":2019,"title":"Dataset on water quality characteristics of a hill stream in Bhaderwah, Jammu and Kashmir","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Ravinder Kumar","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2019.104722","journal":"Data in Brief","published_year":2019,"title":"Metagenomic data of the microbial community of lab-scale nitritation-anammox sequencing-batch bioreactor performing nitrogen removal from synthetic wastewater","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Andrey V. Mardanov","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2019.104135","journal":"Data in Brief","published_year":2019,"title":"Metagenomic profiling dataset of bacterial communities of a drinking water supply system (DWSS) in the arid Namaqualand region, South Africa: Source (lower Orange River) to point-of-use (O'Kiep)","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Innocentia G. Erdogan","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2019.104178","journal":"Data in Brief","published_year":2019,"title":"Water quality data from estuarine variable hydrologic flow regimes during frequent drought","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Bhanu Paudel","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2020.106235","journal":"Data in Brief","published_year":2020,"title":"Data for the evaluation of groundwater quality using water quality index and regression analysis in parts of Nalgonda district, Telangana, Southern India","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"K. Saikrishna","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2019.105019","journal":"Data in Brief","published_year":2020,"title":"Data on airborne bacteria and fungi emission from a conventional hospital wastewater treatment plant","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Ahmadreza Yazdanbakhsh","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2019.104872","journal":"Data in Brief","published_year":2020,"title":"Data on application of water quality index method for appraisal of water quality in around cement industrial corridor, Yerraguntla Mandal, Y.S.R District, A.P South India","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"B. Suvarna","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2019.105099","journal":"Data in Brief","published_year":2020,"title":"Data on the effects of filters, storage conditions, and chlorination in fluorescence and absorbance wastewater measurements","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Massimiliano Sgroi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2019.104869","journal":"Data in Brief","published_year":2020,"title":"Data on the inner filter effect, suspended solids and nitrate interferences in fluorescence measurements of wastewater organic matter","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Massimiliano Sgroi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2020.105268","journal":"Data in Brief","published_year":2020,"title":"Data on water, sanitation, and hygiene in six select metro cities of India","matched_in_title":"water sanitation; hygiene; sanitation","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; hygiene; sanitation; water quality; water sanitation","first_author_name":"Shashi Kala Saroj","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2019.104926","journal":"Data in Brief","published_year":2020,"title":"Data set on performance evaluation of discharged wastewater quality from Guna water treatment plant for potable water purpose","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; wastewater; water quality; water sanitation","first_author_name":"Adane Adugna Ayalew","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2020.106062","journal":"Data in Brief","published_year":2020,"title":"Dataset of pharmaceuticals in the Danube and related drinking water wells in the Budapest region","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Attila Csaba Kondor","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2020.105346","journal":"Data in Brief","published_year":2020,"title":"Dataset of the efficiency of the ultraviolet light activation of persulfate ion for the degradation of cobalt cyanocomplexes in synthetic mining wastewater","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Samir Fernando Castilla-Acevedo","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2020.105822","journal":"Data in Brief","published_year":2020,"title":"Dataset on physicochemical and microbial properties of raw water in four drinking water treatment plants based in South Africa","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Vhahangwele Masindi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2020.106112","journal":"Data in Brief","published_year":2020,"title":"Dataset on the assessment of water quality of ground water in Kalingarayan Canal, Erode district, Tamil Nadu, India","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"R Divahar","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2019.104851","journal":"Data in Brief","published_year":2020,"title":"Dataset: Feminine hygiene product lifecycle inventory and impact assessment","matched_in_title":"hygiene","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"hygiene","first_author_name":"Amy Hait","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2020.105446","journal":"Data in Brief","published_year":2020,"title":"Draft genome sequence data of a T7like phage 3A_8767 isolated from wastewater of a butcher house near Palar river","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Avtar Sain","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2019.104826","journal":"Data in Brief","published_year":2020,"title":"Envisat MERIS and Sentinel-3 OLCI satellite lake biophysical water quality flag dataset for the contiguous United States","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Erin A. Urquhart","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2020.105584","journal":"Data in Brief","published_year":2020,"title":"Treatment of municipal wastewater by vertical subsurface flow constructed wetland: Data collection on removal efficiency using Phragmites Australis and Cyperus Papyrus","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Fernando García-Ávila","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2019.104848","journal":"Data in Brief","published_year":2020,"title":"Utilizations of electro-coagulated sludge from wastewater treatment plant data as an adsorbent for direct red 28 dye removal","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"faecal sludge; wastewater","first_author_name":"Tadele Assefa Aragaw","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2021.106945","journal":"Data in Brief","published_year":2021,"title":"Anomalies in industrial wastewater quality data in Kuwait","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater; water quality","first_author_name":"Adel Al-haddad","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2021.106800","journal":"Data in Brief","published_year":2021,"title":"Bloom announcement: Late season cyanobacterial blooms co-dominated by Microcystis flos-aquae, Lyngbya birgei, and Aphanizomenon flos-aquae complex in Hamilton Harbour (Lake Ontario), an area of concern impacted by industrial effluent and residential wastewater.","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Arthur Zastepa","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2021.107422","journal":"Data in Brief","published_year":2021,"title":"Data on Growth, survivability, water quality and hemato-biochemical indices of Nile Tilapia (Oreochromis niloticus) fry fed with selected marine microalgae","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Kafia Islam Amira","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2021.106799","journal":"Data in Brief","published_year":2021,"title":"Data on the fabrication of hybrid calix [4]arene-modified natural bentonite clay for efficient selective removal of toxic metals from wastewater at room temperature","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Khouloud Jlassi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2021.107519","journal":"Data in Brief","published_year":2021,"title":"Descriptive data on simultaneous nitrification and denitrification of hypersaline wastewater by a robust bacterium Halomonas salifodinae","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Jie Hu","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2021.106940","journal":"Data in Brief","published_year":2021,"title":"Descriptive data on trichloroethylene and Congo red dye adsorption from wastewater using bio nanosponge phosphorylated-carbon nanotube/nanoparticles polyurethane composite","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; wastewater; water quality; water sanitation","first_author_name":"Anny Leudjo Taka","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2021.107272","journal":"Data in Brief","published_year":2021,"title":"Experimental dataset on the effect of electron acceptors in energy generation from brewery wastewater via a microbial fuel cell","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Tegen Dagnew Tessema","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2021.107546","journal":"Data in Brief","published_year":2021,"title":"Microbial communities in polychlorinated biphenyl (PCB)-contaminated wastewater lagoon sediments: PCB congener, quantitative PCR, and 16S rRNA gene amplicon sequencing datasets","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Timothy E. Mattes","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2020.106685","journal":"Data in Brief","published_year":2021,"title":"Treatment of rubber wastewater using zinc sulphate as coagulants-data collection on removal efficiency for physicochemical and heavy metal parameters","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Abbas F.M. Alkarkhi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2021.106866","journal":"Data in Brief","published_year":2021,"title":"Water quality data in a shallow and narrow Setiu Lagoon","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Zuraini Zainol","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2022.108400","journal":"Data in Brief","published_year":2022,"title":"An internet of things labelled dataset for aquaponics fish pond water quality monitoring system","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"C.N. Udanor","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2022.107970","journal":"Data in Brief","published_year":2022,"title":"Data for assessment of sediment, soil, and water quality at Ashfield flats reserve, Western Australia","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Andrew W. Rate","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2022.107830","journal":"Data in Brief","published_year":2022,"title":"Data on estimation of health hazards associated with pesticide residues in drinking water","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Ibrahim El-Nahhal","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2022.108228","journal":"Data in Brief","published_year":2022,"title":"Data on occurrence of perfluoroalkyl substances in influents and effluents collected from different wastewater treatment plants in Latvia","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Dzintars Zacs","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2022.108505","journal":"Data in Brief","published_year":2022,"title":"Data, and sample sources thereof, on water quality life cycle impact assessments pertaining to catchment scale acidification and eutrophication potentials and the benefits of on-farm mitigation strategies","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Graham A. McAuliffe","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2022.108486","journal":"Data in Brief","published_year":2022,"title":"Dataset on water quality monitoring from a wireless sensor network in a river in Kosovo","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Figene Ahmedi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2022.108736","journal":"Data in Brief","published_year":2022,"title":"Plasmid sequence dataset of multidrug-resistant Enterobacterales isolated from hospital effluents and wastewater treatment plant","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Christopher Mutuku","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2021.107726","journal":"Data in Brief","published_year":2022,"title":"SIPIBEL observatory: Data on usual pollutants (solids, organic matter, nutrients, ions) and micropollutants (pharmaceuticals, surfactants, metals), biological and ecotoxicity indicators in hospital and urban wastewater, in treated effluent and sludge from wastewater treatment plant, and in surface and groundwater","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"faecal sludge; wastewater","first_author_name":"Jean-Luc Bertrand-Krajewski","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2022.108212","journal":"Data in Brief","published_year":2022,"title":"Wastewater data from individual homes: Quantitative and qualitative measurements","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Vivien Dubois","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2022.108820","journal":"Data in Brief","published_year":2023,"title":"A comprehensive dataset on the effects of Nannochloropsis sp. inclusion diets on water quality and oxidative stress of guppy (Poecilia reticulata)","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Razia Sultana","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2023.109248","journal":"Data in Brief","published_year":2023,"title":"A simple dataset of water quality on aquaponic fish ponds based on an internet of things measurement device","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Boby Siswanto","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2023.109601","journal":"Data in Brief","published_year":2023,"title":"A water quality dataset of levels of metal, nutrient and anions in sample water points from sixteen selected urban and rural districts of Uganda","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Hasifah Kasujja Namatovu","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2023.109466","journal":"Data in Brief","published_year":2023,"title":"Dataset of fluoride concentration and health risk assessment in drinking water in the Saveh City of Markazi Province, Iran","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Hamid Reza Tashauoei","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2023.109072","journal":"Data in Brief","published_year":2023,"title":"Large-scale dataset on health literacy, sleep hygiene behaviors, and mental well-being in the general population of Qazvin, Iran","matched_in_title":"hygiene","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"hygiene","first_author_name":"Amir H. Pakpour","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2024.110336","journal":"Data in Brief","published_year":2024,"title":"A comprehensive dataset for the evaluation of a horizontal tubular flocculator implemented for drinking water treatment","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Fernando García-Avila","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2023.110009","journal":"Data in Brief","published_year":2024,"title":"Aerial images and water quality dataset for fishpond's condition monitoring","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Dany Eka Saputra","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2024.110807","journal":"Data in Brief","published_year":2024,"title":"Analysis of the genome of Bacillus safensis strain WOB3 KX774195, a Linamarin-utilizing bacterium (LUB) isolated from Cassava wastewater (CWW), Lagos State, Nigeria","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Adewale K. Ogunyemi","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2024.110635","journal":"Data in Brief","published_year":2024,"title":"Comparative sanitation data from high-frequency phone surveys across 3 countries","matched_in_title":"sanitation","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"sanitation; water sanitation","first_author_name":"Amy R. Lewis","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2024.111005","journal":"Data in Brief","published_year":2024,"title":"Dataset on physical-chemical and marine water quality variables in San Andrés Island, Colombian Caribbean","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Juan Sebastián González-Guirald","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2024.110344","journal":"Data in Brief","published_year":2024,"title":"Draft genome sequence data of multidrug-resistant Pseudomonas aeruginosa WO7 from a hospital wastewater treatment plant in Thailand","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Montri Yasawong","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2024.110770","journal":"Data in Brief","published_year":2024,"title":"Surface water quality database for five watersheds in the Arequipa region of Southern Peru","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Molly Noel Rymes","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2025.112290","journal":"Data in Brief","published_year":2025,"title":"Dataset of high-frequency water quality and meteorological variables in Buffalo Pound Lake, Saskatchewan, Canada, 2014 – 2021","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Helen Baulch","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2025.111870","journal":"Data in Brief","published_year":2025,"title":"Draft genome sequence of Bacillus safensis 2T-2, isolated from drinking water","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Cornelius C. Bezuidenhout","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2025.111469","journal":"Data in Brief","published_year":2025,"title":"Knowledge base dataset on nature-based solutions for wastewater treatment and stormwater management","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Josep Pueyo-Ros","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2025.111756","journal":"Data in Brief","published_year":2025,"title":"Wastewater-based surveillance data to determine the COVID-19 trends in communities with low population","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; wastewater; water quality; water sanitation","first_author_name":"Aiswarya Rani Pappu","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2026.113036","journal":"Data in Brief","published_year":2026,"title":"A dataset on the multi-species and multi-endpoint bioanalytical assessment of environmental samples derived from Swedish wastewater treatment plants","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Sebastian Lungu-Mitea","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2025.112300","journal":"Data in Brief","published_year":2026,"title":"Cosmetics and personal hygiene primary plastic packaging dataset: Characterization of post-consumer waste returned via take-back system in Denmark","matched_in_title":"hygiene","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"hygiene","first_author_name":"Gloria Moscatelli","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2025.112310","journal":"Data in Brief","published_year":2026,"title":"Cross-sectoral digital planning Drinking Water-Urban Heat-Housing Provision indicators dataset","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Iván Cardenas-Leon","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2026.112935","journal":"Data in Brief","published_year":2026,"title":"Dataset of illicit drug consumption during and post COVID-19 through wastewater in a city of Chile","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Andressa S. Reis","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2025.112407","journal":"Data in Brief","published_year":2026,"title":"Dataset on microbial community structure in response to microalgal cultivation in dairy wastewater","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Khin Khin Phyu","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2026.112838","journal":"Data in Brief","published_year":2026,"title":"High‐resolution bathymetry and water quality dataset from an impounded lake in Northeast Florida, USA","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Daniele Pinton","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2026.112503","journal":"Data in Brief","published_year":2026,"title":"Pathogen nucleic acids data in wastewater solids from 147 treatment plants in the United States: 2024–2025","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Alexandria B. Boehm","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2026.112969","journal":"Data in Brief","published_year":2026,"title":"Wastewater-based and case-based surveillance data for monitoring COVID-19 in Germany, 2022–2024","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Peter Pütz","first_author_affiliation":null,"abstract":null},{"doi":"10.1016/j.dib.2026.113070","journal":"Data in Brief","published_year":2026,"title":"Water quality and flow dataset from a degraded peatland catchment: Storm events and treatment pond performance","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Lipe R.D. Mendes","first_author_affiliation":null,"abstract":null},{"doi":"10.12688/f1000research.5403.2","journal":"F1000Research","published_year":2014,"title":"Breaking a Guinness World Record on Hand Sanitizing Relay, initiating a call for vital research in overcoming campaign fatigue for hand hygiene.","matched_in_title":"hygiene","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"handwashing; hygiene","first_author_name":"Seto WH","first_author_affiliation":null,"abstract":null},{"doi":"10.12688/f1000research.9157.1","journal":"F1000Research","published_year":2016,"title":"Metagenomic analysis of an ecological wastewater treatment plant's microbial communities and their potential to metabolize pharmaceuticals.","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; wash; wastewater; water quality","first_author_name":"Balcom IN","first_author_affiliation":null,"abstract":null},{"doi":"10.12688/f1000research.13064.2","journal":"F1000Research","published_year":2017,"title":"The impact of fresh gas flow on wash-in, wash-out time and gas consumption for sevoflurane and desflurane, comparing two anaesthesia machines, a test-lung study.","matched_in_title":"wash","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wash","first_author_name":"Leijonhufvud F","first_author_affiliation":null,"abstract":null},{"doi":"10.12688/f1000research.11255.2","journal":"F1000Research","published_year":2017,"title":"Wash-in and wash-out of sevoflurane in a test-lung model: A comparison between Aisys and FLOW-i.","matched_in_title":"wash","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wash","first_author_name":"Jakobsson P","first_author_affiliation":null,"abstract":null},{"doi":"10.12688/f1000research.19544.2","journal":"F1000Research","published_year":2019,"title":"Association between umbilical cord hygiene and neonatal sepsis among neonates presenting to a primary care facility in Nairobi County, Kenya: a case-control study.","matched_in_title":"hygiene","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"handwashing; hygiene; wash; water quality","first_author_name":"Moraa PK","first_author_affiliation":null,"abstract":null},{"doi":"10.12688/f1000research.20099.2","journal":"F1000Research","published_year":2019,"title":"Salivary nitric oxide, Simplified Oral Hygiene Index, and salivary flow rate in smokers and non-smokers: a cross-sectional study.","matched_in_title":"hygiene","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"hygiene","first_author_name":"Bachtiar EW","first_author_affiliation":null,"abstract":null},{"doi":"10.12688/f1000research.122822.1","journal":"F1000Research","published_year":2022,"title":"A scoping review protocol on food handlers' knowledge, attitude, and practices towards food hygiene and safety in low and middle-income countries.","matched_in_title":"hygiene","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; hygiene; water quality","first_author_name":"Dabral P","first_author_affiliation":null,"abstract":null},{"doi":"10.12688/f1000research.87848.2","journal":"F1000Research","published_year":2022,"title":"The relationship between parents' oral hygiene knowledge and children with Down Syndrome's oral hygiene via OHI-S.","matched_in_title":"hygiene","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"hygiene","first_author_name":"Sosiawan A","first_author_affiliation":null,"abstract":null},{"doi":"10.12688/f1000research.156276.3","journal":"F1000Research","published_year":2024,"title":"Assessment of water quality in the piped water supply system by using Water Quality index method.","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; sanitation; wastewater; water quality; water sanitation","first_author_name":"Samal KP","first_author_affiliation":null,"abstract":null},{"doi":"10.12688/f1000research.162022.4","journal":"F1000Research","published_year":2025,"title":"Integrated water quality assessment and health risk analysis of heavy metal and microbial contamination in the Ichu River, Peru.","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; sanitation; wastewater; water quality; water sanitation","first_author_name":"Zarate-Cáceres CR","first_author_affiliation":null,"abstract":null},{"doi":"10.12688/gatesopenres.12754.1","journal":"Gates Open Research","published_year":2017,"title":"Implementation and process analysis of pilot scale multi-phase anaerobic fermentation and digestion of faecal sludge in Ghana.","matched_in_title":"faecal sludge","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"faecal sludge; hygiene; latrine; sanitation; wastewater; water quality; water sanitation","first_author_name":"Shih J","first_author_affiliation":null,"abstract":null},{"doi":"10.12688/gatesopenres.12931.2","journal":"Gates Open Research","published_year":2019,"title":"Non-biological methods for phosphorus and nitrogen removal from wastewater: A gap analysis of reinvented-toilet technologies with respect to ISO 30500.","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; sanitation; wash; wastewater; water quality; water sanitation","first_author_name":"Trotochaud L","first_author_affiliation":null,"abstract":null},{"doi":"10.12688/gatesopenres.13138.2","journal":"Gates Open Research","published_year":2020,"title":"Decentralized solar-powered drinking water ozonation in Western Kenya: an evaluation of disinfection efficacy.","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; handwashing; sanitation; wastewater; water quality; water sanitation","first_author_name":"Hendrickson C","first_author_affiliation":null,"abstract":null},{"doi":"10.12688/gatesopenres.13361.2","journal":"Gates Open Research","published_year":2021,"title":"Testing for sensory threshold in drinking water with added calcium: a first step towards developing a calcium fortified water.","matched_in_title":"drinking water","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; wastewater; water quality","first_author_name":"Cormick G","first_author_affiliation":null,"abstract":null},{"doi":"10.12688/gatesopenres.13727.2","journal":"Gates Open Research","published_year":2022,"title":"Physico-chemical properties of waste derived biochar from community scale faecal sludge treatment plants.","matched_in_title":"faecal sludge","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; faecal sludge; hygiene; latrine; sanitation; wash; wastewater; water sanitation","first_author_name":"Nicholas HL","first_author_affiliation":null,"abstract":null},{"doi":"10.12688/gatesopenres.15489.2","journal":"Gates Open Research","published_year":2024,"title":"Stakeholder Interviews to Inform Best Practice for Public Facing COVID-19 Wastewater Dashboards.","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"faecal sludge; hygiene; wastewater; water quality","first_author_name":"Morales D","first_author_affiliation":null,"abstract":null},{"doi":"10.1038/s41597-023-02069-3","journal":"Scientific Data","published_year":2023,"title":"Author Correction: GLORIA - A globally representative hyperspectral in situ dataset for optical sensing of water quality","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Moritz K. Lehmann","first_author_affiliation":null,"abstract":null},{"doi":"10.1038/s41597-024-03815-x","journal":"Scientific Data","published_year":2024,"title":"A Dataset of Distribution and Characterization of Underground Wastewater Treatment Plants in China","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Shuyan Zhou","first_author_affiliation":null,"abstract":null},{"doi":"10.1038/s41597-024-04257-1","journal":"Scientific Data","published_year":2024,"title":"Author Correction: Human pathogen nucleic acids in wastewater solids from 191 wastewater treatment plants in the United States","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Alexandria B. Boehm","first_author_affiliation":null,"abstract":null},{"doi":"10.1038/s41597-024-03969-8","journal":"Scientific Data","published_year":2024,"title":"Human pathogen nucleic acids in wastewater solids from 191 wastewater treatment plants in the United States","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Alexandria B. Boehm","first_author_affiliation":null,"abstract":null},{"doi":"10.1038/s41597-025-04715-4","journal":"Scientific Data","published_year":2025,"title":"A Comprehensive Dataset of Surface Water Quality Spanning 1940-2023 for Empirical and ML Adopted Research","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Md. Rajaul Karim","first_author_affiliation":null,"abstract":null},{"doi":"10.1038/s41597-025-05609-1","journal":"Scientific Data","published_year":2025,"title":"A bio-optical database for the remote sensing of water quality in BRAZil coAstal and inland waters (BRAZA)","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Daniel Andrade Maciel","first_author_affiliation":null,"abstract":null},{"doi":"10.1038/s41597-025-04534-7","journal":"Scientific Data","published_year":2025,"title":"Compilation of riverine water quality data from the Great Barrier Reef catchment area, northeastern Australia","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Cassandra James","first_author_affiliation":null,"abstract":null},{"doi":"10.1038/s41597-025-05431-9","journal":"Scientific Data","published_year":2025,"title":"Correction: High Resolution Water Quality Dataset of Chinese Lakes and Reservoirs from 2000 to 2023","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Shilong Luan","first_author_affiliation":null,"abstract":null},{"doi":"10.1038/s41597-025-06475-7","journal":"Scientific Data","published_year":2025,"title":"Deep metatranscriptomic sequencing data of wastewater from Los Angeles, USA, 2023–2024","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"wastewater","first_author_name":"Simon L. Grimm","first_author_affiliation":null,"abstract":null},{"doi":"10.1038/s41597-025-04915-y","journal":"Scientific Data","published_year":2025,"title":"High Resolution Water Quality Dataset of Chinese Lakes and Reservoirs from 2000 to 2023","matched_in_title":"water quality","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"drinking water; water quality; water sanitation","first_author_name":"Shilong Luan","first_author_affiliation":null,"abstract":null},{"doi":"10.1038/s41597-025-04682-w","journal":"Scientific Data","published_year":2025,"title":"Metatranscriptomes of activated sludge microbiomes from saline wastewater treatment plant","matched_in_title":"wastewater","matched_in_abstract":null,"has_abstract":false,"title_only_no_abstract":true,"query_term":"faecal sludge; wastewater","first_author_name":"Asala Mahajna","first_author_affiliation":null,"abstract":null}];
+const TERMS = ["drinking water","water quality","faecal sludge","handwashing","sanitation","wastewater","hygiene","latrine","water","WASH"];
+const META = {"built":"2026-07-23"};
+
+const STORE_KEY = "washopenresearch-datapapers-review-v1";
+
+const REASON_PRESETS = [
+  "WASH data paper",
+  "not WASH-related",
+  "incidental term match",
+  "not about water, sanitation, or hygiene practice",
+  "environmental/lab context only",
+  "no reusable dataset described"
+];
+
+let decisions = {};
+try { decisions = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); } catch (e) { decisions = {}; }
+
+let queueFilter = "abstract";
+let statusFilter = "all";
+let currentDoi = null;
+
+const termRe = new RegExp("\\b(?:" + TERMS.map(t =>
+  t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/ /g, "\\s+")
+).join("|") + ")\\b", "gi");
+
+function esc(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function highlight(s) {
+  return esc(s).replace(termRe, m => "<mark>" + m + "</mark>");
+}
+
+function statusOf(p) {
+  const d = decisions[p.doi];
+  if (!d) return "pending";
+  return d.include ? "included" : "excluded";
+}
+
+function visible() {
+  return PAPERS.filter(p => {
+    if (queueFilter === "abstract" && !p.has_abstract) return false;
+    if (queueFilter === "titleonly" && p.has_abstract) return false;
+    if (statusFilter !== "all" && statusOf(p) !== statusFilter) return false;
+    return true;
+  });
+}
+
+function renderTallies() {
+  let inc = 0, exc = 0, absDone = 0, absTotal = 0;
+  for (const p of PAPERS) {
+    const s = statusOf(p);
+    if (s === "included") inc++;
+    if (s === "excluded") exc++;
+    if (p.has_abstract) {
+      absTotal++;
+      if (s !== "pending") absDone++;
+    }
+  }
+  document.getElementById("t-inc").textContent = inc;
+  document.getElementById("t-exc").textContent = exc;
+  document.getElementById("t-pen").textContent = PAPERS.length - inc - exc;
+  document.getElementById("t-abs").textContent = absDone + "/" + absTotal;
+  document.querySelector("#progress .p-inc").style.width = (100 * inc / PAPERS.length) + "%";
+  document.querySelector("#progress .p-exc").style.width = (100 * exc / PAPERS.length) + "%";
+}
+
+function renderQueue() {
+  const list = visible();
+  const q = document.getElementById("queue");
+  q.innerHTML = "";
+  for (const p of list) {
+    const s = statusOf(p);
+    const el = document.createElement("div");
+    el.className = "q-item is-" + s + (p.doi === currentDoi ? " active" : "");
+    el.dataset.doi = p.doi;
+    el.innerHTML =
+      '<div class="q-dot"></div>' +
+      '<div class="q-title">' + esc(p.title) + "</div>" +
+      '<div class="q-meta">' + esc(p.journal) + " &middot; " + p.published_year +
+      (p.has_abstract ? ' &middot; <span class="abs">abstract</span>' : "") + "</div>";
+    el.addEventListener("click", () => select(p.doi));
+    q.appendChild(el);
+  }
+  if (list.length && !list.some(p => p.doi === currentDoi)) select(list[0].doi, false);
+  const active = q.querySelector(".q-item.active");
+  if (active) active.scrollIntoView({ block: "nearest" });
+}
+
+function paper(doi) { return PAPERS.find(p => p.doi === doi); }
+
+function select(doi, rerenderQueue = true) {
+  currentDoi = doi;
+  const p = paper(doi);
+  if (!p) return;
+
+  const tags = [];
+  tags.push('<span class="tag journal">' + esc(p.journal) + "</span>");
+  tags.push('<span class="tag">' + p.published_year + "</span>");
+  if (p.query_term) tags.push('<span class="tag">query: ' + esc(p.query_term) + "</span>");
+  if (p.matched_in_title) tags.push('<span class="tag">title match: ' + esc(p.matched_in_title) + "</span>");
+  if (p.matched_in_abstract) tags.push('<span class="tag">abstract match: ' + esc(p.matched_in_abstract) + "</span>");
+  if (p.title_only_no_abstract) tags.push('<span class="tag warn">weakest signal: title only, no abstract</span>');
+  document.getElementById("c-tags").innerHTML = tags.join("");
+
+  document.getElementById("c-title").innerHTML = highlight(p.title);
+
+  const by = [];
+  if (p.first_author_name) by.push("<b>" + esc(p.first_author_name) + "</b>");
+  if (p.first_author_affiliation) by.push(esc(p.first_author_affiliation));
+  document.getElementById("c-byline").innerHTML = by.join(" &middot; ") || "";
+
+  document.getElementById("c-doi").innerHTML =
+    '<a href="https://doi.org/' + encodeURIComponent(p.doi) + '" target="_blank" rel="noopener">doi.org/' + esc(p.doi) + "</a>";
+
+  const absEl = document.getElementById("c-abstract");
+  if (p.abstract) {
+    absEl.className = "";
+    absEl.innerHTML = highlight(p.abstract);
+  } else {
+    absEl.className = "empty";
+    absEl.textContent = "No abstract in the harvested metadata. Judge from the title and, if needed, the publisher page via the DOI link.";
+  }
+
+  const d = decisions[doi];
+  document.getElementById("reason").value = d && d.reason ? d.reason : "";
+  renderStamp();
+  if (rerenderQueue) renderQueue();
+  document.getElementById("pane").scrollTop = 0;
+}
+
+function renderStamp() {
+  const st = document.getElementById("stamp");
+  const s = statusOf(paper(currentDoi) || {});
+  st.className = "";
+  if (s === "included") { st.textContent = "included"; void st.offsetWidth; st.className = "show-inc"; }
+  else if (s === "excluded") { st.textContent = "excluded"; void st.offsetWidth; st.className = "show-exc"; }
+  else st.textContent = "";
+}
+
+function persist() {
+  localStorage.setItem(STORE_KEY, JSON.stringify(decisions));
+}
+
+function decide(include) {
+  if (!currentDoi) return;
+  decisions[currentDoi] = {
+    include: include,
+    reason: document.getElementById("reason").value.trim()
+  };
+  persist();
+  renderStamp();
+  renderTallies();
+  renderQueue();
+  setTimeout(nextPending, 240);
+}
+
+function clearDecision() {
+  if (!currentDoi || !decisions[currentDoi]) return;
+  delete decisions[currentDoi];
+  persist();
+  document.getElementById("reason").value = "";
+  renderStamp();
+  renderTallies();
+  renderQueue();
+}
+
+function nextPending() {
+  const list = visible();
+  const i = list.findIndex(p => p.doi === currentDoi);
+  for (let k = 1; k <= list.length; k++) {
+    const p = list[(i + k) % list.length];
+    if (statusOf(p) === "pending") { select(p.doi); return; }
+  }
+  toast("Queue complete: no pending papers in this filter.");
+}
+
+function step(delta) {
+  const list = visible();
+  if (!list.length) return;
+  const i = list.findIndex(p => p.doi === currentDoi);
+  const next = list[Math.min(list.length - 1, Math.max(0, i + delta))];
+  if (next) select(next.doi);
+}
+
+function csvField(v) {
+  const s = String(v == null ? "" : v);
+  return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+
+function exportCSV() {
+  const rows = [["doi", "include", "reason"]];
+  for (const p of PAPERS) {
+    const d = decisions[p.doi];
+    if (!d) continue;
+    rows.push([p.doi, d.include ? "TRUE" : "FALSE", d.reason || ""]);
+  }
+  if (rows.length === 1) { toast("No decisions yet; nothing to export."); return; }
+  const blob = new Blob([rows.map(r => r.map(csvField).join(",")).join("\n") + "\n"],
+                        { type: "text/csv" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "datapapers_decisions.csv";
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast((rows.length - 1) + " decisions exported. Save to data-raw/datapapers_decisions.csv and run the apply script.");
+}
+
+let toastTimer = null;
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.className = "show";
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.className = ""; }, 3600);
+}
+
+/* ---------- wiring ---------- */
+
+document.getElementById("btn-inc").addEventListener("click", () => decide(true));
+document.getElementById("btn-exc").addEventListener("click", () => decide(false));
+document.getElementById("btn-clear").addEventListener("click", clearDecision);
+document.getElementById("export-btn").addEventListener("click", exportCSV);
+
+document.getElementById("reason").addEventListener("input", e => {
+  if (currentDoi && decisions[currentDoi]) {
+    decisions[currentDoi].reason = e.target.value.trim();
+    persist();
+  }
+});
+
+const reasonBox = document.getElementById("d-reasons");
+for (const r of REASON_PRESETS) {
+  const b = document.createElement("button");
+  b.className = "chip";
+  b.textContent = r;
+  b.addEventListener("click", () => {
+    const inp = document.getElementById("reason");
+    inp.value = r;
+    if (currentDoi && decisions[currentDoi]) {
+      decisions[currentDoi].reason = r;
+      persist();
+    }
+  });
+  reasonBox.appendChild(b);
+}
+
+for (const chip of document.querySelectorAll("#f-queue .chip[data-q]")) {
+  chip.addEventListener("click", () => {
+    queueFilter = chip.dataset.q;
+    for (const c of document.querySelectorAll("#f-queue .chip[data-q]")) c.classList.toggle("on", c === chip);
+    renderQueue();
+  });
+}
+for (const chip of document.querySelectorAll("#f-queue .chip[data-s]")) {
+  chip.addEventListener("click", () => {
+    statusFilter = chip.dataset.s;
+    for (const c of document.querySelectorAll("#f-queue .chip[data-s]")) c.classList.toggle("on", c === chip);
+    renderQueue();
+  });
+}
+
+document.addEventListener("keydown", e => {
+  if (e.target.id === "reason") {
+    if (e.key === "Escape" || e.key === "Enter") e.target.blur();
+    return;
+  }
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const k = e.key.toLowerCase();
+  if (k === "i" || k === "y") { e.preventDefault(); decide(true); }
+  else if (k === "x" || k === "n") { e.preventDefault(); decide(false); }
+  else if (k === "u") { e.preventDefault(); clearDecision(); }
+  else if (k === "r") { e.preventDefault(); document.getElementById("reason").focus(); }
+  else if (e.key === "ArrowDown" || k === "j") { e.preventDefault(); step(1); }
+  else if (e.key === "ArrowUp" || k === "k") { e.preventDefault(); step(-1); }
+});
+
+/* ---------- boot ---------- */
+
+if (!PAPERS.some(p => p.has_abstract)) {
+  queueFilter = "all";
+  for (const c of document.querySelectorAll("#f-queue .chip[data-q]"))
+    c.classList.toggle("on", c.dataset.q === "all");
+}
+renderTallies();
+renderQueue();
+if (!currentDoi && PAPERS.length) {
+  const first = visible()[0] || PAPERS[0];
+  select(first.doi);
+}
+document.title = "Datapapers Screening Desk (" + PAPERS.length + " candidates, built " + META.built + ")";
+</script>
+</body>
+</html>
+

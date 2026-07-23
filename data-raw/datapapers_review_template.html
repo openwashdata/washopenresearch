@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Datapapers Screening Desk - washopenresearch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f3eee2;
+    --paper-deep: #eae3d1;
+    --card: #fbf8f0;
+    --ink: #23262d;
+    --ink-soft: #61656d;
+    --line: #d9d0ba;
+    --line-soft: #e5ddc9;
+    --teal: #0e6a72;
+    --teal-deep: #0a5058;
+    --teal-wash: #dce9e6;
+    --madder: #a63f2e;
+    --madder-wash: #f0ddd6;
+    --gold: #a97f26;
+    --gold-wash: #f0e6cd;
+    --mark: #f5e19a;
+    --serif-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --serif-body: "Source Serif 4", Georgia, serif;
+    --mono: "IBM Plex Mono", "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    margin: 0;
+    font-family: var(--serif-body);
+    color: var(--ink);
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.14 0 0 0 0 0.13 0 0 0 0 0.11 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ---------- header ---------- */
+
+  header {
+    flex: none;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(to bottom, rgba(251,248,240,.92), rgba(243,238,226,.92));
+    padding: 14px 26px 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 26px;
+  }
+
+  .masthead .kicker {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+
+  .masthead h1 {
+    margin: 2px 0 0;
+    font-family: var(--serif-display);
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: -.01em;
+  }
+
+  .tally {
+    margin-left: auto;
+    display: flex;
+    align-items: baseline;
+    gap: 22px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  .tally b { color: var(--ink); font-weight: 600; }
+  .tally .inc b { color: var(--teal); }
+  .tally .exc b { color: var(--madder); }
+
+  #export-btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    color: var(--card);
+    background: var(--ink);
+    border: 1px solid var(--ink);
+    padding: 9px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    box-shadow: 3px 3px 0 rgba(35,38,45,.18);
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  #export-btn:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 rgba(35,38,45,.22); }
+  #export-btn:active { transform: translate(1px,1px); box-shadow: 1px 1px 0 rgba(35,38,45,.2); }
+
+  #progress {
+    flex: none;
+    height: 5px;
+    background: var(--paper-deep);
+    display: flex;
+  }
+  #progress .p-inc { background: var(--teal); transition: width .3s ease; }
+  #progress .p-exc { background: var(--madder); transition: width .3s ease; }
+
+  /* ---------- layout ---------- */
+
+  main { flex: 1; display: flex; min-height: 0; }
+
+  /* ---------- queue rail ---------- */
+
+  #rail {
+    flex: none;
+    width: 340px;
+    border-right: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    background: rgba(234,227,209,.45);
+  }
+
+  .filters {
+    flex: none;
+    padding: 12px 14px 10px;
+    border-bottom: 1px solid var(--line-soft);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .chip {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: .04em;
+    padding: 4px 9px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--card);
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all .12s ease;
+  }
+  .chip:hover { border-color: var(--ink-soft); color: var(--ink); }
+  .chip.on { background: var(--ink); border-color: var(--ink); color: var(--card); }
+
+  #queue {
+    flex: 1;
+    overflow-y: auto;
+    padding: 6px 0 30px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+  }
+
+  .q-item {
+    padding: 9px 14px 9px 12px;
+    border-left: 3px solid transparent;
+    border-bottom: 1px solid var(--line-soft);
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 14px 1fr;
+    gap: 4px 8px;
+    transition: background .1s ease;
+  }
+  .q-item:hover { background: rgba(251,248,240,.8); }
+  .q-item.active { background: var(--card); border-left-color: var(--teal); }
+  .q-item.active.is-excluded { border-left-color: var(--madder); }
+
+  .q-dot {
+    grid-row: 1 / span 2;
+    width: 9px; height: 9px;
+    margin-top: 4px;
+    border-radius: 50%;
+    border: 1.5px solid var(--ink-soft);
+    background: transparent;
+  }
+  .q-item.is-included .q-dot { background: var(--teal); border-color: var(--teal); }
+  .q-item.is-excluded .q-dot { background: var(--madder); border-color: var(--madder); }
+
+  .q-title {
+    font-family: var(--serif-body);
+    font-size: 12.5px;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .q-meta {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: .03em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+  .q-meta .abs { color: var(--gold); font-weight: 600; }
+
+  .rail-foot {
+    flex: none;
+    border-top: 1px solid var(--line);
+    padding: 10px 14px;
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+  .rail-foot code { color: var(--ink); }
+
+  /* ---------- reading pane ---------- */
+
+  #pane {
+    flex: 1;
+    min-width: 0;
+    overflow-y: auto;
+    padding: 34px 44px 140px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+  }
+
+  #card {
+    position: relative;
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    box-shadow: 5px 5px 0 rgba(35,38,45,.07);
+    padding: 34px 42px 38px;
+  }
+
+  .c-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    background: var(--paper);
+  }
+  .tag.journal { color: var(--teal-deep); border-color: var(--teal-wash); background: var(--teal-wash); }
+  .tag.warn { color: var(--gold); border-color: var(--gold-wash); background: var(--gold-wash); }
+
+  #c-title {
+    font-family: var(--serif-display);
+    font-weight: 600;
+    font-size: 27px;
+    line-height: 1.22;
+    letter-spacing: -.012em;
+    margin: 0 0 14px;
+  }
+
+  .c-byline {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .c-byline b { color: var(--ink); font-weight: 600; }
+
+  .c-doi {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    margin-bottom: 22px;
+  }
+  .c-doi a { color: var(--teal-deep); text-decoration-color: var(--teal-wash); text-underline-offset: 3px; }
+  .c-doi a:hover { text-decoration-color: var(--teal); }
+
+  .c-rule {
+    border: 0;
+    border-top: 1px solid var(--line-soft);
+    margin: 0 0 20px;
+  }
+
+  .c-section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+  }
+
+  #c-abstract {
+    font-size: 16px;
+    line-height: 1.68;
+    hyphens: auto;
+  }
+
+  #c-abstract.empty {
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+
+  mark {
+    background: var(--mark);
+    color: inherit;
+    padding: 0 2px;
+    border-radius: 2px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  /* rubber stamp */
+  #stamp {
+    position: absolute;
+    top: 22px;
+    right: 26px;
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    padding: 6px 12px 6px 15px;
+    border: 3px double currentColor;
+    border-radius: 3px;
+    transform: rotate(-7deg);
+    opacity: 0;
+    pointer-events: none;
+  }
+  #stamp.show-inc, #stamp.show-exc {
+    animation: thump .18s cubic-bezier(.2, 1.6, .4, 1) forwards;
+  }
+  #stamp.show-inc { color: var(--teal); }
+  #stamp.show-exc { color: var(--madder); }
+  @keyframes thump {
+    from { opacity: 0; transform: rotate(-16deg) scale(1.9); }
+    60%  { opacity: .92; transform: rotate(-6deg) scale(.96); }
+    to   { opacity: .88; transform: rotate(-7deg) scale(1); }
+  }
+
+  /* ---------- decision bar ---------- */
+
+  #decide {
+    position: fixed;
+    left: 340px; right: 0; bottom: 0;
+    border-top: 1px solid var(--line);
+    background: rgba(251,248,240,.96);
+    backdrop-filter: blur(4px);
+    padding: 14px 44px 16px;
+  }
+
+  .d-inner { max-width: 760px; margin: 0 auto; }
+
+  .d-reasons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .d-row { display: flex; gap: 10px; align-items: center; }
+
+  #reason {
+    flex: 1;
+    font-family: var(--serif-body);
+    font-size: 13.5px;
+    padding: 9px 12px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: var(--card);
+    color: var(--ink);
+  }
+  #reason:focus { outline: 2px solid var(--teal-wash); border-color: var(--teal); }
+
+  .btn {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    padding: 10px 18px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: transform .1s ease, box-shadow .1s ease;
+    white-space: nowrap;
+  }
+  .btn kbd {
+    font-size: 10px;
+    font-weight: 400;
+    opacity: .75;
+    margin-left: 7px;
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    padding: 0 4px;
+  }
+  .btn:active { transform: translateY(1px); }
+
+  #btn-inc {
+    color: var(--card);
+    background: var(--teal);
+    border: 1px solid var(--teal-deep);
+    box-shadow: 3px 3px 0 rgba(10,80,88,.25);
+  }
+  #btn-inc:hover { background: var(--teal-deep); }
+
+  #btn-exc {
+    color: var(--madder);
+    background: transparent;
+    border: 1px solid var(--madder);
+  }
+  #btn-exc:hover { background: var(--madder-wash); }
+
+  #btn-clear {
+    color: var(--ink-soft);
+    background: transparent;
+    border: 1px solid transparent;
+  }
+  #btn-clear:hover { color: var(--ink); border-color: var(--line); }
+
+  .d-hints {
+    margin-top: 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .04em;
+    color: var(--ink-soft);
+  }
+  .d-hints kbd {
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 0 4px;
+    background: var(--card);
+  }
+
+  #toast {
+    position: fixed;
+    bottom: 110px;
+    left: 50%;
+    transform: translateX(calc(-50% + 170px)) translateY(10px);
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--ink);
+    color: var(--card);
+    padding: 10px 16px;
+    border-radius: 2px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease;
+    max-width: 480px;
+    line-height: 1.5;
+  }
+  #toast.show { opacity: 1; transform: translateX(calc(-50% + 170px)) translateY(0); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="masthead">
+    <div class="kicker">washopenresearch &middot; issue #28</div>
+    <h1>Datapapers Screening Desk</h1>
+  </div>
+  <div class="tally">
+    <span class="inc">included <b id="t-inc">0</b></span>
+    <span class="exc">excluded <b id="t-exc">0</b></span>
+    <span>pending <b id="t-pen">0</b></span>
+    <span>abstract queue <b id="t-abs">0/0</b></span>
+  </div>
+  <button id="export-btn" title="Download decisions as CSV">Export CSV</button>
+</header>
+
+<div id="progress"><div class="p-inc"></div><div class="p-exc"></div></div>
+
+<main>
+  <aside id="rail">
+    <div class="filters" id="f-queue">
+      <button class="chip on" data-q="abstract">With abstract</button>
+      <button class="chip" data-q="titleonly">Title only</button>
+      <button class="chip" data-q="all">All</button>
+      <span style="flex-basis:100%;height:0"></span>
+      <button class="chip on" data-s="all">Any status</button>
+      <button class="chip" data-s="pending">Pending</button>
+      <button class="chip" data-s="included">Included</button>
+      <button class="chip" data-s="excluded">Excluded</button>
+    </div>
+    <div id="queue"></div>
+    <div class="rail-foot">
+      Save the export to <code>data-raw/datapapers_decisions.csv</code>, then run
+      <code>Rscript data-raw/apply_datapapers_decisions.R</code> to fill the
+      screening sheet. Decisions persist in this browser until exported.
+    </div>
+  </aside>
+
+  <section id="pane">
+    <article id="card">
+      <div id="stamp"></div>
+      <div class="c-top" id="c-tags"></div>
+      <h2 id="c-title"></h2>
+      <div class="c-byline" id="c-byline"></div>
+      <div class="c-doi" id="c-doi"></div>
+      <hr class="c-rule">
+      <div class="c-section-label">Abstract</div>
+      <div id="c-abstract"></div>
+    </article>
+  </section>
+</main>
+
+<div id="decide">
+  <div class="d-inner">
+    <div class="d-reasons" id="d-reasons"></div>
+    <div class="d-row">
+      <input id="reason" type="text" placeholder="Reason (stored with the decision; edit any time)" autocomplete="off">
+      <button class="btn" id="btn-inc">Include<kbd>I</kbd></button>
+      <button class="btn" id="btn-exc">Exclude<kbd>X</kbd></button>
+      <button class="btn" id="btn-clear">Clear<kbd>U</kbd></button>
+    </div>
+    <div class="d-hints">
+      <kbd>&uarr;</kbd><kbd>&darr;</kbd> navigate &nbsp; <kbd>I</kbd> include &nbsp;
+      <kbd>X</kbd> exclude &nbsp; <kbd>U</kbd> clear decision &nbsp; <kbd>R</kbd> focus reason &nbsp;
+      decisions auto-advance to the next pending paper
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const PAPERS = __PAPERS_JSON__;
+const TERMS = __TERMS_JSON__;
+const META = __META_JSON__;
+
+const STORE_KEY = "washopenresearch-datapapers-review-v1";
+
+const REASON_PRESETS = [
+  "WASH data paper",
+  "not WASH-related",
+  "incidental term match",
+  "not about water, sanitation, or hygiene practice",
+  "environmental/lab context only",
+  "no reusable dataset described"
+];
+
+let decisions = {};
+try { decisions = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); } catch (e) { decisions = {}; }
+
+let queueFilter = "abstract";
+let statusFilter = "all";
+let currentDoi = null;
+
+const termRe = new RegExp("\\b(?:" + TERMS.map(t =>
+  t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/ /g, "\\s+")
+).join("|") + ")\\b", "gi");
+
+function esc(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function highlight(s) {
+  return esc(s).replace(termRe, m => "<mark>" + m + "</mark>");
+}
+
+function statusOf(p) {
+  const d = decisions[p.doi];
+  if (!d) return "pending";
+  return d.include ? "included" : "excluded";
+}
+
+function visible() {
+  return PAPERS.filter(p => {
+    if (queueFilter === "abstract" && !p.has_abstract) return false;
+    if (queueFilter === "titleonly" && p.has_abstract) return false;
+    if (statusFilter !== "all" && statusOf(p) !== statusFilter) return false;
+    return true;
+  });
+}
+
+function renderTallies() {
+  let inc = 0, exc = 0, absDone = 0, absTotal = 0;
+  for (const p of PAPERS) {
+    const s = statusOf(p);
+    if (s === "included") inc++;
+    if (s === "excluded") exc++;
+    if (p.has_abstract) {
+      absTotal++;
+      if (s !== "pending") absDone++;
+    }
+  }
+  document.getElementById("t-inc").textContent = inc;
+  document.getElementById("t-exc").textContent = exc;
+  document.getElementById("t-pen").textContent = PAPERS.length - inc - exc;
+  document.getElementById("t-abs").textContent = absDone + "/" + absTotal;
+  document.querySelector("#progress .p-inc").style.width = (100 * inc / PAPERS.length) + "%";
+  document.querySelector("#progress .p-exc").style.width = (100 * exc / PAPERS.length) + "%";
+}
+
+function renderQueue() {
+  const list = visible();
+  const q = document.getElementById("queue");
+  q.innerHTML = "";
+  for (const p of list) {
+    const s = statusOf(p);
+    const el = document.createElement("div");
+    el.className = "q-item is-" + s + (p.doi === currentDoi ? " active" : "");
+    el.dataset.doi = p.doi;
+    el.innerHTML =
+      '<div class="q-dot"></div>' +
+      '<div class="q-title">' + esc(p.title) + "</div>" +
+      '<div class="q-meta">' + esc(p.journal) + " &middot; " + p.published_year +
+      (p.has_abstract ? ' &middot; <span class="abs">abstract</span>' : "") + "</div>";
+    el.addEventListener("click", () => select(p.doi));
+    q.appendChild(el);
+  }
+  if (list.length && !list.some(p => p.doi === currentDoi)) select(list[0].doi, false);
+  const active = q.querySelector(".q-item.active");
+  if (active) active.scrollIntoView({ block: "nearest" });
+}
+
+function paper(doi) { return PAPERS.find(p => p.doi === doi); }
+
+function select(doi, rerenderQueue = true) {
+  currentDoi = doi;
+  const p = paper(doi);
+  if (!p) return;
+
+  const tags = [];
+  tags.push('<span class="tag journal">' + esc(p.journal) + "</span>");
+  tags.push('<span class="tag">' + p.published_year + "</span>");
+  if (p.query_term) tags.push('<span class="tag">query: ' + esc(p.query_term) + "</span>");
+  if (p.matched_in_title) tags.push('<span class="tag">title match: ' + esc(p.matched_in_title) + "</span>");
+  if (p.matched_in_abstract) tags.push('<span class="tag">abstract match: ' + esc(p.matched_in_abstract) + "</span>");
+  if (p.title_only_no_abstract) tags.push('<span class="tag warn">weakest signal: title only, no abstract</span>');
+  document.getElementById("c-tags").innerHTML = tags.join("");
+
+  document.getElementById("c-title").innerHTML = highlight(p.title);
+
+  const by = [];
+  if (p.first_author_name) by.push("<b>" + esc(p.first_author_name) + "</b>");
+  if (p.first_author_affiliation) by.push(esc(p.first_author_affiliation));
+  document.getElementById("c-byline").innerHTML = by.join(" &middot; ") || "";
+
+  document.getElementById("c-doi").innerHTML =
+    '<a href="https://doi.org/' + encodeURIComponent(p.doi) + '" target="_blank" rel="noopener">doi.org/' + esc(p.doi) + "</a>";
+
+  const absEl = document.getElementById("c-abstract");
+  if (p.abstract) {
+    absEl.className = "";
+    absEl.innerHTML = highlight(p.abstract);
+  } else {
+    absEl.className = "empty";
+    absEl.textContent = "No abstract in the harvested metadata. Judge from the title and, if needed, the publisher page via the DOI link.";
+  }
+
+  const d = decisions[doi];
+  document.getElementById("reason").value = d && d.reason ? d.reason : "";
+  renderStamp();
+  if (rerenderQueue) renderQueue();
+  document.getElementById("pane").scrollTop = 0;
+}
+
+function renderStamp() {
+  const st = document.getElementById("stamp");
+  const s = statusOf(paper(currentDoi) || {});
+  st.className = "";
+  if (s === "included") { st.textContent = "included"; void st.offsetWidth; st.className = "show-inc"; }
+  else if (s === "excluded") { st.textContent = "excluded"; void st.offsetWidth; st.className = "show-exc"; }
+  else st.textContent = "";
+}
+
+function persist() {
+  localStorage.setItem(STORE_KEY, JSON.stringify(decisions));
+}
+
+function decide(include) {
+  if (!currentDoi) return;
+  decisions[currentDoi] = {
+    include: include,
+    reason: document.getElementById("reason").value.trim()
+  };
+  persist();
+  renderStamp();
+  renderTallies();
+  renderQueue();
+  setTimeout(nextPending, 240);
+}
+
+function clearDecision() {
+  if (!currentDoi || !decisions[currentDoi]) return;
+  delete decisions[currentDoi];
+  persist();
+  document.getElementById("reason").value = "";
+  renderStamp();
+  renderTallies();
+  renderQueue();
+}
+
+function nextPending() {
+  const list = visible();
+  const i = list.findIndex(p => p.doi === currentDoi);
+  for (let k = 1; k <= list.length; k++) {
+    const p = list[(i + k) % list.length];
+    if (statusOf(p) === "pending") { select(p.doi); return; }
+  }
+  toast("Queue complete: no pending papers in this filter.");
+}
+
+function step(delta) {
+  const list = visible();
+  if (!list.length) return;
+  const i = list.findIndex(p => p.doi === currentDoi);
+  const next = list[Math.min(list.length - 1, Math.max(0, i + delta))];
+  if (next) select(next.doi);
+}
+
+function csvField(v) {
+  const s = String(v == null ? "" : v);
+  return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+
+function exportCSV() {
+  const rows = [["doi", "include", "reason"]];
+  for (const p of PAPERS) {
+    const d = decisions[p.doi];
+    if (!d) continue;
+    rows.push([p.doi, d.include ? "TRUE" : "FALSE", d.reason || ""]);
+  }
+  if (rows.length === 1) { toast("No decisions yet; nothing to export."); return; }
+  const blob = new Blob([rows.map(r => r.map(csvField).join(",")).join("\n") + "\n"],
+                        { type: "text/csv" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "datapapers_decisions.csv";
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast((rows.length - 1) + " decisions exported. Save to data-raw/datapapers_decisions.csv and run the apply script.");
+}
+
+let toastTimer = null;
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.className = "show";
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.className = ""; }, 3600);
+}
+
+/* ---------- wiring ---------- */
+
+document.getElementById("btn-inc").addEventListener("click", () => decide(true));
+document.getElementById("btn-exc").addEventListener("click", () => decide(false));
+document.getElementById("btn-clear").addEventListener("click", clearDecision);
+document.getElementById("export-btn").addEventListener("click", exportCSV);
+
+document.getElementById("reason").addEventListener("input", e => {
+  if (currentDoi && decisions[currentDoi]) {
+    decisions[currentDoi].reason = e.target.value.trim();
+    persist();
+  }
+});
+
+const reasonBox = document.getElementById("d-reasons");
+for (const r of REASON_PRESETS) {
+  const b = document.createElement("button");
+  b.className = "chip";
+  b.textContent = r;
+  b.addEventListener("click", () => {
+    const inp = document.getElementById("reason");
+    inp.value = r;
+    if (currentDoi && decisions[currentDoi]) {
+      decisions[currentDoi].reason = r;
+      persist();
+    }
+  });
+  reasonBox.appendChild(b);
+}
+
+for (const chip of document.querySelectorAll("#f-queue .chip[data-q]")) {
+  chip.addEventListener("click", () => {
+    queueFilter = chip.dataset.q;
+    for (const c of document.querySelectorAll("#f-queue .chip[data-q]")) c.classList.toggle("on", c === chip);
+    renderQueue();
+  });
+}
+for (const chip of document.querySelectorAll("#f-queue .chip[data-s]")) {
+  chip.addEventListener("click", () => {
+    statusFilter = chip.dataset.s;
+    for (const c of document.querySelectorAll("#f-queue .chip[data-s]")) c.classList.toggle("on", c === chip);
+    renderQueue();
+  });
+}
+
+document.addEventListener("keydown", e => {
+  if (e.target.id === "reason") {
+    if (e.key === "Escape" || e.key === "Enter") e.target.blur();
+    return;
+  }
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const k = e.key.toLowerCase();
+  if (k === "i" || k === "y") { e.preventDefault(); decide(true); }
+  else if (k === "x" || k === "n") { e.preventDefault(); decide(false); }
+  else if (k === "u") { e.preventDefault(); clearDecision(); }
+  else if (k === "r") { e.preventDefault(); document.getElementById("reason").focus(); }
+  else if (e.key === "ArrowDown" || k === "j") { e.preventDefault(); step(1); }
+  else if (e.key === "ArrowUp" || k === "k") { e.preventDefault(); step(-1); }
+});
+
+/* ---------- boot ---------- */
+
+if (!PAPERS.some(p => p.has_abstract)) {
+  queueFilter = "all";
+  for (const c of document.querySelectorAll("#f-queue .chip[data-q]"))
+    c.classList.toggle("on", c.dataset.q === "all");
+}
+renderTallies();
+renderQueue();
+if (!currentDoi && PAPERS.length) {
+  const first = visible()[0] || PAPERS[0];
+  select(first.doi);
+}
+document.title = "Datapapers Screening Desk (" + PAPERS.length + " candidates, built " + META.built + ")";
+</script>
+</body>
+</html>
