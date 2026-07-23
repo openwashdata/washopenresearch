@@ -1,3 +1,32 @@
+# washopenresearch (development version)
+
+## New features
+
+- New scripted acquisition pipeline for a fourth dataset, `datapapers`, covering
+  WASH-related data papers in seven dedicated data journals (Scientific Data,
+  Data in Brief, Gates Open Research, F1000Research, GigaScience, GigaByte,
+  and Data (MDPI)) (#28). The pipeline lives in
+  `data-raw/01_datapapers_acquire.R` (Crossref/Europe PMC harvest with a
+  committed raw snapshot), `data-raw/02_datapapers_screen.R` (relevance
+  screening captured in a committed decision sheet keyed on DOI), and
+  `data-raw/03_datapapers_process.R` (harmonisation to the shared schema and
+  export). The dataset itself is added once the first harvest and screening
+  round are complete.
+
+## Minor improvements and fixes
+
+- Expired pre-signed CDN links in `washdev$supp_url` are rewritten to stable DOI
+  URLs, and Google Scholar alert redirects in `uncnewsletter$paper_url` are
+  decoded to their target URLs (#10). The 343 Silverchair links carried a
+  January 2024 expiry, and the high-entropy signature tokens tripped secret
+  scanners; the article DOI is recovered from the link path, so no re-collection
+  is needed. Two helpers in `data-raw/helpers.R`, `canonicalize_silverchair_url()`
+  and `decode_scholar_redirect()`, do the rewrites reproducibly.
+- The list-column collapsing helper and shared country-cleaning steps moved to
+  `data-raw/helpers.R`, sourced by all processing scripts.
+- `data-raw/README.md` documents the run order and provenance of every
+  committed snapshot and decision sheet.
+
 # washopenresearch 0.2.0
 
 ## New features

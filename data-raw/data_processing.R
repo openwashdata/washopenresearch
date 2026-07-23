@@ -8,6 +8,8 @@ library(forcats)
 library(countries)
 library(purrr)
 
+source("data-raw/helpers.R")
+
 # Helper: repair invalid UTF-8 -------------------------------------------
 # A few cells in the raw washdev.csv carry Mac Roman bytes (e.g. 0x90 for
 # "ê" in "Inês"); openxlsx refuses to write them
@@ -140,17 +142,6 @@ washdev <- washdev |>
   dplyr::mutate(across(c(paperid, volume, issue, num_supp, num_authors), as.integer)) |>
   dplyr::mutate(das_type = as.factor(das_type))
 
-# Helper: collapse a list-column into a "; "-delimited character column -------
-# list-columns break flat-file exports (issue #8), so multi-value fields are
-# split into lists for cleaning, then collapsed before the data is saved
-collapse_list_col <- function(x) {
-  purrr::map_chr(x, function(values) {
-    values <- trimws(values[!is.na(values)])
-    values <- values[values != ""]
-    if (length(values) == 0) NA_character_ else paste(values, collapse = "; ")
-  })
-}
-
 ## Split multi-value columns: supp_file_type, supp_url, das_repo_url, keywords -
 ### modify supp file type ------------------------------------------------------
 #### manually added misc stuff -------------------------------------------------
@@ -173,6 +164,10 @@ washdev <- washdev |>
   ### modify supp url ----------------------------------------------------------
   dplyr::mutate(supp_url = na_if(supp_url, "[]")) |>
   dplyr::mutate(supp_url = purrr::map(supp_url, function(x) str_extract_all(x, pattern = "(?<=')[^',]*?(?='\\s*)")[[1]])) |>
+  ### rewrite expired Silverchair CDN links to stable DOI URLs (#10) ------------
+  # The pre-signed links expired in Jan 2024; the DOI is recoverable from the
+  # path, and every token in a row shares one DOI, so they collapse to one URL.
+  dplyr::mutate(supp_url = purrr::map(supp_url, function(x) unique(canonicalize_silverchair_url(x)))) |>
   dplyr::mutate(keywords = na_if(keywords, "[]")) |>
   ### modify keywords ----------------------------------------------------------
   dplyr::mutate(keywords = purrr::map(keywords, function(x) str_extract_all(x, pattern = "(?<=')[^',]*?(?='\\s*)")[[1]]))
@@ -181,6 +176,18 @@ washdev <- washdev |>
 washdev <- washdev |>
   dplyr::mutate(across(c(supp_file_type, supp_url, das_repo_url, keywords),
                        collapse_list_col))
+
+## Backfill missing DOIs from Crossref (issue #20) -----------------------------
+# data-raw/backfill_dois.R matches legacy rows (scraped before the R port) to
+# Crossref works on volume + issue + normalised title; rows it could not match
+# stay NA and are listed in data-raw/washdev-doi-review.csv
+washdev_doi_backfill <- readr::read_csv("data-raw/washdev-doi-backfill.csv",
+                                        col_types = "ic")
+washdev <- washdev |>
+  dplyr::left_join(washdev_doi_backfill, by = "paperid",
+                   suffix = c("", "_backfill")) |>
+  dplyr::mutate(doi = dplyr::coalesce(doi, doi_backfill),
+                doi_backfill = NULL)
 
 
 # UNCNEWSLETTER DATA -----------------------------------------------------------
@@ -196,6 +203,8 @@ uncnewsletter <- uncnewsletter |>
   dplyr::filter(!is.na(title)) |>
   dplyr::mutate(supp_file_type = stringr::str_to_lower(supp_file_type)) |>
   dplyr::mutate(num_supp = tidyr::replace_na(num_supp, 0)) |>
+  # decode Google Scholar alert redirects in paper_url to the target URL (#10) -
+  dplyr::mutate(paper_url = decode_scholar_redirect(paper_url)) |>
   # create and rename columns to be uniform with other datasets ----------------
   dplyr::rename(supp_url = supp_link)
 
@@ -251,6 +260,15 @@ uncnewsletter <- uncnewsletter |>
                   countries::country_name(first_author_affiliation_country, to = "UN_en", fuzzy_match = FALSE)) |>
   dplyr::mutate(correspondence_author_affiliation_country =
                   countries::country_name(correspondence_author_affiliation_country, to = "UN_en", fuzzy_match = FALSE))
+
+## Backfill DOIs from Crossref title search (issue #20) ------------------------
+# data-raw/backfill_dois.R queries Crossref per title and accepts the top hit
+# only above a title-similarity threshold; rows below it stay NA and are
+# listed in data-raw/uncnewsletter-doi-review.csv
+unc_doi_backfill <- readr::read_csv("data-raw/uncnewsletter-doi-backfill.csv",
+                                    col_types = "ic")
+uncnewsletter <- uncnewsletter |>
+  dplyr::left_join(unc_doi_backfill, by = "paperid")
 
 skimr::skim(uncnewsletter)
 

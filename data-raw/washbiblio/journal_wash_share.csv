@@ -1,0 +1,51 @@
+source_id,venue,source_type,matched,total,share,decision,das_confirmed
+S2495644771,Journal of Water Sanitation and Hygiene for Development,journal,1051,1185,0.8869198312236287,whole_journal,NA
+S4210228842,Journal of Water Supply Research and Technology—AQUA,journal,1120,1519,0.7373271889400922,whole_journal,NA
+S26443501,Journal of Water and Health,journal,1433,2044,0.7010763209393346,whole_journal,NA
+S124453322,Water Science & Technology Water Supply,journal,2505,4977,0.5033152501506932,whole_journal,NA
+S137656717,Water Practice & Technology,journal,1269,2694,0.4710467706013363,filtered_slice_conditional,NA
+S2764879708,China Water & Wastewater,journal,2385,5577,0.42764927380311996,filtered_slice_conditional,NA
+S2764434589,Journal of Water Process Engineering,journal,4356,10445,0.4170416467209191,filtered_slice_conditional,NA
+S4210201235,ACS ES&T Water,journal,1076,2742,0.3924142961342086,filtered_slice_conditional,NA
+S52566953,Water Research,journal,9629,25522,0.3772823446438367,filtered_slice_conditional,NA
+S2764931087,Applied Water Science,journal,1072,2866,0.3740404745289602,filtered_slice_conditional,NA
+S53450646,Water Science & Technology,journal,8309,22797,0.36447778216431986,filtered_slice_conditional,NA
+S2764832999,Scientific investigations report,journal,1746,4832,0.361341059602649,filtered_slice_conditional,NA
+S130511131,Water Environment Research,journal,1681,5444,0.30878030859662015,filtered_slice_conditional,NA
+S134216166,Water,journal,8550,32131,0.26609816065481934,filtered_slice_conditional,NA
+S124203677,Desalination and Water Treatment,journal,5290,20551,0.25740839861807213,filtered_slice_conditional,NA
+S86512602,Desalination,journal,3670,17473,0.21003834487494993,filtered_slice_conditional,NA
+S2764859491,Journal of environmental chemical engineering,journal,4770,23964,0.19904857285928892,filtered_slice_conditional,NA
+S11732831,Environmental Monitoring and Assessment,journal,3636,18677,0.1946779461369599,filtered_slice_conditional,NA
+S4210200103,Proceedings of the Water Environment Federation,journal,3742,19731,0.18965080330444478,filtered_slice_conditional,NA
+S44455300,Journal of Environmental Management,journal,5315,29990,0.17722574191397134,filtered_slice_conditional,NA
+S140251998,Journal of Biological Chemistry,journal,20002,121932,0.1640422530590821,filtered_slice_conditional,NA
+S35825460,Journal of Environmental Sciences,journal,1225,8339,0.1469001079266099,filtered_slice_conditional,NA
+S86852077,The Science of The Total Environment,journal,11303,77378,0.14607511178888055,filtered_slice_conditional,NA
+S46544255,PLoS neglected tropical diseases,journal,1900,13437,0.14140061025526532,filtered_slice_conditional,NA
+S69753523,Separation and Purification Technology,journal,4279,30907,0.1384476008671175,filtered_slice_conditional,NA
+S87561820,Environmental Science and Pollution Research,journal,6385,48695,0.13112229181640825,filtered_slice_conditional,NA
+S203465130,Chemosphere,journal,5733,45401,0.12627475165745247,filtered_slice_conditional,NA
+S4210170078,Oncology Times,journal,1791,14299,0.12525351423176445,filtered_slice_conditional,NA
+S13479253,Environmental Science & Technology,journal,6531,56690,0.11520550361615806,filtered_slice_conditional,NA
+S145089992,Journal of Hazardous Materials,journal,4701,40982,0.11470889658874628,filtered_slice_conditional,NA
+S21442059,Bioresource Technology,journal,3837,34497,0.11122706322288894,filtered_slice_conditional,NA
+S158228368,Applied and Environmental Microbiology,journal,2967,27405,0.10826491516146688,filtered_slice_conditional,NA
+S70979998,Applied Microbiology and Biotechnology,journal,1785,17085,0.1044776119402985,filtered_slice_conditional,NA
+S100045985,American Journal of Tropical Medicine and Hygiene,journal,1362,14258,0.09552531911909104,filtered_slice_conditional,NA
+S201530359,Environmental Pollution,journal,2541,27151,0.0935877131597363,filtered_slice_conditional,NA
+S149937609,Chemical Engineering Journal,journal,6716,76880,0.08735691987513007,filtered_slice_conditional,NA
+S119469986,Journal of Membrane Science,journal,1867,23404,0.07977268842932832,filtered_slice_conditional,NA
+S58516903,Journal of Cleaner Production,journal,3847,49627,0.07751828641666834,filtered_slice_conditional,NA
+S2484704948,Frontiers in Microbiology,journal,3186,41364,0.07702349869451697,filtered_slice_conditional,NA
+S168522863,Cancer Research,journal,9715,158250,0.06139020537124803,filtered_slice_conditional,NA
+S200071133,Blood,journal,10210,169974,0.06006801040159083,filtered_slice_conditional,NA
+S134307298,Applied Catalysis B: Environmental,journal,1066,19415,0.054906000515065674,filtered_slice_conditional,NA
+S72684844,Journal of Animal Science,journal,1642,31644,0.051889773732777145,filtered_slice_conditional,NA
+S47215897,Antimicrobial Agents and Chemotherapy,journal,1178,23841,0.04941067908225326,filtered_slice_conditional,NA
+S2738498342,EFSA Journal,journal,412,9331,0.044153895616761335,filtered_slice_conditional,NA
+S25293849,The FASEB Journal,journal,6016,136639,0.04402842526657835,filtered_slice_conditional,NA
+S10134376,Sustainability,journal,3978,107377,0.03704703986887322,filtered_slice_conditional,NA
+S202381698,PLoS ONE,journal,9663,341286,0.028313496598161073,filtered_slice_conditional,NA
+S196734849,Scientific Reports,journal,8296,305293,0.027173895241620345,filtered_slice_conditional,NA
+S15137598,Journal of Clinical Oncology,journal,4074,170151,0.0239434384752367,filtered_slice_conditional,NA
