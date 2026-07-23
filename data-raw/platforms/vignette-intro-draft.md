@@ -22,9 +22,12 @@ unevenly. mWater lets you download record-level data, offers an API, and
 provides a data dictionary, so the data can be reused by machine. It does not
 assign a license to the shared public data, and it gives datasets no DOI or
 version, so a paper cannot cite an mWater dataset the way it cites a journal
-article. Project W is harder to assess because it is still in beta and asks you
-to sign in before you use it. We could not confirm from its public pages
-whether it offers downloads, an API, a license, or persistent identifiers.
+article. Project W is harder to assess. It started as a pilot in 2022 and is
+still in beta, and it requires a sign-in, with access granted through a
+waitlist rather than open registration. We could not confirm from its public
+pages whether it offers downloads, an API, or persistent identifiers. Its
+terms of use grant only personal, non-commercial use and set no open license
+on the datasets it indexes.
 
 The platforms exist, but WASH authors rarely point to them. We searched the
 data availability statements of 1,782 papers in this package (the washdev,
@@ -47,9 +50,10 @@ about.
   Once datapapers is built, rerun `scan_platform_mentions.R` and update the
   count and the per-platform hits, since datapapers is exactly the population
   most likely to cite a data platform.
-- Project W's launch year, access model, and licensing are all "not found" in
-  `rubric.csv`. If you have an account, we can confirm them and firm up the
-  second paragraph.
+- Project W's launch year (2022 pilot), waitlist access model, and restrictive
+  terms of use were verified from the Wayback Machine and Aquaya's milestones
+  and terms pages. An exact launch date and whether an API or DOIs exist behind
+  the login remain "not found" and would need an account to confirm.
 - The DHS count is papers with a genuine dhsprogram.com link in the DAS,
   verified by spot-check. The prose says "twelve papers"; the table splits it
   as eight washdev plus four ploswater.

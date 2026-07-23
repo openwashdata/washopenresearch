@@ -31,6 +31,15 @@ Project W is mentioned once in a data availability statement. The only
 platforms mentioned are general (not WASH-specific): DHS (twelve papers),
 HDX (three), MICS (two), and one IBNET link.
 
+## Project W facts
+
+Project W is beta and sign-in gated, so its own public pages are thin. The
+launch year (2022 pilot), the waitlist access model, and the restrictive
+terms of use were verified through the Wayback Machine and Aquaya's own
+milestones and terms pages, not the live catalogue. An exact launch date, the
+post-waitlist registration policy, and whether an API or DOIs exist behind the
+login remain "not found" and could only be confirmed with an account.
+
 ## To refresh after datapapers is built (issue #28)
 
 Rerun `scan_platform_mentions.R`: it automatically includes `datapapers` once

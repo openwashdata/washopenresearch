@@ -12,13 +12,13 @@ mWater,documentation,versioning,"Not found as a documented dataset-versioning fe
 mWater,research_linkage,researchers_use,"Yes; mWater states academic researchers use the platform for data collection and analysis",https://www.mwater.co/blog/inclusive-digital-development,2026-07-23
 mWater,research_linkage,dataset_to_paper,"Yes; Adhikari & Mahajan (2024) name mWater as a WASH data source",https://doi.org/10.3126/arj.v5i1.73556,2026-07-23
 mWater,research_linkage,platform_links_to_publications,"Not found as a structured publications index on the platform",https://www.mwater.co/,2026-07-23
-Project W,access,view_without_account,"Likely requires sign-in; landing CTA is Sign in to get started, unconfirmed whether browsing is possible without login",https://www.projectwdata.net/,2026-07-23
-Project W,access,downloadable,"Not found explicitly; link-to-source model implies it points to record-level data hosted elsewhere",https://www.projectwdata.net/,2026-07-23
-Project W,access,granularity,"Not found; catalogue links out to source datasets rather than hosting downloads",https://recombine.net/projects/projectw.html,2026-07-23
-Project W,access,registration_tiers,"Not found; a sign-in exists but whether registration is free or tiered is not stated",https://www.projectwdata.net/,2026-07-23
-Project W,access,machine_access,"Not found; no API or bulk download mentioned",https://aquaya.org/project-w/,2026-07-23
-Project W,access,licensing,"Not found; no data or catalogue license stated",https://www.projectwdata.net/,2026-07-23
-Project W,documentation,metadata_standard,"Not found; custom human-curated scheme with 180+ topic tags, no named standard",https://aquaya.org/project-w/,2026-07-23
+Project W,access,view_without_account,"No; full browsing/searching requires sign-in, the catalogue is behind login and only /login and /reset pages are reachable",https://web.archive.org/web/20260412140936/https://www.projectwdata.net/,2026-07-23
+Project W,access,downloadable,"Not found; link-to-source model, indexes and points to datasets curated by Aquaya rather than hosting the files",https://www.projectwdata.net/,2026-07-23
+Project W,access,granularity,"Not found; catalogue links out to source datasets rather than hosting downloads",https://www.projectwdata.net/,2026-07-23
+Project W,access,registration_tiers,"Waitlist/invite-based, not open self-registration (Join the waitlist to get early access); free vs paid after the waitlist not stated",https://web.archive.org/web/20260412140936/https://www.projectwdata.net/,2026-07-23
+Project W,access,machine_access,"Not found; no API or bulk export mentioned on any public page",https://www.projectwdata.net/research-support,2026-07-23
+Project W,access,licensing,"No open license; footer Terms of Use link to Aquaya grant only personal non-commercial internal use and prohibit reuse elsewhere",https://aquaya.org/terms-of-use/,2026-07-23
+Project W,documentation,metadata_standard,"Not found; described only as human-curated, no named standard",https://web.archive.org/web/20260412140936/https://www.projectwdata.net/,2026-07-23
 Project W,documentation,data_dictionary,"Not found on public pages",https://www.projectwdata.net/,2026-07-23
 Project W,documentation,persistent_identifiers,"Not found",https://www.projectwdata.net/,2026-07-23
 Project W,documentation,versioning,"Not found",https://www.projectwdata.net/,2026-07-23
