@@ -177,6 +177,18 @@ washdev <- washdev |>
   dplyr::mutate(across(c(supp_file_type, supp_url, das_repo_url, keywords),
                        collapse_list_col))
 
+## Backfill missing DOIs from Crossref (issue #20) -----------------------------
+# data-raw/backfill_dois.R matches legacy rows (scraped before the R port) to
+# Crossref works on volume + issue + normalised title; rows it could not match
+# stay NA and are listed in data-raw/washdev-doi-review.csv
+washdev_doi_backfill <- readr::read_csv("data-raw/washdev-doi-backfill.csv",
+                                        col_types = "ic")
+washdev <- washdev |>
+  dplyr::left_join(washdev_doi_backfill, by = "paperid",
+                   suffix = c("", "_backfill")) |>
+  dplyr::mutate(doi = dplyr::coalesce(doi, doi_backfill),
+                doi_backfill = NULL)
+
 
 # UNCNEWSLETTER DATA -----------------------------------------------------------
 # The per-article metadata was collected manually into this CSV; a scraper
@@ -248,6 +260,15 @@ uncnewsletter <- uncnewsletter |>
                   countries::country_name(first_author_affiliation_country, to = "UN_en", fuzzy_match = FALSE)) |>
   dplyr::mutate(correspondence_author_affiliation_country =
                   countries::country_name(correspondence_author_affiliation_country, to = "UN_en", fuzzy_match = FALSE))
+
+## Backfill DOIs from Crossref title search (issue #20) ------------------------
+# data-raw/backfill_dois.R queries Crossref per title and accepts the top hit
+# only above a title-similarity threshold; rows below it stay NA and are
+# listed in data-raw/uncnewsletter-doi-review.csv
+unc_doi_backfill <- readr::read_csv("data-raw/uncnewsletter-doi-backfill.csv",
+                                    col_types = "ic")
+uncnewsletter <- uncnewsletter |>
+  dplyr::left_join(unc_doi_backfill, by = "paperid")
 
 skimr::skim(uncnewsletter)
 
