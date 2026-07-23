@@ -164,6 +164,10 @@ washdev <- washdev |>
   ### modify supp url ----------------------------------------------------------
   dplyr::mutate(supp_url = na_if(supp_url, "[]")) |>
   dplyr::mutate(supp_url = purrr::map(supp_url, function(x) str_extract_all(x, pattern = "(?<=')[^',]*?(?='\\s*)")[[1]])) |>
+  ### rewrite expired Silverchair CDN links to stable DOI URLs (#10) ------------
+  # The pre-signed links expired in Jan 2024; the DOI is recoverable from the
+  # path, and every token in a row shares one DOI, so they collapse to one URL.
+  dplyr::mutate(supp_url = purrr::map(supp_url, function(x) unique(canonicalize_silverchair_url(x)))) |>
   dplyr::mutate(keywords = na_if(keywords, "[]")) |>
   ### modify keywords ----------------------------------------------------------
   dplyr::mutate(keywords = purrr::map(keywords, function(x) str_extract_all(x, pattern = "(?<=')[^',]*?(?='\\s*)")[[1]]))
@@ -187,6 +191,8 @@ uncnewsletter <- uncnewsletter |>
   dplyr::filter(!is.na(title)) |>
   dplyr::mutate(supp_file_type = stringr::str_to_lower(supp_file_type)) |>
   dplyr::mutate(num_supp = tidyr::replace_na(num_supp, 0)) |>
+  # decode Google Scholar alert redirects in paper_url to the target URL (#10) -
+  dplyr::mutate(paper_url = decode_scholar_redirect(paper_url)) |>
   # create and rename columns to be uniform with other datasets ----------------
   dplyr::rename(supp_url = supp_link)
 

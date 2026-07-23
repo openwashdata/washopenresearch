@@ -15,6 +15,13 @@
 
 ## Minor improvements and fixes
 
+- Expired pre-signed CDN links in `washdev$supp_url` are rewritten to stable DOI
+  URLs, and Google Scholar alert redirects in `uncnewsletter$paper_url` are
+  decoded to their target URLs (#10). The 343 Silverchair links carried a
+  January 2024 expiry, and the high-entropy signature tokens tripped secret
+  scanners; the article DOI is recovered from the link path, so no re-collection
+  is needed. Two helpers in `data-raw/helpers.R`, `canonicalize_silverchair_url()`
+  and `decode_scholar_redirect()`, do the rewrites reproducibly.
 - The list-column collapsing helper and shared country-cleaning steps moved to
   `data-raw/helpers.R`, sourced by all processing scripts.
 - `data-raw/README.md` documents the run order and provenance of every
