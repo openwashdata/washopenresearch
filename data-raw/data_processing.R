@@ -8,6 +8,8 @@ library(forcats)
 library(countries)
 library(purrr)
 
+source("data-raw/helpers.R")
+
 # Helper: repair invalid UTF-8 -------------------------------------------
 # A few cells in the raw washdev.csv carry Mac Roman bytes (e.g. 0x90 for
 # "ê" in "Inês"); openxlsx refuses to write them
@@ -139,17 +141,6 @@ washdev |>
 washdev <- washdev |>
   dplyr::mutate(across(c(paperid, volume, issue, num_supp, num_authors), as.integer)) |>
   dplyr::mutate(das_type = as.factor(das_type))
-
-# Helper: collapse a list-column into a "; "-delimited character column -------
-# list-columns break flat-file exports (issue #8), so multi-value fields are
-# split into lists for cleaning, then collapsed before the data is saved
-collapse_list_col <- function(x) {
-  purrr::map_chr(x, function(values) {
-    values <- trimws(values[!is.na(values)])
-    values <- values[values != ""]
-    if (length(values) == 0) NA_character_ else paste(values, collapse = "; ")
-  })
-}
 
 ## Split multi-value columns: supp_file_type, supp_url, das_repo_url, keywords -
 ### modify supp file type ------------------------------------------------------

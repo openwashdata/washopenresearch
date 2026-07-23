@@ -87,3 +87,21 @@ data,ploswater.rda,url_source,character,Publisher website of the paper
 data,ploswater.rda,doi,character,DOI of the paper
 data,ploswater.rda,article_type,character,Article type e.g. Research Article or Opinion or Review
 data,ploswater.rda,publication_date,date,Date of publication (ISO 8601)
+data,datapapers.rda,paperid,integer,ID number of the paper within this dataset
+data,datapapers.rda,doi,character,DOI of the data paper
+data,datapapers.rda,paper_url,character,Official url of the paper (DOI resolver link)
+data,datapapers.rda,url_source,character,Publisher website of the paper
+data,datapapers.rda,journal,character,Full name of the journal
+data,datapapers.rda,title,character,Title of the paper
+data,datapapers.rda,published_year,integer,Year of publication
+data,datapapers.rda,num_authors,integer,Number of the authors
+data,datapapers.rda,first_author_name,character,Name of the first author
+data,datapapers.rda,first_author_affiliation,character,Academic affiliation of the first author
+data,datapapers.rda,first_author_affiliation_country,character,Country of the first author parsed from first_author_affiliation variable encoded with United Nations names
+data,datapapers.rda,data_repo_url,character,Website urls of the repository holding the dataset the paper describes separated by a semicolon when there are multiple
+data,datapapers.rda,data_repo,character,Name of the data repository (e.g. Zenodo Dryad Figshare OSF Dataverse) parsed from data_repo_url
+data,datapapers.rda,license,character,License url of the paper from Crossref metadata
+data,datapapers.rda,related_paper_doi,character,DOI of a linked research article if any separated by a semicolon when there are multiple
+data,datapapers.rda,abstract,character,Abstract of the paper as provided by the metadata source
+data,datapapers.rda,query_term,character,WASH search term(s) that retrieved the paper separated by a semicolon
+data,datapapers.rda,retrieval_date,date,Date the paper metadata was harvested from the API
