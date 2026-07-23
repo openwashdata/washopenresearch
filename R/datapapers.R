@@ -31,4 +31,11 @@
 #' }
 #' @source Crossref (<https://api.crossref.org>) and Europe PMC
 #'   (<https://europepmc.org>); see `data-raw/README.md` for the pipeline.
-"datapapers"
+#'
+#' @docType data
+#' @keywords datasets
+#' @name datapapers
+# Documented via @name/NULL rather than the "datapapers" string sentinel so
+# devtools::document() runs before data/datapapers.rda exists; the dataset
+# lands once the issue #28 screening sheet is filled and processed.
+NULL
