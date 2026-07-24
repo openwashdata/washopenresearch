@@ -16,9 +16,10 @@
 # matches ~2.1M and surfaces the expected WASH researchers.
 #
 # OpenAlex bills per request (Feb 2026 pricing): search calls $0.001, list
-# calls $0.0001, free budget $0.10/day keyless. A full run is ~175 requests,
-# ~$0.06. Every network step is cached in cache/ so an aborted run resumes
-# without re-spending; delete cache/ to force a fresh harvest.
+# calls $0.0001, free budget $0.10/day keyless; a registered key
+# (OPENALEX_API_KEY in ~/.Renviron) lifts that to $1/day. A full run is ~175
+# requests, ~$0.06. Every network step is cached in cache/ so an aborted run
+# resumes without re-spending; delete cache/ to force a fresh harvest.
 #
 # Dependencies: openalexR (>= 3.1.0), httr, dplyr, tidyr, readr, purrr
 
@@ -30,6 +31,12 @@ library(readr)
 library(purrr)
 
 options(openalexR.mailto = "lars@lse.de")
+
+# openalexR sends the key as an HTTP header, which the usage-priced API may
+# ignore; oa_group_top200() attaches it as a query parameter, which registers
+# reliably. The oa_fetch calls are cheap list calls that fit keyless anyway.
+API_KEY <- Sys.getenv("OPENALEX_API_KEY")
+if (nzchar(API_KEY)) options(openalexR.apikey = API_KEY)
 
 MAILTO <- "lars@lse.de"
 FROM <- "1996-01-01"
@@ -109,12 +116,10 @@ oa_group_top200 <- function(group_by, extra_filter = NULL) {
     paste0("to_publication_date:", TO),
     extra_filter
   ), collapse = ",")
-  resp <- GET(
-    "https://api.openalex.org/works",
-    query = list(filter = filter, group_by = group_by,
-                 per_page = 200, mailto = MAILTO),
-    timeout(120)
-  )
+  query <- list(filter = filter, group_by = group_by,
+                per_page = 200, mailto = MAILTO)
+  if (nzchar(API_KEY)) query$api_key <- API_KEY
+  resp <- GET("https://api.openalex.org/works", query = query, timeout(120))
   stop_for_status(resp)
   content(resp, as = "parsed", type = "application/json")$group_by |>
     map_dfr(\(g) tibble(
