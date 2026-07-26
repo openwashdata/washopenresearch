@@ -1,0 +1,30 @@
+Subject: Research data from your {paper_phrase}
+
+{greeting}
+
+I am contacting you on behalf of the openwashdata project at the Global
+Health Engineering group of ETH Zurich (https://openwashdata.org), an
+initiative that promotes open research data in the water, sanitation, and
+hygiene (WASH) sector.
+
+While compiling an overview of data availability in WASH research, we came
+across the following publication(s) of yours, whose data availability
+statement indicates that the underlying data are available on request:
+
+{paper_list}
+
+We would be grateful if you would be willing to share the underlying
+dataset(s) with us. We would also be happy to support you in publishing the
+data as a citable, openly licensed dataset with its own DOI — with you and
+your co-authors retaining full credit as authors — through the openwashdata
+platform, at no cost to you.
+
+If you would rather not be contacted about this again, just reply to let me
+know and I will not follow up.
+
+Thank you very much for your time and consideration.
+
+Kind regards,
+{sender_name}
+{sender_affiliation}
+{sender_email}
