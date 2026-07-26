@@ -7,3 +7,7 @@
 .DS_Store
 .quarto
 
+# Transient scrape run logs (data-raw/iwa_scraping.R, run_iwa_scrapes.R)
+data-raw/*_scrape.log
+data-raw/iwa_scrapes.log
+
