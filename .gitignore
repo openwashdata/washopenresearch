@@ -11,3 +11,6 @@
 data-raw/*_scrape.log
 data-raw/iwa_scrapes.log
 
+# Personal notes, not part of the package
+python-scripts-lesson.md
+
