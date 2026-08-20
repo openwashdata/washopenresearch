@@ -12,7 +12,13 @@
   IWA journal snapshots (2,599 claims), 71.5% have no supplement, 26.5% a
   structured one, 2.1% an unstructured one, and none an open format.
   `data-raw/das_in_paper_support.R` reproduces the summary in
-  `data-raw/das-in-paper-support-summary.csv`.
+  `data-raw/das-in-paper-support-summary.csv`. A follow-up cross-check
+  against OpenAlex article types (`data-raw/das_in_paper_article_types.R`,
+  committed DOI-to-type lookup) shows the no-supplement claims are almost
+  entirely substantive research articles: only 0.5% are front matter or
+  reviews, so the article-type filter proposed in #47 does not shrink the
+  population. Verifying the remaining 1,847 bare claims requires reading
+  the articles' tables.
 - New scripted acquisition pipeline for a fourth dataset, `datapapers`, covering
   WASH-related data papers in seven dedicated data journals (Scientific Data,
   Data in Brief, Gates Open Research, F1000Research, GigaScience, GigaByte,
