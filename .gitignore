@@ -11,3 +11,10 @@
 data-raw/*_scrape.log
 data-raw/iwa_scrapes.log
 
+# Personal notes, not part of the package
+python-scripts-lesson.md
+
+# Downloaded supplement files (issue #47 tier 3); the committed record is
+# data-raw/suppfiles/manifest.csv with sha256 checksums
+data-raw/suppfiles/files/
+
