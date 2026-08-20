@@ -1,4 +1,4 @@
-# washopenresearch (development version)
+# washopenresearch 0.3.0
 
 ## New features
 
@@ -38,8 +38,9 @@
   committed raw snapshot), `data-raw/02_datapapers_screen.R` (relevance
   screening captured in a committed decision sheet keyed on DOI), and
   `data-raw/03_datapapers_process.R` (harmonisation to the shared schema and
-  export). The dataset itself is added once the first harvest and screening
-  round are complete.
+  export). The first harvest and screening round yielded 8 papers, shipped
+  as the new `datapapers` dataset with CSV and XLSX exports in
+  `inst/extdata/`.
 
 ## Minor improvements and fixes
 
