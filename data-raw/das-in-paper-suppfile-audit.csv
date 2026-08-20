@@ -1,0 +1,315 @@
+source,doi,das_in_paper_support,openalex_type,title_front_matter,trivially_true,n_files,n_files_parsed,paper_class,any_observation
+jwh,10.2166/wh.2026.194,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2026.240,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2026.261,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2020.042,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2020.086,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2020.100,unstructured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+jwh,10.2166/wh.2020.271,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+jwh,10.2166/wh.2020.018,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2020.093,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+jwh,10.2166/wh.2020.115,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2021.247,unstructured supplement,article,FALSE,FALSE,4,0,not_attempted,FALSE
+jwh,10.2166/wh.2021.150,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2021.051,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2021.011,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2021.031,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2021.171,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2021.091,structured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+jwh,10.2166/wh.2021.064,structured supplement,article,FALSE,FALSE,4,4,observation tables,TRUE
+jwh,10.2166/wh.2021.127,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2021.167,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2021.169,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2021.312,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2022.190,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2022.232,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2022.233,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+jwh,10.2166/wh.2022.252,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2022.285,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2022.312,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+jwh,10.2166/wh.2022.014,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2022.296,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2022.276,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2022.117,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+jwh,10.2166/wh.2022.115,structured supplement,review,FALSE,TRUE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2022.026,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2022.048,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2022.061,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2022.201,structured supplement,article,FALSE,FALSE,3,2,summary tables,FALSE
+jwh,10.2166/wh.2022.129,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2023.237,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+jwh,10.2166/wh.2023.291,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2023.238,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2023.213,structured supplement,article,FALSE,FALSE,1,1,figures,FALSE
+jwh,10.2166/wh.2023.276,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2023.312,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+jwh,10.2166/wh.2023.267,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2023.014,unstructured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+jwh,10.2166/wh.2023.126,unstructured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+jwh,10.2166/wh.2023.004,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+jwh,10.2166/wh.2023.027,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2023.091,unstructured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+jwh,10.2166/wh.2023.128,structured supplement,article,FALSE,FALSE,2,1,observation tables,TRUE
+jwh,10.2166/wh.2023.190,structured supplement,article,FALSE,FALSE,2,2,observation tables,TRUE
+jwh,10.2166/wh.2023.157,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2023.262,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2023.261,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2023.121,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2023.130,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2023.088,unstructured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+jwh,10.2166/wh.2023.204,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2023.129,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2023.205,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2023.245,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2023.072,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2023.082,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2024.233,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2024.309,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2024.345,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2024.348,unstructured supplement,article,FALSE,FALSE,2,0,not_attempted,FALSE
+jwh,10.2166/wh.2024.327,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2024.018,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2024.312,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2024.059,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2024.251,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+jwh,10.2166/wh.2024.303,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2024.060,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2024.377,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2024.074,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+jwh,10.2166/wh.2024.107,structured supplement,review,FALSE,TRUE,1,1,prose only,FALSE
+jwh,10.2166/wh.2024.186,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2024.338,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2024.108,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2024.115,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2024.161,unstructured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+jwh,10.2166/wh.2024.392,structured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+jwh,10.2166/wh.2024.024,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+jwh,10.2166/wh.2024.081,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2024.205,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2024.285,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2024.301,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2024.126,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2024.270,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+jwh,10.2166/wh.2024.284,structured supplement,article,FALSE,FALSE,2,2,summary tables,FALSE
+jwh,10.2166/wh.2024.113,structured supplement,article,FALSE,FALSE,2,2,observation tables,TRUE
+jwh,10.2166/wh.2024.399,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2024.314,structured supplement,review,FALSE,TRUE,1,1,prose only,FALSE
+jwh,10.2166/wh.2024.225,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2024.145,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2025.289,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2025.352,unstructured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+jwh,10.2166/wh.2025.343,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+jwh,10.2166/wh.2025.022,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+jwh,10.2166/wh.2025.274,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+jwh,10.2166/wh.2025.374,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2025.009,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2025.041,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+jwh,10.2166/wh.2025.059,structured supplement,article,FALSE,FALSE,2,2,observation tables,TRUE
+jwh,10.2166/wh.2025.346,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+jwh,10.2166/wh.2025.082,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2025.045,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2025.062,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2025.077,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2025.036,unstructured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+jwh,10.2166/wh.2025.126,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+jwh,10.2166/wh.2025.364,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2025.167,structured supplement,article,FALSE,FALSE,3,2,prose only,FALSE
+jwh,10.2166/wh.2026.182,unstructured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+jwh,10.2166/wh.2026.176,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2026.228,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2026.243,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2026.076,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2026.212,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2026.234,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+jwh,10.2166/wh.2026.273,structured supplement,article,FALSE,FALSE,2,2,observation tables,TRUE
+jwh,10.2166/wh.2026.281,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2026.173,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+jwh,10.2166/wh.2026.237,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+jwh,10.2166/wh.2026.075,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+jwh,10.2166/wh.2026.030,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+aqua,10.2166/aqua.2021.039,structured supplement,article,FALSE,FALSE,2,2,prose only,FALSE
+aqua,10.2166/aqua.2021.163,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+aqua,10.2166/aqua.2021.050,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2021.018,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+aqua,10.2166/aqua.2021.146,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2021.056,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2021.082,structured supplement,article,FALSE,FALSE,3,1,observation tables,TRUE
+aqua,10.2166/aqua.2022.118,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2022.128,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2022.157,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+aqua,10.2166/aqua.2022.161,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2022.032,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+aqua,10.2166/aqua.2022.052,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+aqua,10.2166/aqua.2022.029,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2023.113,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+aqua,10.2166/aqua.2023.217,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2023.211,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+aqua,10.2166/aqua.2023.067,structured supplement,article,FALSE,FALSE,1,1,figures,FALSE
+aqua,10.2166/aqua.2023.120,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2023.021,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2023.049,structured supplement,article,FALSE,FALSE,3,3,observation tables,TRUE
+aqua,10.2166/aqua.2023.017,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2023.063,structured supplement,article,FALSE,FALSE,2,1,prose only,FALSE
+aqua,10.2166/aqua.2023.197,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2023.081,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2023.127,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+aqua,10.2166/aqua.2023.388,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+aqua,10.2166/aqua.2023.284,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+aqua,10.2166/aqua.2023.299,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2023.278,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2023.215,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2024.305,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+aqua,10.2166/aqua.2024.235,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2024.246,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2024.255,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2024.307,structured supplement,article,FALSE,FALSE,2,1,observation tables,TRUE
+aqua,10.2166/aqua.2024.130,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2024.259,structured supplement,review,FALSE,TRUE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2024.087,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2024.212,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+aqua,10.2166/aqua.2024.182,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+aqua,10.2166/aqua.2024.203,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+aqua,10.2166/aqua.2024.205,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+aqua,10.2166/aqua.2025.047,unstructured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+aqua,10.2166/aqua.2025.044,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+aqua,10.2166/aqua.2025.036,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+aqua,10.2166/aqua.2026.110,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2020.368,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2020.363,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2020.324,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2020.376,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2021.014,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2021.028,unstructured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+ws,10.2166/ws.2021.042,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2021.009,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2021.026,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2021.033,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2021.072,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2021.097,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2021.090,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2021.103,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2021.107,unstructured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+ws,10.2166/ws.2021.120,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2021.160,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2021.177,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2021.187,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2021.205,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2021.278,structured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+ws,10.2166/ws.2021.258,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2021.232,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2021.234,unstructured supplement,article,FALSE,FALSE,8,0,not_attempted,FALSE
+ws,10.2166/ws.2021.227,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2021.219,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2021.212,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2021.282,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2021.348,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2021.344,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2021.336,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2021.310,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2021.311,structured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+ws,10.2166/ws.2021.297,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2021.295,structured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+ws,10.2166/ws.2021.455,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2021.429,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2021.414,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2021.411,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2021.406,structured supplement,article,FALSE,FALSE,4,1,observation tables,TRUE
+ws,10.2166/ws.2021.392,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2022.003,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2022.023,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2022.054,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2022.134,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2022.141,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2022.190,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2022.156,structured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+ws,10.2166/ws.2022.152,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2022.183,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2022.195,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2022.148,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2022.186,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2022.215,unstructured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+ws,10.2166/ws.2022.206,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2022.185,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2022.244,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2022.266,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2022.280,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2022.252,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2022.317,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2022.299,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2022.274,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2022.304,structured supplement,article,FALSE,FALSE,4,4,summary tables,FALSE
+ws,10.2166/ws.2022.323,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2022.322,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2022.345,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2022.368,unstructured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+ws,10.2166/ws.2022.356,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2022.395,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2022.384,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2022.387,structured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+ws,10.2166/ws.2022.406,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2022.441,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2022.425,unstructured supplement,article,FALSE,FALSE,6,0,not_attempted,FALSE
+ws,10.2166/ws.2023.007,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2023.028,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2023.030,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2023.056,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2023.058,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2023.069,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2023.045,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2023.078,structured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+ws,10.2166/ws.2023.095,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2023.076,unstructured supplement,review,FALSE,TRUE,2,0,not_attempted,FALSE
+ws,10.2166/ws.2023.092,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2023.060,structured supplement,article,FALSE,FALSE,1,1,figures,FALSE
+ws,10.2166/ws.2023.108,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2023.115,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2023.142,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2023.163,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2023.178,unstructured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+ws,10.2166/ws.2023.181,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2023.177,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2023.175,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2023.194,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2023.196,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2023.216,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2023.224,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2023.268,unstructured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+ws,10.2166/ws.2023.291,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2023.269,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2023.309,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2023.319,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2024.024,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2024.015,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2024.056,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2024.048,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2024.038,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2024.071,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2024.083,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2024.096,structured supplement,article,FALSE,FALSE,1,1,figures,FALSE
+ws,10.2166/ws.2024.072,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2024.128,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2024.117,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2024.153,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2024.138,structured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+ws,10.2166/ws.2024.161,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2024.176,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2024.170,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2024.197,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2024.208,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2024.207,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2024.227,structured supplement,article,FALSE,FALSE,2,2,prose only,FALSE
+ws,10.2166/ws.2024.251,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2024.257,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2024.256,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2025.022,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2025.044,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2025.039,structured supplement,article,FALSE,FALSE,1,1,summary tables,FALSE
+ws,10.2166/ws.2025.062,unstructured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+ws,10.2166/ws.2025.075,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2025.079,structured supplement,article,FALSE,FALSE,1,1,observation tables,TRUE
+ws,10.2166/ws.2025.080,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2025.081,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2025.091,structured supplement,article,FALSE,FALSE,2,2,prose only,FALSE
+ws,10.2166/ws.2025.094,structured supplement,article,FALSE,FALSE,1,1,prose only,FALSE
+ws,10.2166/ws.2026.110,unstructured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
+ws,10.2166/ws.2026.165,unstructured supplement,article,FALSE,FALSE,1,0,not_attempted,FALSE
