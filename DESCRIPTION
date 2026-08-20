@@ -1,6 +1,6 @@
 Package: washopenresearch
 Title: Dataset about open research data information in Water, Sanitation, and Hygiene
-Version: 0.3.0
+Version: 0.3.0.9000
 Authors@R: c(
     person("Mian", "Zhong", , "mzhong@ethz.ch", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0009-4546-7214")),
