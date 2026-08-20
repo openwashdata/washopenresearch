@@ -1,0 +1,742 @@
+source,paperid,doi,file_name,format,parse_status,n_tables,max_table_rows,n_images,n_words_prose,has_observation_table,any_summary_table,n_sheets,max_sheet_rows,n_merged_ranges,multi_table_sheet,content_class
+jwh,112069,10.2166/wh.2026.194,jwh0240744supp1.docx,docx,ok,9,12,0,2472,FALSE,TRUE,NA,NA,NA,NA,summary tables
+jwh,112026,10.2166/wh.2026.223,jwh0240773supp1.docx,docx,ok,3,3,0,742,FALSE,TRUE,NA,NA,NA,NA,summary tables
+jwh,112139,10.2166/wh.2026.227,jwh0240784supp1.docx,docx,ok,70,12,0,2639,FALSE,TRUE,NA,NA,NA,NA,summary tables
+jwh,112147,10.2166/wh.2026.240,jwh0240830supp1.docx,docx,ok,8,60,0,184,FALSE,TRUE,NA,NA,NA,NA,summary tables
+jwh,111816,10.2166/wh.2026.261,jwh0240844supp1.docx,docx,ok,0,0,0,19305,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,31386,10.2166/wh.2010.103,103.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,19815,10.2166/wh.2011.155,155.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,1926,10.2166/wh.2012.071,071.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,2608,10.2166/wh.2012.117,117.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,2773,10.2166/wh.2012.105,105.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,2790,10.2166/wh.2012.121,121.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,2787,10.2166/wh.2013.104,104.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,15831,10.2166/wh.2013.225,225.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,15839,10.2166/wh.2013.139,139.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,1690,10.2166/wh.2013.212,212.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,7937,10.2166/wh.2013.068,068.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,562,10.2166/wh.2014.163,063.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,571,10.2166/wh.2014.051,051.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,28219,10.2166/wh.2014.013,013.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,28374,10.2166/wh.2014.204,204.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,28392,10.2166/wh.2015.210,210.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,28278,10.2166/wh.2015.105,wh2015105supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,28283,10.2166/wh.2015.138,wh2015138supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,28020,10.2166/wh.2016.002,wh2016002supp.docx,docx,ok,0,0,0,3816,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,28030,10.2166/wh.2016.046,wh2016046supp.docx,docx,ok,0,0,0,197,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,28412,10.2166/wh.2016.071,wh2016071supp.docx,docx,ok,0,0,0,882,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,28257,10.2166/wh.2016.285,wh2016285supp.docx,docx,ok,0,0,0,750,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,28267,10.2166/wh.2016.132,wh2016132supp.docx,docx,ok,1,62,0,3491,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,28445,10.2166/wh.2017.261,wh2017261supp.docx,docx,ok,0,0,0,280,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,28458,10.2166/wh.2017.183,wh2017183supp.docx,docx,ok,1,19,0,1325,FALSE,TRUE,NA,NA,NA,NA,summary tables
+jwh,28708,10.2166/wh.2017.083,wh2017083supp.docx,docx,ok,0,0,0,452,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,28736,10.2166/wh.2017.321,wh2017321supp.docx,docx,ok,1,13,0,5232,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,28738,10.2166/wh.2017.054,wh2017054supp.docx,docx,ok,0,0,0,95,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,37956,10.2166/wh.2017.100,wh2017100supp.docx,docx,ok,0,0,0,643,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,37982,10.2166/wh.2017.209,wh2017209supp1.docx,docx,ok,0,0,0,770,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,37987,10.2166/wh.2017.147,wh2017147supp1.docx,docx,ok,0,0,0,95,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,38000,10.2166/wh.2018.261,wh2018261supp1.docx,docx,ok,1,4,0,8494,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,39091,10.2166/wh.2018.187,wh2018187supp1.docx,docx,ok,0,0,0,72,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,39107,10.2166/wh.2018.278,wh2018278supp1.docx,docx,ok,3,6,0,745,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,40827,10.2166/wh.2018.281,wh2018281supp1.docx,docx,ok,0,0,0,11199,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,41451,10.2166/wh.2018.033,wh2018033supp.docx,docx,ok,0,0,0,134,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,62802,10.2166/wh.2018.071,wh2018071supp.docx,docx,ok,5,8,0,214,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,63864,10.2166/wh.2018.067,wh2018067supp.docx,docx,ok,0,0,0,10824,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,65391,10.2166/wh.2019.210,wh2019210supp.docx,docx,ok,1,4,13,546,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,65174,10.2166/wh.2018.367,wh2018367supp.docx,docx,ok,0,0,0,1440,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,64494,10.2166/wh.2018.181,wh2018181supp.docx,docx,ok,0,0,0,155,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,65143,10.2166/wh.2018.323,wh2018323supp.docx,docx,ok,0,0,0,73,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,65354,10.2166/wh.2018.164,wh2018164supp.docx,docx,ok,0,0,0,8571,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,65139,10.2166/wh.2018.243,wh2018243supp.docx,docx,ok,0,0,0,602,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,65172,10.2166/wh.2018.224,wh2018224supp.docx,docx,ok,1,91,0,106,FALSE,TRUE,NA,NA,NA,NA,summary tables
+jwh,65559,10.2166/wh.2019.165,wh2019165supp.docx,docx,ok,1,16,0,25,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,66177,10.2166/wh.2019.282,wh2019282supp.docx,docx,ok,0,0,0,922,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,66178,10.2166/wh.2019.295,wh2019295supp.docx,docx,ok,0,0,0,46,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,66484,10.2166/wh.2019.124,wh2019124supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,67601,10.2166/wh.2019.064,wh2019064supp.docx,docx,ok,0,0,0,273,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,67697,10.2166/wh.2019.272,wh2019272supp.docx,docx,ok,0,0,1,688,FALSE,FALSE,NA,NA,NA,NA,figures
+jwh,67628,10.2166/wh.2019.044,wh2019044supp.docx,docx,ok,2,50,0,710,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,69035,10.2166/wh.2019.054,wh2019054supp.docx,docx,ok,0,0,1,676,FALSE,FALSE,NA,NA,NA,NA,figures
+jwh,68123,10.2166/wh.2019.216,wh2019216supp.docx,docx,ok,2,9,0,19453,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,70024,10.2166/wh.2019.060,jwh2019060supp.docx,docx,ok,2,26,0,839,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,73007,10.2166/wh.2020.096,jwh2020096supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,71985,10.2166/wh.2020.088,jwh2020088supp.docx,docx,ok,10,70,0,5807,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,72313,10.2166/wh.2020.182,jwh2020182supp.docx,docx,ok,0,0,0,681,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,73372,10.2166/wh.2020.213,jwh2020213supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,73992,10.2166/wh.2020.221,jwh2020221supp.docx,docx,ok,0,0,0,574,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,74278,10.2166/wh.2020.227,jwh2020227supp.docx,docx,ok,2,3,0,74,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,74432,10.2166/wh.2020.029,jwh2020029supp.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,TRUE,6,116,19,TRUE,observation tables
+jwh,75064,10.2166/wh.2020.053,jwh2020053supp.docx,docx,ok,0,0,0,2547,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,75618,10.2166/wh.2020.042,jwh2020042supp.docx,docx,ok,0,0,0,961,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,76129,10.2166/wh.2020.220,jwh2020220supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,75761,10.2166/wh.2020.086,jwh2020086supp.docx,docx,ok,0,0,0,15,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,75762,10.2166/wh.2020.100,jwh2020100supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,75998,10.2166/wh.2020.271,jwh2020271supp.docx,docx,ok,1,21,0,1556,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,76519,10.2166/wh.2020.018,jwh2020018supp.docx,docx,ok,0,0,0,836,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,77704,10.2166/wh.2020.093,jwh2020093supp.docx,docx,ok,1,16,0,62,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,78246,10.2166/wh.2020.115,jwh2020115supp.docx,docx,ok,0,0,0,22,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,79854,10.2166/wh.2021.247,jwh2021247supp1.png,png,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,79854,10.2166/wh.2021.247,jwh2021247supp2.png,png,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,79854,10.2166/wh.2021.247,jwh2021247supp3.png,png,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,79854,10.2166/wh.2021.247,jwh2021247supp4.png,png,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,80350,10.2166/wh.2021.150,jwh2021150supp.docx,docx,ok,0,0,0,776,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,81997,10.2166/wh.2021.051,jwh2021051supp.docx,docx,ok,0,0,0,44,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,83535,10.2166/wh.2021.011,jwh2021011supp.docx,docx,ok,0,0,0,3479,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,84117,10.2166/wh.2021.031,jwh2021031supp.docx,docx,ok,0,0,0,113,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,84531,10.2166/wh.2021.171,jwh2021171supp.docx,docx,ok,1,3,0,708,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,84206,10.2166/wh.2021.091,jwh2021091supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,85322,10.2166/wh.2021.018,jwh2021018supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,85322,10.2166/wh.2021.018,jwh2021018supp2.docx,docx,ok,0,0,0,766,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,85838,10.2166/wh.2021.064,jwh2021064supp1.xlsx,xlsx,ok,NA,NA,NA,NA,FALSE,TRUE,3,43,0,FALSE,summary tables
+jwh,85838,10.2166/wh.2021.064,jwh2021064supp2.docx,docx,ok,1,21,0,0,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,85838,10.2166/wh.2021.064,jwh2021064supp3.docx,docx,ok,1,37,0,11,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,85838,10.2166/wh.2021.064,jwh2021064supp4.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,FALSE,3,38,0,FALSE,observation tables
+jwh,85846,10.2166/wh.2021.127,jwh2021127supp.docx,docx,ok,0,0,0,730,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,84323,10.2166/wh.2021.167,jwh2021167supp.docx,docx,ok,0,0,0,69,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,85898,10.2166/wh.2021.169,jwh2021169supp.docx,docx,ok,0,0,0,4148,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,85852,10.2166/wh.2021.312,jwh2021312supp.docx,docx,ok,0,0,0,1481,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,85933,10.2166/wh.2021.152,jwh2021152supp.docx,docx,ok,0,0,0,592,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,86945,10.2166/wh.2022.190,jwh2022190supp.docx,docx,ok,0,0,0,4742,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,86325,10.2166/wh.2022.218,jwh2022218supp1.docx,docx,ok,0,0,0,266,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,86325,10.2166/wh.2022.218,jwh2022218supp2.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,FALSE,3,46,5,TRUE,observation tables
+jwh,86497,10.2166/wh.2022.232,jwh2022232supp.docx,docx,ok,0,0,0,75,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,86883,10.2166/wh.2022.183,jwh2022183supp.docx,docx,ok,1,3,0,989,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,86979,10.2166/wh.2022.233,jwh2022233supp.docx,docx,ok,1,21,0,2107,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,88088,10.2166/wh.2022.252,jwh2022252supp.docx,docx,ok,0,0,0,123,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,87615,10.2166/wh.2022.285,jwh2022285supp.docx,docx,ok,0,0,0,542,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,88199,10.2166/wh.2022.312,jwh2022312supp.docx,docx,ok,1,17,0,1449,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,88197,10.2166/wh.2022.014,jwh2022014supp.docx,docx,ok,0,0,0,198,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,88145,10.2166/wh.2022.294,jwh2022294supp.docx,docx,ok,3,113,0,258,FALSE,TRUE,NA,NA,NA,NA,summary tables
+jwh,88298,10.2166/wh.2022.296,jwh2022296supp.docx,docx,ok,0,0,0,464,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,89166,10.2166/wh.2022.276,jwh2022276supp.docx,docx,ok,0,0,0,211,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,89624,10.2166/wh.2022.117,jwh2022117supp1.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,FALSE,9,58,9,TRUE,observation tables
+jwh,89787,10.2166/wh.2022.115,jwh0201223supp1.docx,docx,ok,4,9,0,16698,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,90176,10.2166/wh.2022.026,jwh0201284supp1.docx,docx,ok,0,0,0,3479,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,91409,10.2166/wh.2022.048,jwh0201479supp1.docx,docx,ok,0,0,0,1000,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,91090,10.2166/wh.2022.061,jwh0201497supp1.docx,docx,ok,0,0,0,1461,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,90419,10.2166/wh.2022.201,jwh0201517supp1.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,90419,10.2166/wh.2022.201,jwh0201517supp2.docx,docx,ok,7,12,0,620,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,90419,10.2166/wh.2022.201,jwh0201517supp3.docx,docx,ok,2,7,0,757,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,91868,10.2166/wh.2022.129,jwh0201701supp1.docx,docx,ok,0,0,0,8471,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,92986,10.2166/wh.2023.237,jwh0210094supp1.docx,docx,ok,1,52,0,428,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,92696,10.2166/wh.2022.254,jwh0210125supp1.docx,docx,ok,1,28,0,17,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,93118,10.2166/wh.2023.136,jwh0210147supp1.docx,docx,ok,0,0,0,548,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,93388,10.2166/wh.2023.291,jwh0210299supp1.docx,docx,ok,0,0,0,1783,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,93754,10.2166/wh.2023.238,jwh0210329supp1.docx,docx,ok,0,0,0,3756,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,94080,10.2166/wh.2023.213,jwh0210463supp1.docx,docx,ok,0,0,6,229,FALSE,FALSE,NA,NA,NA,NA,figures
+jwh,94537,10.2166/wh.2023.314,jwh0210514supp1.docx,docx,ok,0,0,0,1726,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,94501,10.2166/wh.2023.276,jwh0210571supp1.docx,docx,ok,1,3,0,3175,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,94622,10.2166/wh.2023.312,jwh0210615supp1.docx,docx,ok,7,88,0,597,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,94538,10.2166/wh.2023.318,jwh0210625supp1.docx,docx,ok,1,14,0,3068,FALSE,TRUE,NA,NA,NA,NA,summary tables
+jwh,95037,10.2166/wh.2023.267,jwh0210702supp1.docx,docx,ok,6,11,0,1152,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,95080,10.2166/wh.2023.014,jwh0210789supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,95081,10.2166/wh.2023.057,jwh0210831supp1.docx,docx,ok,6,18,0,3772,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,96017,10.2166/wh.2023.126,jwh0210972supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,96161,10.2166/wh.2023.004,jwh0210995supp1.docx,docx,ok,1,20,0,2490,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,96796,10.2166/wh.2023.027,jwh0211004supp1.docx,docx,ok,0,0,0,7110,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,96718,10.2166/wh.2023.099,jwh0211073supp1.docx,docx,ok,2,20,0,1692,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,97397,10.2166/wh.2023.051,jwh0211143supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,97052,10.2166/wh.2023.091,jwh0211228supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,97430,10.2166/wh.2023.128,jwh0211242supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,97430,10.2166/wh.2023.128,jwh0211242supp2.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,FALSE,1,68,41,FALSE,observation tables
+jwh,97476,10.2166/wh.2023.190,jwh0211357supp1.docx,docx,ok,0,0,0,310,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,97476,10.2166/wh.2023.190,jwh0211357supp2.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,FALSE,7,177,0,TRUE,observation tables
+jwh,97928,10.2166/wh.2023.157,jwh0211518supp1.docx,docx,ok,1,9,0,90,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,97761,10.2166/wh.2023.262,jwh0211530supp1.docx,docx,ok,0,0,0,287,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,97633,10.2166/wh.2023.261,jwh0211611supp1.docx,docx,ok,0,0,0,3676,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,98180,10.2166/wh.2023.121,jwh0211651supp1.docx,docx,ok,0,0,0,782,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,98015,10.2166/wh.2023.130,jwh0211663supp1.docx,docx,ok,0,0,0,1271,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,98609,10.2166/wh.2023.088,jwh0211747supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,98521,10.2166/wh.2023.204,jwh0211772supp1.docx,docx,ok,2,3,0,1689,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,98613,10.2166/wh.2023.129,jwh0211795supp1.docx,docx,ok,0,0,0,1124,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,98626,10.2166/wh.2023.174,jwh0211834supp1.docx,docx,ok,0,0,0,158,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,98626,10.2166/wh.2023.174,jwh0211834supp2.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,TRUE,5,120,0,FALSE,observation tables
+jwh,99279,10.2166/wh.2023.205,jwh0211847supp1.docx,docx,ok,2,8,0,502,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,99252,10.2166/wh.2023.245,jwh0211922supp1.docx,docx,ok,0,0,0,26,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,99402,10.2166/wh.2023.072,jwh0220052supp1.docx,docx,ok,1,3,0,292,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,99546,10.2166/wh.2023.082,jwh0220235supp1.docx,docx,ok,0,0,0,11918,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,99853,10.2166/wh.2024.233,jwh0220309supp1.docx,docx,ok,2,1,0,317,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,99906,10.2166/wh.2024.309,jwh0220372supp1.docx,docx,ok,0,0,0,525,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,99843,10.2166/wh.2024.316,jwh0220385supp1.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,100390,10.2166/wh.2024.345,jwh0220584supp1.docx,docx,ok,0,0,0,155,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,100428,10.2166/wh.2024.348,jwh0220601supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,100428,10.2166/wh.2024.348,jwh0220601supp2.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,100565,10.2166/wh.2024.327,jwh0220717supp1.docx,docx,ok,0,0,0,1581,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,100892,10.2166/wh.2024.018,jwh0220757supp1.docx,docx,ok,0,0,0,562,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,102051,10.2166/wh.2024.293,jwh0220811supp1.docx,docx,ok,1,6,0,326,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,101132,10.2166/wh.2024.312,jwh0220842supp1.docx,docx,ok,14,9,0,1652,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,101335,10.2166/wh.2024.059,jwh0220939supp1.docx,docx,ok,0,0,0,2773,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,102448,10.2166/wh.2024.251,jwh0220967supp1.docx,docx,ok,1,33,0,640,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,101631,10.2166/wh.2024.303,jwh0220978supp1.docx,docx,ok,1,4,0,1900,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,102892,10.2166/wh.2024.043,jwh0221209supp1.docx,docx,ok,0,0,0,3259,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,102447,10.2166/wh.2024.060,jwh0221235supp1.docx,docx,ok,0,0,0,1444,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,104043,10.2166/wh.2024.377,jwh0221347supp1.docx,docx,ok,0,0,0,233,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,103308,10.2166/wh.2024.074,jwh0221409supp1.docx,docx,ok,1,85,0,750,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,103100,10.2166/wh.2024.107,jwh0221491supp1.docx,docx,ok,0,0,0,551,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,104024,10.2166/wh.2024.186,jwh0221556supp1.docx,docx,ok,0,0,0,2117,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,104005,10.2166/wh.2024.338,jwh0221594supp1.docx,docx,ok,0,0,0,2041,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,104248,10.2166/wh.2024.376,jwh0221606supp1.docx,docx,ok,0,0,0,22620,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,104563,10.2166/wh.2024.108,jwh0221641supp1.docx,docx,ok,0,0,0,389,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,104040,10.2166/wh.2024.115,jwh0221650supp1.docx,docx,ok,0,0,0,2125,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,104023,10.2166/wh.2024.161,jwh0221683supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,104988,10.2166/wh.2024.392,jwh0221743supp1.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,105080,10.2166/wh.2024.024,jwh0221756supp1.docx,docx,ok,1,127,0,11,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,104865,10.2166/wh.2024.081,jwh0221781supp1.docx,docx,ok,0,0,0,81,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,105724,10.2166/wh.2024.205,jwh0222060supp1.docx,docx,ok,2,14,0,2621,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,105376,10.2166/wh.2024.285,jwh0222171supp1.docx,docx,ok,0,0,0,488,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,105430,10.2166/wh.2024.301,jwh0222218supp1.docx,docx,ok,0,0,0,30,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,105920,10.2166/wh.2024.126,jwh0222276supp1.docx,docx,ok,0,0,0,411,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,106142,10.2166/wh.2024.270,jwh0222358supp1.docx,docx,ok,8,51,0,61,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,106005,10.2166/wh.2024.284,jwh0222398supp1.xlsx,xlsx,ok,NA,NA,NA,NA,FALSE,TRUE,1,55,0,FALSE,summary tables
+jwh,106005,10.2166/wh.2024.284,jwh0222398supp2.xlsx,xlsx,ok,NA,NA,NA,NA,FALSE,FALSE,1,14,16,FALSE,summary tables
+jwh,106290,10.2166/wh.2024.113,jwh0230016supp1.docx,docx,ok,0,0,0,2337,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,106290,10.2166/wh.2024.113,jwh0230016supp2.docx,docx,ok,1,20,0,1129,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,106269,10.2166/wh.2024.399,jwh0230043supp1.docx,docx,ok,0,0,0,5155,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,106268,10.2166/wh.2024.314,jwh0230058supp1.docx,docx,ok,0,0,0,5108,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,106965,10.2166/wh.2025.164,jwh0230089supp1.docx,docx,ok,0,0,0,1523,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,106192,10.2166/wh.2024.225,jwh0230100supp1.docx,docx,ok,0,0,0,1832,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,106972,10.2166/wh.2025.380,jwh0230260supp1.docx,docx,ok,1,21,0,1769,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,103645,10.2166/wh.2024.145,jwh0230288supp1.docx,docx,ok,0,0,0,32,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,107444,10.2166/wh.2025.289,jwh0230350supp1.docx,docx,ok,0,0,0,296,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,107290,10.2166/wh.2025.352,jwh0230413supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,107834,10.2166/wh.2025.174,jwh0230439supp1.docx,docx,ok,0,0,0,645,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,107834,10.2166/wh.2025.174,jwh0230439supp2.docx,docx,ok,0,0,0,329,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,107777,10.2166/wh.2025.343,jwh0230615supp1.docx,docx,ok,2,34,0,63,TRUE,TRUE,NA,NA,NA,NA,observation tables
+jwh,108133,10.2166/wh.2025.022,jwh0230648supp1.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,FALSE,1,231,176,TRUE,observation tables
+jwh,108156,10.2166/wh.2025.274,jwh0230684supp1.docx,docx,ok,20,23,0,4920,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,108131,10.2166/wh.2025.374,jwh0230727supp1.docx,docx,ok,2,10,0,1677,FALSE,TRUE,NA,NA,NA,NA,summary tables
+jwh,108129,10.2166/wh.2025.020,jwh0230764supp1.docx,docx,ok,1,9,0,2648,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,108179,10.2166/wh.2025.027,jwh0230794supp1.docx,docx,ok,0,0,0,2025,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,108717,10.2166/wh.2025.009,jwh0230894supp1.docx,docx,ok,0,0,0,1094,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,108750,10.2166/wh.2025.041,jwh0230923supp1.docx,docx,ok,1,16,0,178,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,108970,10.2166/wh.2025.059,jwh0230952supp1.docx,docx,ok,1,47,0,245,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,108970,10.2166/wh.2025.059,jwh0230952supp2.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,TRUE,2,60,0,FALSE,observation tables
+jwh,109379,10.2166/wh.2025.346,jwh0230991supp1.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,FALSE,1,17,0,FALSE,observation tables
+jwh,109222,10.2166/wh.2025.082,jwh0231109supp1.docx,docx,ok,1,6,2,2289,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,109782,10.2166/wh.2025.045,jwh0231196supp1.docx,docx,ok,3,8,0,4958,FALSE,TRUE,NA,NA,NA,NA,summary tables
+jwh,109749,10.2166/wh.2025.062,jwh0231224supp1.docx,docx,ok,0,0,0,129,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,109916,10.2166/wh.2025.053,jwh0231341supp1.docx,docx,ok,0,0,0,2649,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,110166,10.2166/wh.2025.077,jwh0231355supp1.docx,docx,ok,3,13,0,479,FALSE,TRUE,NA,NA,NA,NA,summary tables
+jwh,110239,10.2166/wh.2025.036,jwh0231415supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,110185,10.2166/wh.2025.126,jwh0231430supp1.docx,docx,ok,9,20,0,1439,TRUE,TRUE,NA,NA,NA,NA,observation tables
+jwh,110660,10.2166/wh.2025.391,jwh0240001supp1.docx,docx,ok,0,0,0,833,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,110610,10.2166/wh.2025.364,jwh0240036supp1.docx,docx,ok,1,4,0,312,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,110650,10.2166/wh.2025.167,jwh0240050supp1.docx,docx,ok,0,0,0,2528,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,110650,10.2166/wh.2025.167,jwh0240050supp2.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,110650,10.2166/wh.2025.167,jwh0240050supp3.docx,docx,ok,0,0,0,1413,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,110668,10.2166/wh.2026.182,jwh0240065supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+jwh,110858,10.2166/wh.2026.175,jwh0240160supp1.docx,docx,ok,0,0,0,2116,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,110801,10.2166/wh.2026.176,jwh0240176supp1.docx,docx,ok,2,8,0,2066,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,110802,10.2166/wh.2026.228,jwh0240204supp1.docx,docx,ok,2,13,1,313,FALSE,TRUE,NA,NA,NA,NA,summary tables
+jwh,110854,10.2166/wh.2026.243,jwh0240239supp1.docx,docx,ok,0,0,0,6544,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,110825,10.2166/wh.2026.252,jwh0240278supp1.docx,docx,ok,2,21,0,62,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,111119,10.2166/wh.2026.076,jwh0240324supp1.docx,docx,ok,1,3,0,888,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,111056,10.2166/wh.2026.197,jwh0240387supp1.docx,docx,ok,5,15,0,338,FALSE,TRUE,NA,NA,NA,NA,summary tables
+jwh,111190,10.2166/wh.2026.212,jwh0240415supp1.docx,docx,ok,0,0,0,20447,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,111103,10.2166/wh.2026.234,jwh0240432supp1.docx,docx,ok,1,16,0,814,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,111219,10.2166/wh.2026.273,jwh0240446supp1.docx,docx,ok,1,29,0,13,TRUE,FALSE,NA,NA,NA,NA,observation tables
+jwh,111219,10.2166/wh.2026.273,jwh0240446supp2.docx,docx,ok,1,8,0,47,FALSE,TRUE,NA,NA,NA,NA,summary tables
+jwh,111151,10.2166/wh.2026.281,jwh0240460supp1.docx,docx,ok,7,13,0,1631,FALSE,TRUE,NA,NA,NA,NA,summary tables
+jwh,111256,10.2166/wh.2026.173,jwh0240518supp1.docx,docx,ok,7,270,0,670,TRUE,TRUE,NA,NA,NA,NA,observation tables
+jwh,111246,10.2166/wh.2026.237,jwh0240607supp1.docx,docx,ok,0,0,0,322,FALSE,FALSE,NA,NA,NA,NA,prose only
+jwh,111740,10.2166/wh.2026.075,jwh0240651supp1.docx,docx,ok,1,5,0,653,FALSE,FALSE,NA,NA,NA,NA,summary tables
+jwh,111631,10.2166/wh.2026.030,jwh0240693supp1.docx,docx,ok,2,12,0,1282,FALSE,TRUE,NA,NA,NA,NA,summary tables
+aqua,29030,10.2166/aqua.2009.103,0003.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,29056,10.2166/aqua.2012.079,079.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,29060,10.2166/aqua.2012.005,005.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,31188,10.2166/aqua.2012.047,047.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,31189,10.2166/aqua.2012.070,070.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,29195,10.2166/aqua.2013.060,037.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,29200,10.2166/aqua.2013.115,060.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,29201,10.2166/aqua.2013.037,115.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,28954,10.2166/aqua.2013.081,081.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,29007,10.2166/aqua.2014.021,021.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,29243,10.2166/aqua.2014.135,135.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,29314,10.2166/aqua.2015.123,123.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,29016,10.2166/aqua.2015.086,jws2015086supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,29230,10.2166/aqua.2016.030,jws2016030supp.docx,docx,ok,0,0,0,616,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,29236,10.2166/aqua.2016.001,jws2016001supp.docx,docx,ok,2,10,0,3668,FALSE,FALSE,NA,NA,NA,NA,summary tables
+aqua,29176,10.2166/aqua.2016.012,jws2016012supp.docx,docx,ok,0,0,0,438,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,29284,10.2166/aqua.2016.102,jws2016102supp.docx,docx,ok,0,0,0,13,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,29251,10.2166/aqua.2017.027,jws2017027supp.docx,docx,ok,0,0,0,532,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,29179,10.2166/aqua.2017.049,jws2017049supp.docx,docx,ok,1,14,0,24,FALSE,FALSE,NA,NA,NA,NA,summary tables
+aqua,29191,10.2166/aqua.2017.099,jws2017099supp.docx,docx,ok,0,0,19,772,FALSE,FALSE,NA,NA,NA,NA,figures
+aqua,29346,10.2166/aqua.2017.083,jws2017083supp.docx,docx,ok,2,22,0,983,TRUE,FALSE,NA,NA,NA,NA,observation tables
+aqua,29352,10.2166/aqua.2017.106,jws2017106supp.docx,docx,ok,0,0,0,910,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,38080,10.2166/aqua.2017.183,jws2017183supp.docx,docx,ok,0,0,0,163,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,38078,10.2166/aqua.2017.084,jws2017084supp.docx,docx,ok,0,0,0,2306,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,38113,10.2166/aqua.2017.103,aqua2017103supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,39345,10.2166/aqua.2018.021,jws2018021supp.docx,docx,ok,1,149,0,274,TRUE,FALSE,NA,NA,NA,NA,observation tables
+aqua,64330,10.2166/aqua.2018.075,jws2018075supp.docx,docx,ok,0,0,0,613,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,63276,10.2166/aqua.2018.052,jws2018052supp.docx,docx,ok,5,41,0,649,TRUE,FALSE,NA,NA,NA,NA,observation tables
+aqua,64603,10.2166/aqua.2018.104,jws2018104supp.docx,docx,ok,2,3,0,28,FALSE,TRUE,NA,NA,NA,NA,summary tables
+aqua,66692,10.2166/aqua.2019.138,jws2019138supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,67247,10.2166/aqua.2019.134,jws2019134supp.docx,docx,ok,2,25,0,1711,TRUE,FALSE,NA,NA,NA,NA,observation tables
+aqua,68627,10.2166/aqua.2019.157,jws2019157supp.docx,docx,ok,0,0,0,1000,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,70236,10.2166/aqua.2019.078,jws2019078supp.docx,docx,ok,0,0,0,970,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,69036,10.2166/aqua.2019.027,jws2019027supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,70269,10.2166/aqua.2019.063,jws2019063supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,71028,10.2166/aqua.2019.111,jws2019111supp.docx,docx,ok,0,0,1,116,FALSE,FALSE,NA,NA,NA,NA,figures
+aqua,71145,10.2166/aqua.2019.210,jws2019210supp.docx,docx,ok,3,8,0,184,FALSE,TRUE,NA,NA,NA,NA,summary tables
+aqua,71096,10.2166/aqua.2019.084,jws2019084supp.docx,docx,ok,2,88,0,375,TRUE,FALSE,NA,NA,NA,NA,observation tables
+aqua,70880,10.2166/aqua.2019.075,jws2019075supp.docx,docx,ok,0,0,0,2768,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,71661,10.2166/aqua.2019.004,jws2019004supp.docx,docx,ok,0,0,0,90,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,71449,10.2166/aqua.2019.113,jws2019113supp.docx,docx,ok,2,46,0,277,TRUE,FALSE,NA,NA,NA,NA,observation tables
+aqua,73749,10.2166/aqua.2020.143,jws2020143supp.docx,docx,ok,0,0,0,83,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,72316,10.2166/aqua.2020.109,jws2020109supp.docx,docx,ok,0,0,0,20,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,73291,10.2166/aqua.2020.127,jws2020127supp.docx,docx,ok,1,3,0,131,FALSE,FALSE,NA,NA,NA,NA,summary tables
+aqua,75282,10.2166/aqua.2020.146,jws2020146supp1.docx,docx,ok,0,0,0,905,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,75282,10.2166/aqua.2020.146,jws2020146supp2.pptx,pptx,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,75823,10.2166/aqua.2020.010,jws2020010supp.docx,docx,ok,2,6,0,556,FALSE,FALSE,NA,NA,NA,NA,summary tables
+aqua,76707,10.2166/aqua.2020.212,jws2020212supp.docx,docx,ok,0,0,0,41,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,77837,10.2166/aqua.2020.053,jws2020053supp.docx,docx,ok,1,1,0,161,FALSE,FALSE,NA,NA,NA,NA,summary tables
+aqua,78594,10.2166/aqua.2020.057,jws2020057supp.docx,docx,ok,1,14,0,450,FALSE,FALSE,NA,NA,NA,NA,summary tables
+aqua,78084,10.2166/aqua.2020.094,jws2020094supp.docx,docx,ok,1,2,2,228,FALSE,FALSE,NA,NA,NA,NA,summary tables
+aqua,80017,10.2166/aqua.2021.039,jws2021039supp1.docx,docx,ok,0,0,0,2958,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,80017,10.2166/aqua.2021.039,jws2021039supp2.docx,docx,ok,0,0,0,3178,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,80325,10.2166/aqua.2021.105,jws2021105supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,81370,10.2166/aqua.2021.163,jws2021163supp.docx,docx,ok,1,2,0,1968,FALSE,FALSE,NA,NA,NA,NA,summary tables
+aqua,82365,10.2166/aqua.2021.032,jws2021032supp.docx,docx,ok,1,8,0,32,FALSE,FALSE,NA,NA,NA,NA,summary tables
+aqua,82960,10.2166/aqua.2021.050,jws2021050supp.docx,docx,ok,0,0,0,236,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,83327,10.2166/aqua.2021.018,jws2021018supp.docx,docx,ok,2,5,4,932,FALSE,FALSE,NA,NA,NA,NA,summary tables
+aqua,83690,10.2166/aqua.2021.146,jws2021146supp.docx,docx,ok,0,0,0,1890,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,83539,10.2166/aqua.2021.056,jws2021056supp.docx,docx,ok,0,0,0,3644,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,84403,10.2166/aqua.2021.082,jws2021082supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,84403,10.2166/aqua.2021.082,jws2021082supp2.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,FALSE,7,47,15,TRUE,observation tables
+aqua,84403,10.2166/aqua.2021.082,jws2021082supp3.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,85076,10.2166/aqua.2021.088,jws2021088supp1.jpeg,jpeg,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,85076,10.2166/aqua.2021.088,jws2021088supp2.jpeg,jpeg,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,85076,10.2166/aqua.2021.088,jws2021088supp3.jpeg,jpeg,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,86389,10.2166/aqua.2022.118,jws2022118supp.docx,docx,ok,0,0,0,1668,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,87108,10.2166/aqua.2022.128,jws2022128supp.docx,docx,ok,0,0,0,61,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,87730,10.2166/aqua.2022.157,jws2022157supp.docx,docx,ok,1,5,2,913,FALSE,FALSE,NA,NA,NA,NA,summary tables
+aqua,88060,10.2166/aqua.2022.161,jws2022161supp.docx,docx,ok,0,0,0,235,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,88323,10.2166/aqua.2022.032,jws2022032supp.docx,docx,ok,15,19,0,690,TRUE,FALSE,NA,NA,NA,NA,observation tables
+aqua,89607,10.2166/aqua.2022.052,jws0710801supp1.docx,docx,ok,1,8,0,598,FALSE,FALSE,NA,NA,NA,NA,summary tables
+aqua,89916,10.2166/aqua.2022.029,jws0710910supp1.docx,docx,ok,0,0,0,1168,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,93558,10.2166/aqua.2023.113,jws0720230supp1.docx,docx,ok,2,11,1,64,FALSE,FALSE,NA,NA,NA,NA,summary tables
+aqua,93607,10.2166/aqua.2023.217,jws0720313supp1.docx,docx,ok,0,0,0,299,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,94059,10.2166/aqua.2023.211,jws0720491supp1.docx,docx,ok,3,19,0,2073,TRUE,FALSE,NA,NA,NA,NA,observation tables
+aqua,94079,10.2166/aqua.2023.219,jws0720520supp1.docx,docx,ok,0,0,0,613,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,94528,10.2166/aqua.2023.067,jws0720577supp1.docx,docx,ok,0,0,1,10,FALSE,FALSE,NA,NA,NA,NA,figures
+aqua,94524,10.2166/aqua.2023.120,jws0720633supp1.docx,docx,ok,0,0,0,512,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,94746,10.2166/aqua.2023.218,jws0720701supp1.docx,docx,ok,0,0,0,649,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,94599,10.2166/aqua.2023.007,jws0720721supp1.docx,docx,ok,0,0,0,530,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,94523,10.2166/aqua.2023.021,jws0720750supp1.docx,docx,ok,0,0,0,1196,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,94741,10.2166/aqua.2023.049,jws0720814supp1.docx,docx,ok,0,0,0,365,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,94741,10.2166/aqua.2023.049,jws0720814supp2.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,FALSE,1,41,0,FALSE,observation tables
+aqua,94741,10.2166/aqua.2023.049,jws0720814supp3.xlsx,xlsx,ok,NA,NA,NA,NA,FALSE,FALSE,1,7,0,FALSE,summary tables
+aqua,95171,10.2166/aqua.2023.204,jws0720930supp1.docx,docx,ok,1,1,0,97,FALSE,FALSE,NA,NA,NA,NA,summary tables
+aqua,94901,10.2166/aqua.2023.017,jws0720983supp1.docx,docx,ok,0,0,0,745,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,95110,10.2166/aqua.2023.077,jws0721084supp1.docx,docx,ok,0,0,0,433,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,96720,10.2166/aqua.2023.225,jws0721386supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,96474,10.2166/aqua.2023.063,jws0721512supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,96474,10.2166/aqua.2023.063,jws0721512supp2.docx,docx,ok,0,0,0,8316,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,96847,10.2166/aqua.2023.197,jws0721582supp1.docx,docx,ok,0,0,0,141,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,97499,10.2166/aqua.2023.081,jws0721852supp1.docx,docx,ok,0,0,0,93,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,98016,10.2166/aqua.2023.127,jws0721881supp1.docx,docx,ok,1,1,0,228,FALSE,FALSE,NA,NA,NA,NA,summary tables
+aqua,98048,10.2166/aqua.2023.388,jws0721920supp1.docx,docx,ok,4,12,0,41,FALSE,FALSE,NA,NA,NA,NA,summary tables
+aqua,98064,10.2166/aqua.2023.284,jws0722109supp1.docx,docx,ok,2,19,0,7452,FALSE,TRUE,NA,NA,NA,NA,summary tables
+aqua,98246,10.2166/aqua.2023.299,jws0722170supp1.docx,docx,ok,0,0,0,467,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,98900,10.2166/aqua.2023.134,jws0722277supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,98705,10.2166/aqua.2023.278,jws0722347supp1.docx,docx,ok,0,0,0,1014,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,98951,10.2166/aqua.2023.215,jws0722408supp1.docx,docx,ok,0,0,0,805,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,100274,10.2166/aqua.2024.305,jws0730286supp1.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,TRUE,3,326,1,FALSE,observation tables
+aqua,100340,10.2166/aqua.2024.327,jws0730322supp1.docx,docx,ok,1,12,0,43,FALSE,FALSE,NA,NA,NA,NA,summary tables
+aqua,100595,10.2166/aqua.2024.220,jws0730407supp1.docx,docx,ok,1,4,0,60,FALSE,FALSE,NA,NA,NA,NA,summary tables
+aqua,100596,10.2166/aqua.2024.235,jws0730424supp1.docx,docx,ok,0,0,0,5644,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,100580,10.2166/aqua.2024.246,jws0730453supp1.docx,docx,ok,0,0,0,657,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,100847,10.2166/aqua.2024.255,jws0730464supp1.docx,docx,ok,0,0,0,4611,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,100820,10.2166/aqua.2024.307,jws0730569supp1.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,TRUE,8,97,0,TRUE,observation tables
+aqua,100820,10.2166/aqua.2024.307,jws0730569supp2.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,102994,10.2166/aqua.2024.130,jws0731467supp1.docx,docx,ok,0,0,0,783,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,103510,10.2166/aqua.2024.259,jws0731565supp1.docx,docx,ok,0,0,0,322,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,103254,10.2166/aqua.2024.087,jws0731611supp1.docx,docx,ok,0,0,0,417,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,103352,10.2166/aqua.2024.212,jws0731643supp1.docx,docx,ok,2,6,0,5733,FALSE,FALSE,NA,NA,NA,NA,summary tables
+aqua,104243,10.2166/aqua.2024.182,jws0731884supp1.docx,docx,ok,3,51,0,36,TRUE,FALSE,NA,NA,NA,NA,observation tables
+aqua,104735,10.2166/aqua.2024.203,jws0731917supp1.docx,docx,ok,4,23,0,621,FALSE,TRUE,NA,NA,NA,NA,summary tables
+aqua,105084,10.2166/aqua.2024.205,jws0732013supp1.docx,docx,ok,2,22,0,2040,FALSE,TRUE,NA,NA,NA,NA,summary tables
+aqua,105414,10.2166/aqua.2024.365,jws0732229supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,108516,10.2166/aqua.2025.204,jws0740405supp1.docx,docx,ok,0,0,0,9579,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,108509,10.2166/aqua.2025.299,jws0740435supp1.docx,docx,ok,0,0,0,190,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,109410,10.2166/aqua.2025.047,jws0740647supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,109786,10.2166/aqua.2025.044,jws0740715supp1.docx,docx,ok,4,24,0,3175,TRUE,TRUE,NA,NA,NA,NA,observation tables
+aqua,110156,10.2166/aqua.2025.036,jws0740762supp1.docx,docx,ok,0,0,0,809,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,110220,10.2166/aqua.2025.040,jws0740828supp1.docx,docx,ok,0,0,0,48,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,110220,10.2166/aqua.2025.040,jws0740828supp2.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,110446,10.2166/aqua.2025.087,jws0740839supp1.docx,docx,ok,21,25,0,671,TRUE,FALSE,NA,NA,NA,NA,observation tables
+aqua,111107,10.2166/aqua.2026.110,jws0750129supp1.docx,docx,ok,0,0,0,1346,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,111137,10.2166/aqua.2026.111,jws0750143supp1.docx,docx,ok,0,0,0,142,FALSE,FALSE,NA,NA,NA,NA,prose only
+aqua,112075,10.2166/aqua.2026.084,jws0750293supp1.docx,docx,ok,1,30,0,195,FALSE,TRUE,NA,NA,NA,NA,summary tables
+aqua,112075,10.2166/aqua.2026.084,jws0750293supp2.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,112075,10.2166/aqua.2026.084,jws0750293supp3.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+aqua,112080,10.2166/aqua.2026.099,jws0750321supp1.docx,docx,ok,0,0,0,438,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,25194,10.2166/ws.2011.057,057.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,25251,10.2166/ws.2012.127,127.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,25316,10.2166/ws.2012.053,053.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,25332,10.2166/ws.2012.091,091.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27295,10.2166/ws.2013.149,149.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,25345,10.2166/ws.2013.109,109.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,25367,10.2166/ws.2013.173,173.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,25389,10.2166/ws.2013.169,169.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,25384,10.2166/ws.2013.186,186.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27390,10.2166/ws.2014.007,007.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27393,10.2166/ws.2014.011,011.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27402,10.2166/ws.2014.017,017.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27406,10.2166/ws.2014.025,025.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27410,10.2166/ws.2014.054,054.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27421,10.2166/ws.2014.035,035.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27435,10.2166/ws.2014.048,048.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27471,10.2166/ws.2014.091,091.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27439,10.2166/ws.2014.098,098.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27473,10.2166/ws.2014.129,129.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27497,10.2166/ws.2015.002,002.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27504,10.2166/ws.2015.013,013.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27561,10.2166/ws.2015.041,041.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27495,10.2166/ws.2015.046,ws2015046supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27529,10.2166/ws.2015.061,ws2015061supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,28062,10.2166/ws.2015.084,ws2015084supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,28077,10.2166/ws.2015.094,ws2015094supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,28087,10.2166/ws.2015.098,ws2015098supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27567,10.2166/ws.2015.105,ws2015105supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27594,10.2166/ws.2015.111,ws2015111supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27608,10.2166/ws.2015.113,ws2015113supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27635,10.2166/ws.2015.106,ws2015106supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,3173,10.2166/ws.2015.148,ws2015148supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,3202,10.2166/ws.2015.152,ws2015152supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27734,10.2166/ws.2015.169,ws2015169supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27782,10.2166/ws.2015.180,ws2015180supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,27827,10.2166/ws.2015.191,ws2015191supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,28023,10.2166/ws.2016.001,ws2016001supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,28026,10.2166/ws.2016.021,ws2016021supp.docx,docx,ok,0,0,1,136,FALSE,FALSE,NA,NA,NA,NA,figures
+ws,28027,10.2166/ws.2016.023,ws2016023supp.docx,docx,ok,1,18,0,45,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,28056,10.2166/ws.2016.019,ws2016019supp.docx,docx,ok,0,0,0,1845,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,31663,10.2166/ws.2016.056,ws2016056supp.docx,docx,ok,0,0,1,162,FALSE,FALSE,NA,NA,NA,NA,figures
+ws,28120,10.2166/ws.2016.088,ws2016088supp.docx,docx,ok,0,0,0,503,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,28140,10.2166/ws.2016.090,ws2016090supp.docx,docx,ok,1,9,0,4948,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,29974,10.2166/ws.2016.098,ws2016098supp.docx,docx,ok,0,0,0,1451,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,29983,10.2166/ws.2016.114,ws2016114supp.docx,docx,ok,1,13,0,227,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,29989,10.2166/ws.2016.121,ws2016121supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,30007,10.2166/ws.2016.132,ws2016132supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,28177,10.2166/ws.2016.160,ws2016160supp.docx,docx,ok,0,0,0,13975,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,28179,10.2166/ws.2016.165,ws2016165supp.docx,docx,ok,1,1,0,775,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,28183,10.2166/ws.2016.161,ws2016161supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,28193,10.2166/ws.2016.151,ws2016151supp.docx,docx,ok,0,0,0,1186,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,30646,10.2166/ws.2016.145,ws2016145supp.docx,docx,ok,0,0,0,1392,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,30653,10.2166/ws.2016.148,ws2016148supp.docx,docx,ok,0,0,0,73,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,14984,10.2166/ws.2016.199,ws2016199supp.docx,docx,ok,0,0,0,36,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,15111,10.2166/ws.2017.037,ws2017037supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,15136,10.2166/ws.2017.040,ws2017040supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,15247,10.2166/ws.2017.043,ws2017043supp.docx,docx,ok,0,0,0,950,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,38178,10.2166/ws.2017.063,ws2017063supp.docx,docx,ok,0,0,17,1766,FALSE,FALSE,NA,NA,NA,NA,figures
+ws,38211,10.2166/ws.2017.081,ws2017081supp.docx,docx,ok,1,1,22,2728,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,38208,10.2166/ws.2017.097,ws2017097supp.docx,docx,ok,0,0,0,174,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,38213,10.2166/ws.2017.092,ws2017092supp.docx,docx,ok,1,20,0,584,FALSE,TRUE,NA,NA,NA,NA,summary tables
+ws,38220,10.2166/ws.2017.070,ws2017070supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,38266,10.2166/ws.2017.126,ws2017126supp.docx,docx,ok,0,0,0,388,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,38287,10.2166/ws.2017.153,ws2017153supp.docx,docx,ok,0,0,0,785,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,38282,10.2166/ws.2017.143,ws2017143supp.docx,docx,ok,0,0,23,339,FALSE,FALSE,NA,NA,NA,NA,figures
+ws,38310,10.2166/ws.2017.185,ws2017185supp.docx,docx,ok,0,0,0,2593,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,39247,10.2166/ws.2017.203,ws2017203supp.docx,docx,ok,0,0,0,93,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,39259,10.2166/ws.2017.215,ws2017215supp.docx,docx,ok,1,12,2,90,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,39260,10.2166/ws.2017.216,ws2017216supp.docx,docx,ok,3,5,0,341,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,39310,10.2166/ws.2018.026,ws2018026supp.docx,docx,ok,1,1,0,847,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,39327,10.2166/ws.2018.043,ws2018043supp.docx,docx,ok,1,17,0,9,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,39332,10.2166/ws.2018.048,ws2018048supp.docx,docx,ok,2,29,0,6982,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,39334,10.2166/ws.2018.050,ws2018050supp.docx,docx,ok,0,0,0,105,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,39222,10.2166/ws.2018.085,ws2018085supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,39188,10.2166/ws.2018.089,ws2018089supp.docx,docx,ok,4,3,40,1128,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,39189,10.2166/ws.2018.091,ws2018091supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,39242,10.2166/ws.2018.097,ws2018097supp.docx,docx,ok,0,0,1,167,FALSE,FALSE,NA,NA,NA,NA,figures
+ws,39350,10.2166/ws.2018.104,ws2018104supp.docx,docx,ok,0,0,0,59,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,39351,10.2166/ws.2018.105,ws2018105supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,39352,10.2166/ws.2018.106,ws2018106supp.docx,docx,ok,0,0,0,58,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,40814,10.2166/ws.2018.110,ws2018110supp.docx,docx,ok,0,0,0,32,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,40814,10.2166/ws.2018.110,ws2018110supp.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,FALSE,4,52,28,TRUE,observation tables
+ws,40815,10.2166/ws.2018.111,ws2018111supp.docx,docx,ok,1,8,0,17,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,41417,10.2166/ws.2018.129,ws2018129supp.docx,docx,ok,0,0,0,875,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,41429,10.2166/ws.2018.130,ws2018130supp.docx,docx,ok,1,17,16,3101,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,41454,10.2166/ws.2018.131,ws2018131supp.docx,docx,ok,1,7,0,2300,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,41521,10.2166/ws.2018.132,ws2018132supp.docx,docx,ok,1,5,0,107,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,62405,10.2166/ws.2018.136,ws2018136supp.docx,docx,ok,3,14,0,2064,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,62857,10.2166/ws.2018.138,ws2018138supp.docx,docx,ok,0,0,0,2776,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,65095,10.2166/ws.2018.190,ws2018190supp.docx,docx,ok,0,0,0,906,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,63760,10.2166/ws.2018.150,ws2018150supp.docx,docx,ok,2,6,0,721,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,64199,10.2166/ws.2018.158,ws2018158supp.docx,docx,ok,0,0,0,26,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,64165,10.2166/ws.2018.161,ws2018161supp.docx,docx,ok,0,0,0,517,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,64166,10.2166/ws.2018.162,ws2018162supp.docx,docx,ok,0,0,1,16,FALSE,FALSE,NA,NA,NA,NA,figures
+ws,64441,10.2166/ws.2018.164,ws2018164supp.docx,docx,ok,0,0,19,1426,FALSE,FALSE,NA,NA,NA,NA,figures
+ws,64493,10.2166/ws.2018.176,ws2018176supp.docx,docx,ok,6,269,11,233,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,64772,10.2166/ws.2018.188,ws2018188supp.docx,docx,ok,1,12,0,1305,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,64779,10.2166/ws.2018.187,ws2018187supp.docx,docx,ok,0,0,0,2439,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,64308,10.2166/ws.2018.167,ws2018167supp.docx,docx,ok,0,0,0,1048,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,65147,10.2166/ws.2018.191,ws2018191supp.docx,docx,ok,1,4,0,534,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,65471,10.2166/ws.2019.006,ws2019006supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,65382,10.2166/ws.2019.001,ws2019001supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,65531,10.2166/ws.2019.009,ws2019009supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,65532,10.2166/ws.2019.010,ws2019010supp.docx,docx,ok,0,0,0,1327,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,65689,10.2166/ws.2019.025,ws2019025supp.docx,docx,ok,3,16,0,6082,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,65766,10.2166/ws.2019.026,ws2019026supp.docx,docx,ok,1,14,4,2289,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,66195,10.2166/ws.2019.040,ws2019040supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,66259,10.2166/ws.2019.046,ws2019046supp.docx,docx,ok,0,0,0,2962,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,66194,10.2166/ws.2019.039,ws2019039supp.docx,docx,ok,1,7,0,1971,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,66246,10.2166/ws.2019.045,ws2019045supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,66613,10.2166/ws.2019.052,ws2019052supp.docx,docx,ok,0,0,0,253,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,66245,10.2166/ws.2019.044,ws2019044supp.docx,docx,ok,0,0,0,1273,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,66478,10.2166/ws.2019.049,ws2019049supp.docx,docx,ok,0,0,0,1713,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,66758,10.2166/ws.2019.060,ws2019060supp.docx,docx,ok,0,0,0,1112,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,67110,10.2166/ws.2019.070,ws2019070supp.docx,docx,ok,1,8,0,592,FALSE,TRUE,NA,NA,NA,NA,summary tables
+ws,67546,10.2166/ws.2019.072,ws2019072supp.docx,docx,ok,0,0,0,4108,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,67621,10.2166/ws.2019.074,ws2019074supp.docx,docx,ok,0,0,0,1111,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,67648,10.2166/ws.2019.077,ws2019077supp.docx,docx,ok,0,0,1,26,FALSE,FALSE,NA,NA,NA,NA,figures
+ws,67630,10.2166/ws.2019.076,ws2019076supp.docx,docx,ok,0,0,3,540,FALSE,FALSE,NA,NA,NA,NA,figures
+ws,67788,10.2166/ws.2019.082,ws2019082supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,67993,10.2166/ws.2019.089,ws2019089supp.docx,docx,ok,0,0,0,830,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,68121,10.2166/ws.2019.093,ws2019093supp.docx,docx,ok,0,0,0,1180,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,68972,10.2166/ws.2019.103,ws2019103supp.docx,docx,ok,0,0,0,630,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,69018,10.2166/ws.2019.106,ws2019106supp.docx,docx,ok,0,0,0,175,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,69392,10.2166/ws.2019.114,ws2019114supp.docx,docx,ok,0,0,0,17,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,69653,10.2166/ws.2019.121,ws2019121supp.docx,docx,ok,3,15,2,244,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,69739,10.2166/ws.2019.129,ws2019129supp.docx,docx,ok,3,3,0,1499,FALSE,TRUE,NA,NA,NA,NA,summary tables
+ws,70025,10.2166/ws.2019.142,ws2019142supp.docx,docx,ok,0,0,2,446,FALSE,FALSE,NA,NA,NA,NA,figures
+ws,70135,10.2166/ws.2019.145,ws2019145supp.docx,docx,ok,0,0,0,617,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,70388,10.2166/ws.2019.152,ws2019152supp.docx,docx,ok,1,20,0,39,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,70910,10.2166/ws.2019.171,ws2019171supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,71060,10.2166/ws.2019.173,ws2019173supp.docx,docx,ok,1,1,1,267,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,71199,10.2166/ws.2019.178,ws2019178supp.docx,docx,ok,0,0,0,1263,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,71228,10.2166/ws.2019.182,ws2019182supp.docx,docx,ok,5,7,0,2325,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,71690,10.2166/ws.2019.191,ws2019191supp.docx,docx,ok,0,0,0,22,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,72152,10.2166/ws.2020.003,ws2020003supp.docx,docx,ok,2,3,0,174,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,72561,10.2166/ws.2020.032,ws2020032supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,71696,10.2166/ws.2019.198,ws2019198supp.docx,docx,ok,1,42,0,66,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,71695,10.2166/ws.2019.197,ws2019197supp.docx,docx,ok,0,0,0,83,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,72230,10.2166/ws.2020.012,ws2020012supp.docx,docx,ok,1,8,0,1430,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,72254,10.2166/ws.2020.020,ws2020020supp.docx,docx,ok,0,0,0,90,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,72530,10.2166/ws.2020.031,ws2020031supp.docx,docx,ok,0,0,0,151,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,72387,10.2166/ws.2020.025,ws2020025supp.docx,docx,ok,0,0,0,51,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,73054,10.2166/ws.2020.042,ws2020042supp.docx,docx,ok,0,0,0,668,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,73687,10.2166/ws.2020.064,ws2020064supp.docx,docx,ok,1,101,0,8,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,74055,10.2166/ws.2020.085,ws2020085supp.docx,docx,ok,0,0,0,1340,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,74285,10.2166/ws.2020.099,ws2020099supp.docx,docx,ok,0,0,31,2451,FALSE,FALSE,NA,NA,NA,NA,figures
+ws,74312,10.2166/ws.2020.103,ws2020103supp.docx,docx,ok,2,6,0,2013,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,74504,10.2166/ws.2020.113,ws2020113supp.docx,docx,ok,0,0,0,84,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,74479,10.2166/ws.2020.112,ws2020112supp.docx,docx,ok,2,1,240,2585,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,74165,10.2166/ws.2020.093,ws2020093supp.docx,docx,ok,1,32,0,1451,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,74733,10.2166/ws.2020.124,ws2020124supp.docx,docx,ok,0,0,2,911,FALSE,FALSE,NA,NA,NA,NA,figures
+ws,74732,10.2166/ws.2020.123,ws2020123supp.docx,docx,ok,0,0,0,200,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,75131,10.2166/ws.2020.141,ws2020141supp.docx,docx,ok,0,0,0,485,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,75448,10.2166/ws.2020.156,ws2020156supp.docx,docx,ok,2,3,0,474,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,75679,10.2166/ws.2020.167,ws2020167supp.docx,docx,ok,1,14,0,1169,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,76249,10.2166/ws.2020.200,ws2020200supp.docx,docx,ok,1,34,0,2336,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,76931,10.2166/ws.2020.232,ws2020232supp.docx,docx,ok,0,0,0,8364,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,77147,10.2166/ws.2020.244,ws2020244supp.docx,docx,ok,0,0,0,28,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,77691,10.2166/ws.2020.257,ws2020257supp.docx,docx,ok,1,81,0,5409,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,77117,10.2166/ws.2020.241,ws2020241supp.docx,docx,ok,0,0,0,995,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,76868,10.2166/ws.2020.224,ws2020224supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,76808,10.2166/ws.2020.222,ws2020222supp.docx,docx,ok,1,10,0,449,FALSE,TRUE,NA,NA,NA,NA,summary tables
+ws,78134,10.2166/ws.2020.313,ws2020313supp.docx,docx,ok,0,0,0,1958,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,77783,10.2166/ws.2020.278,ws2020278supp.docx,docx,ok,1,17,0,956,FALSE,TRUE,NA,NA,NA,NA,summary tables
+ws,78074,10.2166/ws.2020.300,ws2020300supp.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,FALSE,1,58,0,TRUE,observation tables
+ws,78802,10.2166/ws.2020.368,ws2020368supp.docx,docx,ok,0,0,0,1785,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,78738,10.2166/ws.2020.363,ws2020363supp.docx,docx,ok,0,0,0,1130,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,78227,10.2166/ws.2020.324,ws2020324supp.docx,docx,ok,0,0,0,86,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,79071,10.2166/ws.2020.376,ws2020376supp.docx,docx,ok,0,0,0,395,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,79848,10.2166/ws.2021.014,ws2021014supp.docx,docx,ok,1,15,0,859,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,80025,10.2166/ws.2021.028,ws2021028supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,80349,10.2166/ws.2021.042,ws2021042supp.docx,docx,ok,0,0,0,28,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,79700,10.2166/ws.2021.009,ws2021009supp.docx,docx,ok,0,0,0,30,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,79994,10.2166/ws.2021.026,ws2021026supp.docx,docx,ok,1,1,0,976,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,76230,10.2166/ws.2020.199,ws2020199supp.docx,docx,ok,0,0,0,1301,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,77118,10.2166/ws.2020.242,ws2020242supp.docx,docx,ok,11,9,0,4666,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,80224,10.2166/ws.2021.033,ws2021033supp.docx,docx,ok,0,0,0,75,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,80918,10.2166/ws.2021.072,ws2021072supp.docx,docx,ok,4,36,0,2775,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,82119,10.2166/ws.2021.142,ws2021142supp.docx,docx,ok,0,0,0,99,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,81333,10.2166/ws.2021.097,ws2021097supp.docx,docx,ok,4,9,0,353,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,81113,10.2166/ws.2021.090,ws2021090supp.docx,docx,ok,19,15,3,4865,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,81351,10.2166/ws.2021.103,ws2021103supp.docx,docx,ok,0,0,0,43,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,81439,10.2166/ws.2021.107,ws2021107supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,81509,10.2166/ws.2021.120,ws2021120supp.docx,docx,ok,0,0,0,249,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,82385,10.2166/ws.2021.160,ws2021160supp.docx,docx,ok,0,0,0,121,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,82429,10.2166/ws.2021.172,ws2021172supp.docx,docx,ok,0,0,0,135,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,82438,10.2166/ws.2021.177,ws2021177supp.docx,docx,ok,0,0,0,1321,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,82533,10.2166/ws.2021.180,ws2021180supp.docx,docx,ok,2,8,0,29,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,82606,10.2166/ws.2021.187,ws2021187supp.docx,docx,ok,0,0,0,417,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,82870,10.2166/ws.2021.205,ws2021205supp.docx,docx,ok,1,5,2,1421,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,83738,10.2166/ws.2021.278,ws2021278supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,83516,10.2166/ws.2021.258,ws2021258supp.docx,docx,ok,0,0,0,599,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,83306,10.2166/ws.2021.245,ws2021245supp.docx,docx,ok,0,0,0,411,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,83174,10.2166/ws.2021.232,ws2021232supp.docx,docx,ok,0,0,0,425,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,83223,10.2166/ws.2021.234,ws2021234supp1.jpeg,jpeg,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,83223,10.2166/ws.2021.234,ws2021234supp2.jpeg,jpeg,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,83223,10.2166/ws.2021.234,ws2021234supp3.jpeg,jpeg,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,83223,10.2166/ws.2021.234,ws2021234supp4.jpeg,jpeg,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,83223,10.2166/ws.2021.234,ws2021234supp5.jpeg,jpeg,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,83223,10.2166/ws.2021.234,ws2021234supp6.jpeg,jpeg,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,83223,10.2166/ws.2021.234,ws2021234supp7.jpeg,jpeg,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,83223,10.2166/ws.2021.234,ws2021234supp8.jpeg,jpeg,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,83069,10.2166/ws.2021.227,ws2021227supp.docx,docx,ok,0,0,0,808,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,83043,10.2166/ws.2021.222,ws2021222supp.docx,docx,ok,0,0,0,3409,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,83000,10.2166/ws.2021.219,ws2021219supp.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,FALSE,1,21,0,FALSE,observation tables
+ws,82889,10.2166/ws.2021.212,ws2021212supp.docx,docx,ok,0,0,0,398,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,83783,10.2166/ws.2021.282,ws2021282supp.docx,docx,ok,0,0,0,652,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,84648,10.2166/ws.2021.348,ws2021348supp.docx,docx,ok,0,0,0,590,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,84601,10.2166/ws.2021.344,ws2021344supp.docx,docx,ok,3,41,12,11097,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,84422,10.2166/ws.2021.334,ws2021334supp.docx,docx,ok,0,0,54,589,FALSE,FALSE,NA,NA,NA,NA,figures
+ws,84429,10.2166/ws.2021.336,ws2021336supp.docx,docx,ok,1,12,0,4640,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,84269,10.2166/ws.2021.322,ws2021322supp.docx,docx,ok,0,0,0,180,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,84244,10.2166/ws.2021.315,ws2021315supp1.docx,docx,ok,0,0,10,433,FALSE,FALSE,NA,NA,NA,NA,figures
+ws,84244,10.2166/ws.2021.315,ws2021315supp2.docx,docx,ok,0,0,0,2191,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,84122,10.2166/ws.2021.310,ws2021310supp.docx,docx,ok,0,0,0,204,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,84078,10.2166/ws.2021.311,ws2021311supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,83953,10.2166/ws.2021.297,ws2021297supp.docx,docx,ok,0,0,0,276,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,83865,10.2166/ws.2021.295,ws2021295supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,84929,10.2166/ws.2021.370,ws2021370supp.docx,docx,ok,0,0,0,838,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,84988,10.2166/ws.2021.376,ws2021376supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,86112,10.2166/ws.2021.455,ws2021455supp.docx,docx,ok,0,0,0,121,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,85788,10.2166/ws.2021.429,ws2021429supp.docx,docx,ok,0,0,0,269,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,85673,10.2166/ws.2021.414,ws2021414supp.docx,docx,ok,0,0,0,358,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,85585,10.2166/ws.2021.411,ws2021411supp.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,FALSE,1,197,0,TRUE,observation tables
+ws,85486,10.2166/ws.2021.406,ws2021406supp1.docx,docx,ok,1,17,0,462,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,85486,10.2166/ws.2021.406,ws2021406supp2.png,png,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,85486,10.2166/ws.2021.406,ws2021406supp3.png,png,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,85486,10.2166/ws.2021.406,ws2021406supp4.png,png,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,85305,10.2166/ws.2021.392,ws2021392supp.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,FALSE,4,37,4,TRUE,observation tables
+ws,86205,10.2166/ws.2022.003,ws2022003supp.docx,docx,ok,1,3,0,12624,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,86247,10.2166/ws.2022.013,ws2022013supp.docx,docx,ok,0,0,0,733,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,86276,10.2166/ws.2022.023,ws2022023supp.docx,docx,ok,3,7,1,3420,FALSE,TRUE,NA,NA,NA,NA,summary tables
+ws,87046,10.2166/ws.2022.054,ws2022054supp.docx,docx,ok,6,38,0,49,TRUE,TRUE,NA,NA,NA,NA,observation tables
+ws,87678,10.2166/ws.2022.134,ws2022134supp.xls,xls,ok,NA,NA,NA,NA,TRUE,FALSE,5,48,0,TRUE,observation tables
+ws,87765,10.2166/ws.2022.141,ws2022141supp.docx,docx,ok,0,0,0,299,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,88623,10.2166/ws.2022.190,ws2022190supp.docx,docx,ok,4,28,0,1702,TRUE,TRUE,NA,NA,NA,NA,observation tables
+ws,88057,10.2166/ws.2022.156,ws2022156supp.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,87981,10.2166/ws.2022.152,ws2022152supp.docx,docx,ok,0,0,0,9400,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,88552,10.2166/ws.2022.183,ws2022183supp.docx,docx,ok,1,4,0,5497,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,88660,10.2166/ws.2022.195,ws2022195supp.docx,docx,ok,0,0,0,4556,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,87781,10.2166/ws.2022.148,ws2022148supp.docx,docx,ok,0,0,0,323,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,88338,10.2166/ws.2022.186,ws2022186supp.docx,docx,ok,2,7,8,644,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,88923,10.2166/ws.2022.215,ws2022215supp.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,88776,10.2166/ws.2022.206,ws2022206supp.docx,docx,ok,1,10,4,43,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,88455,10.2166/ws.2022.185,ws2022185supp.docx,docx,ok,0,0,0,4473,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,89441,10.2166/ws.2022.244,ws2022244supp.docx,docx,ok,0,0,0,745,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,89420,10.2166/ws.2022.246,ws2022246supp.docx,docx,ok,3,16,0,235,TRUE,TRUE,NA,NA,NA,NA,observation tables
+ws,89553,10.2166/ws.2022.251,ws2022251supp.docx,docx,ok,1,1,0,606,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,89681,10.2166/ws.2022.266,ws022086867supp1.docx,docx,ok,0,0,0,30,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,89870,10.2166/ws.2022.280,ws022086994supp1.docx,docx,ok,0,0,0,24,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,89561,10.2166/ws.2022.252,ws022087014supp1.docx,docx,ok,0,0,0,132,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,90549,10.2166/ws.2022.317,ws022097072supp1.docx,docx,ok,2,5,0,60,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,90231,10.2166/ws.2022.299,ws022097125supp1.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,FALSE,2,36,0,FALSE,observation tables
+ws,90257,10.2166/ws.2022.274,ws022097197supp1.docx,docx,ok,0,0,0,304,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,90355,10.2166/ws.2022.304,ws022097256supp1.docx,docx,ok,0,0,0,14,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,90355,10.2166/ws.2022.304,ws022097256supp2.docx,docx,ok,0,0,0,2722,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,90355,10.2166/ws.2022.304,ws022097256supp3.docx,docx,ok,2,7,0,320,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,90355,10.2166/ws.2022.304,ws022097256supp4.docx,docx,ok,0,0,0,1666,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,90078,10.2166/ws.2022.285,ws022097375supp1.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,FALSE,1,17,4,TRUE,observation tables
+ws,90816,10.2166/ws.2022.323,ws022107416supp1.docx,docx,ok,0,0,0,3082,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,91005,10.2166/ws.2022.254,ws022107476supp1.docx,docx,ok,1,9,0,12,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,90795,10.2166/ws.2022.322,ws022107513supp1.docx,docx,ok,0,0,0,701,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,91259,10.2166/ws.2022.345,ws022107782supp1.docx,docx,ok,0,0,0,112,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,91484,10.2166/ws.2022.358,ws022117960supp1.docx,docx,ok,1,1,0,30,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,91610,10.2166/ws.2022.368,ws022117972supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,91439,10.2166/ws.2022.356,ws022118139supp1.docx,docx,ok,0,0,0,825,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,92021,10.2166/ws.2022.395,ws022128434supp1.docx,docx,ok,0,0,0,1465,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,91945,10.2166/ws.2022.384,ws022128527supp1.docx,docx,ok,1,143,0,4400,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,91946,10.2166/ws.2022.387,ws022128625supp1.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,92203,10.2166/ws.2022.406,ws022128750supp1.docx,docx,ok,0,0,0,1833,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,92823,10.2166/ws.2022.441,ws023010206supp1.docx,docx,ok,1,10,0,130,FALSE,TRUE,NA,NA,NA,NA,summary tables
+ws,92574,10.2166/ws.2022.425,ws023010288supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,92574,10.2166/ws.2022.425,ws023010288supp2.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,92574,10.2166/ws.2022.425,ws023010288supp3.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,92574,10.2166/ws.2022.425,ws023010288supp4.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,92574,10.2166/ws.2022.425,ws023010288supp5.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,92574,10.2166/ws.2022.425,ws023010288supp6.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,93072,10.2166/ws.2023.007,ws023020599supp1.docx,docx,ok,0,0,0,254,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,93125,10.2166/ws.2023.008,ws023020624supp1.docx,docx,ok,0,0,0,116,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,93391,10.2166/ws.2023.028,ws023020867supp1.docx,docx,ok,0,0,0,2059,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,93445,10.2166/ws.2023.030,ws023020884supp1.docx,docx,ok,0,0,0,268,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,93758,10.2166/ws.2023.056,ws023031041supp1.docx,docx,ok,0,0,0,1762,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,93760,10.2166/ws.2023.058,ws023031416supp1.docx,docx,ok,0,0,0,648,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,93922,10.2166/ws.2023.069,ws023041531supp1.docx,docx,ok,4,10,5,1062,FALSE,TRUE,NA,NA,NA,NA,summary tables
+ws,93610,10.2166/ws.2023.045,ws023041587supp1.docx,docx,ok,0,0,0,572,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,94153,10.2166/ws.2023.078,ws023041611supp1.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,94573,10.2166/ws.2023.095,ws023041658supp1.docx,docx,ok,0,0,0,84,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,94090,10.2166/ws.2023.076,ws023041711supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,94090,10.2166/ws.2023.076,ws023041711supp2.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,94633,10.2166/ws.2023.092,ws023051810supp1.docx,docx,ok,0,0,0,4799,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,94328,10.2166/ws.2023.082,ws023052001supp1.docx,docx,ok,0,0,1,969,FALSE,FALSE,NA,NA,NA,NA,figures
+ws,93813,10.2166/ws.2023.060,ws023052081supp1.docx,docx,ok,0,0,8,307,FALSE,FALSE,NA,NA,NA,NA,figures
+ws,94767,10.2166/ws.2023.108,ws023052105supp1.docx,docx,ok,0,0,0,373,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,94933,10.2166/ws.2023.115,ws023052147supp1.docx,docx,ok,2,13,0,1016,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,95556,10.2166/ws.2023.142,ws023062404supp1.docx,docx,ok,4,30,0,76,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,96098,10.2166/ws.2023.162,ws023072814supp1.docx,docx,ok,0,0,0,285,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,96109,10.2166/ws.2023.163,ws023072833supp1.docx,docx,ok,5,2,0,125,FALSE,TRUE,NA,NA,NA,NA,summary tables
+ws,96324,10.2166/ws.2023.178,ws023083046supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,96379,10.2166/ws.2023.181,ws023083061supp1.docx,docx,ok,0,0,0,920,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,96869,10.2166/ws.2023.177,ws023083097supp1.docx,docx,ok,7,69,0,39,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,96307,10.2166/ws.2023.175,ws023083156supp1.docx,docx,ok,0,0,0,651,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,96289,10.2166/ws.2023.176,ws023083205supp1.docx,docx,ok,0,0,0,1194,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,96706,10.2166/ws.2023.194,ws023083402supp1.docx,docx,ok,1,11,0,173,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,96741,10.2166/ws.2023.196,ws023083500supp1.docx,docx,ok,0,0,0,1615,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,97009,10.2166/ws.2023.216,ws023093868supp1.docx,docx,ok,1,21,0,13,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,97079,10.2166/ws.2023.224,ws023093925supp1.docx,docx,ok,2,37,0,29,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,97227,10.2166/ws.2023.226,ws023093959supp1.docx,docx,ok,1,3,0,11059,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,98117,10.2166/ws.2023.268,ws023114520supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,98523,10.2166/ws.2023.291,ws023114645supp1.docx,docx,ok,0,0,0,675,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,98118,10.2166/ws.2023.269,ws023114699supp1.docx,docx,ok,1,1,0,889,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,98920,10.2166/ws.2023.309,ws023125004supp1.docx,docx,ok,0,0,0,2470,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,99256,10.2166/ws.2023.319,ws023125062supp1.docx,docx,ok,0,0,0,266,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,99400,10.2166/ws.2023.328,ws024010086supp1.docx,docx,ok,0,0,0,1830,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,100375,10.2166/ws.2024.022,ws024020625supp1.docx,docx,ok,1,13,0,14,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,100430,10.2166/ws.2024.024,ws024030738supp1.docx,docx,ok,0,0,0,1154,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,100677,10.2166/ws.2024.035,ws024030865supp1.docx,docx,ok,3,4,1,276,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,100677,10.2166/ws.2024.035,ws024030865supp2.docx,docx,ok,0,0,0,299,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,100388,10.2166/ws.2024.015,ws024030889supp1.docx,docx,ok,3,84,0,34,TRUE,TRUE,NA,NA,NA,NA,observation tables
+ws,101159,10.2166/ws.2024.056,ws024040961supp1.docx,docx,ok,1,25,0,6627,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,101008,10.2166/ws.2024.048,ws024041117supp1.docx,docx,ok,1,8,0,811,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,100732,10.2166/ws.2024.038,ws024041207supp1.docx,docx,ok,0,0,0,58,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,102245,10.2166/ws.2024.110,ws024051498supp1.docx,docx,ok,0,0,0,346,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,101822,10.2166/ws.2024.089,ws024051515supp1.docx,docx,ok,1,5,0,539,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,101526,10.2166/ws.2024.071,ws024051755supp1.docx,docx,ok,0,0,0,643,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,101705,10.2166/ws.2024.083,ws024051776supp1.docx,docx,ok,1,1,0,1204,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,102003,10.2166/ws.2024.096,ws024051875supp1.docx,docx,ok,0,0,3,470,FALSE,FALSE,NA,NA,NA,NA,figures
+ws,101536,10.2166/ws.2024.072,ws024051893supp1.docx,docx,ok,1,11,0,146,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,102734,10.2166/ws.2024.127,ws024062066supp1.docx,docx,ok,1,10,0,77,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,102748,10.2166/ws.2024.128,ws024062105supp1.docx,docx,ok,1,12,0,264,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,102834,10.2166/ws.2024.136,ws024062143supp1.docx,docx,ok,0,0,0,5949,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,102377,10.2166/ws.2024.117,ws024062172supp1.docx,docx,ok,0,0,0,157,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,103146,10.2166/ws.2024.153,ws024072218supp1.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,FALSE,4,208,5,TRUE,observation tables
+ws,102479,10.2166/ws.2024.118,ws024072409supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,102852,10.2166/ws.2024.138,ws024072518supp1.doc,doc,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,103426,10.2166/ws.2024.161,ws024072534supp1.docx,docx,ok,2,10,0,925,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,103933,10.2166/ws.2024.176,ws024082737supp1.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,FALSE,1,191,4,FALSE,observation tables
+ws,103637,10.2166/ws.2024.170,ws024082844supp1.docx,docx,ok,0,0,0,14,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,104177,10.2166/ws.2024.193,ws024082933supp1.docx,docx,ok,0,0,0,3105,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,104311,10.2166/ws.2024.197,ws024093031supp1.docx,docx,ok,0,0,0,1042,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,104788,10.2166/ws.2024.208,ws024103423supp1.docx,docx,ok,0,0,0,1451,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,104842,10.2166/ws.2024.207,ws024103540supp1.docx,docx,ok,0,0,0,306,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,105310,10.2166/ws.2024.227,ws024103588supp1.docx,docx,ok,0,0,0,20,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,105310,10.2166/ws.2024.227,ws024103588supp2.docx,docx,ok,0,0,0,22,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,105472,10.2166/ws.2024.240,ws024113759supp1.docx,docx,ok,0,0,0,191,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,105910,10.2166/ws.2024.251,ws024124059supp1.docx,docx,ok,1,65,0,573,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,106272,10.2166/ws.2024.257,ws025010119supp1.docx,docx,ok,0,0,0,6315,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,106273,10.2166/ws.2024.256,ws025020343supp1.docx,docx,ok,0,0,0,1126,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,107070,10.2166/ws.2025.022,ws025030578supp1.docx,docx,ok,1,11,0,2369,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,107172,10.2166/ws.2025.028,ws025030596supp1.docx,docx,ok,0,0,0,3525,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,107850,10.2166/ws.2025.045,ws025040727supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,107785,10.2166/ws.2025.044,ws025040779supp1.docx,docx,ok,0,0,0,757,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,107639,10.2166/ws.2025.039,ws025050900supp1.docx,docx,ok,1,5,1,233,FALSE,FALSE,NA,NA,NA,NA,summary tables
+ws,108246,10.2166/ws.2025.062,ws025061087supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,108592,10.2166/ws.2025.068,ws025071161supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,109212,10.2166/ws.2025.075,ws025091292supp1.docx,docx,ok,2,132,0,58,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,109417,10.2166/ws.2025.079,ws025091329supp1.docx,docx,ok,1,18,0,669,TRUE,FALSE,NA,NA,NA,NA,observation tables
+ws,109444,10.2166/ws.2025.080,ws025091346supp1.docx,docx,ok,0,0,0,348,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,109460,10.2166/ws.2025.081,ws025091358supp1.docx,docx,ok,0,0,0,26,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,109889,10.2166/ws.2025.091,ws025111498supp1.docx,docx,ok,0,0,0,2019,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,109889,10.2166/ws.2025.091,ws025111498supp2.docx,docx,ok,0,0,0,392,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,109949,10.2166/ws.2025.094,ws025111530supp1.docx,docx,ok,0,0,0,4592,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,110831,10.2166/ws.2026.110,ws026020098supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,111111,10.2166/ws.2026.126,ws026030193supp1.docx,docx,ok,0,0,0,193,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,111111,10.2166/ws.2026.126,ws026030193supp2.xlsx,xlsx,ok,NA,NA,NA,NA,TRUE,TRUE,3,1457,12,FALSE,observation tables
+ws,111250,10.2166/ws.2026.134,ws026040255supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,112074,10.2166/ws.2026.119,ws026060486supp1.docx,docx,ok,0,0,0,218,FALSE,FALSE,NA,NA,NA,NA,prose only
+ws,112143,10.2166/ws.2026.165,ws026060522supp1.pdf,pdf,not_attempted,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,not_attempted
+ws,112031,10.2166/ws.2026.162,ws026060547supp1.docx,docx,ok,1,2,0,613,FALSE,FALSE,NA,NA,NA,NA,summary tables

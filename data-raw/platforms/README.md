@@ -40,9 +40,18 @@ milestones and terms pages, not the live catalogue. An exact launch date, the
 post-waitlist registration policy, and whether an API or DOIs exist behind the
 login remain "not found" and could only be confirmed with an account.
 
-## To refresh after datapapers is built (issue #28)
+## Refresh with datapapers (2026-08-20)
 
-Rerun `scan_platform_mentions.R`: it automatically includes `datapapers` once
-`data/datapapers.rda` exists, since data papers are the population most likely
-to cite a data platform. Update the 1,782 count and the per-platform hits in
-the vignette if they change.
+Rerun after `datapapers` was built (issue #28): the scan now covers all four
+datasets and the per-platform hits are unchanged. The first rerun exposed a
+gap: the dataset shipped with `data_repo_url` NA for all 8 papers because the
+repository-link backfill planned for issue #27 never happened. The links were
+then backfilled the same day via `data-raw/datapapers_repo_fixes.csv` (each
+row records its source: Crossref relations, DataCite, or the article's
+availability section), applied in `03_datapapers_process.R`. Result: seven of
+the eight data papers deposit in general repositories (GBIF twice, IEEE
+DataPort, Figshare, Dryad, NCBI BioProject, Zenodo), one shares its data only
+in the article tables and supplement, and none uses a WASH sector platform.
+The vignette's 1,782 count stays as written (it names the three DAS-carrying
+datasets; `datapapers` has no `das` column); the data-paper finding is added
+as its own sentence.
