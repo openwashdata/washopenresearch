@@ -1,0 +1,9 @@
+doi,data_repo_url,source,checked_date
+10.3390/data8060103,,"No repository deposit: DAS states the data are openly available as the content of the reported tables and the attached supplementary materials (mdpi.com page via Wayback Machine)",2026-08-20
+10.3390/data8090141,https://doi.org/10.21227/3q8d-jw96,"DAS: openly available at IEEE DataPort (mdpi.com page via Wayback Machine)",2026-08-20
+10.46471/gigabyte.167,https://doi.org/10.15468/gx8zn4,"Data availability section and Crossref reference list: GBIF occurrence dataset published through the Jean Piaget University of Cabo Verde IPT",2026-08-20
+10.1038/sdata.2018.108,https://doi.org/10.15470/gkiznu,"Crossref relation (references): GBIF IPT dataset MZNA-INV-FRW, University of Navarra; DataCite resource type Dataset",2026-08-20
+10.1038/s41597-022-01439-7,https://doi.org/10.6084/m9.figshare.19158206.v1,"Crossref relation and article Data Records: figshare deposit; DataCite resource type Dataset. Zenodo 10.5281/zenodo.6052815 is the code deposit",2026-08-20
+10.1038/s41597-022-01686-8,https://doi.org/10.5061/dryad.2z34tmpp7; https://www.ncbi.nlm.nih.gov/sra/?term=SRP221580,"Crossref relation: Dryad dataset plus NCBI SRA study SRP221580",2026-08-20
+10.1038/s41597-022-01749-w,https://www.ncbi.nlm.nih.gov/bioproject/PRJNA488159; https://www.ncbi.nlm.nih.gov/bioproject/PRJNA497963,"Article accession links: NCBI BioProjects holding the SRA sequencing runs cited in the Crossref relation",2026-08-20
+10.1038/s41597-025-04537-4,https://zenodo.org/communities/whow; https://doi.org/10.5281/zenodo.14505948,"DAS: project Zenodo community as the collection point plus the ISPRA linked dataset (DataCite resource type Dataset); knowledge graph and code on GitHub (github.com/whow-project)",2026-08-20
