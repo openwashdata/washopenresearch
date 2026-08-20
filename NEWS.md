@@ -19,6 +19,17 @@
   reviews, so the article-type filter proposed in #47 does not shrink the
   population. Verifying the remaining 1,847 bare claims requires reading
   the articles' tables.
+- Supplement content audit (#47 tier 3): the 741 supplementary files of the
+  IWA snapshots whose pre-signed CDN links were still valid were downloaded
+  (checksummed manifest in `data-raw/suppfiles/manifest.csv`; the signatures
+  lapse 2026-08-18 to 2026-08-30, so 572 further links were already dead)
+  and classified with transparent structural heuristics
+  (`data-raw/suppfiles_parse.R`: pandoc-converted docx tables, readxl/xlsx
+  sheet metrics). Of the 290 in-paper claims whose structured supplement was
+  in hand, 54% share prose only, 21% summary tables, and 20% tables shaped
+  like observations (`data-raw/das_in_paper_suppfile_audit.R`). xlsx files
+  are the exception: 25 of 29 hold observation-shaped sheets. Heuristics are
+  recorded per file and await validation against a manual sample.
 - New scripted acquisition pipeline for a fourth dataset, `datapapers`, covering
   WASH-related data papers in seven dedicated data journals (Scientific Data,
   Data in Brief, Gates Open Research, F1000Research, GigaScience, GigaByte,
