@@ -2,6 +2,17 @@
 
 ## New features
 
+- New function `das_in_paper_support()` classifies how a "data in paper"
+  data availability statement is backed by the recorded supplement fields
+  (#47). The modal claim "all relevant data are included in the paper or its
+  supplementary information" splits into `"no supplement"` (the claim rests
+  on the printed tables alone), `"unstructured supplement"` (pdf or images
+  only), `"structured supplement"` (docx, xlsx and similar), and
+  `"open supplement"` (csv, txt, json, xml). Across washdev and the three
+  IWA journal snapshots (2,599 claims), 71.5% have no supplement, 26.5% a
+  structured one, 2.1% an unstructured one, and none an open format.
+  `data-raw/das_in_paper_support.R` reproduces the summary in
+  `data-raw/das-in-paper-support-summary.csv`.
 - New scripted acquisition pipeline for a fourth dataset, `datapapers`, covering
   WASH-related data papers in seven dedicated data journals (Scientific Data,
   Data in Brief, Gates Open Research, F1000Research, GigaScience, GigaByte,
@@ -15,6 +26,14 @@
 
 ## Minor improvements and fixes
 
+- `datapapers` now carries the repository links its papers deposit to:
+  `data_repo_url` and `data_repo` were NA for all 8 papers because the
+  Crossref relation metadata was empty and the fallback planned for #27
+  never ran. The links were verified against Crossref relations, DataCite
+  resource types, and the articles' availability sections, and are recorded
+  in `data-raw/datapapers_repo_fixes.csv`, applied during processing. Seven
+  papers use general repositories (GBIF, IEEE DataPort, Figshare, Dryad,
+  NCBI BioProject, Zenodo); none uses a WASH sector platform.
 - Expired pre-signed CDN links in `washdev$supp_url` are rewritten to stable DOI
   URLs, and Google Scholar alert redirects in `uncnewsletter$paper_url` are
   decoded to their target URLs (#10). The 343 Silverchair links carried a
