@@ -20,6 +20,12 @@ curated datasets.
 - `harvest_corpus.R` — OpenAlex harvest script (skeleton; run where outbound
   network is available). Its intermediate outputs answer issue #18 steps 1, 3,
   and 4 with real numbers.
+- `pull_journal_identifiers.R` — issue #38 step 1: one OpenAlex source GET per
+  in-scope journal for the ISSN join key plus empirical OA flags and the
+  works-level oa_status mix. Writes `journal-identifiers.csv`.
+- `pull_oa_policies.R` — issue #38 step 2: queries the Jisc Open Policy Finder
+  by ISSN for each journal's permitted-OA policy. Needs `OPENPOLICYFINDER_KEY`
+  in `~/.Renviron`. Writes `oa-policies.csv`; raw JSON cached in `cache/opf/`.
 
 ## Window
 
