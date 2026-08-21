@@ -1,0 +1,76 @@
+source_id,venue,issn_l,publisher,top_journal,top_publisher,data_citation_score,data_transparency_score,analysis_code_transparency_score,materials_transparency_score,design_analysis_reporting_guidelines_score,study_preregistration_score,analysis_plan_preregistration_score,replication_score,registered_reports_publication_bias_score,open_science_badges_score,top_total,data_transparency_justification,data_citation_justification,top_matched
+S2495644771,Journal of Water Sanitation and Hygiene for Development,2043-9083,IWA Publishing,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S4210228842,Journal of Water Supply Research and Technology—AQUA,0003-7214,UWA Publishing,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S26443501,Journal of Water and Health,1477-8920,UWA Publishing,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S124453322,Water Science & Technology Water Supply,1606-9749,IWA Publishing,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S137656717,Water Practice & Technology,1751-231X,UWA Publishing,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S2764879708,China Water & Wastewater,NA,North China Municipal Engineering Design & Research Institute,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S2764434589,Journal of Water Process Engineering,2214-7144,Elsevier BV,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S4210201235,ACS ES&T Water,2690-0637,American Chemical Society,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S52566953,Water Research,0043-1354,Elsevier BV,Water Research,Elsevier,1,2,0,0,0,0,0,0,0,0,3,"""This journal requires authors to deposit their research data in a relevant data repository and to
+cite and link to this dataset in their article. "" Provides details.","""This journal encourages you to cite underlying or relevant datasets in your manuscript by citing them
+in your text and including a data reference in your Reference List. Data references should include the
+following elements: author name(s), dataset title, data repository, version (where available), year,
+and global persistent identifier. """,TRUE
+S2764931087,Applied Water Science,2190-5487,Springer Nature,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S53450646,Water Science & Technology,0273-1223,Pergamon Press,Water Science and Technology,NA,0,0,0,0,0,0,0,0,0,0,0,No mentions.,No mentions.,TRUE
+S2764832999,Scientific investigations report,2328-031X,United States Geological Survey,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S130511131,Water Environment Research,0043-1303,Wiley,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S134216166,Water,2073-4441,Multidisciplinary Digital Publishing Institute,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S124203677,Desalination and Water Treatment,1944-3986,Taylor & Francis,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S86512602,Desalination,0011-9164,Elsevier BV,Desalination,Elsevier,1,0,0,0,0,0,0,0,0,0,1,"""This journal encourages and enables you to share data that supports your research publication where appropriate, and enables you to interlink the data with your published articles.""","""This journal encourages you to cite underlying or relevant datasets in your manuscript by citing them
+in your text and including a data reference in your Reference List. Data references should include the
+following elements: author name(s), dataset title, data repository, version (where available), year,
+and global persistent identifier. """,TRUE
+S2764859491,Journal of environmental chemical engineering,2213-2929,Elsevier BV,Journal of Environmental Chemical Engineering,Elsevier,1,0,0,0,0,0,0,0,0,0,1,"""This journal encourages and enables you to share data that supports your research publication where appropriate, and enables you to interlink the data with your published articles.""","""This journal encourages you to cite underlying or relevant datasets in your manuscript by citing them
+in your text and including a data reference in your Reference List. Data references should include the
+following elements: author name(s), dataset title, data repository, version (where available), year,
+and global persistent identifier. """,TRUE
+S11732831,Environmental Monitoring and Assessment,0167-6369,Springer Science+Business Media,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S4210200103,Proceedings of the Water Environment Federation,1938-6478,Water Environment Federation,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S44455300,Journal of Environmental Management,0301-4797,Elsevier BV,Journal of Environmental Management,Elsevier,1,0,0,0,0,0,0,0,0,0,1,"""This journal encourages and enables you to share data that supports your research publication where appropriate, and enables you to interlink the data with your published articles. ""","""This journal encourages you to cite underlying or relevant datasets in your manuscript by citing them in your text and including a data reference in your Reference List. Data references should include the following elements: author name(s), dataset title, data repository, version (where available), year, and global persistent identifier""",TRUE
+S140251998,Journal of Biological Chemistry,0021-9258,Elsevier BV,Journal of Biological Chemistry,Elsevier,0,0,0,0,0,0,0,0,0,0,0,No mentions.,No mentions.,TRUE
+S35825460,Journal of Environmental Sciences,1001-0742,Elsevier BV,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S86852077,The Science of The Total Environment,0048-9697,Elsevier BV,Science of The Total Environment,Elsevier,1,0,0,0,0,0,0,0,0,0,1,"""This journal encourages and enables you to share data that supports your research publication where appropriate, and enables you to interlink the data with your published articles.""","""This journal encourages you to cite underlying or relevant datasets in your manuscript by citing them
+in your text and including a data reference in your Reference List. Data references should include the
+following elements: author name(s), dataset title, data repository, version (where available), year,
+and global persistent identifier. """,TRUE
+S46544255,PLoS neglected tropical diseases,1935-2727,Public Library of Science,PLOS Neglected Tropical Diseases,PLOS,1,2,0,0,2,0,0,0,0,0,5,"""PLOS journals require authors to make all data necessary to replicate their study’s findings publicly available without restriction at the time of publication. When specific legal or ethical restrictions prohibit public sharing of a data set, authors must indicate how others may obtain access to the data.""","""PLOS encourages authors to cite any publicly available research data in their reference list. References to data sets (data citations) must include a persistent identifier (such as a DOI). Citations of data sets, when they appear in the reference list, should include the minimum information recommended by DataCite and follow journal style.""",TRUE
+S69753523,Separation and Purification Technology,1383-5866,Elsevier BV,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S87561820,Environmental Science and Pollution Research,0944-1344,Springer Science+Business Media,Environmental Science and Pollution Research,Springer,1,0,0,0,0,0,0,0,0,0,1,"""Data sharing and data citation is encouraged""","""Datasets that are assigned digital object identifiers (DOIs) by a data repository may be cited in the reference list.""",TRUE
+S203465130,Chemosphere,0045-6535,Elsevier BV,Chemosphere,Elsevier,1,0,0,0,0,0,0,0,0,0,1,"""This journal encourages and enables you to share data that supports your research publication where appropriate, and enables you to interlink the data with your published articles.""","""This journal encourages you to cite underlying or relevant datasets in your manuscript by citing them
+in your text and including a data reference in your Reference List. Data references should include the
+following elements: author name(s), dataset title, data repository, version (where available), year,
+and global persistent identifier. """,TRUE
+S4210170078,Oncology Times,0276-2234,Wolters Kluwer,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S13479253,Environmental Science & Technology,0013-936X,American Chemical Society,Environmental Science & Technology,NA,0,0,0,0,0,0,0,0,0,0,0,No mentions.,No mentions.,TRUE
+S145089992,Journal of Hazardous Materials,0304-3894,Elsevier BV,Journal of Hazardous Materials,Elsevier,1,0,0,0,0,0,0,0,0,0,1,"""This journal encourages and enables you to share data that supports your research publication where appropriate, and enables you to interlink the data with your published articles.""","""This journal encourages you to cite underlying or relevant datasets in your manuscript by citing them
+in your text and including a data reference in your Reference List. Data references should include the
+following elements: author name(s), dataset title, data repository, version (where available), year,
+and global persistent identifier. """,TRUE
+S21442059,Bioresource Technology,0960-8524,Elsevier BV,Bioresource Technology,Elsevier,1,0,0,0,0,0,0,0,0,0,1,"""This journal encourages and enables you to share data that supports your research publication where appropriate, and enables you to interlink the data with your published articles.""","""This journal encourages you to cite underlying or relevant datasets in your manuscript by citing them
+in your text and including a data reference in your Reference List. Data references should include the
+following elements: author name(s), dataset title, data repository, version (where available), year,
+and global persistent identifier. """,TRUE
+S158228368,Applied and Environmental Microbiology,0099-2240,American Society for Microbiology,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S70979998,Applied Microbiology and Biotechnology,0175-7598,Springer Science+Business Media,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S100045985,American Journal of Tropical Medicine and Hygiene,0002-9637,American Society of Tropical Medicine and Hygiene,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S201530359,Environmental Pollution,0269-7491,Elsevier BV,Environmental Pollution,Elsevier,1,0,0,0,0,0,0,0,0,0,1,"""This journal encourages and enables you to share data that supports your research publication where appropriate, and enables you to interlink the data with your published articles.""","""This journal encourages you to cite underlying or relevant datasets in your manuscript by citing them
+in your text and including a data reference in your Reference List. Data references should include the
+following elements: author name(s), dataset title, data repository, version (where available), year,
+and global persistent identifier. """,TRUE
+S149937609,Chemical Engineering Journal,1385-8947,Elsevier BV,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S119469986,Journal of Membrane Science,0376-7388,Elsevier BV,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S58516903,Journal of Cleaner Production,0959-6526,Elsevier BV,Journal of Cleaner Production,Elsevier,1,0,0,0,0,0,0,0,0,0,1,"""This journal encourages and enables you to share data that supports your research publication where appropriate, and enables you to interlink the data with your published articles.""","""This journal encourages you to cite underlying or relevant datasets in your manuscript by citing them in your text and including a data reference in your Reference List. Data references should include the following elements: author name(s), dataset title, data repository, version (where available), year, and global persistent identifier""",TRUE
+S2484704948,Frontiers in Microbiology,1664-302X,Frontiers Media,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S168522863,Cancer Research,0008-5472,American Association for Cancer Research,Cancer Research,NA,0,0,0,0,1,0,0,0,0,0,1,"""Publication in an AACR journal is contingent upon the authors certification that all materials, data, and protocols described in the manuscript will be made available upon request, if the request is made within six years of publication. """,No mention.,TRUE
+S200071133,Blood,0006-4971,Elsevier BV,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S134307298,Applied Catalysis B: Environmental,0926-3373,Elsevier BV,Applied Catalysis B: Environmental,Elsevier,1,2,0,0,0,0,0,0,0,0,3,"""This journal requires and enables you to share data that supports your research publication where appropriate, and enables you to interlink the data with your published articles.""","""This journal encourages you to cite underlying or relevant datasets in your manuscript by citing them in your text and including a data reference in your Reference List. Data references should include the following elements: author name(s), dataset title, data repository, version (where available), year, and global persistent identifier.""",TRUE
+S72684844,Journal of Animal Science,0021-8812,Oxford University Press,Journal of Animal Science,Oxford University Press,0,0,0,0,0,0,0,0,0,0,0,No mentions.,No mentions.,TRUE
+S47215897,Antimicrobial Agents and Chemotherapy,0066-4804,American Society for Microbiology,Antimicrobial Agents and Chemotherapy,NA,1,2,2,2,0,0,0,0,0,0,7,"""Therefore, a condition of publication in any ASM Journal is that authors make data fully available, without restriction, except in rare circumstances.""","""To promote reproducibility, ASM expects researchers to identify and cite data sets and/or code used in their experiments and studies."" Gives rules for data citation.",TRUE
+S2738498342,EFSA Journal,1831-4732,Wiley,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S25293849,The FASEB Journal,0892-6638,Wiley,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+S10134376,Sustainability,2071-1050,Multidisciplinary Digital Publishing Institute,Sustainability,NA,1,1,0,0,1,0,0,0,0,0,3,"""Data Availability Statement: In this section, please provide details regarding where data supporting reported results can be found, including links to publicly archived datasets analyzed or generated during the study. """,Journal gives example of data citation.,TRUE
+S202381698,PLoS ONE,1932-6203,Public Library of Science,PLOS ONE,PLOS,1,2,0,0,2,0,0,3,3,0,11,Journal requires data sharing.,Journal encourages data citation.,TRUE
+S196734849,Scientific Reports,2045-2322,Nature Portfolio,Scientific Reports,Nature,1,1,1,1,0,0,0,3,3,0,10,"""You must include a Data Availability Statement in all submitted manuscripts""",Gives clear examples for citation of data sets,TRUE
+S15137598,Journal of Clinical Oncology,0732-183X,Lippincott Williams & Wilkins,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
