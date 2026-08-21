@@ -1,0 +1,51 @@
+source_id,venue,decision,issn_l,publisher,is_oa,is_in_doaj,opf_covered,opf_n_pathways,top_matched,top_data_transparency,top_data_citation,n_plos_osi,n_osi_comparator,n_aaas,own_scrape,any_behavioral,layers_covered,residual_for_35
+S2495644771,Journal of Water Sanitation and Hygiene for Development,whole_journal,2043-9083,IWA Publishing,TRUE,FALSE,TRUE,3,FALSE,NA,NA,0,0,0,TRUE,TRUE,2,FALSE
+S4210228842,Journal of Water Supply Research and Technology—AQUA,whole_journal,0003-7214,UWA Publishing,FALSE,FALSE,TRUE,3,FALSE,NA,NA,0,0,0,TRUE,TRUE,2,FALSE
+S26443501,Journal of Water and Health,whole_journal,1477-8920,UWA Publishing,TRUE,TRUE,TRUE,3,FALSE,NA,NA,0,0,0,TRUE,TRUE,2,FALSE
+S124453322,Water Science & Technology Water Supply,whole_journal,1606-9749,IWA Publishing,FALSE,FALSE,TRUE,3,FALSE,NA,NA,0,0,0,TRUE,TRUE,2,FALSE
+S137656717,Water Practice & Technology,filtered_slice_conditional,1751-231X,UWA Publishing,FALSE,FALSE,TRUE,3,FALSE,NA,NA,0,0,0,FALSE,FALSE,1,TRUE
+S2764879708,China Water & Wastewater,filtered_slice_conditional,NA,North China Municipal Engineering Design & Research Institute,FALSE,FALSE,FALSE,0,FALSE,NA,NA,0,0,0,FALSE,FALSE,0,TRUE
+S2764434589,Journal of Water Process Engineering,filtered_slice_conditional,2214-7144,Elsevier BV,FALSE,FALSE,TRUE,7,FALSE,NA,NA,0,0,0,FALSE,FALSE,1,TRUE
+S4210201235,ACS ES&T Water,filtered_slice_conditional,2690-0637,American Chemical Society,FALSE,FALSE,TRUE,5,FALSE,NA,NA,0,0,0,FALSE,FALSE,1,TRUE
+S52566953,Water Research,filtered_slice_conditional,0043-1354,Elsevier BV,FALSE,FALSE,TRUE,7,TRUE,2,1,0,3,0,FALSE,TRUE,3,FALSE
+S2764931087,Applied Water Science,filtered_slice_conditional,2190-5487,Springer Nature,TRUE,TRUE,TRUE,3,FALSE,NA,NA,0,0,0,FALSE,FALSE,1,TRUE
+S53450646,Water Science & Technology,filtered_slice_conditional,0273-1223,Pergamon Press,TRUE,TRUE,TRUE,3,TRUE,0,0,0,0,0,FALSE,FALSE,2,TRUE
+S2764832999,Scientific investigations report,filtered_slice_conditional,2328-031X,United States Geological Survey,FALSE,FALSE,FALSE,0,FALSE,NA,NA,0,0,0,FALSE,FALSE,0,TRUE
+S130511131,Water Environment Research,filtered_slice_conditional,0043-1303,Wiley,FALSE,FALSE,TRUE,4,FALSE,NA,NA,0,1,0,FALSE,TRUE,2,FALSE
+S134216166,Water,filtered_slice_conditional,2073-4441,Multidisciplinary Digital Publishing Institute,TRUE,FALSE,TRUE,2,FALSE,NA,NA,0,0,0,FALSE,FALSE,1,TRUE
+S124203677,Desalination and Water Treatment,filtered_slice_conditional,1944-3986,Taylor & Francis,TRUE,TRUE,TRUE,2,FALSE,NA,NA,0,0,0,FALSE,FALSE,1,TRUE
+S86512602,Desalination,filtered_slice_conditional,0011-9164,Elsevier BV,FALSE,FALSE,TRUE,7,TRUE,0,1,0,0,0,FALSE,FALSE,2,TRUE
+S2764859491,Journal of environmental chemical engineering,filtered_slice_conditional,2213-2929,Elsevier BV,FALSE,FALSE,TRUE,7,TRUE,0,1,0,0,0,FALSE,FALSE,2,TRUE
+S11732831,Environmental Monitoring and Assessment,filtered_slice_conditional,0167-6369,Springer Science+Business Media,FALSE,FALSE,TRUE,4,FALSE,NA,NA,0,68,0,FALSE,TRUE,2,FALSE
+S4210200103,Proceedings of the Water Environment Federation,filtered_slice_conditional,1938-6478,Water Environment Federation,FALSE,FALSE,FALSE,0,FALSE,NA,NA,0,0,0,FALSE,FALSE,0,TRUE
+S44455300,Journal of Environmental Management,filtered_slice_conditional,0301-4797,Elsevier BV,FALSE,FALSE,TRUE,7,TRUE,0,1,0,1,0,FALSE,TRUE,3,FALSE
+S140251998,Journal of Biological Chemistry,filtered_slice_conditional,0021-9258,Elsevier BV,TRUE,TRUE,TRUE,4,TRUE,0,0,0,116,0,FALSE,TRUE,3,FALSE
+S35825460,Journal of Environmental Sciences,filtered_slice_conditional,1001-0742,Elsevier BV,FALSE,FALSE,TRUE,7,FALSE,NA,NA,0,0,0,FALSE,FALSE,1,TRUE
+S86852077,The Science of The Total Environment,filtered_slice_conditional,0048-9697,Elsevier BV,FALSE,FALSE,TRUE,7,TRUE,0,1,0,3,0,FALSE,TRUE,3,FALSE
+S46544255,PLoS neglected tropical diseases,filtered_slice_conditional,1935-2727,Public Library of Science,TRUE,TRUE,TRUE,3,TRUE,2,1,6037,0,0,FALSE,TRUE,3,FALSE
+S69753523,Separation and Purification Technology,filtered_slice_conditional,1383-5866,Elsevier BV,FALSE,FALSE,TRUE,7,FALSE,NA,NA,0,0,0,FALSE,FALSE,1,TRUE
+S87561820,Environmental Science and Pollution Research,filtered_slice_conditional,0944-1344,Springer Science+Business Media,FALSE,FALSE,TRUE,4,TRUE,0,1,0,68,0,FALSE,TRUE,3,FALSE
+S203465130,Chemosphere,filtered_slice_conditional,0045-6535,Elsevier BV,FALSE,FALSE,FALSE,0,TRUE,0,1,0,0,0,FALSE,FALSE,1,TRUE
+S4210170078,Oncology Times,filtered_slice_conditional,0276-2234,Wolters Kluwer,FALSE,FALSE,FALSE,0,FALSE,NA,NA,0,0,0,FALSE,FALSE,0,TRUE
+S13479253,Environmental Science & Technology,filtered_slice_conditional,0013-936X,American Chemical Society,FALSE,FALSE,TRUE,5,TRUE,0,0,0,48,0,FALSE,TRUE,3,FALSE
+S145089992,Journal of Hazardous Materials,filtered_slice_conditional,0304-3894,Elsevier BV,FALSE,FALSE,TRUE,7,TRUE,0,1,0,0,0,FALSE,FALSE,2,TRUE
+S21442059,Bioresource Technology,filtered_slice_conditional,0960-8524,Elsevier BV,FALSE,FALSE,TRUE,7,TRUE,0,1,0,2,0,FALSE,TRUE,3,FALSE
+S158228368,Applied and Environmental Microbiology,filtered_slice_conditional,0099-2240,American Society for Microbiology,TRUE,TRUE,TRUE,4,FALSE,NA,NA,0,0,0,FALSE,FALSE,1,TRUE
+S70979998,Applied Microbiology and Biotechnology,filtered_slice_conditional,0175-7598,Springer Science+Business Media,TRUE,TRUE,TRUE,3,FALSE,NA,NA,0,4,0,FALSE,TRUE,2,FALSE
+S100045985,American Journal of Tropical Medicine and Hygiene,filtered_slice_conditional,0002-9637,American Society of Tropical Medicine and Hygiene,FALSE,FALSE,TRUE,4,FALSE,NA,NA,0,69,0,FALSE,TRUE,2,FALSE
+S201530359,Environmental Pollution,filtered_slice_conditional,0269-7491,Elsevier BV,FALSE,FALSE,TRUE,7,TRUE,0,1,0,0,0,FALSE,FALSE,2,TRUE
+S149937609,Chemical Engineering Journal,filtered_slice_conditional,1385-8947,Elsevier BV,FALSE,FALSE,TRUE,7,FALSE,NA,NA,0,0,0,FALSE,FALSE,1,TRUE
+S119469986,Journal of Membrane Science,filtered_slice_conditional,0376-7388,Elsevier BV,FALSE,FALSE,TRUE,7,FALSE,NA,NA,0,0,0,FALSE,FALSE,1,TRUE
+S58516903,Journal of Cleaner Production,filtered_slice_conditional,0959-6526,Elsevier BV,FALSE,FALSE,TRUE,7,TRUE,0,1,0,0,0,FALSE,FALSE,2,TRUE
+S2484704948,Frontiers in Microbiology,filtered_slice_conditional,1664-302X,Frontiers Media,TRUE,TRUE,TRUE,2,FALSE,NA,NA,0,0,0,FALSE,FALSE,1,TRUE
+S168522863,Cancer Research,filtered_slice_conditional,0008-5472,American Association for Cancer Research,FALSE,FALSE,TRUE,5,TRUE,0,0,0,0,0,FALSE,FALSE,2,TRUE
+S200071133,Blood,filtered_slice_conditional,0006-4971,Elsevier BV,FALSE,FALSE,TRUE,5,FALSE,NA,NA,0,0,0,FALSE,FALSE,1,TRUE
+S134307298,Applied Catalysis B: Environmental,filtered_slice_conditional,0926-3373,Elsevier BV,FALSE,FALSE,TRUE,7,TRUE,2,1,0,0,0,FALSE,FALSE,2,TRUE
+S72684844,Journal of Animal Science,filtered_slice_conditional,0021-8812,Oxford University Press,FALSE,FALSE,TRUE,6,TRUE,0,0,0,0,0,FALSE,FALSE,2,TRUE
+S47215897,Antimicrobial Agents and Chemotherapy,filtered_slice_conditional,0066-4804,American Society for Microbiology,FALSE,FALSE,TRUE,4,TRUE,2,1,0,0,0,FALSE,FALSE,2,TRUE
+S2738498342,EFSA Journal,filtered_slice_conditional,1831-4732,Wiley,TRUE,TRUE,TRUE,1,FALSE,NA,NA,0,0,0,FALSE,FALSE,1,TRUE
+S25293849,The FASEB Journal,filtered_slice_conditional,0892-6638,Wiley,FALSE,FALSE,TRUE,3,FALSE,NA,NA,0,14,0,FALSE,TRUE,2,FALSE
+S10134376,Sustainability,filtered_slice_conditional,2071-1050,Multidisciplinary Digital Publishing Institute,TRUE,FALSE,TRUE,2,TRUE,1,1,0,0,0,FALSE,FALSE,2,TRUE
+S202381698,PLoS ONE,filtered_slice_conditional,1932-6203,Public Library of Science,TRUE,TRUE,TRUE,3,TRUE,2,1,127182,0,0,FALSE,TRUE,3,FALSE
+S196734849,Scientific Reports,filtered_slice_conditional,2045-2322,Nature Portfolio,TRUE,TRUE,TRUE,2,TRUE,1,1,0,4036,0,FALSE,TRUE,3,FALSE
+S15137598,Journal of Clinical Oncology,filtered_slice_conditional,0732-183X,Lippincott Williams & Wilkins,FALSE,FALSE,TRUE,5,FALSE,NA,NA,0,0,0,FALSE,FALSE,1,TRUE
