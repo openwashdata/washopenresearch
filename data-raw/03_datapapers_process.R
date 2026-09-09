@@ -19,6 +19,7 @@ source("data-raw/helpers.R")
 raw_path <- "data-raw/datapapers_raw.csv"
 screening_path <- "data-raw/datapapers_screening.csv"
 fixes_path <- "data-raw/datapapers_country_fixes.csv"
+repo_fixes_path <- "data-raw/datapapers_repo_fixes.csv"
 
 for (path in c(raw_path, screening_path)) {
   if (!file.exists(path)) {
@@ -33,6 +34,11 @@ country_fixes <- readr::read_csv(
   fixes_path,
   col_types = cols(doi = col_character(),
                    first_author_affiliation_country = col_character())
+)
+repo_fixes <- readr::read_csv(
+  repo_fixes_path,
+  col_types = cols(doi = col_character(), data_repo_url = col_character(),
+                   source = col_character(), checked_date = col_date())
 )
 
 n_pending <- sum(is.na(screening$include))
@@ -53,15 +59,19 @@ datapapers <- datapapers_raw |>
     paper_url = paste0("https://doi.org/", doi),
     # Data papers exist to describe a shared dataset, so the linked
     # repository DOI/URL plays the role of das_repo_url in the other
-    # datasets. Rows without relation metadata get their repository link at
-    # screening or in issue #27's download step.
+    # datasets. The raw harvest's relation metadata is the first source;
+    # the committed fixes sheet supplies the links verified against
+    # Crossref/DataCite and the articles' availability sections (each row
+    # records its source). A row NA in both means the paper deposited
+    # nowhere: its data live in the article tables/supplement.
     data_repo_url = if_else(
       !is.na(data_repo_doi) & !str_detect(data_repo_doi, "^https?://"),
       str_replace_all(data_repo_doi, "(^|; )(10\\.)", "\\1https://doi.org/\\2"),
       data_repo_doi
-    ),
-    data_repo = parse_repo_name(data_repo_url)
+    )
   ) |>
+  apply_country_fixes(repo_fixes, key = "doi", value_col = "data_repo_url") |>
+  mutate(data_repo = parse_repo_name(data_repo_url)) |>
   # Clean affiliation countries: automatic standardisation, then the committed
   # fixes sheet for the residual NAs (no hard-coded ID vectors).
   mutate(

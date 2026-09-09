@@ -1,0 +1,13 @@
+source,das_in_paper_support,n,share
+aqua,no supplement,325,0.776
+aqua,structured supplement,90,0.215
+aqua,unstructured supplement,4,0.01
+jwh,no supplement,321,0.554
+jwh,structured supplement,238,0.411
+jwh,unstructured supplement,20,0.035
+washdev,no supplement,212,0.584
+washdev,structured supplement,139,0.383
+washdev,unstructured supplement,12,0.033
+ws,no supplement,999,0.807
+ws,structured supplement,221,0.179
+ws,unstructured supplement,18,0.015

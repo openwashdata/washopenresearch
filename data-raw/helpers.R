@@ -115,6 +115,8 @@ parse_repo_name <- function(url) {
     stringr::str_detect(url, "pangaea\\.de") ~ "PANGAEA",
     stringr::str_detect(url, "ncbi\\.nlm\\.nih\\.gov|ebi\\.ac\\.uk") ~ "NCBI/EBI",
     stringr::str_detect(url, "gigadb\\.org") ~ "GigaDB",
+    stringr::str_detect(url, "gbif\\.org|doi\\.org/10\\.15468|doi\\.org/10\\.15470") ~ "GBIF",
+    stringr::str_detect(url, "ieee-dataport\\.org|doi\\.org/10\\.21227") ~ "IEEE DataPort",
     TRUE ~ "other"
   )
 }

@@ -1,40 +1,53 @@
 platform,dataset,n_rows,das_text_hits,repo_url_hits
+Akvo,datapapers,8,0,0
 Akvo,ploswater,436,0,0
 Akvo,uncnewsletter,173,0,0
 Akvo,washdev,1173,0,0
+DHS Program,datapapers,8,0,0
 DHS Program,ploswater,436,4,4
 DHS Program,uncnewsletter,173,0,0
 DHS Program,washdev,1173,8,6
+GLAAS,datapapers,8,0,0
 GLAAS,ploswater,436,0,0
 GLAAS,uncnewsletter,173,0,0
 GLAAS,washdev,1173,0,0
+HDX,datapapers,8,0,0
 HDX,ploswater,436,2,2
 HDX,uncnewsletter,173,0,0
 HDX,washdev,1173,1,1
+IBNET,datapapers,8,0,0
 IBNET,ploswater,436,1,1
 IBNET,uncnewsletter,173,0,0
 IBNET,washdev,1173,0,0
+JMP,datapapers,8,0,0
 JMP,ploswater,436,0,0
 JMP,uncnewsletter,173,0,0
 JMP,washdev,1173,0,0
+KoboToolbox,datapapers,8,0,0
 KoboToolbox,ploswater,436,0,0
 KoboToolbox,uncnewsletter,173,0,0
 KoboToolbox,washdev,1173,0,0
+MICS,datapapers,8,0,0
 MICS,ploswater,436,2,2
 MICS,uncnewsletter,173,0,0
 MICS,washdev,1173,0,0
+Project W,datapapers,8,0,0
 Project W,ploswater,436,0,0
 Project W,uncnewsletter,173,0,0
 Project W,washdev,1173,0,0
+SDG 6 Data Portal,datapapers,8,0,0
 SDG 6 Data Portal,ploswater,436,0,0
 SDG 6 Data Portal,uncnewsletter,173,0,0
 SDG 6 Data Portal,washdev,1173,0,0
+WPdx,datapapers,8,0,0
 WPdx,ploswater,436,0,0
 WPdx,uncnewsletter,173,0,0
 WPdx,washdev,1173,0,0
+World Bank Microdata Library,datapapers,8,0,0
 World Bank Microdata Library,ploswater,436,0,0
 World Bank Microdata Library,uncnewsletter,173,0,0
 World Bank Microdata Library,washdev,1173,0,0
+mWater,datapapers,8,0,0
 mWater,ploswater,436,0,0
 mWater,uncnewsletter,173,0,0
 mWater,washdev,1173,0,0
