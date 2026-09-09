@@ -1,7 +1,7 @@
-# --------------------------------------------
-# CITATION file created with {cffr} R package
+# ------------------------------------------------
+# CITATION.cff file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
-# --------------------------------------------
+# ------------------------------------------------
  
 cff-version: 1.2.0
 message: 'To cite package "washopenresearch" in publications use:'
@@ -13,10 +13,10 @@ version: 0.4.0
 doi: 10.5281/zenodo.11185699
 abstract: The goal of washopenresearch is to provide an overview of open research
   data related to Water Sanitation and Hygiene (WASH). The package provides access
-  to two datasets `washdev` and `uncnewsletter`. Each dataset collects information
-  on scientific articles about (1) article metadata (e.g. title, first author, correspondence
-  author), (2) supplementary material information, (3) data availability statement,
-  and (4) semantic information (e.g. keywords).
+  to six datasets `washdev`, `ws`, `jwh`, `uncnewsletter`, `ploswater`, and `datapapers`.
+  Each dataset collects information on scientific articles about (1) article metadata (e.g.
+  title, first author, correspondence author), (2) supplementary material information,
+  (3) data availability statement, and (4) semantic information (e.g. keywords).
 authors:
 - family-names: Zhong
   given-names: Mian
@@ -30,9 +30,43 @@ authors:
   given-names: Lars
   email: lschoebitz@ethz.ch
   orcid: https://orcid.org/0000-0003-2196-5015
+preferred-citation:
+  type: generic
+  title: 'washopenresearch: Dataset about open research data information in Water,
+    Sanitation, and Hygiene'
+  authors:
+  - family-names: Zhong
+    given-names: Mian
+    email: mzhong@ethz.ch
+    orcid: https://orcid.org/0009-0009-4546-7214
+  - family-names: Luz
+    given-names: Ludwig
+    email: lluz@ethz.ch
+    orcid: https://orcid.org/0009-0007-9248-3204
+  - family-names: Schöbitz
+    given-names: Lars
+    email: lschoebitz@ethz.ch
+    orcid: https://orcid.org/0000-0003-2196-5015
+  year: '2026'
+  doi: 10.5281/zenodo.11185699
+  url: https://github.com/openwashdata/washopenresearch
+  abstract: The goal of washopenresearch is to provide an overview of open research
+    data related to Water Sanitation and Hygiene (WASH). The package provides access
+    to two datasets `washdev` and `uncnewsletter`. Each dataset collects information
+    on scientific articles about (1) article metadata (e.g. title, first author, correspondence
+    author), (2) supplementary material information, (3) data availability statement,
+    and (4) semantic information (e.g. keywords).
+  keywords:
+  - open-data
+  - open-research-data
+  - open-science
+  - openwashdata
+  - sanitation
+  - wash
+  version: 0.1.0
 repository-code: https://github.com/openwashdata/washopenresearch
 url: https://github.com/openwashdata/washopenresearch
-date-released: '2026-07-07'
+date-released: '2026-08-20'
 contact:
 - family-names: Zhong
   given-names: Mian
@@ -45,4 +79,77 @@ keywords:
 - openwashdata
 - sanitation
 - wash
+references:
+- type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
+  url: https://www.R-project.org/
+  authors:
+  - name: R Core Team
+    website: https://ror.org/02zz1nj61
+  institution:
+    name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
+    address: Vienna, Austria
+  year: '2026'
+  doi: 10.32614/R.manuals
+  version: '>= 3.5'
+- type: software
+  title: dplyr
+  abstract: 'dplyr: A Grammar of Data Manipulation'
+  notes: Imports
+  url: https://dplyr.tidyverse.org
+  repository: https://CRAN.R-project.org/package=dplyr
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: François
+    given-names: Romain
+    orcid: https://orcid.org/0000-0002-2444-4226
+  - family-names: Henry
+    given-names: Lionel
+  - family-names: Müller
+    given-names: Kirill
+    orcid: https://orcid.org/0000-0002-1416-3412
+  - family-names: Vaughan
+    given-names: Davis
+    email: davis@posit.co
+    orcid: https://orcid.org/0000-0003-4777-038X
+  year: '2026'
+  doi: 10.32614/CRAN.package.dplyr
+- type: software
+  title: europepmc
+  abstract: 'europepmc: R Interface to the Europe PubMed Central RESTful Web Service'
+  notes: Suggests
+  url: https://docs.ropensci.org/europepmc/
+  repository: https://CRAN.R-project.org/package=europepmc
+  authors:
+  - family-names: Jahn
+    given-names: Najko
+    email: najko.jahn@gmail.com
+  year: '2026'
+  doi: 10.32614/CRAN.package.europepmc
+- type: software
+  title: rcrossref
+  abstract: 'rcrossref: Client for Various ''CrossRef'' ''APIs'''
+  notes: Suggests
+  url: https://docs.ropensci.org/rcrossref/
+  repository: https://CRAN.R-project.org/package=rcrossref
+  authors:
+  - family-names: Chamberlain
+    given-names: Scott
+  - family-names: Zhu
+    given-names: Hao
+  - family-names: Jahn
+    given-names: Najko
+    email: najko.jahn@gmail.com
+    orcid: https://orcid.org/0000-0001-5105-1463
+  - family-names: Boettiger
+    given-names: Carl
+  - family-names: Ram
+    given-names: Karthik
+  year: '2026'
+  doi: 10.32614/CRAN.package.rcrossref
 

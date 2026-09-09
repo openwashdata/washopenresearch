@@ -34,7 +34,7 @@
   2001 to 2026, and `jwh` holds all 2,013 articles of the Journal of Water and
   Health from 2003 to 2026, both collected with `data-raw/iwa_scraping.R` and
   sharing the `washdev` schema. Together with `washdev` and `ploswater` this
-  takes the corpus to 8,506 screened articles. Data availability statements
+  takes the corpus to 8,403 screened articles. Data availability statements
   were mapped to the shared `das_type` levels for 1,596 of 1,623 statements in
   `ws` and 717 of 733 in `jwh`; the unmapped tail keeps the full statement text
   and is listed in `data-raw/ws-das-review.csv` and
@@ -45,7 +45,38 @@
   empty, so the statement text was never captured and the dataset's central
   variable would ship empty. It needs a re-scrape first.
 
+# washopenresearch 0.3.0
 
+## New features
+
+- New function `das_in_paper_support()` classifies how a "data in paper"
+  data availability statement is backed by the recorded supplement fields
+  (#47). The modal claim "all relevant data are included in the paper or its
+  supplementary information" splits into `"no supplement"` (the claim rests
+  on the printed tables alone), `"unstructured supplement"` (pdf or images
+  only), `"structured supplement"` (docx, xlsx and similar), and
+  `"open supplement"` (csv, txt, json, xml). Across washdev and the three
+  IWA journal snapshots (2,599 claims), 71.5% have no supplement, 26.5% a
+  structured one, 2.1% an unstructured one, and none an open format.
+  `data-raw/das_in_paper_support.R` reproduces the summary in
+  `data-raw/das-in-paper-support-summary.csv`. A follow-up cross-check
+  against OpenAlex article types (`data-raw/das_in_paper_article_types.R`,
+  committed DOI-to-type lookup) shows the no-supplement claims are almost
+  entirely substantive research articles: only 0.5% are front matter or
+  reviews, so the article-type filter proposed in #47 does not shrink the
+  population. Verifying the remaining 1,847 bare claims requires reading
+  the articles' tables.
+- Supplement content audit (#47 tier 3): the 741 supplementary files of the
+  IWA snapshots whose pre-signed CDN links were still valid were downloaded
+  (checksummed manifest in `data-raw/suppfiles/manifest.csv`; the signatures
+  lapse 2026-08-18 to 2026-08-30, so 572 further links were already dead)
+  and classified with transparent structural heuristics
+  (`data-raw/suppfiles_parse.R`: pandoc-converted docx tables, readxl/xlsx
+  sheet metrics). Of the 290 in-paper claims whose structured supplement was
+  in hand, 54% share prose only, 21% summary tables, and 20% tables shaped
+  like observations (`data-raw/das_in_paper_suppfile_audit.R`). xlsx files
+  are the exception: 25 of 29 hold observation-shaped sheets. Heuristics are
+  recorded per file and await validation against a manual sample.
 - New scripted acquisition pipeline for a fourth dataset, `datapapers`, covering
   WASH-related data papers in seven dedicated data journals (Scientific Data,
   Data in Brief, Gates Open Research, F1000Research, GigaScience, GigaByte,
@@ -54,11 +85,20 @@
   committed raw snapshot), `data-raw/02_datapapers_screen.R` (relevance
   screening captured in a committed decision sheet keyed on DOI), and
   `data-raw/03_datapapers_process.R` (harmonisation to the shared schema and
-  export). The dataset itself is added once the first harvest and screening
-  round are complete.
+  export). The first harvest and screening round yielded 8 papers, shipped
+  as the new `datapapers` dataset with CSV and XLSX exports in
+  `inst/extdata/`.
 
 ## Minor improvements and fixes
 
+- `datapapers` now carries the repository links its papers deposit to:
+  `data_repo_url` and `data_repo` were NA for all 8 papers because the
+  Crossref relation metadata was empty and the fallback planned for #27
+  never ran. The links were verified against Crossref relations, DataCite
+  resource types, and the articles' availability sections, and are recorded
+  in `data-raw/datapapers_repo_fixes.csv`, applied during processing. Seven
+  papers use general repositories (GBIF, IEEE DataPort, Figshare, Dryad,
+  NCBI BioProject, Zenodo); none uses a WASH sector platform.
 - Expired pre-signed CDN links in `washdev$supp_url` are rewritten to stable DOI
   URLs, and Google Scholar alert redirects in `uncnewsletter$paper_url` are
   decoded to their target URLs (#10). The 343 Silverchair links carried a
