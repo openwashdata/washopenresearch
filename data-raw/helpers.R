@@ -118,3 +118,113 @@ parse_repo_name <- function(url) {
     TRUE ~ "other"
   )
 }
+
+# Repair invalid UTF-8 in character columns.
+# A few cells in the raw IWA CSVs carry Mac Roman bytes (e.g. 0x90 for "ê" in
+# "Inês"); openxlsx refuses to write them.
+repair_encoding <- function(x) {
+  if (!is.character(x)) return(x)
+  bad <- !is.na(x) & !validUTF8(x)
+  x[bad] <- iconv(x[bad], from = "macintosh", to = "UTF-8")
+  x
+}
+
+# Unpack a Python list literal column written by the scraper.
+# The scrapers store multi-value fields as "[]" or "['a', 'b']"; this turns
+# them into list-columns, which collapse_list_col() later flattens for export.
+unpack_list_literal <- function(x) {
+  x <- dplyr::na_if(x, "[]")
+  purrr::map(x, function(value) {
+    stringr::str_extract_all(value, pattern = "(?<=')[^',]*?(?='\\s*)")[[1]]
+  })
+}
+
+# Shared cleaning for the IWA journals scraped from iwaponline.com.
+# washdev, ws, jwh and aqua come off the same scraper (data-raw/iwa_scraping.R)
+# with the same 28-column schema, so the steps that do not depend on manual,
+# per-journal decisions live here and each journal's script calls this first.
+# Steps that stay per-journal: the das_type regex mapping, the review files,
+# and the hard-coded ID fix vectors.
+#
+# `drop_index` handles the one schema difference: washdev.csv was written by
+# the original Python scraper and carries an unnamed leading index column;
+# ws.csv, jwh.csv and aqua.csv come from the R port and do not.
+process_iwa_journal <- function(path, drop_index = FALSE) {
+  data <- readr::read_csv(path, show_col_types = FALSE)
+
+  if (drop_index) {
+    data <- dplyr::select(data, -1)
+  }
+
+  data |>
+    dplyr::mutate(dplyr::across(where(is.character), repair_encoding)) |>
+    dplyr::rename(paper_url = url) |>
+    dplyr::mutate(url_source = "iwaponline.com") |>
+    dplyr::mutate(
+      first_author_affiliation_country =
+        clean_iwa_country(first_author_affiliation_country),
+      correspondence_author_affiliation_country =
+        clean_iwa_country(correspondence_author_affiliation_country)
+    ) |>
+    dplyr::mutate(
+      supp_url = unpack_list_literal(supp_url),
+      supp_url = purrr::map(supp_url, function(x) unique(canonicalize_silverchair_url(x))),
+      keywords = unpack_list_literal(keywords),
+      das_repo_url = as.list(das_repo_url)
+    )
+}
+
+# Standardise the free-text affiliation country strings the IWA pages carry.
+# The scraped values trail e-mail addresses and inconsistent country spellings,
+# so the known patterns are rewritten before the UN name lookup; anything the
+# lookup cannot resolve becomes NA and is listed in the per-journal review file.
+clean_iwa_country <- function(x) {
+  x |>
+    stringr::str_replace("\\s+E-mail.*", "") |>
+    stringr::str_replace("Canada .*", "Canada") |>
+    stringr::str_replace(
+      "USA?|U\\.S\\.A|((GA|MI|FL|CA).*)|(United States)",
+      "United States of America"
+    ) |>
+    to_un_country_name()
+}
+
+# Redact email addresses embedded in free-text fields.
+# Dropping the structured email columns still leaves addresses inside the
+# statements authors wrote, for example "data are available on request from
+# name@example.org". These are fewer but just as contactable, so the local
+# part is masked and the domain kept, which preserves the sense of the
+# statement while removing the address.
+redact_inline_emails <- function(x) {
+  if (!is.character(x)) return(x)
+  stringr::str_replace_all(
+    x,
+    "[a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})",
+    "[email removed]@\\1"
+  )
+}
+
+# Strip access tokens from repository URLs.
+# A few data availability statements carry a Zenodo pre-signed link of the form
+# ...?token=<JWT>, which grants access to an otherwise restricted record. The
+# token is a credential, so it is dropped and the bare record URL kept; the
+# same reasoning as the expired Silverchair signatures in #10.
+strip_url_tokens <- function(x) {
+  if (!is.character(x)) return(x)
+  x <- stringr::str_replace_all(x, "([?&])token=[A-Za-z0-9._~+/=-]+", "\\1token=[removed]")
+  stringr::str_replace_all(x, "([?&])(access_token|signature)=[A-Za-z0-9._~+/=-]+", "\\1\\2=[removed]")
+}
+
+# Drop the scraped author email addresses before a dataset is exported.
+# The addresses are personal data and earn nothing analytically: the research
+# questions use author country, das_type, keywords and supplementary counts.
+# A published CC BY table of corresponding author addresses is a ready-made
+# mailing list, so the columns stay in data-raw/ and out of the package.
+drop_author_emails <- function(data) {
+  data |>
+    dplyr::select(-dplyr::any_of(c(
+      "first_author_email", "correspondence_author_email"
+    ))) |>
+    dplyr::mutate(dplyr::across(where(is.character), redact_inline_emails)) |>
+    dplyr::mutate(dplyr::across(where(is.character), strip_url_tokens))
+}

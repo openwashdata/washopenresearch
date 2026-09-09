@@ -1,0 +1,28 @@
+paperid,volume,issue,das_type
+77655,21,1,The data that support the findings of this study are available on request from the corresponding author. The data are not publicly available due to privacy or ethical restrictions.
+77954,21,1,Processed monitoring data and the script to reproduce WQI figures are available in the data package at https://doi.org/10.5281/zenodo.4165486. Raw data can be requested at RIWA-Rijn. Other relevant data are included in the paper or its Supplementary Information.
+80613,21,5,All relevant data are available on request to the corresponding author (E-mail: gqwang@nhri.cn).
+83043,22,1,Interested readers are asked to contact the corresponding author if needed.
+84988,22,2,Data cannot be made publicly available; readers should contact the author for details.
+85304,22,3,All the relevant data are uploaded on GitHub and accessible via the following URL: https://github.com/demekeendalie/rainfall-prediction.
+87069,22,4,"If needed, the data can be made available to readers of the paper."
+87618,22,5,The supporting data associated with the findings of this study can be obtained from the corresponding author on genuine request.
+91413,22,10,All relevant data and codes are available from: http://dx.doi.org/10.17632/m96sxh95kd.1.
+92500,23,2,1. Input-Output Table: https://oss.henan.gov.cn/sbgt-wztipt/attachment/hntjj/hntj/lib/tjnj/2020nj/zk/indexch.htm.
+93055,23,2,"If needed, all data will be made available to the readers."
+95208,23,6,The data used in this study is free of cost available at U.S. Department of Agriculture Research Services (USDA-ARS) Water Database (http://www.ars.usda.gov/arsdb.html).
+95801,23,7,There are no data available.
+96700,23,8,The datasets generated and/or analysed in this study are not yet publicly available but can be requested from the corresponding authors.
+97038,23,9,All Relevant data are included in the paper or its Supplementary Information.
+99908,24,2,Data will be available upon reasonable request.
+99913,24,2,"The relevant data has been uploaded to the public database, and the link is https://doi.org/10.6084/m9.figshare.25009520.v1."
+101479,24,4,"All relevant data are available online, as listed in the references below."
+102367,24,6,"The raw data used in this study are available to download from https://www.dwd.de/EN/ourservices/gpcc/gpcc.html (GPCC), https://power.larc.nasa.gov/ (NASA POWER), https://app.climateengine.org/climateEngine (CHIRPS and TerraClimate), and https://crudata.uea.ac.uk/cru/data/hrg/cru_ts_4.07/ (CRU)."
+105423,24,11,All the data has been provided in the supplementary file.
+105267,24,11,The data that support the findings of this study are available in the public domain: https://www.melbournewater.com.au and http://www.bom.gov.au.
+106504,25,1,Data may be shared upon request.
+106867,25,2,All relevant data will be made available to readers on a reasonable request.
+107850,25,4,All relevant data are available on OpenEI at https://doi.org/10.7481/1963162
+107859,25,6,All relevant data are available in the manuscript.
+110212,25,12,"The repository used in this study is not publicly available at this moment, but the authors will consider providing access upon reasonable request."
+111061,26,3,"Google Earth Engine scripts for Sentinel-2 data acquisition, study area filtering, and integration of ground measurement dates are accessible via the following link: https://code.earthengine.google.com/?accept_repo=users/st124094/Final."

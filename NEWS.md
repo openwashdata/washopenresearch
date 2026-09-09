@@ -1,6 +1,50 @@
-# washopenresearch (development version)
+# washopenresearch 0.4.0
+
+## Breaking changes
+
+- The scraped author email addresses are removed from every dataset. The
+  columns `first_author_email` and `correspondence_author_email` no longer
+  exist in `washdev`, `ploswater`, `uncnewsletter`, `ws` or `jwh`. They were
+  published up to and including v0.3.0. The addresses are personal data and
+  earn nothing analytically, since the research questions use author country,
+  `das_type`, keyword frequency and supplementary counts. A CC BY table of
+  corresponding author addresses is a ready-made mailing list, which is the
+  concrete harm. The addresses remain in `data-raw/` for provenance; code that
+  read either column needs updating. Addresses that authors wrote into the
+  statements themselves are masked in place, keeping the domain so the
+  statement still reads correctly (52 statements across the five datasets).
+
+- The flat-file exports in `inst/extdata/` are no longer built into the
+  installed package. They are still generated and still live in the repository
+  and the Zenodo deposit, but shipping a CSV and an XLSX per dataset for six
+  datasets would push the built tarball past the 5 MB CRAN guidance. Calls to
+  `system.file("extdata", ..., package = "washopenresearch")` no longer resolve;
+  read the datasets directly instead, for example `data(ws)`. `inst/CITATION`
+  is unaffected and still ships, so `citation("washopenresearch")` is unchanged.
+
+- Access tokens are stripped from repository URLs. A few statements carried a
+  Zenodo pre-signed link (`?token=<JWT>`) granting access to an otherwise
+  restricted record; the token is replaced and the record URL kept, following
+  the same reasoning as the expired Silverchair signatures in #10.
 
 ## New features
+
+- Two new datasets covering the remaining IWA journals scraped in the same run
+  as `washdev` (#32-#34). `ws` holds all 4,884 articles of Water Supply from
+  2001 to 2026, and `jwh` holds all 2,013 articles of the Journal of Water and
+  Health from 2003 to 2026, both collected with `data-raw/iwa_scraping.R` and
+  sharing the `washdev` schema. Together with `washdev` and `ploswater` this
+  takes the corpus to 8,506 screened articles. Data availability statements
+  were mapped to the shared `das_type` levels for 1,596 of 1,623 statements in
+  `ws` and 717 of 733 in `jwh`; the unmapped tail keeps the full statement text
+  and is listed in `data-raw/ws-das-review.csv` and
+  `data-raw/jwh-das-review.csv` (#12).
+
+- A fourth IWA journal, AQUA, was scraped in the same run but is not exported.
+  539 of its 1,819 rows carry `has_das` TRUE while `das` and `das_type` are
+  empty, so the statement text was never captured and the dataset's central
+  variable would ship empty. It needs a re-scrape first.
+
 
 - New scripted acquisition pipeline for a fourth dataset, `datapapers`, covering
   WASH-related data papers in seven dedicated data journals (Scientific Data,
