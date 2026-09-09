@@ -9,7 +9,7 @@ type: software
 license: CC-BY-4.0
 title: 'washopenresearch: Dataset about open research data information in Water, Sanitation,
   and Hygiene'
-version: 0.1.0
+version: 0.4.0
 doi: 10.5281/zenodo.11185699
 abstract: The goal of washopenresearch is to provide an overview of open research
   data related to Water Sanitation and Hygiene (WASH). The package provides access

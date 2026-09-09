@@ -1,0 +1,17 @@
+paperid,volume,issue,das_type
+112026,24,6,"Attendance data, reported daily by school, was provided by JCPS under a data use agreement (DUA) and are not publicly available. Researchers interested in accessing these data should contact JCPS. Wastewater data collected as part of the WastewaterSCAN/SCAN project are publicly available. The random forest code, redacted of any identifiable school information, is available at: https://github.com/CenterForHealthyAirWaterAndSoil/RandomForestProject."
+111837,24,6,"No new data were generated or analyzed in this review article. All information discussed in this manuscript was obtained from previously published studies, which are cited in the reference list."
+83542,19,5,All the data used are available from the sources cited in the variable descriptions and in the list of primary studies.
+89200,20,7,Code and links to data are available from https://github.com/julianfaraway/wbequant.
+96245,21,8,All sequence data are available from the DRA database of DNA Data Bank of Japan (DDBJ). The accession numbers of the sequence data are listed in the Methods and Supplementary Information.
+97397,21,9,Data is publicly available on Hydroshare at https://www.hydroshare.org/resource/08084d979c5d4900a589f8232332a7c5/.
+98218,21,11,All the relevant data is included in the paper.
+98626,21,12,All the analyses were carried out using publicly available datasets that can be obtained directly from the MICS website (mics.unicef.org). Datasets are continuously sourced and updated by the International Center for Equity in Health (equidade.org) as they are released. We used the last available versions on 8 February 2023.
+99877,22,2,COVID-19 mortality from the WHO and inadequate WASH mortality data from IMHE have been uploaded to DRYAD and are available at https://doi.org/10.5061/dryad.fj6q5742f.
+100361,22,3,The code corresponding to the applied methods is available at https://github.com/EcuadorianMP/Drinking-Water-Microbiome. The raw FASTA sequence set is available as a NCBI bioproject with accession number PRJNA659797.
+103099,22,7,All relevant data are provided in this document.
+104779,22,10,All relevant data are included in the article or its Supplementary Information.
+106694,23,1,The data that support the findings of this study are available from the Instituto Nacional de Estadística e Informática of Peru (https://proyectos.inei.gob.pe/microdatos/).
+107016,23,3,Raw sequences are available from GenBank (BioProject: PRJNA1072827).
+107834,23,4,All relevant data are provided in the paper and its supplementary information.
+109916,23,11,Baseline data are available at https://doi.org/10.7910/DVN/VLGMZD and endline data are available at https://doi.org/10.7910/DVN/SSFGDG.
