@@ -38,10 +38,13 @@ library(wordcloud2)
 
 The goal of washopenresearch is to provide an overview of open research
 data related to Water Sanitation and Hygiene (WASH). The current version
-contains four datasets from the following sources:
+contains six datasets from the following sources:
 
 -   `washdev`: Open access journal [*Journal of Water, Sanitation and
     Hygiene for Development*](https://iwaponline.com/washdev)
+-   `ws`: Journal [*Water Supply*](https://iwaponline.com/ws)
+-   `jwh`: Journal [*Journal of Water and
+    Health*](https://iwaponline.com/jwh)
 -   `uncnewsletter`: Research section of the newsletter [North Carolina
     Water
     News](https://waterinstitute.unc.edu/our-work/nc-water-news-newsletter)
@@ -91,12 +94,19 @@ read_csv("data-raw/dictionary.csv") |>
 
 ## Data
 
-The package provides access to four datasets `washdev`,
+The package provides access to six datasets `washdev`, `ws`, `jwh`,
 `uncnewsletter`, `ploswater`, and `datapapers`. Each dataset collects
 information on scientific articles about (1) article metadata (e.g.
 title, first author, correspondence author), (2) supplementary material
 information, (3) data availability statement or linked data repository,
 and (4) semantic information (e.g. keywords or abstract).
+
+Author email addresses were removed in version 0.4.0. They are personal
+data, and the research questions this package serves use author country,
+data availability statement type, keywords and supplementary counts
+rather than contact details. Author names, affiliations and ORCIDs are
+kept, since ORCIDs are persistent public identifiers built for
+attribution.
 
 ```{r}
 library(washopenresearch)
@@ -126,6 +136,61 @@ readr::read_csv("data-raw/dictionary.csv") |>
   dplyr::select(variable_name:description) |> 
   knitr::kable() |> 
   kableExtra::kable_styling("striped") |> 
+  kableExtra::scroll_box(height = "200px")
+```
+
+### ws
+
+The dataset `ws` contains data on all articles of the journal [*Water
+Supply*](https://iwaponline.com/ws), collected with the same R scraper
+as `washdev` and sharing its schema. It has `r nrow(ws)` observations
+from `r min(ws$published_year)` to `r max(ws$published_year)`, the
+longest run in the package. Water Supply does not enforce a data
+availability policy, so most articles carry no statement at all; where
+one exists, `das_type` records what it claims.
+
+```{r}
+ws |>
+  head(3) |>
+  gt::gt() |>
+  gt::as_raw_html()
+```
+
+For an overview of the variable descriptions, see the following table.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+readr::read_csv("data-raw/dictionary.csv") |>
+  dplyr::filter(file_name == "ws.rda") |>
+  dplyr::select(variable_name:description) |>
+  knitr::kable() |>
+  kableExtra::kable_styling("striped") |>
+  kableExtra::scroll_box(height = "200px")
+```
+
+### jwh
+
+The dataset `jwh` contains data on all articles of the [*Journal of
+Water and Health*](https://iwaponline.com/jwh), collected with the same
+R scraper as `washdev` and sharing its schema. It has `r nrow(jwh)`
+observations from `r min(jwh$published_year)` to
+`r max(jwh$published_year)`. Like Water Supply, it does not enforce a
+data availability policy.
+
+```{r}
+jwh |>
+  head(3) |>
+  gt::gt() |>
+  gt::as_raw_html()
+```
+
+For an overview of the variable descriptions, see the following table.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+readr::read_csv("data-raw/dictionary.csv") |>
+  dplyr::filter(file_name == "jwh.rda") |>
+  dplyr::select(variable_name:description) |>
+  knitr::kable() |>
+  kableExtra::kable_styling("striped") |>
   kableExtra::scroll_box(height = "200px")
 ```
 
@@ -316,27 +381,32 @@ datapapers |>
 ## Method
 
 We describe the raw data collection procedure of each dataset in this
-section. To reproduce the collection, you need to have python3 installed
-and install python libraries
+section. The collection is scripted in R; the scripts live in
+`data-raw/` and the run order is documented in `data-raw/README.md`.
 
-```         
-pip install requirements.txt
-```
+### washdev, ws and jwh
 
-### washdev
+All three IWA journals are collected by the same R scraper. First, each
+publication link is scraped by iterating the table of contents of all
+volumes. This step delivers a table containing the paper ID, volume
+number, issue number, publication url, journal title, publication title,
+and published year. Then, for each publication, the remaining variables
+are retrieved from the article's html using that url, rule-based, to
+find the relevant fields (for example supplementary materials) and
+extract the value.
 
-The collection of `washdev` is via web scraping using Python. The script
-can be found in `inst/python/washdev_scraping.py`. First, each
-publication link is scraped from iterating the table of contents of all
-volumes. This step delivers a table containing the variables paper ID,
-volume number, issue number, publication url, journal title, publication
-title, and published year. This table will be merged to get the final
-dataset.
+`washdev` uses `data-raw/washdev_scraping.R`. `ws` and `jwh` use the
+generalised `data-raw/iwa_scraping.R`, driven by
+`data-raw/run_iwa_scrapes.R`. Because the three share one schema, the
+cleaning that follows is shared too: `process_iwa_journal()` in
+`data-raw/helpers.R` handles encoding repair, column harmonisation,
+country standardisation and the multi-value fields, while the data
+availability statement mapping and the review files stay per-journal.
 
-Then, for each publication, we retrieve the needed variables from the
-publication's html file using the publication url. The retrieval is
-rule-based to find the relevant fields (e.g. supplementary materials)
-and extract the value.
+Statements that no rule maps keep their full text and are listed in a
+review file per journal (`data-raw/*-das-review.csv`), so nothing is
+silently reclassified. The same applies to affiliations whose country
+could not be standardised (`data-raw/*-country-review.csv`).
 
 ### datapapers
 
@@ -354,7 +424,9 @@ so the pipeline runs end-to-end non-interactively. See
 The collection of `uncnewsletter` is a combination of web scraping and
 manual annotation. We first use the newsletter archive to scrape all
 publication website links. The code can be found at
-`inst/python/uncnewsletter_scraping.py`. Two annotators worked on the
+`inst/python/uncnewsletter_scraping.py`, which was removed from the
+package when the Python tooling went (#17); it is recoverable from the
+git history. Two annotators worked on the
 manual extraction of the needed variables on these publications. For
 each publication, an annotator follows the guide to fill in the value on
 an collaborative spreadsheet. The guide is converted into the data

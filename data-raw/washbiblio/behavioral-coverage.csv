@@ -1,0 +1,51 @@
+source_id,venue,n_plos_osi,n_osi_comparator,n_aaas,own_scrape,any_behavioral
+S2495644771,Journal of Water Sanitation and Hygiene for Development,0,0,0,TRUE,TRUE
+S4210228842,Journal of Water Supply Research and Technology—AQUA,0,0,0,TRUE,TRUE
+S26443501,Journal of Water and Health,0,0,0,TRUE,TRUE
+S124453322,Water Science & Technology Water Supply,0,0,0,TRUE,TRUE
+S137656717,Water Practice & Technology,0,0,0,FALSE,FALSE
+S2764879708,China Water & Wastewater,0,0,0,FALSE,FALSE
+S2764434589,Journal of Water Process Engineering,0,0,0,FALSE,FALSE
+S4210201235,ACS ES&T Water,0,0,0,FALSE,FALSE
+S52566953,Water Research,0,3,0,FALSE,TRUE
+S2764931087,Applied Water Science,0,0,0,FALSE,FALSE
+S53450646,Water Science & Technology,0,0,0,FALSE,FALSE
+S2764832999,Scientific investigations report,0,0,0,FALSE,FALSE
+S130511131,Water Environment Research,0,1,0,FALSE,TRUE
+S134216166,Water,0,0,0,FALSE,FALSE
+S124203677,Desalination and Water Treatment,0,0,0,FALSE,FALSE
+S86512602,Desalination,0,0,0,FALSE,FALSE
+S2764859491,Journal of environmental chemical engineering,0,0,0,FALSE,FALSE
+S11732831,Environmental Monitoring and Assessment,0,68,0,FALSE,TRUE
+S4210200103,Proceedings of the Water Environment Federation,0,0,0,FALSE,FALSE
+S44455300,Journal of Environmental Management,0,1,0,FALSE,TRUE
+S140251998,Journal of Biological Chemistry,0,116,0,FALSE,TRUE
+S35825460,Journal of Environmental Sciences,0,0,0,FALSE,FALSE
+S86852077,The Science of The Total Environment,0,3,0,FALSE,TRUE
+S46544255,PLoS neglected tropical diseases,6037,0,0,FALSE,TRUE
+S69753523,Separation and Purification Technology,0,0,0,FALSE,FALSE
+S87561820,Environmental Science and Pollution Research,0,68,0,FALSE,TRUE
+S203465130,Chemosphere,0,0,0,FALSE,FALSE
+S4210170078,Oncology Times,0,0,0,FALSE,FALSE
+S13479253,Environmental Science & Technology,0,48,0,FALSE,TRUE
+S145089992,Journal of Hazardous Materials,0,0,0,FALSE,FALSE
+S21442059,Bioresource Technology,0,2,0,FALSE,TRUE
+S158228368,Applied and Environmental Microbiology,0,0,0,FALSE,FALSE
+S70979998,Applied Microbiology and Biotechnology,0,4,0,FALSE,TRUE
+S100045985,American Journal of Tropical Medicine and Hygiene,0,69,0,FALSE,TRUE
+S201530359,Environmental Pollution,0,0,0,FALSE,FALSE
+S149937609,Chemical Engineering Journal,0,0,0,FALSE,FALSE
+S119469986,Journal of Membrane Science,0,0,0,FALSE,FALSE
+S58516903,Journal of Cleaner Production,0,0,0,FALSE,FALSE
+S2484704948,Frontiers in Microbiology,0,0,0,FALSE,FALSE
+S168522863,Cancer Research,0,0,0,FALSE,FALSE
+S200071133,Blood,0,0,0,FALSE,FALSE
+S134307298,Applied Catalysis B: Environmental,0,0,0,FALSE,FALSE
+S72684844,Journal of Animal Science,0,0,0,FALSE,FALSE
+S47215897,Antimicrobial Agents and Chemotherapy,0,0,0,FALSE,FALSE
+S2738498342,EFSA Journal,0,0,0,FALSE,FALSE
+S25293849,The FASEB Journal,0,14,0,FALSE,TRUE
+S10134376,Sustainability,0,0,0,FALSE,FALSE
+S202381698,PLoS ONE,127182,0,0,FALSE,TRUE
+S196734849,Scientific Reports,0,4036,0,FALSE,TRUE
+S15137598,Journal of Clinical Oncology,0,0,0,FALSE,FALSE

@@ -14,16 +14,14 @@ data,washdev.rda,num_authors,integer,Number of the authors
 data,washdev.rda,first_author_name,character,Name of the first author
 data,washdev.rda,first_author_affiliation,character,Academic affiliation of the first author
 data,washdev.rda,first_author_affiliation_country,character,Country of the first author parsed from first_author_affiliation variable encoded with United Nations names
-data,washdev.rda,first_author_email,character,Email of the first author
 data,washdev.rda,first_author_orcid,character,ORCID of the first author
 data,washdev.rda,correspondence_author_name,character,Name of the correspondence author
 data,washdev.rda,correspondence_author_affiliation,character,Academic affiliation of the correspondence author
 data,washdev.rda,correspondence_author_affiliation_country,character,Country of the correspondence author parsed from correspondence_author_affiliation variable encoded with United Nations names
-data,washdev.rda,correspondence_author_email,character,Email of the correspondence author
 data,washdev.rda,correspondence_author_orcid,character,ORCID of the correspondence author
 data,washdev.rda,has_das,logical,Whether the paper has a data availability statement
 data,washdev.rda,das,character,Original data availability statement of the paper.  NA if it does not have a data availability statement.
-data,washdev.rda,das_type,factor,Type of the data availability statement including "in paper"(data in full paper scope like supplementary material or appendix or main content) "on request"(data available on request to the authors) "available in online repository"(data is shared in a public online repository) "not shareable"(data is not shareable). NA if it does not have a data availability statement.
+data,washdev.rda,das_type,factor,"Type of the data availability statement including ""in paper""(data in full paper scope like supplementary material or appendix or main content) ""on request""(data available on request to the authors) ""available in online repository""(data is shared in a public online repository) ""not shareable""(data is not shareable). NA if it does not have a data availability statement."
 data,washdev.rda,das_repo_url,character,Website urls of the data if the relevant data of the paper is shared on a public repository separated by a semicolon when there are multiple
 data,washdev.rda,keywords,character,Keywords of the paper separated by a semicolon
 data,washdev.rda,url_source,character,Publisher website of the paper
@@ -43,16 +41,14 @@ data,uncnewsletter.rda,num_authors,integer,Number of the authors
 data,uncnewsletter.rda,first_author_name,character,Name of the first author
 data,uncnewsletter.rda,first_author_affiliation,character,Academic affiliation of the first author
 data,uncnewsletter.rda,first_author_affiliation_country,character,Country of the first author directly parsed from first_author_affiliation variable encoded with United Nation names
-data,uncnewsletter.rda,first_author_email,character,Email of the first author
 data,uncnewsletter.rda,first_author_orcid,character,ORCID of the first author
 data,uncnewsletter.rda,correspondence_author_name,character,Name of the correspondence author
 data,uncnewsletter.rda,correspondence_author_affiliation,character,Academic affiliation of the correspondence author
 data,uncnewsletter.rda,correspondence_author_affiliation_country,character,Country or region of the correspondence author directly parsed from correspondence_author_affiliation variable encoded with United Nation names
-data,uncnewsletter.rda,correspondence_author_email,character,Email of the correspondence author
 data,uncnewsletter.rda,correspondence_author_orcid,character,ORCID of the correspondence author
 data,uncnewsletter.rda,has_das,logical,Whether the paper has a data availability statement
 data,uncnewsletter.rda,das,character,Original data availability statement of the paper. NA if it does not have a data availability statement.
-data,uncnewsletter.rda,das_type,factor,Type of the data availability statement including "in paper"(data in full paper scope like supplementary material or appendix or main content) "on request"(data available on request to the authors) "available in online repository"(data is shared in a public online repository) "not shareable"(data is not shareable). NA if it does not have a data availability statement.
+data,uncnewsletter.rda,das_type,factor,"Type of the data availability statement including ""in paper""(data in full paper scope like supplementary material or appendix or main content) ""on request""(data available on request to the authors) ""available in online repository""(data is shared in a public online repository) ""not shareable""(data is not shareable). NA if it does not have a data availability statement."
 data,uncnewsletter.rda,das_repo_url,character,Website urls of the data if the relevant data of the paper is shared on a public repository separated by a semicolon when there are multiple
 data,uncnewsletter.rda,keywords,character,Keywords of the paper separated by a semicolon
 data,uncnewsletter.rda,doi,character,DOI of the paper backfilled via a Crossref title search (issue #20); NA where no match cleared the title-similarity threshold (see data-raw/uncnewsletter-doi-review.csv)
@@ -71,12 +67,10 @@ data,ploswater.rda,num_authors,integer,Number of the authors
 data,ploswater.rda,first_author_name,character,Name of the first author
 data,ploswater.rda,first_author_affiliation,character,Academic affiliation of the first author
 data,ploswater.rda,first_author_affiliation_country,character,Country of the first author parsed from first_author_affiliation encoded with United Nations names
-data,ploswater.rda,first_author_email,character,Email of the first author. Only available when the first author is the correspondence author because PLOS publishes only the correspondence email
 data,ploswater.rda,first_author_orcid,character,ORCID of the first author
 data,ploswater.rda,correspondence_author_name,character,Name of the correspondence author
 data,ploswater.rda,correspondence_author_affiliation,character,Academic affiliation of the correspondence author
 data,ploswater.rda,correspondence_author_affiliation_country,character,Country of the correspondence author parsed from correspondence_author_affiliation encoded with United Nations names
-data,ploswater.rda,correspondence_author_email,character,Email of the correspondence author
 data,ploswater.rda,correspondence_author_orcid,character,ORCID of the correspondence author
 data,ploswater.rda,has_das,logical,Whether the paper has a data availability statement
 data,ploswater.rda,das,character,Original data availability statement of the paper. NA if it does not have a data availability statement
@@ -106,3 +100,57 @@ data,datapapers.rda,related_paper_doi,character,DOI of a linked research article
 data,datapapers.rda,abstract,character,Abstract of the paper as provided by the metadata source
 data,datapapers.rda,query_term,character,WASH search term(s) that retrieved the paper separated by a semicolon
 data,datapapers.rda,retrieval_date,date,Date the paper metadata was harvested from the API
+data,ws.rda,paperid,integer,ID number of the paper on the journal website
+data,ws.rda,volume,integer,Volume number of the journal
+data,ws.rda,issue,character,"Issue number of the journal, as text because combined issues (for example ""1-2"") occur"
+data,ws.rda,paper_url,character,Official website url of the paper
+data,ws.rda,journal,character,Full name of the journal
+data,ws.rda,title,character,Title of the paper
+data,ws.rda,published_year,numeric,Year of publication
+data,ws.rda,is_supp,logical,Whether the paper has supplementary materials
+data,ws.rda,num_supp,integer,Number of supplementary material files
+data,ws.rda,supp_file_type,character,File types of the supplementary materials separated by a semicolon when there are multiple
+data,ws.rda,supp_url,character,Website urls of the supplementary materials separated by a semicolon when there are multiple
+data,ws.rda,num_authors,integer,Number of the authors
+data,ws.rda,first_author_name,character,Name of the first author
+data,ws.rda,first_author_affiliation,character,Academic affiliation of the first author
+data,ws.rda,first_author_affiliation_country,character,Country of the first author parsed from first_author_affiliation variable encoded with United Nations names
+data,ws.rda,first_author_orcid,character,ORCID of the first author
+data,ws.rda,correspondence_author_name,character,Name of the correspondence author
+data,ws.rda,correspondence_author_affiliation,character,Academic affiliation of the correspondence author
+data,ws.rda,correspondence_author_affiliation_country,character,Country of the correspondence author parsed from correspondence_author_affiliation variable encoded with United Nations names
+data,ws.rda,correspondence_author_orcid,character,ORCID of the correspondence author
+data,ws.rda,has_das,logical,Whether the paper has a data availability statement
+data,ws.rda,das,character,Original data availability statement of the paper.  NA if it does not have a data availability statement.
+data,ws.rda,das_type,factor,"Type of the data availability statement including ""in paper""(data in full paper scope like supplementary material or appendix or main content) ""on request""(data available on request to the authors) ""available in online repository""(data is shared in a public online repository) ""not shareable""(data is not shareable). NA if it does not have a data availability statement."
+data,ws.rda,das_repo_url,character,Website urls of the data if the relevant data of the paper is shared on a public repository separated by a semicolon when there are multiple
+data,ws.rda,keywords,character,Keywords of the paper separated by a semicolon
+data,ws.rda,doi,character,DOI of the paper. Collected by the R scraper; populated for every row
+data,ws.rda,url_source,character,Publisher website of the paper
+data,jwh.rda,paperid,integer,ID number of the paper on the journal website
+data,jwh.rda,volume,integer,Volume number of the journal
+data,jwh.rda,issue,character,"Issue number of the journal, as text because combined issues (for example ""1-2"") occur"
+data,jwh.rda,paper_url,character,Official website url of the paper
+data,jwh.rda,journal,character,Full name of the journal
+data,jwh.rda,title,character,Title of the paper
+data,jwh.rda,published_year,numeric,Year of publication
+data,jwh.rda,is_supp,logical,Whether the paper has supplementary materials
+data,jwh.rda,num_supp,integer,Number of supplementary material files
+data,jwh.rda,supp_file_type,character,File types of the supplementary materials separated by a semicolon when there are multiple
+data,jwh.rda,supp_url,character,Website urls of the supplementary materials separated by a semicolon when there are multiple
+data,jwh.rda,num_authors,integer,Number of the authors
+data,jwh.rda,first_author_name,character,Name of the first author
+data,jwh.rda,first_author_affiliation,character,Academic affiliation of the first author
+data,jwh.rda,first_author_affiliation_country,character,Country of the first author parsed from first_author_affiliation variable encoded with United Nations names
+data,jwh.rda,first_author_orcid,character,ORCID of the first author
+data,jwh.rda,correspondence_author_name,character,Name of the correspondence author
+data,jwh.rda,correspondence_author_affiliation,character,Academic affiliation of the correspondence author
+data,jwh.rda,correspondence_author_affiliation_country,character,Country of the correspondence author parsed from correspondence_author_affiliation variable encoded with United Nations names
+data,jwh.rda,correspondence_author_orcid,character,ORCID of the correspondence author
+data,jwh.rda,has_das,logical,Whether the paper has a data availability statement
+data,jwh.rda,das,character,Original data availability statement of the paper.  NA if it does not have a data availability statement.
+data,jwh.rda,das_type,factor,"Type of the data availability statement including ""in paper""(data in full paper scope like supplementary material or appendix or main content) ""on request""(data available on request to the authors) ""available in online repository""(data is shared in a public online repository) ""not shareable""(data is not shareable). NA if it does not have a data availability statement."
+data,jwh.rda,das_repo_url,character,Website urls of the data if the relevant data of the paper is shared on a public repository separated by a semicolon when there are multiple
+data,jwh.rda,keywords,character,Keywords of the paper separated by a semicolon
+data,jwh.rda,doi,character,DOI of the paper. Collected by the R scraper; populated for every row
+data,jwh.rda,url_source,character,Publisher website of the paper
