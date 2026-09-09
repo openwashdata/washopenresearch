@@ -1,12 +1,15 @@
-#' Dataset about data availability in the UNC Water Newsletter
+#' Dataset about data availability in the Journal of Water and Health
 #'
-#' @format ## `uncnewsletter`
+#' The Journal of Water and Health is an IWA journal covering water quality and health. Coverage runs from 2003 to 2026.
+#' Scraped from iwaponline.com by data-raw/iwa_scraping.R (#32-#34).
+#'
+#' @format ## `jwh`
 #'
 #' \describe{
 #'   \item{paperid}{ID number of the paper on the journal website}
-#'   \item{issue_url}{Volume number of the journal}
+#'   \item{volume}{Volume number of the journal}
+#'   \item{issue}{Issue number of the journal, as text because combined issues (for example "1-2") occur}
 #'   \item{paper_url}{Official website url of the paper}
-#'   \item{url_source}{Publisher website of the paper}
 #'   \item{journal}{Full name of the journal}
 #'   \item{title}{Title of the paper}
 #'   \item{published_year}{Year of publication}
@@ -17,17 +20,18 @@
 #'   \item{num_authors}{Number of the authors}
 #'   \item{first_author_name}{Name of the first author}
 #'   \item{first_author_affiliation}{Academic affiliation of the first author}
-#'   \item{first_author_affiliation_country}{Country of the first author directly parsed from first_author_affiliation variable encoded with United Nation names}
+#'   \item{first_author_affiliation_country}{Country of the first author parsed from first_author_affiliation, encoded with United Nations names}
 #'   \item{first_author_orcid}{ORCID of the first author}
 #'   \item{correspondence_author_name}{Name of the correspondence author}
 #'   \item{correspondence_author_affiliation}{Academic affiliation of the correspondence author}
-#'   \item{correspondence_author_affiliation_country}{Country or region of the correspondence author directly parsed from correspondence_author_affiliation variable encoded with United Nation names}
+#'   \item{correspondence_author_affiliation_country}{Country of the correspondence author parsed from correspondence_author_affiliation, encoded with United Nations names}
 #'   \item{correspondence_author_orcid}{ORCID of the correspondence author}
 #'   \item{has_das}{Whether the paper has a data availability statement}
-#'   \item{das}{Original data availability statement of the paper. NA if it does not have a data availability statement.}
+#'   \item{das}{Original data availability statement of the paper.  NA if it does not have a data availability statement.}
 #'   \item{das_type}{Type of the data availability statement including in paper(data in full paper scope like supplementary material or appendix or main content) on request(data available on request to the authors) available in online repository(data is shared in a public online repository) not shareable(data is not shareable). NA if it does not have a data availability statement.}
 #'   \item{das_repo_url}{Website urls of the data if the relevant data of the paper is shared on a public repository, separated by "; " when there are multiple}
 #'   \item{keywords}{Keywords of the paper, separated by "; "}
-#'   \item{doi}{DOI of the paper, backfilled via a Crossref title search (issue #20); NA where no match cleared the title-similarity threshold.}
+#'   \item{url_source}{Publisher website of the paper}
+#'   \item{doi}{DOI of the paper. Collected by the R scraper; populated for every row}
 #' }
-"uncnewsletter"
+"jwh"

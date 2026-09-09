@@ -11,3 +11,4 @@
 ^\.github$
 ^python-scripts-lesson\.md$
 ^\.claude$
+^inst/extdata$

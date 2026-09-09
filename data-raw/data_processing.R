@@ -10,16 +10,6 @@ library(purrr)
 
 source("data-raw/helpers.R")
 
-# Helper: repair invalid UTF-8 -------------------------------------------
-# A few cells in the raw washdev.csv carry Mac Roman bytes (e.g. 0x90 for
-# "ê" in "Inês"); openxlsx refuses to write them
-repair_encoding <- function(x) {
-  if (!is.character(x)) return(x)
-  bad <- !is.na(x) & !validUTF8(x)
-  x[bad] <- iconv(x[bad], from = "macintosh", to = "UTF-8")
-  x
-}
-
 # WASHDEV DATA -----------------------------------------------------------
 # Drop the index column written by the scraper; keep everything else,
 # including the doi column collected since the R port (#11, #20)
@@ -342,10 +332,106 @@ ploswater |>
   dplyr::select(paperid, first_author_affiliation, correspondence_author_affiliation) |>
   readr::write_csv("data-raw/ploswater-country-review.csv")
 
+# WS AND JWH DATA --------------------------------------------------------------
+# Water Supply and Journal of Water and Health, scraped off iwaponline.com by
+# the R port of the washdev scraper (data-raw/iwa_scraping.R, driven by
+# run_iwa_scrapes.R) in one run with washdev and aqua (#32-#34). They share the
+# washdev schema exactly, so the shared cleaning lives in
+# process_iwa_journal(); only the das_type mapping and the review files are
+# per-journal below.
+#
+# aqua was scraped in the same run but is NOT exported: 539 of its 1,819 rows
+# carry has_das TRUE while das and das_type are empty, so the statement text was
+# never captured. It needs a re-scrape before it can be published.
+
+ws <- process_iwa_journal("data-raw/ws.csv")
+jwh <- process_iwa_journal("data-raw/jwh.csv")
+
+## modify das type -------------------------------------------------------------
+# Same mapping as washdev: these are the standard Silverchair statements, and
+# the journals share a template. Anything left unmapped keeps the full statement
+# text and is listed in the review file below, per issue #12.
+map_iwa_das_type <- function(x) {
+  x |>
+    stringr::str_replace("^All relevant data are (included in|available)( from)? an? online repositor.*", "available in online repository") |>
+    stringr::str_replace("^All relevant data are available from.*", "available in online repository") |>
+    stringr::str_replace(".*available on Zenodo.*", "available in online repository") |>
+    stringr::str_replace("^All relevant data are available online\\.?$", "available in online repository") |>
+    stringr::str_replace("^All relevant data are included in the paper.*", "in paper") |>
+    stringr::str_replace(".+readers should contact the corresponding author.*", "on request") |>
+    stringr::str_replace(".*available from the corresponding author.*", "on request")
+}
+
+ws <- ws |> dplyr::mutate(das_type = map_iwa_das_type(das_type))
+jwh <- jwh |> dplyr::mutate(das_type = map_iwa_das_type(das_type))
+
+#### Review file (issue #12): das_type values no rule mapped -------------------
+# No manual fixes without approval; statements that stayed unmapped go here.
+ws |>
+  dplyr::filter(has_das,
+                !das_type %in% c("available in online repository", "in paper", "on request")) |>
+  dplyr::select(paperid, volume, issue, das_type) |>
+  readr::write_csv("data-raw/ws-das-review.csv")
+
+jwh |>
+  dplyr::filter(has_das,
+                !das_type %in% c("available in online repository", "in paper", "on request")) |>
+  dplyr::select(paperid, volume, issue, das_type) |>
+  readr::write_csv("data-raw/jwh-das-review.csv")
+
+#### Review file (issue #12): affiliations without a standardized country ------
+ws |>
+  dplyr::filter(
+    (is.na(first_author_affiliation_country) & !is.na(first_author_affiliation)) |
+      (is.na(correspondence_author_affiliation_country) & !is.na(correspondence_author_affiliation))
+  ) |>
+  dplyr::select(paperid, volume, issue, first_author_affiliation, correspondence_author_affiliation) |>
+  readr::write_csv("data-raw/ws-country-review.csv")
+
+jwh |>
+  dplyr::filter(
+    (is.na(first_author_affiliation_country) & !is.na(first_author_affiliation)) |
+      (is.na(correspondence_author_affiliation_country) & !is.na(correspondence_author_affiliation))
+  ) |>
+  dplyr::select(paperid, volume, issue, first_author_affiliation, correspondence_author_affiliation) |>
+  readr::write_csv("data-raw/jwh-country-review.csv")
+
+## change data type ------------------------------------------------------------
+# issue stays character here: the R scraper records combined issues ("1-2"),
+# which as.integer would silently turn into NA.
+ws <- ws |>
+  dplyr::mutate(dplyr::across(c(paperid, volume, num_supp, num_authors), as.integer)) |>
+  dplyr::mutate(das_type = as.factor(das_type))
+
+jwh <- jwh |>
+  dplyr::mutate(dplyr::across(c(paperid, volume, num_supp, num_authors), as.integer)) |>
+  dplyr::mutate(das_type = as.factor(das_type))
+
+## Collapse multi-value columns into "; "-delimited strings --------------------
+ws <- ws |>
+  dplyr::mutate(dplyr::across(c(supp_file_type, supp_url, das_repo_url, keywords),
+                              collapse_list_col))
+
+jwh <- jwh |>
+  dplyr::mutate(dplyr::across(c(supp_file_type, supp_url, das_repo_url, keywords),
+                              collapse_list_col))
+
+# Drop the scraped author email addresses --------------------------------------
+# Applied to every exported dataset, not only the new ones: the addresses were
+# published in v0.3.0 and are personal data that earns nothing analytically.
+# They stay in data-raw/ and out of the package. See drop_author_emails().
+washdev <- drop_author_emails(washdev)
+uncnewsletter <- drop_author_emails(uncnewsletter)
+ploswater <- drop_author_emails(ploswater)
+ws <- drop_author_emails(ws)
+jwh <- drop_author_emails(jwh)
+
 # Write to R data object -------------------------------------------------------
 usethis::use_data(washdev, overwrite = TRUE)
 usethis::use_data(uncnewsletter, overwrite = TRUE)
 usethis::use_data(ploswater, overwrite = TRUE)
+usethis::use_data(ws, overwrite = TRUE)
+usethis::use_data(jwh, overwrite = TRUE)
 
 # Export processed data to csv and xlsx files ----------------------------------
 readr::write_csv(washdev, here::here("inst", "extdata", "washdev.csv"))
@@ -356,4 +442,10 @@ openxlsx::write.xlsx(uncnewsletter, here::here("inst", "extdata", "uncnewsletter
 
 readr::write_csv(ploswater, here::here("inst", "extdata", "ploswater.csv"))
 openxlsx::write.xlsx(ploswater, here::here("inst", "extdata", "ploswater.xlsx"))
+
+readr::write_csv(ws, here::here("inst", "extdata", "ws.csv"))
+openxlsx::write.xlsx(ws, here::here("inst", "extdata", "ws.xlsx"))
+
+readr::write_csv(jwh, here::here("inst", "extdata", "jwh.csv"))
+openxlsx::write.xlsx(jwh, here::here("inst", "extdata", "jwh.xlsx"))
 

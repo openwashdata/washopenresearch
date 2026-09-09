@@ -26,12 +26,10 @@
 #'   \item{first_author_name}{Name of the first author}
 #'   \item{first_author_affiliation}{Academic affiliation of the first author}
 #'   \item{first_author_affiliation_country}{Country of the first author parsed from first_author_affiliation, encoded with United Nations names}
-#'   \item{first_author_email}{Email of the first author. Only available when the first author is also the correspondence author, because PLOS publishes only the correspondence email.}
 #'   \item{first_author_orcid}{ORCID of the first author}
 #'   \item{correspondence_author_name}{Name of the correspondence author}
 #'   \item{correspondence_author_affiliation}{Academic affiliation of the correspondence author}
 #'   \item{correspondence_author_affiliation_country}{Country of the correspondence author parsed from correspondence_author_affiliation, encoded with United Nations names}
-#'   \item{correspondence_author_email}{Email of the correspondence author}
 #'   \item{correspondence_author_orcid}{ORCID of the correspondence author}
 #'   \item{has_das}{Whether the paper has a data availability statement}
 #'   \item{das}{Original data availability statement of the paper. NA if it does not have a data availability statement.}

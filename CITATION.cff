@@ -9,14 +9,14 @@ type: software
 license: CC-BY-4.0
 title: 'washopenresearch: Dataset about open research data information in Water, Sanitation,
   and Hygiene'
-version: 0.3.0
+version: 0.4.0
 doi: 10.5281/zenodo.11185699
-abstract: The goal of washopenresearch is to provide an overview of open research
+abstract: 'The goal of washopenresearch is to provide an overview of open research
   data related to Water Sanitation and Hygiene (WASH). The package provides access
-  to four datasets `washdev`, `uncnewsletter`, `ploswater`, and `datapapers`. Each
-  dataset collects information on scientific articles about (1) article metadata (e.g.
-  title, first author, correspondence author), (2) supplementary material information,
-  (3) data availability statement, and (4) semantic information (e.g. keywords).
+  to six datasets: `washdev`, `ws`, `jwh`, `uncnewsletter`, `ploswater`, and `datapapers`.
+  Each dataset collects information on scientific articles about (1) article metadata
+  (e.g. title, first author, correspondence author), (2) supplementary material information,
+  (3) data availability statement, and (4) semantic information (e.g. keywords).'
 authors:
 - family-names: Zhong
   given-names: Mian
@@ -30,6 +30,10 @@ authors:
   given-names: Lars
   email: lschoebitz@ethz.ch
   orcid: https://orcid.org/0000-0003-2196-5015
+- family-names: Dubey
+  given-names: Yash
+  email: yash.dubey@gess.ethz.ch
+  orcid: https://orcid.org/0009-0001-2849-970X
 preferred-citation:
   type: generic
   title: 'washopenresearch: Dataset about open research data information in Water,
@@ -47,15 +51,20 @@ preferred-citation:
     given-names: Lars
     email: lschoebitz@ethz.ch
     orcid: https://orcid.org/0000-0003-2196-5015
+  - family-names: Dubey
+    given-names: Yash
+    email: yash.dubey@gess.ethz.ch
+    orcid: https://orcid.org/0009-0001-2849-970X
   year: '2026'
   doi: 10.5281/zenodo.11185699
   url: https://github.com/openwashdata/washopenresearch
-  abstract: The goal of washopenresearch is to provide an overview of open research
+  abstract: 'The goal of washopenresearch is to provide an overview of open research
     data related to Water Sanitation and Hygiene (WASH). The package provides access
-    to two datasets `washdev` and `uncnewsletter`. Each dataset collects information
-    on scientific articles about (1) article metadata (e.g. title, first author, correspondence
-    author), (2) supplementary material information, (3) data availability statement,
-    and (4) semantic information (e.g. keywords).
+    to six datasets: `washdev`, `ws`, `jwh`, `uncnewsletter`, `ploswater`, and `datapapers`.
+    Each dataset collects information on scientific articles about (1) article metadata
+    (e.g. title, first author, correspondence author), (2) supplementary material
+    information, (3) data availability statement, and (4) semantic information (e.g.
+    keywords).'
   keywords:
   - open-data
   - open-research-data
@@ -63,10 +72,10 @@ preferred-citation:
   - openwashdata
   - sanitation
   - wash
-  version: 0.1.0
+  version: 0.4.0
 repository-code: https://github.com/openwashdata/washopenresearch
 url: https://github.com/openwashdata/washopenresearch
-date-released: '2026-08-20'
+date-released: '2026-09-09'
 contact:
 - family-names: Zhong
   given-names: Mian
@@ -152,4 +161,17 @@ references:
     given-names: Karthik
   year: '2026'
   doi: 10.32614/CRAN.package.rcrossref
+- type: software
+  title: testthat
+  abstract: 'testthat: Unit Testing for R'
+  notes: Suggests
+  url: https://testthat.r-lib.org
+  repository: https://CRAN.R-project.org/package=testthat
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2026'
+  doi: 10.32614/CRAN.package.testthat
+  version: '>= 3.0.0'
 
