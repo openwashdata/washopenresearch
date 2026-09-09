@@ -45,6 +45,11 @@
   empty, so the statement text was never captured and the dataset's central
   variable would ship empty. It needs a re-scrape first.
 
+- Yash Dubey is added as an author (#31). The contribution predates the R
+  port: the Selenium-based scraper and a washdev data update, committed in
+  December 2024 under the GitHub Action identity, which is why it was missed
+  when the author list was last reviewed.
+
 # washopenresearch 0.3.0
 
 ## New features

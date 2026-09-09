@@ -30,6 +30,10 @@ authors:
   given-names: Lars
   email: lschoebitz@ethz.ch
   orcid: https://orcid.org/0000-0003-2196-5015
+- family-names: Dubey
+  given-names: Yash
+  email: yash.dubey@gess.ethz.ch
+  orcid: https://orcid.org/0009-0001-2849-970X
 preferred-citation:
   type: generic
   title: 'washopenresearch: Dataset about open research data information in Water,
@@ -47,6 +51,10 @@ preferred-citation:
     given-names: Lars
     email: lschoebitz@ethz.ch
     orcid: https://orcid.org/0000-0003-2196-5015
+  - family-names: Dubey
+    given-names: Yash
+    email: yash.dubey@gess.ethz.ch
+    orcid: https://orcid.org/0009-0001-2849-970X
   year: '2026'
   doi: 10.5281/zenodo.11185699
   url: https://github.com/openwashdata/washopenresearch
