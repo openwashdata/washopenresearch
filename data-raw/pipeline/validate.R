@@ -99,13 +99,17 @@ gate_rules <- function() {
       }
     },
     no_access_tokens = function(data, context) {
-      # A token, access_token or signature parameter whose value was not
-      # replaced by strip_url_tokens().
-      columns <- columns_matching(
-        data, "[?&](token|access_token|signature)[=](?!\\[removed\\])"
-      )
+      # A token, access_token or signature parameter that strip_url_tokens()
+      # did not drop.
+      columns <- columns_matching(data, "[?&](token|access_token|signature)[=]")
       if (length(columns) > 0) {
         paste("access tokens in URLs of:", paste(columns, collapse = ", "))
+      }
+    },
+    no_stated_passwords = function(data, context) {
+      columns <- columns_matching(data, "(?i)(password|passcode)\\s*[:=]")
+      if (length(columns) > 0) {
+        paste("passwords stated in the text of:", paste(columns, collapse = ", "))
       }
     },
     statement_text = function(data, context) {

@@ -11,7 +11,7 @@ clean_dataset <- function() {
     has_das = c(TRUE, TRUE, FALSE),
     das = c(
       "All relevant data are included in the paper.",
-      paste0("Data are available at https://zenodo.org/records/1?tok", "en=[removed]"),
+      "Data are available at https://zenodo.org/records/1 (password [removed]).",
       NA
     ),
     das_type = factor(c("in paper", "available in online repository", NA))
@@ -101,11 +101,17 @@ test_that("an address inside a factor level is rejected", {
   expect_error(validate(data), "no_inline_addresses.*das_type")
 })
 
-test_that("an access token in a URL is rejected, a removed one is not", {
+test_that("an access token in a URL is rejected", {
   data <- clean_dataset()
-  expect_no_error(validate(data))
   data$das[2] <- paste0("https://zenodo.org/records/1?tok", "en=", "abc.def.ghi")
   expect_error(validate(data), "no_access_tokens.*das")
+})
+
+test_that("a password stated in the text is rejected, a removed one is not", {
+  data <- clean_dataset()
+  expect_no_error(validate(data))
+  data$das[2] <- paste0("Data are on the FTP site (username: reader, pass", "word: ", "letmein).")
+  expect_error(validate(data), "no_stated_passwords.*das")
 })
 
 test_that("a statement flag without statement text is rejected", {

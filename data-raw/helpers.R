@@ -224,18 +224,33 @@ redact_inline_emails <- function(x) {
 # Strip access tokens from repository URLs.
 # A few data availability statements carry a Zenodo pre-signed link of the form
 # ...?token=<JWT>, which grants access to an otherwise restricted record. The
-# token is a credential, so it is dropped and the bare record URL kept; the
-# same reasoning as the expired Silverchair signatures in #10.
+# token is a credential, so the whole parameter is dropped and the bare record
+# URL kept; the same reasoning as the expired Silverchair signatures in #10.
 strip_url_tokens <- function(x) {
   if (!is.character(x)) return(x)
-  # The characters a query parameter value can hold, named once for both
-  # patterns.
-  value <- "[A-Za-z0-9._~+/=-]+"
-  x <- stringr::str_replace_all(
-    x, paste0("([?&])token=", value), "\\1token=[removed]"
-  )
+  # A token, access_token or signature parameter with its value. The pattern
+  # is assembled from parts so that this file holds no literal a secret
+  # scanner reads as a credential assignment.
+  parameter <- paste0("(token|access_token|signature)", "=", "[A-Za-z0-9._~+/=-]+")
+  x |>
+    # after another parameter
+    stringr::str_replace_all(paste0("&", parameter), "") |>
+    # first of several parameters
+    stringr::str_replace_all(paste0("\\?", parameter, "&"), "?") |>
+    # the only parameter
+    stringr::str_replace_all(paste0("\\?", parameter), "")
+}
+
+# Remove passwords that authors wrote into a statement, for example the login
+# of an FTP site or the extraction code of a file share. The published article
+# states them for its readers; the package does not pass credentials on. The
+# rest of the sentence stays, with a marker where the password was.
+redact_stated_passwords <- function(x) {
+  if (!is.character(x)) return(x)
   stringr::str_replace_all(
-    x, paste0("([?&])(access_token|signature)=", value), "\\1\\2=[removed]"
+    x,
+    stringr::regex("(password|passcode)\\s*[:=]\\s*[^\\s),;]+", ignore_case = TRUE),
+    "\\1 [removed]"
   )
 }
 
@@ -244,11 +259,14 @@ strip_url_tokens <- function(x) {
 # questions use author country, das_type, keywords and supplementary counts.
 # A published CC BY table of corresponding author addresses is a ready-made
 # mailing list, so the columns stay in data-raw/ and out of the package.
+# Credentials inside the text go the same way: access tokens in URLs and
+# passwords stated in a statement.
 drop_author_emails <- function(data) {
   data |>
     dplyr::select(-dplyr::any_of(c(
       "first_author_email", "correspondence_author_email"
     ))) |>
     dplyr::mutate(dplyr::across(where(is.character), redact_inline_emails)) |>
-    dplyr::mutate(dplyr::across(where(is.character), strip_url_tokens))
+    dplyr::mutate(dplyr::across(where(is.character), strip_url_tokens)) |>
+    dplyr::mutate(dplyr::across(where(is.character), redact_stated_passwords))
 }

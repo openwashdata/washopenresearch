@@ -9,6 +9,15 @@
   no entry for it. The article is listed in
   `data-raw/washdev-country-review.csv`.
 
+- Credentials are removed from the text of the datasets. Where a statement
+  linked a restricted Zenodo record through an access token, the token
+  parameter is now dropped and the plain record URL kept; up to v0.4.0 the
+  URL kept the parameter with a placeholder value and did not resolve
+  (`ploswater`, one article). Where authors wrote a password into their
+  statement, such as the login of an FTP site, the password is replaced by
+  `[removed]` and the rest of the sentence kept (`ploswater` and `ws`, one
+  statement each).
+
 # washopenresearch 0.4.0
 
 ## Breaking changes
