@@ -15,8 +15,12 @@ collapse_list_col <- function(x) {
 # Standardise free-text country names to United Nations English names.
 # Non-matches become NA and are handled by a committed fixes sheet
 # (see apply_country_fixes()), not by hard-coded ID vectors.
+# The lookup's messages about unmatched names are silenced: every unmatched
+# affiliation is listed in the dataset's country review sheet.
 to_un_country_name <- function(x) {
-  countries::country_name(x, to = "UN_en", fuzzy_match = FALSE)
+  suppressMessages(
+    countries::country_name(x, to = "UN_en", fuzzy_match = FALSE)
+  )
 }
 
 # Apply manual country corrections from a decision sheet.
@@ -141,18 +145,40 @@ unpack_list_literal <- function(x) {
   })
 }
 
+# Column types of the raw IWA snapshots.
+# Never left to readr's guessing: the statement columns are empty for the
+# early years of a journal, so a guess from the first rows types them as
+# logical and silently drops every statement further down. That is how the
+# 539 AQUA statements went missing in v0.4.0.
+iwa_raw_col_types <- function() {
+  readr::cols(
+    paperid = readr::col_integer(),
+    volume = readr::col_integer(),
+    published_year = readr::col_double(),
+    is_supp = readr::col_logical(),
+    num_supp = readr::col_integer(),
+    num_authors = readr::col_integer(),
+    has_das = readr::col_logical(),
+    .default = readr::col_character()
+  )
+}
+
 # Shared cleaning for the IWA journals scraped from iwaponline.com.
 # washdev, ws, jwh and aqua come off the same scraper (data-raw/iwa_scraping.R)
 # with the same 28-column schema, so the steps that do not depend on manual,
-# per-journal decisions live here and each journal's script calls this first.
-# Steps that stay per-journal: the das_type regex mapping, the review files,
-# and the hard-coded ID fix vectors.
+# per-journal decisions live here and build_iwa() in data-raw/pipeline/ calls
+# this first. Steps that stay per-journal: the das_type regex mapping, the
+# review files, and the decision sheets.
 #
 # `drop_index` handles the one schema difference: washdev.csv was written by
 # the original Python scraper and carries an unnamed leading index column;
 # ws.csv, jwh.csv and aqua.csv come from the R port and do not.
 process_iwa_journal <- function(path, drop_index = FALSE) {
-  data <- readr::read_csv(path, show_col_types = FALSE)
+  data <- readr::read_csv(
+    path,
+    col_types = iwa_raw_col_types(),
+    name_repair = "unique_quiet"
+  )
 
   if (drop_index) {
     data <- dplyr::select(data, -1)
@@ -193,9 +219,9 @@ clean_iwa_country <- function(x) {
 
 # Redact email addresses embedded in free-text fields.
 # Dropping the structured email columns still leaves addresses inside the
-# statements authors wrote, for example "data are available on request from
-# name@example.org". These are fewer but just as contactable, so the local
-# part is masked and the domain kept, which preserves the sense of the
+# statements authors wrote, for example "data are available on request from"
+# followed by an address. These are fewer but just as contactable, so the
+# local part is masked and the domain kept, which preserves the sense of the
 # statement while removing the address.
 redact_inline_emails <- function(x) {
   if (!is.character(x)) return(x)
@@ -213,8 +239,15 @@ redact_inline_emails <- function(x) {
 # same reasoning as the expired Silverchair signatures in #10.
 strip_url_tokens <- function(x) {
   if (!is.character(x)) return(x)
-  x <- stringr::str_replace_all(x, "([?&])token=[A-Za-z0-9._~+/=-]+", "\\1token=[removed]")
-  stringr::str_replace_all(x, "([?&])(access_token|signature)=[A-Za-z0-9._~+/=-]+", "\\1\\2=[removed]")
+  # The characters a query parameter value can hold, named once for both
+  # patterns.
+  value <- "[A-Za-z0-9._~+/=-]+"
+  x <- stringr::str_replace_all(
+    x, paste0("([?&])token=", value), "\\1token=[removed]"
+  )
+  stringr::str_replace_all(
+    x, paste0("([?&])(access_token|signature)=", value), "\\1\\2=[removed]"
+  )
 }
 
 # Drop the scraped author email addresses before a dataset is exported.
