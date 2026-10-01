@@ -83,6 +83,28 @@ test_that("no URL carries an access token", {
   }
 })
 
+test_that("no statement states a password", {
+  # Authors sometimes write the login of an FTP site or a share into their
+  # statement. The package does not pass credentials on; the build replaces
+  # the password and keeps the sentence.
+  datasets <- list(
+    washdev = washdev, ws = ws, jwh = jwh,
+    ploswater = ploswater, uncnewsletter = uncnewsletter,
+    datapapers = datapapers
+  )
+  stated_password <- "(password|passcode)\\s*[:=]"
+  for (name in names(datasets)) {
+    data <- datasets[[name]]
+    text <- unlist(lapply(data, function(column) {
+      if (is.character(column)) column else if (is.factor(column)) levels(column)
+    }))
+    expect_false(
+      any(grepl(stated_password, text, ignore.case = TRUE)),
+      label = paste0(name, " states no password")
+    )
+  }
+})
+
 test_that("country columns hold no three letter codes", {
   # The columns are documented as United Nations country names. washdev
   # shipped ISO codes for 33 correspondence authors up to v0.4.0.
