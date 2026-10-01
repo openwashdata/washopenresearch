@@ -20,8 +20,10 @@ library(targets)
 # data-raw/ would execute the scrapers and the analysis scripts.
 tar_source(c("data-raw/helpers.R", "data-raw/pipeline"))
 
-datasets <- c("washdev", "ws", "jwh", "ploswater", "uncnewsletter", "datapapers")
-iwa_journals <- c("washdev", "ws", "jwh")
+datasets <- c(
+  "washdev", "ws", "jwh", "aqua", "ploswater", "uncnewsletter", "datapapers"
+)
+iwa_journals <- c("washdev", "ws", "jwh", "aqua")
 
 # The two targets of a dataset: <dataset>_built holds what the build
 # function returns, and <dataset> is that object once it has passed the
@@ -69,6 +71,7 @@ list(
   tar_target(washdev_raw_file, "data-raw/washdev.csv", format = "file"),
   tar_target(ws_raw_file, "data-raw/ws.csv", format = "file"),
   tar_target(jwh_raw_file, "data-raw/jwh.csv", format = "file"),
+  tar_target(aqua_raw_file, "data-raw/aqua.csv", format = "file"),
   tar_target(ploswater_raw_file, "data-raw/ploswater.csv", format = "file"),
   tar_target(
     uncnewsletter_raw_file, "data-raw/unc-article-url-manual-collection.csv",
@@ -129,6 +132,7 @@ list(
   ),
   dataset_target("ws", build_iwa(ws_raw_file, iwa_config("ws"))),
   dataset_target("jwh", build_iwa(jwh_raw_file, iwa_config("jwh"))),
+  dataset_target("aqua", build_iwa(aqua_raw_file, iwa_config("aqua"))),
   dataset_target("ploswater", build_ploswater(ploswater_raw_file)),
   dataset_target(
     "uncnewsletter",

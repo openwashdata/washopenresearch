@@ -36,7 +36,7 @@ This rebuilds whatever is out of date and writes:
 - `data/<dataset>.rda`, the dataset the package ships
 - `inst/extdata/<dataset>.csv` and `.xlsx`, the flat-file exports
 - `data-raw/<dataset>-das-review.csv` and `-country-review.csv`, the review
-  sheets of `washdev`, `ws`, `jwh` and `ploswater` (see below)
+  sheets of `washdev`, `ws`, `jwh`, `aqua` and `ploswater` (see below)
 
 Only targets whose inputs changed are rebuilt, and a file is rewritten only
 when its content changes, so a build on a fresh clone leaves `git status`
@@ -50,6 +50,7 @@ live in `data-raw/pipeline/`, one build function per dataset.
 | `washdev` | `washdev.csv` | `washdev-country-fixes.csv`, `washdev-supp-type-fixes.csv`, `washdev-doi-backfill.csv` | `build_iwa()` |
 | `ws` | `ws.csv` | none | `build_iwa()` |
 | `jwh` | `jwh.csv` | none | `build_iwa()` |
+| `aqua` | `aqua.csv` | none | `build_iwa()` |
 | `ploswater` | `ploswater.csv` | none | `build_ploswater()` |
 | `uncnewsletter` | `unc-article-url-manual-collection.csv` | `uncnewsletter-supp-fixes.csv`, `uncnewsletter-doi-backfill.csv` | `build_uncnewsletter()` |
 | `datapapers` | `datapapers_raw.csv` | `datapapers_screening.csv`, `datapapers_country_fixes.csv`, `datapapers_repo_fixes.csv` | `build_datapapers()` |

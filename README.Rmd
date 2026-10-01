@@ -38,13 +38,15 @@ library(wordcloud2)
 
 The goal of washopenresearch is to provide an overview of open research
 data related to Water Sanitation and Hygiene (WASH). The current version
-contains six datasets from the following sources:
+contains seven datasets from the following sources:
 
 -   `washdev`: Open access journal [*Journal of Water, Sanitation and
     Hygiene for Development*](https://iwaponline.com/washdev)
 -   `ws`: Journal [*Water Supply*](https://iwaponline.com/ws)
 -   `jwh`: Journal [*Journal of Water and
     Health*](https://iwaponline.com/jwh)
+-   `aqua`: Journal [*AQUA - Water Infrastructure, Ecosystems and
+    Society*](https://iwaponline.com/aqua)
 -   `uncnewsletter`: Research section of the newsletter [North Carolina
     Water
     News](https://waterinstitute.unc.edu/our-work/nc-water-news-newsletter)
@@ -94,8 +96,8 @@ read_csv("data-raw/dictionary.csv") |>
 
 ## Data
 
-The package provides access to six datasets `washdev`, `ws`, `jwh`,
-`uncnewsletter`, `ploswater`, and `datapapers`. Each dataset collects
+The package provides access to seven datasets `washdev`, `ws`, `jwh`,
+`aqua`, `uncnewsletter`, `ploswater`, and `datapapers`. Each dataset collects
 information on scientific articles about (1) article metadata (e.g.
 title, first author, correspondence author), (2) supplementary material
 information, (3) data availability statement or linked data repository,
@@ -188,6 +190,35 @@ For an overview of the variable descriptions, see the following table.
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 readr::read_csv("data-raw/dictionary.csv") |>
   dplyr::filter(file_name == "jwh.rda") |>
+  dplyr::select(variable_name:description) |>
+  knitr::kable() |>
+  kableExtra::kable_styling("striped") |>
+  kableExtra::scroll_box(height = "200px")
+```
+
+### aqua
+
+The dataset `aqua` contains data on all articles of the journal [*AQUA -
+Water Infrastructure, Ecosystems and
+Society*](https://iwaponline.com/aqua) in the journal's online archive,
+collected with the same R scraper as `washdev` and sharing its schema. It
+has `r nrow(aqua)` observations from `r min(aqua$published_year)` to
+`r max(aqua$published_year)`, of which `r sum(aqua$has_das)` carry a data
+availability statement. The journal changed its title during this period;
+the dataset uses the current title for every year.
+
+```{r}
+aqua |>
+  head(3) |>
+  gt::gt() |>
+  gt::as_raw_html()
+```
+
+For an overview of the variable descriptions, see the following table.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+readr::read_csv("data-raw/dictionary.csv") |>
+  dplyr::filter(file_name == "aqua.rda") |>
   dplyr::select(variable_name:description) |>
   knitr::kable() |>
   kableExtra::kable_styling("striped") |>
@@ -384,9 +415,9 @@ We describe the raw data collection procedure of each dataset in this
 section. The collection is scripted in R; the scripts live in
 `data-raw/` and the run order is documented in `data-raw/README.md`.
 
-### washdev, ws and jwh
+### washdev, ws, jwh and aqua
 
-All three IWA journals are collected by the same R scraper. First, each
+All four IWA journals are collected by the same R scraper. First, each
 publication link is scraped by iterating the table of contents of all
 volumes. This step delivers a table containing the paper ID, volume
 number, issue number, publication url, journal title, publication title,
@@ -395,9 +426,9 @@ are retrieved from the article's html using that url, rule-based, to
 find the relevant fields (for example supplementary materials) and
 extract the value.
 
-`washdev` uses `data-raw/washdev_scraping.R`. `ws` and `jwh` use the
+`washdev` uses `data-raw/washdev_scraping.R`. `ws`, `jwh` and `aqua` use the
 generalised `data-raw/iwa_scraping.R`, driven by
-`data-raw/run_iwa_scrapes.R`. Because the three share one schema, the
+`data-raw/run_iwa_scrapes.R`. Because the four share one schema, the
 cleaning that follows is shared too: `process_iwa_journal()` in
 `data-raw/helpers.R` handles encoding repair, column harmonisation,
 country standardisation and the multi-value fields, while the data
