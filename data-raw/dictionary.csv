@@ -155,3 +155,30 @@ data,jwh.rda,das_repo_url,character,Website urls of the data if the relevant dat
 data,jwh.rda,keywords,character,Keywords of the paper separated by a semicolon
 data,jwh.rda,doi,character,DOI of the paper. Collected by the R scraper; populated for every row
 data,jwh.rda,url_source,character,Publisher website of the paper
+data,aqua.rda,paperid,integer,ID number of the paper on the journal website
+data,aqua.rda,volume,integer,Volume number of the journal
+data,aqua.rda,issue,character,"Issue number of the journal, as text because combined issues (for example ""1-2"") occur"
+data,aqua.rda,paper_url,character,Official website url of the paper
+data,aqua.rda,journal,character,Full name of the journal
+data,aqua.rda,title,character,Title of the paper
+data,aqua.rda,published_year,numeric,Year of publication
+data,aqua.rda,is_supp,logical,Whether the paper has supplementary materials
+data,aqua.rda,num_supp,integer,Number of supplementary material files
+data,aqua.rda,supp_file_type,character,File types of the supplementary materials separated by a semicolon when there are multiple
+data,aqua.rda,supp_url,character,Website urls of the supplementary materials separated by a semicolon when there are multiple
+data,aqua.rda,num_authors,integer,Number of the authors
+data,aqua.rda,first_author_name,character,Name of the first author
+data,aqua.rda,first_author_affiliation,character,Academic affiliation of the first author
+data,aqua.rda,first_author_affiliation_country,character,Country of the first author parsed from first_author_affiliation variable encoded with United Nations names
+data,aqua.rda,first_author_orcid,character,ORCID of the first author
+data,aqua.rda,correspondence_author_name,character,Name of the correspondence author
+data,aqua.rda,correspondence_author_affiliation,character,Academic affiliation of the correspondence author
+data,aqua.rda,correspondence_author_affiliation_country,character,Country of the correspondence author parsed from correspondence_author_affiliation variable encoded with United Nations names
+data,aqua.rda,correspondence_author_orcid,character,ORCID of the correspondence author
+data,aqua.rda,has_das,logical,Whether the paper has a data availability statement
+data,aqua.rda,das,character,Original data availability statement of the paper.  NA if it does not have a data availability statement.
+data,aqua.rda,das_type,factor,"Type of the data availability statement including ""in paper""(data in full paper scope like supplementary material or appendix or main content) ""on request""(data available on request to the authors) ""available in online repository""(data is shared in a public online repository) ""not shareable""(data is not shareable). NA if it does not have a data availability statement."
+data,aqua.rda,das_repo_url,character,Website urls of the data if the relevant data of the paper is shared on a public repository separated by a semicolon when there are multiple
+data,aqua.rda,keywords,character,Keywords of the paper separated by a semicolon
+data,aqua.rda,doi,character,DOI of the paper. Collected by the R scraper; populated for every row
+data,aqua.rda,url_source,character,Publisher website of the paper

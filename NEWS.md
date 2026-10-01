@@ -1,5 +1,21 @@
 # washopenresearch (development version)
 
+## New features
+
+- New dataset `aqua`: all 1,819 articles of the journal AQUA - Water
+  Infrastructure, Ecosystems and Society in the journal's online archive,
+  1998 to 2026, with the same columns as `ws` and `jwh`. 539 articles carry
+  a data availability statement; 529 of these map to a shared `das_type`
+  and the remaining 10 keep their full text and are listed in
+  `data-raw/aqua-das-review.csv`.
+
+  The 0.4.0 notes said AQUA needed a re-scrape because its statement text
+  had never been captured. That was wrong. The statements were in the raw
+  snapshot all along. The build read the snapshot with guessed column
+  types, the journal's first statement sits beyond the rows a guess looks
+  at, so the statement column was read as logical and came back empty. The
+  build now states every column type (#52).
+
 ## Bug fixes
 
 - `washdev`: 33 correspondence author countries were three letter ISO codes

@@ -1,4 +1,4 @@
-# Build an IWA journal dataset (washdev, ws, jwh) from its raw snapshot.
+# Build an IWA journal dataset (washdev, ws, jwh, aqua) from its raw snapshot.
 # The journals come off one scraper and share one schema, so one function
 # builds all of them. What differs in the processing is listed in
 # iwa_config(); which sheets a journal has is wired in _targets.R, because
@@ -56,7 +56,8 @@ iwa_config <- function(journal) {
       das_rules = washdev_das_rules()
     ),
     ws = r_scraper_journal,
-    jwh = r_scraper_journal
+    jwh = r_scraper_journal,
+    aqua = r_scraper_journal
   )
   if (!journal %in% names(configs)) {
     stop("No IWA configuration for journal '", journal, "'.", call. = FALSE)
