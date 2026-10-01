@@ -28,6 +28,15 @@
   skipped that column because it is a factor. The address is now masked
   there as it already was in `das`.
 
+## Changes
+
+- `washdev`, `ws`, `jwh`: the levels of `das_type` now list the shared
+  statement types first ("available in online repository", "in paper",
+  "on request"), followed by the statements no rule mapped. Before, the
+  three types sat scattered among the statements in alphabetical order.
+  Values are unchanged; code that relies on the integer codes of the factor
+  needs checking.
+
 ## Documentation
 
 - `uncnewsletter`: the `citations` column is now described in the help page

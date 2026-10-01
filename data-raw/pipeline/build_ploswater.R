@@ -17,14 +17,6 @@ ploswater_raw_col_types <- function() {
   )
 }
 
-# The das_type levels in the order PLOS Water has shipped them.
-ploswater_das_type_levels <- function() {
-  c(
-    "available in online repository", "in paper", "on request",
-    "not shareable", "no data generated"
-  )
-}
-
 # PLOS statements are free-form; these rules map them onto the das_type
 # levels shared with the other datasets. Precedence: no data generated >
 # online repository > in paper > on request > not shareable. A statement no
@@ -44,7 +36,8 @@ classify_ploswater_das <- function(has_das, das, das_repo_url) {
     detect("cannot be (shared|made)|not (be )?(publicly )?(available|shared)|restrictions apply|third[- ]party") ~ "not shareable",
     .default = NA_character_
   )
-  factor(das_type, levels = ploswater_das_type_levels())
+  # All shared levels are declared, whether or not each one occurs.
+  factor(das_type, levels = das_type_levels())
 }
 
 # Build the dataset: the shared column layout, the das_type classification
