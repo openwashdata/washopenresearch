@@ -73,56 +73,6 @@ map_das_type <- function(x, rules) {
   x
 }
 
-# Factor whose level order does not depend on the session locale.
-# as.factor() sorts levels with the session collation, so the same data gave
-# different level orders on macOS and on a Linux runner.
-das_type_factor <- function(x) {
-  factor(x, levels = stringi::stri_sort(unique(x[!is.na(x)]), locale = "en_US"))
-}
-
-# Read a sheet keyed on paperid (a decision sheet or the DOI backfill) and
-# refuse it unless every row can be applied to exactly one article of `data`.
-# A sheet that parses with problems, repeats a paperid, or names a paperid
-# the dataset does not have is a mistake in the sheet; applying the rest of
-# it would hide that.
-read_paperid_sheet <- function(path, data) {
-  sheet <- readr::read_csv(
-    path,
-    col_types = readr::cols(
-      paperid = readr::col_integer(),
-      .default = readr::col_character()
-    )
-  )
-  problems <- readr::problems(sheet)
-  if (nrow(problems) > 0) {
-    stop(path, " does not parse cleanly (first problem in row ",
-         problems$row[[1]], ").", call. = FALSE)
-  }
-  duplicated_ids <- unique(sheet$paperid[duplicated(sheet$paperid)])
-  if (length(duplicated_ids) > 0) {
-    stop(path, " lists a paperid more than once: ",
-         paste(duplicated_ids, collapse = ", "), call. = FALSE)
-  }
-  unknown_ids <- setdiff(sheet$paperid, data$paperid)
-  if (length(unknown_ids) > 0) {
-    stop(path, " lists a paperid the dataset does not have: ",
-         paste(unknown_ids, collapse = ", "), call. = FALSE)
-  }
-  sheet
-}
-
-# Apply a decision sheet: every non-missing value in the sheet's columns
-# replaces the value of the article with that paperid. An empty cell means
-# "no decision for this column", so the built value stays.
-apply_decisions <- function(data, sheet, columns) {
-  rows <- match(sheet$paperid, data$paperid)
-  for (column in columns) {
-    decided <- !is.na(sheet[[column]])
-    data[[column]][rows[decided]] <- sheet[[column]][decided]
-  }
-  data
-}
-
 # Build one IWA dataset. The three sheet arguments are paths, or NULL for a
 # journal that has no such sheet.
 build_iwa <- function(raw_file, config,
