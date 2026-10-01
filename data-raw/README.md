@@ -8,6 +8,42 @@ non-interactive:
 Rscript data-raw/<script>.R
 ```
 
+## Environment
+
+The build pipeline and the scrapers run against the package versions pinned
+in `renv.lock`. The lockfile covers only those scripts (the allowlist is in
+`.renvignore`); packages used for the README, the vignettes or the analysis
+scripts are not locked.
+
+No `.Rprofile` autoloader is committed. Starting R in this repository uses
+your normal library, so `R CMD check`, r-universe builds and devtools
+sessions are unaffected. Scripts that need the pinned packages call
+`renv::load()` before attaching anything.
+
+Restore the pinned packages once after cloning, and again whenever
+`renv.lock` changes:
+
+``` sh
+Rscript -e 'renv::load(); renv::restore()'
+```
+
+Run every renv command after `renv::load()`, as above. Without it,
+`renv::restore()` and `renv::snapshot()` act on your global library. Do not
+run `renv::activate()` or `renv::init()`: both write the autoloader this
+repository leaves out.
+
+After a pipeline or scraper script starts using a new package, update the
+lockfile:
+
+``` sh
+RENV_LOCKFILE_VERSION=1 Rscript -e 'renv::load(); renv::snapshot()'
+```
+
+`RENV_LOCKFILE_VERSION=1` keeps the compact lockfile format (package,
+version, source, hash). The default format copies each package's full
+`DESCRIPTION` into the lockfile, including author and maintainer email
+addresses, which do not belong in this repository.
+
 ## Run order
 
 ### `datapapers` (issue #28)
