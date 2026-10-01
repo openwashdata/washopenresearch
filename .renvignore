@@ -13,3 +13,5 @@
 !/data-raw/build.R
 !/data-raw/check_reproducible.R
 !/data-raw/update_sources.R
+!/data-raw/run_tests.R
+!/data-raw/tests/
