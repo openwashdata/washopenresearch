@@ -1,3 +1,14 @@
+# washopenresearch (development version)
+
+## Bug fixes
+
+- `washdev`: 33 correspondence author countries were three letter ISO codes
+  ("IND", "GBR") in a column that otherwise holds United Nations country
+  names. 32 are now the UN name. The 33rd, an affiliation in Taiwan, is
+  missing, as it already was in the first author column: the UN names have
+  no entry for it. The article is listed in
+  `data-raw/washdev-country-review.csv`.
+
 # washopenresearch 0.4.0
 
 ## Breaking changes

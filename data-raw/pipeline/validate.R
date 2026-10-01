@@ -154,7 +154,7 @@ gate_rules <- function() {
 # Rules the data shipped in v0.4.0 breaks. Each is switched on by the commit
 # that fixes its defect, and this list goes when it is empty.
 rules_awaiting_fixes <- function() {
-  c("dictionary_columns", "unique_key", "no_inline_addresses", "un_country_names")
+  c("dictionary_columns", "unique_key", "no_inline_addresses")
 }
 
 # Validate a built dataset. Returns it unchanged when every rule holds and
