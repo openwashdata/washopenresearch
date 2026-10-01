@@ -145,6 +145,18 @@ unpack_list_literal <- function(x) {
   })
 }
 
+# Read a committed CSV with explicit column types, and refuse it when a cell
+# does not parse instead of carrying on with a warning and a missing value.
+read_strict_csv <- function(path, col_types) {
+  data <- readr::read_csv(path, col_types = col_types, name_repair = "unique_quiet")
+  problems <- readr::problems(data)
+  if (nrow(problems) > 0) {
+    stop(path, " does not parse cleanly (first problem in row ",
+         problems$row[[1]], ", column ", problems$col[[1]], ").", call. = FALSE)
+  }
+  data
+}
+
 # Column types of the raw IWA snapshots.
 # Never left to readr's guessing: the statement columns are empty for the
 # early years of a journal, so a guess from the first rows types them as
@@ -174,11 +186,7 @@ iwa_raw_col_types <- function() {
 # the original Python scraper and carries an unnamed leading index column;
 # ws.csv, jwh.csv and aqua.csv come from the R port and do not.
 process_iwa_journal <- function(path, drop_index = FALSE) {
-  data <- readr::read_csv(
-    path,
-    col_types = iwa_raw_col_types(),
-    name_repair = "unique_quiet"
-  )
+  data <- read_strict_csv(path, iwa_raw_col_types())
 
   if (drop_index) {
     data <- dplyr::select(data, -1)

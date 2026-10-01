@@ -52,7 +52,9 @@ if (length(built) == 0) {
 # package version changed, so a cached dataset could hide a difference.
 # `!!` inlines the names: both calls evaluate the selection in a fresh R
 # process, where the variable `built` does not exist.
-targets::tar_invalidate(tidyselect::any_of(!!built))
+if (targets::tar_exist_meta()) {
+  targets::tar_invalidate(tidyselect::any_of(!!built))
+}
 targets::tar_make(names = tidyselect::any_of(!!built), reporter = "silent")
 
 differing <- character()
@@ -68,12 +70,18 @@ for (name in built) {
   }
 }
 
+# A dataset the pipeline does not build cannot be shown to be reproducible,
+# so it fails the check like a difference does.
 if (length(not_built) > 0) {
-  message("not built by the pipeline yet: ", paste(not_built, collapse = ", "))
+  message("\nIn data/ at ", ref, " but not built by the pipeline: ",
+          paste(not_built, collapse = ", "))
 }
 if (length(differing) > 0) {
   message("\n", length(differing), " of ", length(built),
           " datasets differ from ", ref, ": ", paste(differing, collapse = ", "))
+}
+if (length(not_built) > 0 || length(differing) > 0) {
   quit(status = 1)
 }
-message("\nAll ", length(built), " datasets built by the pipeline are identical to ", ref, ".")
+message("\nAll ", length(built), " datasets in data/ at ", ref,
+        " are identical to what the pipeline builds.")
