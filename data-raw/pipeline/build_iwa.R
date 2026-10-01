@@ -123,5 +123,5 @@ build_iwa <- function(raw_file, config,
   # addresses and credentials works on text columns.
   data |>
     drop_author_emails() |>
-    dplyr::mutate(das_type = das_type_factor(das_type))
+    dplyr::mutate(das_type = das_type_factor_shared_first(das_type))
 }

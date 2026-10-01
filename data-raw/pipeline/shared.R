@@ -59,9 +59,33 @@ apply_decisions <- function(data, sheet, columns, key = "paperid") {
   data
 }
 
-# Factor whose level order does not depend on the session locale.
-# as.factor() sorts levels with the session collation, so the same data gave
+# The das_type levels the datasets share, in the order they are listed
+# wherever they lead a factor.
+das_type_levels <- function() {
+  c(
+    "available in online repository", "in paper", "on request",
+    "not shareable", "no data generated"
+  )
+}
+
+# Sort text with a collation that does not depend on the session locale.
+# sort() and as.factor() use the session collation, so the same data gave
 # different level orders on macOS and on a Linux runner.
+sort_text <- function(x) {
+  stringi::stri_sort(x, locale = "en_US")
+}
+
+# Factor of das_type values with all levels in sorted order.
 das_type_factor <- function(x) {
-  factor(x, levels = stringi::stri_sort(unique(x[!is.na(x)]), locale = "en_US"))
+  factor(x, levels = sort_text(unique(x[!is.na(x)])))
+}
+
+# Factor of das_type values that mix the shared levels with the full text of
+# statements no rule mapped. The shared levels that occur come first, in
+# their fixed order, then the statements in sorted order, so that the
+# categories are not scattered among the statements.
+das_type_factor_shared_first <- function(x) {
+  present <- unique(x[!is.na(x)])
+  shared <- intersect(das_type_levels(), present)
+  factor(x, levels = c(shared, sort_text(setdiff(present, shared))))
 }
