@@ -23,6 +23,12 @@
   `[removed]` and the rest of the sentence kept (`ploswater` and `ws`, one
   statement each).
 
+## Documentation
+
+- `uncnewsletter`: the `citations` column is now described in the help page
+  and the data dictionary. It has been in the dataset since its first
+  release without documentation. The source of the counts is not recorded.
+
 # washopenresearch 0.4.0
 
 ## Breaking changes
