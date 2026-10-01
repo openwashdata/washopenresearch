@@ -48,7 +48,7 @@ gap: the dataset shipped with `data_repo_url` NA for all 8 papers because the
 repository-link backfill planned for issue #27 never happened. The links were
 then backfilled the same day via `data-raw/datapapers_repo_fixes.csv` (each
 row records its source: Crossref relations, DataCite, or the article's
-availability section), applied in `03_datapapers_process.R`. Result: seven of
+availability section), applied in the build pipeline (`build_datapapers()`). Result: seven of
 the eight data papers deposit in general repositories (GBIF twice, IEEE
 DataPort, Figshare, Dryad, NCBI BioProject, Zenodo), one shares its data only
 in the article tables and supplement, and none uses a WASH sector platform.

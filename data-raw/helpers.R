@@ -13,8 +13,8 @@ collapse_list_col <- function(x) {
 }
 
 # Standardise free-text country names to United Nations English names.
-# Non-matches become NA and are handled by a committed fixes sheet
-# (see apply_country_fixes()), not by hard-coded ID vectors.
+# Non-matches become NA and are handled by a committed decision sheet
+# (see apply_decisions() in data-raw/pipeline/), not by hard-coded ID vectors.
 # The lookup's messages about unmatched names are silenced: every unmatched
 # affiliation is listed in the dataset's country review sheet.
 to_un_country_name <- function(x) {
@@ -23,28 +23,9 @@ to_un_country_name <- function(x) {
   )
 }
 
-# Apply manual country corrections from a decision sheet.
-# `fixes` has one row per record needing a correction, keyed on `key`
-# (e.g. "doi"), with the corrected value in `value_col`. Only rows where the
-# automatic standardisation produced NA are overwritten, so re-running the
-# automatic step never silently discards a manual decision.
-apply_country_fixes <- function(data, fixes, key, value_col) {
-  if (nrow(fixes) == 0) {
-    return(data)
-  }
-  fixes <- fixes[, c(key, value_col)]
-  names(fixes) <- c(key, ".fixed_value")
-  data |>
-    dplyr::left_join(fixes, by = key) |>
-    dplyr::mutate(
-      !!value_col := dplyr::coalesce(.data[[value_col]], .fixed_value),
-      .fixed_value = NULL
-    )
-}
-
 # The data journals harvested for the `datapapers` dataset (issue #28).
 # Used by 01_datapapers_acquire.R (which API to query) and
-# 03_datapapers_process.R (url_source lookup).
+# build_datapapers() in data-raw/pipeline/ (url_source lookup).
 datapapers_journals <- function() {
   dplyr::tribble(
     ~journal,              ~publisher,           ~issn,       ~api,        ~url_source,

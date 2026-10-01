@@ -15,7 +15,7 @@
 # - A `doi` column is collected from the citation_doi meta tag (new).
 # - When supplements have mixed file types, all types are recorded joined
 #   by " & " (one per file, e.g. "docx & xlsx") instead of the literal
-#   "misc", which previously required manual repair in data_processing.R.
+#   "misc", which previously required manual repair in the build.
 #
 # Run from the package root:
 #   Rscript data-raw/washdev_scraping.R
@@ -77,7 +77,7 @@ node_exists <- function(node) !inherits(node, "xml_missing")
 
 #' Format a character vector the way pandas wrote Python lists to the raw
 #' CSV, e.g. "['a', 'b']" or "[]", so old and new rows share one format and
-#' data_processing.R parses both identically.
+#' the build pipeline parses both identically.
 py_list <- function(x) {
   x <- x[!is.na(x)]
   if (length(x) == 0) return("[]")

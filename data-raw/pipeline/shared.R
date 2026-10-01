@@ -28,17 +28,33 @@ read_paperid_sheet <- function(path, data) {
   check_sheet_keys(sheet, data, "paperid", path)
 }
 
-# Apply a decision sheet keyed on paperid: every non-missing value in the
-# sheet's columns replaces the value of the article with that paperid. An
-# empty cell means "no decision for this column", so the built value stays.
-apply_decisions <- function(data, sheet, columns) {
-  rows <- match(sheet$paperid, data$paperid)
+# Read a sheet keyed on doi and check its keys against `data`. Every column
+# is read as text.
+read_doi_sheet <- function(path, data) {
+  sheet <- read_strict_csv(path, readr::cols(.default = readr::col_character()))
+  check_sheet_keys(sheet, data, "doi", path)
+}
+
+# Apply a decision sheet: every non-missing value in the sheet's columns
+# replaces the value of the article with that key. An empty cell means "no
+# decision for this column", so the built value stays.
+apply_decisions <- function(data, sheet, columns, key = "paperid") {
+  rows <- match(sheet[[key]], data[[key]])
   for (column in columns) {
     decided <- !is.na(sheet[[column]])
     values <- sheet[[column]][decided]
-    # Sheets are read as text; keep the dataset column's own type.
-    storage.mode(values) <- storage.mode(data[[column]])
-    data[[column]][rows[decided]] <- values
+    # Sheets are read as text; keep the dataset column's own type, and refuse
+    # a value that does not convert instead of writing a missing value.
+    converted <- suppressWarnings(methods::as(values, class(data[[column]])[[1]]))
+    if (anyNA(converted)) {
+      stop(
+        "Decision sheet value for column '", column, "' is not a valid ",
+        class(data[[column]])[[1]], ": ",
+        paste(values[is.na(converted)], collapse = ", "),
+        call. = FALSE
+      )
+    }
+    data[[column]][rows[decided]] <- converted
   }
   data
 }

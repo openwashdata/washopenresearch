@@ -2,6 +2,8 @@
 # The newsletter ceased publication in May 2024, so this is a frozen source
 # covering papers from 2020 to 2023 (issue #17).
 
+# Column types of the annotated collection. The numeric columns stay double,
+# as the dataset has shipped them.
 uncnewsletter_raw_col_types <- function() {
   readr::cols(
     paperid = readr::col_double(),
@@ -31,6 +33,8 @@ unpack_uncnewsletter_lists <- function(data) {
     )
 }
 
+# Build the dataset: annotated rows only, supplement corrections from the
+# decision sheet, multi-value columns collapsed, DOIs from the backfill.
 build_uncnewsletter <- function(raw_file, supp_fixes_file, doi_backfill_file) {
   data <- read_strict_csv(raw_file, uncnewsletter_raw_col_types()) |>
     dplyr::mutate(paper_info = NULL) |>
