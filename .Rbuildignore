@@ -11,4 +11,6 @@
 ^\.github$
 ^python-scripts-lesson\.md$
 ^\.claude$
+^CLAUDE\.md$
+^CONTEXT\.md$
 ^inst/extdata$
