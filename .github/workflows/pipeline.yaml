@@ -22,7 +22,11 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
+      # Full history with tags: the validation gate compares each dataset
+      # with the last release to see that no article was lost.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: r-lib/actions/setup-r@v2
         with:
@@ -33,6 +37,9 @@ jobs:
       # Restores renv.lock. The action activates the project in this checkout
       # only; no autoloader is committed.
       - uses: r-lib/actions/setup-renv@v2
+
+      - name: Test the pipeline code
+        run: Rscript data-raw/run_tests.R
 
       - name: Rebuild the datasets and compare with the committed data
         run: Rscript data-raw/check_reproducible.R HEAD

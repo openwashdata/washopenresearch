@@ -23,14 +23,24 @@ tar_source(c("data-raw/helpers.R", "data-raw/pipeline"))
 datasets <- c("washdev", "ws", "jwh", "ploswater", "uncnewsletter", "datapapers")
 iwa_journals <- c("washdev", "ws", "jwh")
 
-# A dataset target, named after its dataset. It also depends on renv.lock:
-# the pipeline store cannot see a changed package version, and another
-# version of readr or countries can change a dataset.
+# The two targets of a dataset: <dataset>_built holds what the build
+# function returns, and <dataset> is that object once it has passed the
+# validation gate. Everything downstream uses the validated one.
+#
+# The build also depends on renv.lock: the pipeline store cannot see a
+# changed package version, and another version of readr or countries can
+# change a dataset.
 dataset_target <- function(name, command) {
-  tar_target_raw(name, bquote({
-    renv_lock_file
-    .(substitute(command))
-  }))
+  built <- paste0(name, "_built")
+  list(
+    tar_target_raw(built, bquote({
+      renv_lock_file
+      .(substitute(command))
+    })),
+    tar_target_raw(name, bquote(
+      validate_dataset(.(as.symbol(built)), .(name), dictionary_file, removed_keys_file)
+    ))
+  )
 }
 
 # One writer target per dataset, named <dataset>_files: the package data
@@ -65,6 +75,10 @@ list(
     format = "file"
   ),
   tar_target(datapapers_raw_file, "data-raw/datapapers_raw.csv", format = "file"),
+
+  # Inputs of the validation gate --------------------------------------------
+  tar_target(dictionary_file, "data-raw/dictionary.csv", format = "file"),
+  tar_target(removed_keys_file, "data-raw/removed-keys.csv", format = "file"),
 
   # Decision sheets ----------------------------------------------------------
   tar_target(

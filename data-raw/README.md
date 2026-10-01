@@ -58,6 +58,25 @@ After a build that changed a dataset, finish the package integration:
 `devtools::document()`, re-knit `README.Rmd`, and update the counts in the
 `Description` field of `DESCRIPTION` if needed.
 
+### Validation gate
+
+Every built dataset passes through `validate_dataset()` before anything is
+written. The build stops, naming every broken rule, when a dataset
+
+- has columns that differ from `dictionary.csv`,
+- repeats a key (`paperid`, or `doi` for `ploswater` and `datapapers`),
+- holds a list column, an email column, an email address inside text, or
+  an access token in a URL,
+- flags an article as having a data availability statement without the
+  statement text,
+- has a country value that is not a UN country name,
+- is frozen and changed its row count, or
+- lost an article that was in the last release. An article may only leave a
+  dataset through a row in `removed-keys.csv` (dataset, key, reason).
+
+The rules are tested in `data-raw/tests/`; run them with
+`Rscript data-raw/run_tests.R`.
+
 ### Checking reproducibility
 
 ``` sh
@@ -182,6 +201,8 @@ a review sheet, the next build overwrites it.
 |---|---|---|
 | `build.R` | entry point of the build | code review |
 | `check_reproducible.R` | compares a rebuild with the committed datasets | code review |
+| `run_tests.R`, `tests/` | tests of the pipeline code | code review |
+| `removed-keys.csv` | articles deliberately removed from a dataset, with the reason | humans (curation) |
 | `pipeline/` | build, shared and writer functions of the pipeline | code review |
 | `helpers.R` | shared helpers (strict CSV reader, country cleaning, email masking, journal and term lists) | code review |
 | `washdev.csv`, `ws.csv`, `jwh.csv`, `aqua.csv` | raw snapshots of the iwaponline.com scrapes | scrapers |
