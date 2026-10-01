@@ -58,13 +58,12 @@ test_that("no free-text field carries an email address", {
   )
   for (name in names(datasets)) {
     data <- datasets[[name]]
-    text_columns <- names(data)[vapply(data, is.character, logical(1))]
-    found <- vapply(
-      text_columns,
-      function(column) any(grepl(pattern, data[[column]])),
-      logical(1)
-    )
-    expect_false(any(found), label = paste0(name, " has no inline address"))
+    # Text columns and the levels of factor columns: an unmapped statement
+    # keeps its full text in das_type, which is a factor.
+    text <- unlist(lapply(data, function(column) {
+      if (is.character(column)) column else if (is.factor(column)) levels(column)
+    }))
+    expect_false(any(grepl(pattern, text)), label = paste0(name, " has no inline address"))
   }
 })
 

@@ -100,7 +100,7 @@ build_iwa <- function(raw_file, config,
   }
 
   data <- data |>
-    dplyr::mutate(das_type = das_type_factor(map_das_type(das_type, config$das_rules))) |>
+    dplyr::mutate(das_type = map_das_type(das_type, config$das_rules)) |>
     dplyr::mutate(dplyr::across(
       c(supp_file_type, supp_url, das_repo_url, keywords),
       collapse_list_col
@@ -118,5 +118,10 @@ build_iwa <- function(raw_file, config,
       dplyr::mutate(doi = dplyr::coalesce(doi, doi_backfill), doi_backfill = NULL)
   }
 
-  drop_author_emails(data)
+  # das_type becomes a factor only after the text is cleaned: an unmapped
+  # statement keeps its full text in das_type, and the cleaning that masks
+  # addresses and credentials works on text columns.
+  data |>
+    drop_author_emails() |>
+    dplyr::mutate(das_type = das_type_factor(das_type))
 }

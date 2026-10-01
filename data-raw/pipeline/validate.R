@@ -155,18 +155,11 @@ gate_rules <- function() {
   )
 }
 
-# Rules the data shipped in v0.4.0 breaks. Each is switched on by the commit
-# that fixes its defect, and this list goes when it is empty.
-rules_awaiting_fixes <- function() {
-  c("no_inline_addresses")
-}
-
 # Validate a built dataset. Returns it unchanged when every rule holds and
 # stops otherwise. `released` is the dataset as last released (NULL for a
 # new dataset); it is an argument so the rule can be tested without git.
 validate_dataset <- function(data, name, dictionary_file, removed_keys_file,
-                             released = released_dataset(name),
-                             skip = rules_awaiting_fixes()) {
+                             released = released_dataset(name)) {
   context <- list(
     name = name,
     key = dataset_key(name),
@@ -179,9 +172,7 @@ validate_dataset <- function(data, name, dictionary_file, removed_keys_file,
     un_names = unique(countries::country_reference_list$UN_en),
     released = released
   )
-  rules <- gate_rules()
-  rules <- rules[setdiff(names(rules), skip)]
-  violations <- unlist(lapply(rules, function(rule) rule(data, context)))
+  violations <- unlist(lapply(gate_rules(), function(rule) rule(data, context)))
   if (length(violations) > 0) {
     stop(
       "Dataset '", name, "' failed validation:\n",

@@ -23,6 +23,11 @@
   `[removed]` and the rest of the sentence kept (`ploswater` and `ws`, one
   statement each).
 
+- `ws`: one data availability statement kept an author email address in
+  `das_type`. The masking of addresses inside text, introduced in v0.4.0,
+  skipped that column because it is a factor. The address is now masked
+  there as it already was in `das`.
+
 ## Documentation
 
 - `uncnewsletter`: the `citations` column is now described in the help page

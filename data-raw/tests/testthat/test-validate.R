@@ -43,7 +43,7 @@ gate_files <- function(data = clean_dataset(), name = "ws", removed = NULL) {
 validate <- function(data, name = "ws", files = gate_files(name = name), released = NULL) {
   validate_dataset(
     data, name, files$dictionary, files$removed_keys,
-    released = released, skip = character()
+    released = released
   )
 }
 
