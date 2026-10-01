@@ -7,6 +7,9 @@
 .DS_Store
 .quarto
 
+# targets pipeline store (local cache, rebuilt from the committed inputs)
+_targets/
+
 # Transient scrape run logs (data-raw/iwa_scraping.R, run_iwa_scrapes.R)
 data-raw/*_scrape.log
 data-raw/iwa_scrapes.log
