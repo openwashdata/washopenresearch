@@ -17,7 +17,17 @@ test_that("live datasets never fall below their v0.4.0 row counts", {
   expect_gte(nrow(washdev), 1173)
   expect_gte(nrow(ws), 4884)
   expect_gte(nrow(jwh), 2013)
-  expect_gte(nrow(ploswater), 436)
+  # 436 rows in v0.4.0, two of them duplicates
+  expect_gte(nrow(ploswater), 434)
+})
+
+test_that("every article appears once per dataset", {
+  expect_false(anyDuplicated(washdev$paperid) > 0)
+  expect_false(anyDuplicated(ws$paperid) > 0)
+  expect_false(anyDuplicated(jwh$paperid) > 0)
+  expect_false(anyDuplicated(uncnewsletter$paperid) > 0)
+  expect_false(anyDuplicated(ploswater$doi) > 0)
+  expect_false(anyDuplicated(datapapers$doi) > 0)
 })
 
 test_that("no dataset carries author email addresses", {

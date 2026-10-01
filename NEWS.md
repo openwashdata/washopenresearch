@@ -9,6 +9,11 @@
   no entry for it. The article is listed in
   `data-raw/washdev-country-review.csv`.
 
+- `ploswater`: two articles appeared twice
+  (10.1371/journal.pwat.0000024 and 10.1371/journal.pwat.0000520), each as
+  two rows identical in every column. The dataset now has 434 rows, one
+  per article. The cause was a search query paged without a sort order.
+
 - Credentials are removed from the text of the datasets. Where a statement
   linked a restricted Zenodo record through an access token, the token
   parameter is now dropped and the plain record URL kept; up to v0.4.0 the
