@@ -83,6 +83,25 @@ test_that("no URL carries an access token", {
   }
 })
 
+test_that("country columns hold no three letter codes", {
+  # The columns are documented as United Nations country names. washdev
+  # shipped ISO codes for 33 correspondence authors up to v0.4.0.
+  datasets <- list(
+    washdev = washdev, ws = ws, jwh = jwh,
+    ploswater = ploswater, uncnewsletter = uncnewsletter,
+    datapapers = datapapers
+  )
+  for (name in names(datasets)) {
+    data <- datasets[[name]]
+    country_columns <- grep("affiliation_country$", names(data), value = TRUE)
+    values <- unlist(data[country_columns], use.names = FALSE)
+    expect_false(
+      any(grepl("^[A-Z]{3}$", values)),
+      label = paste0(name, " has no three letter country code")
+    )
+  }
+})
+
 test_that("the IWA datasets share one schema", {
   # washdev, ws and jwh come off the same scraper and are cleaned by
   # process_iwa_journal(), so they must stay column-identical.
