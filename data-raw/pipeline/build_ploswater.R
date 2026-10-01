@@ -2,6 +2,7 @@
 # data-raw/ploswater.R. Multi-value columns arrive "; "-delimited already,
 # so there is no list-column handling here.
 
+# Column types of the raw snapshot.
 ploswater_raw_col_types <- function() {
   readr::cols(
     volume = readr::col_integer(),
@@ -16,6 +17,7 @@ ploswater_raw_col_types <- function() {
   )
 }
 
+# The das_type levels in the order PLOS Water has shipped them.
 ploswater_das_type_levels <- function() {
   c(
     "available in online repository", "in paper", "on request",
@@ -45,6 +47,8 @@ classify_ploswater_das <- function(has_das, das, das_repo_url) {
   factor(das_type, levels = ploswater_das_type_levels())
 }
 
+# Build the dataset: the shared column layout, the das_type classification
+# and standardised countries.
 build_ploswater <- function(raw_file) {
   read_strict_csv(raw_file, ploswater_raw_col_types()) |>
     # Same column layout as the other datasets; PLOS has no site-specific
