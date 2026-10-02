@@ -34,6 +34,11 @@ jobs:
           r-version: renv
           use-public-rspm: true
 
+      # The pinned packages come as binaries that expect their system
+      # libraries on the runner. igraph, which targets depends on, needs GLPK.
+      - name: Install system libraries
+        run: sudo apt-get update && sudo apt-get install -y libglpk40
+
       # Restores renv.lock. The action activates the project in this checkout
       # only; no autoloader is committed.
       - uses: r-lib/actions/setup-renv@v2
