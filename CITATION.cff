@@ -9,7 +9,7 @@ type: software
 license: CC-BY-4.0
 title: 'washopenresearch: Dataset about open research data information in Water, Sanitation,
   and Hygiene'
-version: 0.4.0
+version: 0.5.0
 doi: 10.5281/zenodo.11185699
 abstract: 'The goal of washopenresearch is to provide an overview of open research
   data related to Water Sanitation and Hygiene (WASH). The package provides access
@@ -73,10 +73,10 @@ preferred-citation:
   - openwashdata
   - sanitation
   - wash
-  version: 0.4.0
+  version: 0.5.0
 repository-code: https://github.com/openwashdata/washopenresearch
 url: https://github.com/openwashdata/washopenresearch
-date-released: '2026-09-09'
+date-released: '2026-10-02'
 contact:
 - family-names: Zhong
   given-names: Mian
