@@ -73,6 +73,19 @@ canonicalize_silverchair_url <- function(url) {
   ifelse(is_cdn & !is.na(doi), paste0("https://doi.org/", doi), url)
 }
 
+# Drop the signed query from a Silverchair CDN link and keep the file path.
+# iwaponline.com serves supplementary files through pre-signed links
+# (Expires, Signature, Key-Pair-Id) that stop working a few weeks after the
+# page was loaded. The signature is a credential while it works and trips
+# secret scanners afterwards, so it does not enter a raw snapshot. The path
+# still names the file and carries the article DOI, which is all
+# canonicalize_silverchair_url() needs. A non-Silverchair value is returned
+# unchanged.
+strip_silverchair_signature <- function(url) {
+  is_cdn <- !is.na(url) & stringr::str_detect(url, "silverchair-cdn\\.com")
+  ifelse(is_cdn, stringr::str_remove(url, "\\?.*$"), url)
+}
+
 # Decode the target URL out of a Google Scholar alert redirect (issue #10).
 # uncnewsletter carries a few paper_url values of the form
 # https://scholar.google.com/scholar_url?url=<target>&...&scisig=... The target
@@ -254,6 +267,13 @@ redact_stated_passwords <- function(x) {
   )
 }
 
+# Remove the credentials an author wrote into a statement: access tokens in
+# URLs and stated passwords. The scrapers apply this before a statement
+# enters a raw snapshot, and the build applies it again to every text column.
+remove_credentials <- function(x) {
+  redact_stated_passwords(strip_url_tokens(x))
+}
+
 # Drop the scraped author email addresses before a dataset is exported.
 # The addresses are personal data and earn nothing analytically: the research
 # questions use author country, das_type, keywords and supplementary counts.
@@ -267,6 +287,5 @@ drop_author_emails <- function(data) {
       "first_author_email", "correspondence_author_email"
     ))) |>
     dplyr::mutate(dplyr::across(where(is.character), redact_inline_emails)) |>
-    dplyr::mutate(dplyr::across(where(is.character), strip_url_tokens)) |>
-    dplyr::mutate(dplyr::across(where(is.character), redact_stated_passwords))
+    dplyr::mutate(dplyr::across(where(is.character), remove_credentials))
 }

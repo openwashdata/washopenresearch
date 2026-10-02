@@ -5,7 +5,8 @@
 # subject terms, and each article's full JATS XML is served at
 # https://journals.plos.org/water/article/file?id=<DOI>&type=manuscript.
 # The XML carries the data availability statement, supplementary material
-# entries, affiliations, ORCIDs, and the correspondence author.
+# entries, affiliations, ORCIDs, and the correspondence author. Credentials
+# inside a statement (access tokens in URLs, stated passwords) are removed.
 #
 # Notes:
 # - PLOS Water has no author keywords in the XML for most articles; the
@@ -31,6 +32,9 @@ library(purrr)
 library(stringr)
 library(readr)
 library(tibble)
+
+# For the helpers that keep credentials out of the raw snapshot
+source("data-raw/helpers.R")
 
 SEARCH_URL <- "https://api.plos.org/search"
 ARTICLE_XML_URL <- "https://journals.plos.org/water/article/file?id=%s&type=manuscript"
@@ -231,12 +235,18 @@ das_repositories <- function(das_node, das_text) {
 
 parse_das <- function(xml) {
   node <- xml_find_first(xml, "//custom-meta[@id='data-availability']/meta-value")
+  # A few statements link a restricted record through an access token or
+  # state a password. Credentials do not enter the raw snapshot. The plain
+  # record URL and the rest of the sentence stay.
   das_text <- if (inherits(node, "xml_missing")) NA_character_ else
-    str_squish(xml_text(node))
-  c(
+    remove_credentials(str_squish(xml_text(node)))
+  fields <- c(
     list(has_das = !is.na(das_text), das = das_text),
     das_repositories(node, if (is.na(das_text)) "" else das_text)
   )
+  # The link targets inside the statement can carry a token as well
+  fields$das_repo_url <- strip_url_tokens(fields$das_repo_url)
+  fields
 }
 
 parse_article_xml <- function(xml) {
