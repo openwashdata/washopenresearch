@@ -128,3 +128,30 @@ write_snapshot <- function(data, path) {
 as_snapshot_text <- function(rows) {
   dplyr::mutate(rows, dplyr::across(dplyr::everything(), as.character))
 }
+
+# Update log -----------------------------------------------------------------
+
+# How many journal issues and rows a raw snapshot holds. Zeros when the
+# snapshot does not exist yet.
+snapshot_counts <- function(path) {
+  if (!file.exists(path)) return(list(issues = 0L, rows = 0L))
+  snapshot <- read_snapshot(path)
+  list(
+    issues = dplyr::n_distinct(issue_key(snapshot$volume, snapshot$issue)),
+    rows = nrow(snapshot)
+  )
+}
+
+# One row of data-raw/update-log.csv: what a run added to the snapshot of
+# one journal, from snapshot_counts() before and after the run. `finished`
+# is FALSE when the scraper stopped with an error; what it added until then
+# is in the snapshot and is counted.
+update_log_row <- function(journal, before, after, finished, date = Sys.Date()) {
+  tibble::tibble(
+    date = as.character(date),
+    journal = journal,
+    issues_added = after$issues - before$issues,
+    rows_added = after$rows - before$rows,
+    finished = finished
+  )
+}

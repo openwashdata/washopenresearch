@@ -236,7 +236,12 @@ strip_url_tokens <- function(x) {
   # A token, access_token or signature parameter with its value. The pattern
   # is assembled from parts so that this file holds no literal a secret
   # scanner reads as a credential assignment.
-  parameter <- paste0("(token|access_token|signature)", "=", "[A-Za-z0-9._~+/=-]+")
+  # The value ends on a character other than a full stop, so that the stop
+  # of a sentence ending on the URL stays.
+  parameter <- paste0(
+    "(token|access_token|signature)", "=",
+    "[A-Za-z0-9._~+/=-]*[A-Za-z0-9_~+/=-]"
+  )
   x |>
     # after another parameter
     stringr::str_replace_all(paste0("&", parameter), "") |>
