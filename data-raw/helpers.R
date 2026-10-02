@@ -171,7 +171,7 @@ iwa_raw_col_types <- function() {
 
 # Shared cleaning for the IWA journals scraped from iwaponline.com.
 # washdev, ws, jwh and aqua come off the same scraper (data-raw/iwa_scraping.R)
-# with the same 28-column schema, so the steps that do not depend on manual,
+# with the same 26-column schema, so the steps that do not depend on manual,
 # per-journal decisions live here and build_iwa() in data-raw/pipeline/ calls
 # this first. Steps that stay per-journal: the das_type regex mapping, the
 # review files, and the decision sheets.
@@ -274,13 +274,16 @@ remove_credentials <- function(x) {
   redact_stated_passwords(strip_url_tokens(x))
 }
 
-# Drop the scraped author email addresses before a dataset is exported.
-# The addresses are personal data and earn nothing analytically: the research
-# questions use author country, das_type, keywords and supplementary counts.
-# A published CC BY table of corresponding author addresses is a ready-made
-# mailing list, so the columns stay in data-raw/ and out of the package.
-# Credentials inside the text go the same way: access tokens in URLs and
-# passwords stated in a statement.
+# Keep author email addresses and credentials out of a dataset before it is
+# exported. The addresses are personal data and earn nothing analytically: the
+# research questions use author country, das_type, keywords and supplementary
+# counts. A published CC BY table of corresponding author addresses is a
+# ready-made mailing list.
+# Since 0.5.0 the raw snapshots have no email columns and the scrapers do not
+# collect them, so dropping the columns only matters for a snapshot from an
+# earlier commit. The text is still cleaned on every build. Addresses inside
+# a statement are masked, and access tokens in URLs and passwords stated in a
+# statement are removed.
 drop_author_emails <- function(data) {
   data |>
     dplyr::select(-dplyr::any_of(c(
