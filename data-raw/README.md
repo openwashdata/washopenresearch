@@ -274,6 +274,7 @@ a review sheet, the next build overwrites it.
 | `pipeline/` | build, shared and writer functions of the pipeline | code review |
 | `helpers.R` | shared helpers (strict CSV reader, country cleaning, email masking, journal and term lists) | code review |
 | `update_sources.R` | entry point of the monthly acquisition | code review |
+| `monthly-data-update.md` | checklist of the monthly data update; a workflow opens it as an issue on the 5th of each month | code review |
 | `update-log.csv` | what each acquisition run added, one row per journal and run | `update_sources.R` |
 | `iwa_scraping.R`, `scrape_plan.R` | scraper of the four IWA journals, and the tested functions that decide what a run fetches | code review |
 | `washdev.csv`, `ws.csv`, `jwh.csv`, `aqua.csv` | raw snapshots of the iwaponline.com scrapes | scrapers |
