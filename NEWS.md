@@ -1,4 +1,47 @@
-# washopenresearch (development version)
+# washopenresearch 0.5.0
+
+This release makes the build of the datasets reproducible and prepares
+monthly data updates. The data of the six datasets of 0.4.0 changes only
+through the fixes listed below, and `aqua` joins as the seventh dataset.
+No new journal issues are added yet; the first monthly update follows as
+0.6.0.
+
+## Coverage
+
+Five datasets are updated monthly from now on. `uncnewsletter` and
+`datapapers` are frozen: still built with every release, no longer
+updated.
+
+| Dataset | Updates | Articles | Years | Latest issue |
+|---|---|---:|---|---|
+| `washdev` | monthly | 1,173 | 2011 to 2026 | Vol. 16 Issue 6 |
+| `ws` | monthly | 4,884 | 2001 to 2026 | Vol. 26 Issue 6 |
+| `jwh` | monthly | 2,013 | 2003 to 2026 | Vol. 24 Issue 6 |
+| `aqua` | monthly | 1,819 | 1998 to 2026 | Vol. 75 Issue 6 |
+| `ploswater` | monthly | 434 | 2022 to 2026 | Vol. 5 Issue 7, published up to 2026-07-06 |
+| `uncnewsletter` | frozen | 173 | 2020 to 2023 | newsletter ceased in May 2024 |
+| `datapapers` | frozen | 8 | 2018 to 2025 | harvested on 23 July 2026 |
+
+## Reproducible build
+
+- The datasets are built by a `targets` pipeline from the raw snapshots and
+  decision sheets committed in `data-raw/`, with the package versions
+  pinned in `renv.lock`. One command rebuilds everything:
+  `Rscript data-raw/build.R`. Manual corrections moved from the code into
+  decision sheets keyed on the article identifier.
+
+- A validation gate checks every dataset before anything is written:
+  documented columns, a unique key, no email addresses or credentials,
+  statement text wherever a statement is flagged, UN country names, and no
+  article lost since the last release.
+
+- A workflow on GitHub rebuilds the datasets on every push and pull request
+  and fails when they differ from the committed data
+  (`data-raw/check_reproducible.R`).
+
+- Zenodo files the release as a dataset in the openwashdata community,
+  from the new `.zenodo.json`. The releases 0.1.0, 0.3.0 and 0.4.0 were
+  never archived there.
 
 ## New features
 
@@ -123,7 +166,14 @@
   10.1371/journal.pwat.0000302). They enter the dataset with the next data
   update.
 
+- A workflow opens an issue on the 5th of each month with the checklist of
+  the monthly data update (`data-raw/monthly-data-update.md`).
+
 ## Documentation
+
+- The help pages and the README say which datasets are updated monthly and
+  which are frozen, and the README has a coverage table that is computed
+  from the datasets.
 
 - `uncnewsletter`: the `citations` column is now described in the help page
   and the data dictionary. It has been in the dataset since its first
