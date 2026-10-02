@@ -44,10 +44,6 @@ classify_ploswater_das <- function(has_das, das, das_repo_url) {
 # and standardised countries.
 build_ploswater <- function(raw_file) {
   read_strict_csv(raw_file, ploswater_raw_col_types()) |>
-    # The search API was paged without a sort, so a few articles came back
-    # on two pages. Only rows that are identical in every column are
-    # dropped; a DOI repeated with different content still fails the gate.
-    dplyr::distinct() |>
     # Same column layout as the other datasets; PLOS has no site-specific
     # article number, so the DOI is the identifier.
     dplyr::mutate(paperid = doi, url_source = "journals.plos.org") |>

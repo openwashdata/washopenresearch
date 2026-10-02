@@ -28,6 +28,13 @@ test_that("other parameters survive, wherever the token sits", {
   )
 })
 
+test_that("the full stop after a token stays in the sentence", {
+  expect_equal(
+    strip_url_tokens(paste0("See https://zenodo.org/records/1?", token_parameter, ". More text.")),
+    "See https://zenodo.org/records/1. More text."
+  )
+})
+
 test_that("several tokens in one text are all dropped", {
   url <- paste0("https://zenodo.org/records/1?", token_parameter)
   expect_equal(

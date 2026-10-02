@@ -107,6 +107,22 @@
   three weeks, are written to `data-raw/private/`, which is not committed.
   `data-raw/suppfiles_download.R` reads them there.
 
+- One command runs the monthly acquisition for every live source:
+  `Rscript data-raw/update_sources.R`. It runs the four IWA journals in
+  sequence with a cooldown, then PLOS Water, each as its own R process. A
+  source that fails does not stop the others, and `data-raw/update-log.csv`
+  records per journal and run how many journal issues and rows were added.
+
+- The PLOS Water downloader can run incrementally. It failed on the second
+  run, because it read the existing snapshot with guessed column types and
+  could not combine the publication date with the new rows. It now pages
+  the search in a fixed sort order and keeps one row per DOI. The two
+  repeated rows are removed from `data-raw/ploswater.csv`; the dataset has
+  been without them since the fix listed above. The unsorted paging had
+  also skipped two articles (10.1371/journal.pwat.0000223 and
+  10.1371/journal.pwat.0000302). They enter the dataset with the next data
+  update.
+
 ## Documentation
 
 - `uncnewsletter`: the `citations` column is now described in the help page

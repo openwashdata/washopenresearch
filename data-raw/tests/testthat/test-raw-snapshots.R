@@ -79,3 +79,9 @@ test_that("no raw snapshot has an email address in an affiliation column", {
     )
   }
 })
+
+# The PLOS Water search was once paged without a sort order and returned two
+# articles twice. The downloader keeps one row per DOI.
+test_that("the PLOS Water snapshot has one row per DOI", {
+  expect_false(anyDuplicated(read_raw_text("ploswater")$doi) > 0)
+})

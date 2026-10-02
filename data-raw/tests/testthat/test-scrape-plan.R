@@ -189,9 +189,9 @@ test_that("new rows are written like the rows already in the snapshot", {
 })
 
 test_that("the raw snapshots survive being read and written back unchanged", {
-  # The scraper reads a snapshot as text and writes it back with the new
+  # The scrapers read a snapshot as text and write it back with the new
   # rows, so the rows already in it must come out byte for byte as they are.
-  for (name in c("washdev", "ws", "jwh", "aqua")) {
+  for (name in c("washdev", "ws", "jwh", "aqua", "ploswater")) {
     path <- testthat::test_path("..", "..", paste0(name, ".csv"))
     rewritten <- tempfile(fileext = ".csv")
     write_snapshot(read_snapshot(path), rewritten)
@@ -201,4 +201,24 @@ test_that("the raw snapshots survive being read and written back unchanged", {
       label = paste0(name, ".csv read and written back")
     )
   }
+})
+
+test_that("the update log records what a run added", {
+  path <- tempfile(fileext = ".csv")
+  expect_identical(snapshot_counts(path), list(issues = 0L, rows = 0L))
+
+  write_snapshot(snapshot_of(c("1/1", "1/2")), path)
+  before <- snapshot_counts(path)
+  expect_identical(before, list(issues = 2L, rows = 4L))
+
+  # A late article in 1/2 and a new issue with two articles
+  write_snapshot(snapshot_of(c("1/1", "1/2", "1/2", "2/1"))[-1, ], path)
+  after <- snapshot_counts(path)
+  expect_identical(
+    update_log_row("ws", before, after, finished = TRUE, date = as.Date("2026-11-05")),
+    tibble::tibble(
+      date = "2026-11-05", journal = "ws",
+      issues_added = 1L, rows_added = 3L, finished = TRUE
+    )
+  )
 })

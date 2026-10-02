@@ -6,7 +6,7 @@ between them.
 
 | Stage | What it does | Needs network | How it runs |
 |---|---|---|---|
-| Acquisition | Fetches articles from the journals and writes the raw snapshots | yes | by hand, one script per source |
+| Acquisition | Fetches articles from the journals and writes the raw snapshots | yes | by hand, one command for all sources |
 | Build | Turns the committed raw snapshots and sheets into the package datasets, the exports and the review sheets | no | `targets` pipeline |
 
 The build never fetches anything, so it gives the same result on any
@@ -16,8 +16,9 @@ All scripts are run **from the package root** and are non-interactive.
 
 ## Run order
 
-1. Acquisition, when new articles are wanted: one command per source (see
-   "Acquisition"). Each run adds to the raw snapshot of its source.
+1. Acquisition, when new articles are wanted:
+   `caffeinate -i Rscript data-raw/update_sources.R` (see "Acquisition").
+   The run adds to the raw snapshot of each live source.
 2. `Rscript data-raw/build.R`: rebuilds the datasets, exports and review
    sheets from the snapshots and sheets.
 3. Read the review sheets. To act on a row, add it to a decision sheet and
@@ -92,10 +93,31 @@ does not build.
 
 ## Acquisition
 
-| Source | Command | Raw snapshot |
+``` sh
+caffeinate -i Rscript data-raw/update_sources.R
+```
+
+This one command is the monthly acquisition. It runs the four IWA journals
+one after the other, with a cooldown of five minutes in between, then PLOS
+Water. `caffeinate -i` keeps the Mac awake; the run takes hours when many
+articles are new. Naming sources runs a subset, for example
+`Rscript data-raw/update_sources.R jwh ploswater`.
+
+| Source | Scraper, run by the update command | Raw snapshot |
 |---|---|---|
-| Journal of Water, Sanitation and Hygiene for Development, Water Supply, Journal of Water and Health, AQUA | `Rscript data-raw/iwa_scraping.R <washdev\|ws\|jwh\|aqua>`, one journal per run | `washdev.csv`, `ws.csv`, `jwh.csv`, `aqua.csv` |
-| PLOS Water | `Rscript data-raw/ploswater.R` | `ploswater.csv` |
+| Journal of Water, Sanitation and Hygiene for Development, Journal of Water and Health, AQUA, Water Supply | `iwa_scraping.R <washdev\|jwh\|aqua\|ws>` | `washdev.csv`, `jwh.csv`, `aqua.csv`, `ws.csv` |
+| PLOS Water | `ploswater.R` | `ploswater.csv` |
+
+Each scraper runs as its own R process, because the IWA scraper and the PLOS
+Water downloader define helper functions with the same names. A source that
+fails does not stop the others. Its failure is printed, and the command
+exits with status 1 at the end. Run the command again to continue; every
+scraper picks up where it stopped.
+
+`update-log.csv` gets one row per journal and run: `date`, `journal`,
+`issues_added`, `rows_added`, and `finished` (`FALSE` when the scraper
+stopped with an error or could not read every page). The release notes of a
+monthly update take their coverage table from it.
 
 The IWA scraper drives a headless Chrome session, because iwaponline.com
 blocks plain HTTP clients and throttles bursts of requests. It runs slowly
@@ -130,6 +152,11 @@ The download links of supplementary files on iwaponline.com are signed and
 work for about three weeks. The raw snapshot keeps the file path only. The
 signed links go to `data-raw/private/<journal>-signed-supp-links.csv`,
 which is not committed, and `suppfiles_download.R` reads them there.
+
+The PLOS Water downloader needs no browser. It lists all articles through
+the PLOS search API, in a fixed sort order, downloads the XML of those whose
+DOI is not in the snapshot yet, and appends them. The snapshot holds one row
+per DOI.
 
 Two sources are frozen. They are still built, but no longer updated:
 
@@ -246,6 +273,8 @@ a review sheet, the next build overwrites it.
 | `removed-keys.csv` | articles deliberately removed from a dataset, with the reason | humans (curation) |
 | `pipeline/` | build, shared and writer functions of the pipeline | code review |
 | `helpers.R` | shared helpers (strict CSV reader, country cleaning, email masking, journal and term lists) | code review |
+| `update_sources.R` | entry point of the monthly acquisition | code review |
+| `update-log.csv` | what each acquisition run added, one row per journal and run | `update_sources.R` |
 | `iwa_scraping.R`, `scrape_plan.R` | scraper of the four IWA journals, and the tested functions that decide what a run fetches | code review |
 | `washdev.csv`, `ws.csv`, `jwh.csv`, `aqua.csv` | raw snapshots of the iwaponline.com scrapes | scrapers |
 | `*_issues.csv` | cached list of journal issues per IWA journal | scrapers |
