@@ -64,6 +64,21 @@
   datasets are unchanged. The git history was not rewritten, so commits up
   to and including v0.4.0 still hold these values.
 
+- The raw snapshots (`washdev.csv`, `ws.csv`, `jwh.csv`, `aqua.csv` and
+  `ploswater.csv`) no longer have the columns `first_author_email` and
+  `correspondence_author_email`, and the scrapers no longer collect author
+  email addresses. Contact addresses that some article pages print after
+  the affiliation are masked in the same way as in the datasets
+  (`washdev.csv` 10 articles, `aqua.csv` 4), and the scraper masks them in
+  new articles. No other value in the snapshots changed, and the datasets
+  are unchanged.
+
+  The git history was not rewritten. Commits up to and including v0.4.0
+  still hold the removed values, and the archive of v0.0.1 on Zenodo holds
+  the email columns of `washdev.csv`. Addresses that authors wrote inside a
+  data availability statement stay in the raw statement text, which is the
+  published statement, and are masked in the datasets as before.
+
 ## Documentation
 
 - `uncnewsletter`: the `citations` column is now described in the help page

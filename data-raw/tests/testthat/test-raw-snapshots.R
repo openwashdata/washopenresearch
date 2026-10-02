@@ -51,3 +51,31 @@ test_that("the signed query is dropped and the file path kept", {
     )
   )
 })
+
+# The raw snapshots hold no structured author addresses. The two author
+# email columns were removed from them in 0.5.0 and the scrapers stopped
+# collecting them.
+test_that("no raw snapshot has an email column", {
+  for (name in raw_snapshots) {
+    header <- names(read_raw_text(name))
+    expect_false(
+      any(grepl("email", header, ignore.case = TRUE)),
+      label = paste0("an email column in ", name, ".csv")
+    )
+  }
+})
+
+# Some article pages print a contact address after the affiliation. It is
+# masked in the raw snapshot like the build masks addresses in text.
+# Addresses inside a data availability statement are the published statement
+# and stay in the raw text.
+test_that("no raw snapshot has an email address in an affiliation column", {
+  for (name in raw_snapshots) {
+    affiliations <- dplyr::select(read_raw_text(name), dplyr::contains("affiliation"))
+    expect_identical(
+      dplyr::mutate(affiliations, dplyr::across(dplyr::everything(), redact_inline_emails)),
+      affiliations,
+      label = paste0("the affiliation columns of ", name, ".csv with addresses masked")
+    )
+  }
+})

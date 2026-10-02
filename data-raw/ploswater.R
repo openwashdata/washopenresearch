@@ -7,6 +7,7 @@
 # The XML carries the data availability statement, supplementary material
 # entries, affiliations, ORCIDs, and the correspondence author. Credentials
 # inside a statement (access tokens in URLs, stated passwords) are removed.
+# Author email addresses are not collected.
 #
 # Notes:
 # - PLOS Water has no author keywords in the XML for most articles; the
@@ -187,23 +188,17 @@ parse_authors <- function(xml) {
     xml, "//contrib-group/contrib[@contrib-type='author'][@corresp='yes']"
   )
   corresp <- contrib_fields(xml, corresp_node)
-  corresp_email <- xml_text(xml_find_first(
-    xml, "//author-notes/corresp/email"
-  ))
-  first_is_corresp <- length(contribs) > 0 &&
-    identical(xml_attr(contribs[[1]], "corresp"), "yes")
+  # The correspondence author's email address in the XML is not collected,
+  # because the raw snapshot holds no structured author addresses.
   list(
     num_authors = length(contribs),
     first_author_name = first$name,
     first_author_affiliation = first$affiliation,
     first_author_affiliation_country = first$affiliation_country,
-    # PLOS XML only publishes the correspondence author's email
-    first_author_email = if (first_is_corresp) corresp_email else NA_character_,
     first_author_orcid = first$orcid,
     correspondence_author_name = corresp$name,
     correspondence_author_affiliation = corresp$affiliation,
     correspondence_author_affiliation_country = corresp$affiliation_country,
-    correspondence_author_email = corresp_email,
     correspondence_author_orcid = corresp$orcid
   )
 }

@@ -192,9 +192,15 @@ a review sheet, the next build overwrites it.
 - **No list-columns in saved objects** (issue #8): multi-value fields are
   collapsed to `"; "`-delimited strings via `collapse_list_col()` before a
   dataset is saved.
-- **No author email addresses in the datasets.** The email columns are
-  dropped and addresses inside text columns are masked before a dataset or
-  a review sheet is written.
+- **No author contact addresses.** The raw snapshots have had no author
+  email columns since version 0.5.0, and the scrapers do not collect them.
+  A contact address printed after an affiliation is masked when it is
+  scraped. The git history was not rewritten, so commits up to and
+  including v0.4.0 still hold these values, and the archive of v0.0.1 on
+  Zenodo holds the email columns of `washdev.csv`. Addresses that authors
+  wrote inside a statement stay in the raw statement text, which is the
+  published statement. The build masks them before a dataset or a review
+  sheet is written.
 - **No credentials in the raw snapshots.** The scrapers drop access tokens
   from the URLs of a statement, replace a password stated in a statement by
   `[removed]`, and keep only the file path of the signed download links of

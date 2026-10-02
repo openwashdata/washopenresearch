@@ -29,7 +29,7 @@ library(stringr)
 library(readr)
 library(tibble)
 
-# For the helpers that keep credentials out of the raw snapshot
+# For the helpers that keep addresses and credentials out of the raw snapshot
 source("data-raw/helpers.R")
 
 JOURNAL_NAME <- "Journal of Water, Sanitation & Hygiene for Development"
@@ -161,8 +161,11 @@ parse_supp <- function(page) {
   )
 }
 
-#' Extract name, affiliation, country, email, and ORCID from one author
-#' info card (a div.info-card-author node).
+#' Extract name, affiliation, country, and ORCID from one author info card
+#' (a div.info-card-author node). The author's email address on the card is
+#' not collected, because the raw snapshots hold no author contact addresses.
+#' Some pages print the address after the affiliation text as well; there it
+#' is masked the way the build masks addresses in text.
 parse_author_card <- function(card) {
   name <- first_text(html_element(card, "div.info-card-name"))
   aff_node <- html_element(card, "div.aff")
@@ -175,20 +178,18 @@ parse_author_card <- function(card) {
     } else {
       html_text(aff_node)
     }
-    aff <- str_trim(aff)
+    aff <- redact_inline_emails(str_trim(aff))
     country <- last(str_split_1(aff, ", "))
     country <- str_split_1(country, " Email")[1]
   } else {
     aff <- NA_character_
     country <- NA_character_
   }
-  email_node <- html_element(card, "a[href^='mailto']")
   orcid_node <- html_element(card, "a[id^='contrib-orcid']")
   list(
     name = name,
     affiliation = aff,
     affiliation_country = country,
-    email = if (node_exists(email_node)) html_text(email_node) else NA_character_,
     orcid = if (node_exists(orcid_node)) html_attr(orcid_node, "href") else NA_character_
   )
 }
@@ -196,8 +197,7 @@ parse_author_card <- function(card) {
 parse_authors <- function(page) {
   na_author <- list(
     name = NA_character_, affiliation = NA_character_,
-    affiliation_country = NA_character_, email = NA_character_,
-    orcid = NA_character_
+    affiliation_country = NA_character_, orcid = NA_character_
   )
   cards <- html_elements(page, "div.info-card-author")
   first <- if (length(cards) > 0) parse_author_card(cards[[1]]) else na_author
@@ -212,12 +212,10 @@ parse_authors <- function(page) {
     first_author_name = first$name,
     first_author_affiliation = first$affiliation,
     first_author_affiliation_country = first$affiliation_country,
-    first_author_email = first$email,
     first_author_orcid = first$orcid,
     correspondence_author_name = corresp$name,
     correspondence_author_affiliation = corresp$affiliation,
     correspondence_author_affiliation_country = corresp$affiliation_country,
-    correspondence_author_email = corresp$email,
     correspondence_author_orcid = corresp$orcid
   )
 }
