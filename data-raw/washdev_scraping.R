@@ -29,6 +29,9 @@ library(stringr)
 library(readr)
 library(tibble)
 
+# For the helpers that keep credentials out of the raw snapshot
+source("data-raw/helpers.R")
+
 JOURNAL_NAME <- "Journal of Water, Sanitation & Hygiene for Development"
 SITE_ROOT <- "https://iwaponline.com"
 ISSUE_ROOT <- "https://iwaponline.com/washdev/issue"
@@ -151,9 +154,10 @@ parse_supp <- function(page) {
     is_supp = node_exists(html_element(page, "h2#supplementary-data")),
     num_supp = length(supp_nodes),
     supp_file_type = supp_type,
-    supp_url = py_list(map_chr(
+    # The download links are pre-signed; only the file path is kept
+    supp_url = py_list(strip_silverchair_signature(map_chr(
       supp_nodes, \(node) html_attr(html_element(node, "a"), "href")
-    ))
+    )))
   )
 }
 
@@ -249,7 +253,9 @@ parse_das <- function(page) {
     body <- html_element(
       page, sprintf("div[data-section-parent-id='%s']", section_id)
     )
-    if (node_exists(body)) das_text <- str_trim(html_text(body))
+    if (node_exists(body)) {
+      das_text <- remove_credentials(str_trim(html_text(body)))
+    }
   }
   das_type <- if (!is.na(das_text) && startsWith(das_text, DAS_ONLINE_BOILERPLATE)) {
     DAS_ONLINE_BOILERPLATE

@@ -53,6 +53,17 @@
   Values are unchanged; code that relies on the integer codes of the factor
   needs checking.
 
+- Credentials are removed from the raw snapshots in `data-raw/`, as they
+  already were from the datasets. The download links of supplementary files
+  in `washdev.csv`, `ws.csv`, `jwh.csv` and `aqua.csv` lose their signed
+  query and keep the file path (1,752 links of 1,532 articles, all expired
+  since August 2026). In `ploswater.csv` the access tokens in the URLs of
+  one statement are dropped. A password that authors wrote into their
+  statement is replaced by `[removed]` (`ploswater.csv` and `ws.csv`, one
+  statement each). The scrapers apply the same rules to new articles. The
+  datasets are unchanged. The git history was not rewritten, so commits up
+  to and including v0.4.0 still hold these values.
+
 ## Documentation
 
 - `uncnewsletter`: the `citations` column is now described in the help page

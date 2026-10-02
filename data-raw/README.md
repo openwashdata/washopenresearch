@@ -195,6 +195,11 @@ a review sheet, the next build overwrites it.
 - **No author email addresses in the datasets.** The email columns are
   dropped and addresses inside text columns are masked before a dataset or
   a review sheet is written.
+- **No credentials in the raw snapshots.** The scrapers drop access tokens
+  from the URLs of a statement, replace a password stated in a statement by
+  `[removed]`, and keep only the file path of the signed download links of
+  supplementary files. The git history was not rewritten, so commits up to
+  and including v0.4.0 still hold such values.
 
 ## Files
 
