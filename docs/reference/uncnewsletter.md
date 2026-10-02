@@ -1,6 +1,7 @@
 # Dataset about data availability in the UNC Water Newsletter
 
-Dataset about data availability in the UNC Water Newsletter
+A curated list of articles from the Research section of the newsletter
+North Carolina Water News, 2020 to 2023.
 
 ## Usage
 
@@ -11,10 +12,6 @@ uncnewsletter
 ## Format
 
 ### `uncnewsletter`
-
-- url_source:
-
-  Publisher website of the paper
 
 - paperid:
 
@@ -79,10 +76,6 @@ uncnewsletter
   Country of the first author directly parsed from
   first_author_affiliation variable encoded with United Nation names
 
-- first_author_email:
-
-  Email of the first author
-
 - first_author_orcid:
 
   ORCID of the first author
@@ -100,10 +93,6 @@ uncnewsletter
   Country or region of the correspondence author directly parsed from
   correspondence_author_affiliation variable encoded with United Nation
   names
-
-- correspondence_author_email:
-
-  Email of the correspondence author
 
 - correspondence_author_orcid:
 
@@ -132,6 +121,22 @@ uncnewsletter
   Website urls of the data if the relevant data of the paper is shared
   on a public repository, separated by "; " when there are multiple
 
+- citations:
+
+  Number of citations of the paper, as entered by the annotators during
+  the manual collection in January 2024 or earlier; the source of the
+  count is not documented. NA where no value was entered.
+
 - keywords:
 
   Keywords of the paper, separated by "; "
+
+- doi:
+
+  DOI of the paper, backfilled via a Crossref title search (issue \#20);
+  NA where no match cleared the title-similarity threshold.
+
+## Details
+
+This dataset is frozen. The newsletter ceased publication in May 2024,
+so the dataset is still built with every release but no longer updated.

@@ -8,7 +8,9 @@
 <title>Missed Opportunity: where is WASH research data gone? • washopenresearch</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/Atkinson_Hyperlegible_Next-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Missed Opportunity: where is WASH research data gone?">
 <script defer data-domain="openwashdata.github.io" src="https://plausible.io/js/script.js"></script>
@@ -21,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">washopenresearch</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,11 +91,6 @@ Information.</li>
 corresponding author for details.</li>
 <li>All relevant data are available from an online repository</li>
 </ul>
-<p>Using the dataset <code>washdev</code> from the
-<code>washopenresearch</code> data package, this example investigates
-the “Data Availability Statement” from 924 articles published in the
-Journal of Water, Sanitation and Hygiene for Development from 2011 to
-2023.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Import useful libraries</span></span>
 <span><span class="co">## Package installation if you do not have them, uncomment and run the following two lines</span></span>
@@ -102,7 +99,60 @@ Journal of Water, Sanitation and Hygiene for Development from 2011 to
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/openwashdata/washopenresearch">washopenresearch</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jrnold.github.io/ggthemes/" class="external-link">ggthemes</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com" class="external-link">gt</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com" class="external-link">gt</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># This article looks at the articles published from 2011 to 2023. The</span></span>
+<span><span class="co"># dataset has grown since, so the later years are left out here.</span></span>
+<span><span class="va">washdev_2023</span> <span class="op">&lt;-</span> <span class="va">washdev</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">published_year</span> <span class="op">&lt;=</span> <span class="fl">2023</span><span class="op">)</span></span></code></pre></div>
+<p>Using the dataset <code>washdev</code> from the
+<code>washopenresearch</code> data package, this example investigates
+the “Data Availability Statement” from 932 articles published in the
+Journal of Water, Sanitation and Hygiene for Development from 2011 to
+2023.</p>
+</div>
+<div class="section level2">
+<h2 id="where-wash-data-is-meant-to-go">Where WASH data is meant to go<a class="anchor" aria-label="anchor" href="#where-wash-data-is-meant-to-go"></a>
+</h2>
+<p>The WASH sector has built its own places to put data. Two of them are
+the largest. The first is mWater, a free platform where people collect
+water, sanitation, and health data with survey tools and can share it.
+mWater has run since 2012, covers 198 countries, and holds records for
+more than four million sites. The second is Project W, a catalogue built
+by the Aquaya Institute that gathers WASH datasets from more than 900
+organisations into one searchable place across 190 or more geographies.
+mWater generates data. Project W compiles data that already exists.</p>
+<p>Both platforms let researchers store or find data, but they document
+it unevenly. mWater lets you download record-level data, offers an API,
+and provides a data dictionary, so the data can be reused by machine. It
+does not assign a license to the shared public data, and it gives
+datasets no DOI or version, so a paper cannot cite an mWater dataset the
+way it cites a journal article. Project W is harder to assess. It
+started as a pilot in 2022 and is still in beta, and it requires a
+sign-in, with access granted through a waitlist rather than open
+registration. We could not confirm from its public pages whether it
+offers downloads, an API, or persistent identifiers. Its terms of use
+grant only personal, non-commercial use and set no open license on the
+datasets it indexes.</p>
+<p>The platforms exist, but WASH authors rarely point to them. We
+searched the data availability statements of 1,782 papers in this
+package (the <code>washdev</code>, <code>uncnewsletter</code>, and
+<code>ploswater</code> datasets) for mentions of thirteen WASH data
+platforms. Neither mWater nor Project W appears once. The platforms that
+do appear are the large household-survey programmes and general
+repositories that are not WASH-specific: the Demographic and Health
+Surveys (twelve papers), the Humanitarian Data Exchange (three papers),
+and the Multiple Indicator Cluster Surveys (two papers). So when WASH
+authors do share data through a platform, they reach for a general one
+rather than a sector platform. The eight standalone WASH data papers in
+the <code>datapapers</code> dataset tell the same story: seven deposit
+their datasets in general repositories (GBIF, IEEE DataPort, Figshare,
+Dryad, NCBI, Zenodo), one shares its data only in the article tables,
+and none uses a sector platform, even though these papers exist for no
+other reason than to publish a dataset. The sector built mWater and
+Project W to hold WASH data, and the published record so far routes
+around both. That gap is the missed opportunity this article is
+about.</p>
 </div>
 <div class="section level2">
 <h2 id="how-is-wash-research-data-available-in-the-journal">How is WASH research data available in the journal?<a class="anchor" aria-label="anchor" href="#how-is-wash-research-data-available-in-the-journal"></a>
@@ -118,9 +168,9 @@ distribution of different types of DAS.</p>
 relevant variables like <code>published_year</code>,
 <code>has_das</code>, <code>das_type</code> to be used for analysis.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">washdev</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Rows: 924</span></span>
-<span><span class="co">#&gt; Columns: 28</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">washdev_2023</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Rows: 932</span></span>
+<span><span class="co">#&gt; Columns: 27</span></span>
 <span><span class="co">#&gt; $ paperid                                   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 28742<span style="color: #949494;">, </span>28745<span style="color: #949494;">, </span>28743<span style="color: #949494;">, </span>28744<span style="color: #949494;">, </span>…</span></span>
 <span><span class="co">#&gt; $ volume                                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1…</span></span>
 <span><span class="co">#&gt; $ issue                                     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>2…</span></span>
@@ -131,23 +181,22 @@ relevant variables like <code>published_year</code>,
 <span><span class="co">#&gt; $ is_supp                                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE<span style="color: #949494;">, </span>FALSE<span style="color: #949494;">, </span>FALSE<span style="color: #949494;">, </span>TRUE<span style="color: #949494;">, </span>F…</span></span>
 <span><span class="co">#&gt; $ num_supp                                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
 <span><span class="co">#&gt; $ supp_file_type                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>"pdf"<span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">N</span>…</span></span>
-<span><span class="co">#&gt; $ supp_url                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>"https://iwa.sil…</span></span>
+<span><span class="co">#&gt; $ supp_url                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>"https://doi.org…</span></span>
 <span><span class="co">#&gt; $ num_authors                               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 6<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>6<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>3<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>3<span style="color: #949494;">, </span>8…</span></span>
 <span><span class="co">#&gt; $ first_author_name                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Jamie Bartram"<span style="color: #949494;">, </span>"E. Kvarnst…</span></span>
 <span><span class="co">#&gt; $ first_author_affiliation                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Journal of Water, Sanitatio…</span></span>
 <span><span class="co">#&gt; $ first_author_affiliation_country          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>"Sweden"<span style="color: #949494;">, </span>"Cameroon"<span style="color: #949494;">, </span>"I…</span></span>
-<span><span class="co">#&gt; $ first_author_email                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>"elisabeth.kvarnstrom@se…</span></span>
 <span><span class="co">#&gt; $ first_author_orcid                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>…</span></span>
 <span><span class="co">#&gt; $ correspondence_author_name                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>"E. Kvarnström"<span style="color: #949494;">, </span>"E. Soh…</span></span>
 <span><span class="co">#&gt; $ correspondence_author_affiliation         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>"Stockholm Environment I…</span></span>
 <span><span class="co">#&gt; $ correspondence_author_affiliation_country <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>"Sweden"<span style="color: #949494;">, </span>"Cameroon"<span style="color: #949494;">, </span>"I…</span></span>
-<span><span class="co">#&gt; $ correspondence_author_email               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>"elisabeth.kvarnstrom@se…</span></span>
 <span><span class="co">#&gt; $ correspondence_author_orcid               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>…</span></span>
 <span><span class="co">#&gt; $ has_das                                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE<span style="color: #949494;">, </span>FALSE<span style="color: #949494;">, </span>FALSE<span style="color: #949494;">, </span>FALSE<span style="color: #949494;">, </span>…</span></span>
 <span><span class="co">#&gt; $ das                                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>…</span></span>
 <span><span class="co">#&gt; $ das_type                                  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>…</span></span>
 <span><span class="co">#&gt; $ das_repo_url                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>…</span></span>
 <span><span class="co">#&gt; $ keywords                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>"function-based; sanitat…</span></span>
+<span><span class="co">#&gt; $ doi                                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10.2166/washdev.2011.0001"<span style="color: #949494;">,</span>…</span></span>
 <span><span class="co">#&gt; $ url_source                                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "iwaponline.com"<span style="color: #949494;">, </span>"iwaponlin…</span></span></code></pre></div>
 <p>We prepare the data by first creating a new variable
 <code>das_policy</code> based on <code>published_year</code> to
@@ -156,7 +205,8 @@ change. Then, we modify the <code>das_type</code> to be more
 human-readable and add a new type <code>"missing</code> for all the
 publications that do not have a DAS.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">washdev_das_type</span> <span class="op">&lt;-</span> <span class="va">washdev</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="va">washdev_das_type</span> <span class="op">&lt;-</span> <span class="va">washdev_2023</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>das_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">das_type</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>das_policy <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html" class="external-link">case_when</a></span><span class="op">(</span></span>
 <span>        <span class="va">published_year</span> <span class="op">&lt;</span> <span class="fl">2020</span> <span class="op">~</span> <span class="st">"pre-2020"</span>,</span>
 <span>        <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"2020 or later"</span></span>
@@ -182,7 +232,7 @@ policy year.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2020 or later available in online repository    27</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2020 or later available in paper               217</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2020 or later available on request              64</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2020 or later missing                           53</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2020 or later missing                           61</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> pre-2020      missing                          563</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -216,12 +266,12 @@ impact.</p>
 <span>    <span class="co"># Style of the figure</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>        title <span class="op">=</span> <span class="st">"Data Availability Statement"</span>,</span>
-<span>        subtitle <span class="op">=</span> <span class="st">"Analysis of 924 articles published in Journal of Water, Sanitation and Hygiene for Development (2011 to 2023)"</span>,</span>
+<span>        subtitle <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Analysis of"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">washdev_2023</span><span class="op">)</span>, <span class="st">"articles published in Journal of Water, Sanitation and Hygiene for Development (2011 to 2023)"</span><span class="op">)</span>,</span>
 <span>        fill <span class="op">=</span> <span class="st">"published year"</span>,</span>
 <span>        y <span class="op">=</span> <span class="st">"number of publications"</span>,</span>
 <span>        x <span class="op">=</span> <span class="st">"data availability statement"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">600</span>, <span class="fl">100</span><span class="op">)</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">600</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="http://jrnold.github.io/ggthemes/reference/colorblind.html" class="external-link">scale_fill_colorblind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://jrnold.github.io/ggthemes/reference/colorblind.html" class="external-link">scale_fill_colorblind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>panel.grid.major.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>          plot.subtitle <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: `scale_fill_colorblind()` was deprecated in ggthemes 5.2.0.</span></span>
@@ -240,8 +290,8 @@ and the number of publications on the horizontal axis</p></li>
 <li><p>Colors differentiate between papers published before 2020 and in
 2020 or later, when a policy was introduced that requires authors to
 select one of the three data availability statements</p></li>
-<li><p>After that policy was introduced, we still found 15% of papers
-without a data availability statement, while 60% of articles stated that
+<li><p>After that policy was introduced, we still found 17% of papers
+without a data availability statement, while 59% of articles stated that
 data was available in the paper, which could also be as supplementary
 material</p></li>
 </ul>
@@ -280,7 +330,7 @@ stores the file types of an article as a single string separated by
 <span>    <span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">das_type</span>, <span class="va">supp_file_type</span><span class="op">)</span> </span>
 <span><span class="va">washdev_supp_file_type_n</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 16 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 17 × 3</span></span></span>
 <span><span class="co">#&gt;    das_type                       supp_file_type     n</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> available in online repository docx              21</span></span>
@@ -296,9 +346,10 @@ stores the file types of an article as a single string separated by
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> available on request           docx              33</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> available on request           missing           29</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> available on request           pdf                2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> missing                        docx              12</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> missing                        missing           40</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> missing                        pdf                2</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> missing                        docx              13</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> missing                        docx, xlsx         4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> missing                        missing           42</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> missing                        pdf                3</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="summary-on-supplementary-material-file-types">2. Summary on Supplementary Material File Types<a class="anchor" aria-label="anchor" href="#summary-on-supplementary-material-file-types"></a>
@@ -792,23 +843,28 @@ used in the supplementary materials.</p>
 <tbody class="gt_table_body">
 <tr>
 <td headers="supp_file_type" class="gt_row gt_left">missing</td>
-<td headers="n" class="gt_row gt_right">202</td>
-<td headers="perc" class="gt_row gt_right">51.4</td>
+<td headers="n" class="gt_row gt_right">204</td>
+<td headers="perc" class="gt_row gt_right">50.9</td>
 </tr>
 <tr>
 <td headers="supp_file_type" class="gt_row gt_left">docx</td>
-<td headers="n" class="gt_row gt_right">149</td>
-<td headers="perc" class="gt_row gt_right">37.9</td>
+<td headers="n" class="gt_row gt_right">150</td>
+<td headers="perc" class="gt_row gt_right">37.4</td>
 </tr>
 <tr>
 <td headers="supp_file_type" class="gt_row gt_left">xlsx</td>
 <td headers="n" class="gt_row gt_right">24</td>
-<td headers="perc" class="gt_row gt_right">6.1</td>
+<td headers="perc" class="gt_row gt_right">6.0</td>
 </tr>
 <tr>
 <td headers="supp_file_type" class="gt_row gt_left">pdf</td>
-<td headers="n" class="gt_row gt_right">13</td>
-<td headers="perc" class="gt_row gt_right">3.3</td>
+<td headers="n" class="gt_row gt_right">14</td>
+<td headers="perc" class="gt_row gt_right">3.5</td>
+</tr>
+<tr>
+<td headers="supp_file_type" class="gt_row gt_left">docx, xlsx</td>
+<td headers="n" class="gt_row gt_right">4</td>
+<td headers="perc" class="gt_row gt_right">1.0</td>
 </tr>
 <tr>
 <td headers="supp_file_type" class="gt_row gt_left">pptx</td>
@@ -818,7 +874,7 @@ used in the supplementary materials.</p>
 <tr>
 <td headers="supp_file_type" class="gt_row gt_left">png</td>
 <td headers="n" class="gt_row gt_right">1</td>
-<td headers="perc" class="gt_row gt_right">0.3</td>
+<td headers="perc" class="gt_row gt_right">0.2</td>
 </tr>
 </tbody>
 <tfoot><tr class="gt_footnotes">

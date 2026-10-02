@@ -38,13 +38,15 @@ library(wordcloud2)
 
 The goal of washopenresearch is to provide an overview of open research
 data related to Water Sanitation and Hygiene (WASH). The current version
-contains six datasets from the following sources:
+contains seven datasets from the following sources:
 
 -   `washdev`: Open access journal [*Journal of Water, Sanitation and
     Hygiene for Development*](https://iwaponline.com/washdev)
 -   `ws`: Journal [*Water Supply*](https://iwaponline.com/ws)
 -   `jwh`: Journal [*Journal of Water and
     Health*](https://iwaponline.com/jwh)
+-   `aqua`: Journal [*AQUA - Water Infrastructure, Ecosystems and
+    Society*](https://iwaponline.com/aqua)
 -   `uncnewsletter`: Research section of the newsletter [North Carolina
     Water
     News](https://waterinstitute.unc.edu/our-work/nc-water-news-newsletter)
@@ -94,8 +96,8 @@ read_csv("data-raw/dictionary.csv") |>
 
 ## Data
 
-The package provides access to six datasets `washdev`, `ws`, `jwh`,
-`uncnewsletter`, `ploswater`, and `datapapers`. Each dataset collects
+The package provides access to seven datasets `washdev`, `ws`, `jwh`,
+`aqua`, `uncnewsletter`, `ploswater`, and `datapapers`. Each dataset collects
 information on scientific articles about (1) article metadata (e.g.
 title, first author, correspondence author), (2) supplementary material
 information, (3) data availability statement or linked data repository,
@@ -110,6 +112,46 @@ attribution.
 
 ```{r}
 library(washopenresearch)
+```
+
+### Coverage and updates
+
+Five datasets are updated monthly. Each data release adds the journal
+issues published since the last one. `uncnewsletter` and `datapapers` are
+frozen: they are still built with every release but no longer updated. The
+table shows what each dataset covers in this version.
+
+```{r, echo=FALSE}
+# The newest journal issue in a dataset, by volume and issue number
+latest_issue <- function(data) {
+  newest <- data[data$volume == max(data$volume), ]
+  number <- suppressWarnings(as.integer(sub("-.*", "", as.character(newest$issue))))
+  paste0("Vol. ", max(data$volume), " Issue ", newest$issue[which.max(number)])
+}
+
+coverage_row <- function(name, data, updates, latest) {
+  tibble::tibble(
+    Dataset = paste0("`", name, "`"),
+    Updates = updates,
+    Articles = format(nrow(data), big.mark = ","),
+    Years = paste(range(data$published_year, na.rm = TRUE), collapse = " to "),
+    `Latest issue` = latest
+  )
+}
+
+dplyr::bind_rows(
+  coverage_row("washdev", washdev, "monthly", latest_issue(washdev)),
+  coverage_row("ws", ws, "monthly", latest_issue(ws)),
+  coverage_row("jwh", jwh, "monthly", latest_issue(jwh)),
+  coverage_row("aqua", aqua, "monthly", latest_issue(aqua)),
+  coverage_row(
+    "ploswater", ploswater, "monthly",
+    paste0(latest_issue(ploswater), ", published up to ", max(ploswater$publication_date))
+  ),
+  coverage_row("uncnewsletter", uncnewsletter, "frozen", "newsletter ceased in May 2024"),
+  coverage_row("datapapers", datapapers, "frozen", "harvested on 23 July 2026")
+) |>
+  knitr::kable(align = "llrll")
 ```
 
 ### washdev
@@ -194,6 +236,35 @@ readr::read_csv("data-raw/dictionary.csv") |>
   kableExtra::scroll_box(height = "200px")
 ```
 
+### aqua
+
+The dataset `aqua` contains data on all articles of the journal [*AQUA -
+Water Infrastructure, Ecosystems and
+Society*](https://iwaponline.com/aqua) in the journal's online archive,
+collected with the same R scraper as `washdev` and sharing its schema. It
+has `r nrow(aqua)` observations from `r min(aqua$published_year)` to
+`r max(aqua$published_year)`, of which `r sum(aqua$has_das)` carry a data
+availability statement. The journal changed its title during this period;
+the dataset uses the current title for every year.
+
+```{r}
+aqua |>
+  head(3) |>
+  gt::gt() |>
+  gt::as_raw_html()
+```
+
+For an overview of the variable descriptions, see the following table.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+readr::read_csv("data-raw/dictionary.csv") |>
+  dplyr::filter(file_name == "aqua.rda") |>
+  dplyr::select(variable_name:description) |>
+  knitr::kable() |>
+  kableExtra::kable_styling("striped") |>
+  kableExtra::scroll_box(height = "200px")
+```
+
 ### uncnewsletter
 
 The dataset `uncnewsletter` contains data on a curated list of articles
@@ -254,7 +325,8 @@ readr::read_csv("data-raw/dictionary.csv") |>
 The dataset `datapapers` contains WASH-related data papers published in
 seven dedicated data journals, identified from Crossref and Europe PMC
 metadata and screened for relevance (see `data-raw/README.md` for the
-pipeline). It has `r nrow(datapapers)` observations. Because a data
+pipeline). It has `r nrow(datapapers)` observations. The dataset is
+frozen: it was harvested once and its screening is closed. Because a data
 paper exists to describe a shared dataset, `data_repo_url` and
 `data_repo` take the role that the data availability statement variables
 play in the other two datasets.
@@ -284,7 +356,7 @@ readr::read_csv("data-raw/dictionary.csv") |>
 1.  What are the top 10 countries(or regions) the first authors from in
     the *Journal of Water, Sanitation and Hygiene for Development*?
 
-```{r}
+```{r washdev_first_author_countries}
 library(washopenresearch)
 
 washdev |> 
@@ -347,7 +419,7 @@ webshot("man/figures/wc.html", "man/figures/washdev_wordcloud.png", delay = 3)
 1.  What are the top 10 source websites of the publications selected by
     the newsletter?
 
-```{r}
+```{r uncnewsletter_source_websites}
 uncnewsletter |> 
   group_by(url_source) |>
   summarise(count=n()) |>
@@ -384,9 +456,9 @@ We describe the raw data collection procedure of each dataset in this
 section. The collection is scripted in R; the scripts live in
 `data-raw/` and the run order is documented in `data-raw/README.md`.
 
-### washdev, ws and jwh
+### washdev, ws, jwh and aqua
 
-All three IWA journals are collected by the same R scraper. First, each
+All four IWA journals are collected by the same R scraper. First, each
 publication link is scraped by iterating the table of contents of all
 volumes. This step delivers a table containing the paper ID, volume
 number, issue number, publication url, journal title, publication title,
@@ -395,9 +467,8 @@ are retrieved from the article's html using that url, rule-based, to
 find the relevant fields (for example supplementary materials) and
 extract the value.
 
-`washdev` uses `data-raw/washdev_scraping.R`. `ws` and `jwh` use the
-generalised `data-raw/iwa_scraping.R`, driven by
-`data-raw/run_iwa_scrapes.R`. Because the three share one schema, the
+All four journals are scraped with `data-raw/iwa_scraping.R`. Because they
+share one schema, the
 cleaning that follows is shared too: `process_iwa_journal()` in
 `data-raw/helpers.R` handles encoding repair, column harmonisation,
 country standardisation and the multi-value fields, while the data

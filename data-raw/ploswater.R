@@ -5,7 +5,9 @@
 # subject terms, and each article's full JATS XML is served at
 # https://journals.plos.org/water/article/file?id=<DOI>&type=manuscript.
 # The XML carries the data availability statement, supplementary material
-# entries, affiliations, ORCIDs, and the correspondence author.
+# entries, affiliations, ORCIDs, and the correspondence author. Credentials
+# inside a statement (access tokens in URLs, stated passwords) are removed.
+# Author email addresses are not collected.
 #
 # Notes:
 # - PLOS Water has no author keywords in the XML for most articles; the
@@ -21,8 +23,15 @@
 #   a one second pause between article downloads. The XML files come from
 #   the journal site, not the API, but the same politeness applies.
 #
-# Run from the package root:
+# A run is incremental: it lists all articles, downloads the XML of those
+# whose DOI is not in data-raw/ploswater.csv yet, and appends them. The
+# snapshot holds one row per DOI.
+#
+# Run from the package root, or all sources with data-raw/update_sources.R:
 #   Rscript data-raw/ploswater.R
+
+# The pinned packages, unless a calling script loaded them already
+if (!nzchar(Sys.getenv("RENV_PROJECT"))) renv::load(quiet = TRUE)
 
 library(httr2)
 library(xml2)
@@ -31,6 +40,11 @@ library(purrr)
 library(stringr)
 library(readr)
 library(tibble)
+
+# For the helpers that keep credentials out of the raw snapshot
+source("data-raw/helpers.R")
+# For reading and writing the snapshot as text
+source("data-raw/scrape_plan.R")
 
 SEARCH_URL <- "https://api.plos.org/search"
 ARTICLE_XML_URL <- "https://journals.plos.org/water/article/file?id=%s&type=manuscript"
@@ -57,7 +71,9 @@ REPO_PATTERNS <- c(
 # Search API ---------------------------------------------------------------
 
 #' All PLOS Water articles from the search API, one row per article, with
-#' the fields needed for the overview columns.
+#' the fields needed for the overview columns. The pages are requested in a
+#' fixed order. Without a sort the API may return an article on two pages
+#' and leave another one out.
 fetch_article_list <- function(rows_per_page = 100) {
   fields <- paste(
     c("id", "title_display", "volume", "issue", "publication_date",
@@ -72,6 +88,7 @@ fetch_article_list <- function(rows_per_page = 100) {
         q = 'journal:"PLOS Water" AND doc_type:full',
         fl = fields,
         wt = "json",
+        sort = "publication_date asc,id asc",
         rows = rows_per_page,
         start = start
       ) |>
@@ -97,7 +114,9 @@ fetch_article_list <- function(rows_per_page = 100) {
       article_type = d$article_type %||% NA_character_,
       keywords = paste(unique(unlist(d$subject)), collapse = "; ")
     )
-  }) |> list_rbind()
+  }) |>
+    list_rbind() |>
+    distinct(doi, .keep_all = TRUE)
 }
 
 # Article XML --------------------------------------------------------------
@@ -183,23 +202,17 @@ parse_authors <- function(xml) {
     xml, "//contrib-group/contrib[@contrib-type='author'][@corresp='yes']"
   )
   corresp <- contrib_fields(xml, corresp_node)
-  corresp_email <- xml_text(xml_find_first(
-    xml, "//author-notes/corresp/email"
-  ))
-  first_is_corresp <- length(contribs) > 0 &&
-    identical(xml_attr(contribs[[1]], "corresp"), "yes")
+  # The correspondence author's email address in the XML is not collected,
+  # because the raw snapshot holds no structured author addresses.
   list(
     num_authors = length(contribs),
     first_author_name = first$name,
     first_author_affiliation = first$affiliation,
     first_author_affiliation_country = first$affiliation_country,
-    # PLOS XML only publishes the correspondence author's email
-    first_author_email = if (first_is_corresp) corresp_email else NA_character_,
     first_author_orcid = first$orcid,
     correspondence_author_name = corresp$name,
     correspondence_author_affiliation = corresp$affiliation,
     correspondence_author_affiliation_country = corresp$affiliation_country,
-    correspondence_author_email = corresp_email,
     correspondence_author_orcid = corresp$orcid
   )
 }
@@ -216,7 +229,9 @@ das_repositories <- function(das_node, das_text) {
     str_extract_all(das_text, "https?://[^\\s,;)]+")[[1]],
     str_extract_all(das_text, "\\b10\\.\\d{4,}/[^\\s,;)]+")[[1]]
   )
-  urls <- unique(str_remove(urls, "[.)]$"))
+  # A link target can carry an access token, which is dropped like in the
+  # statement text
+  urls <- unique(str_remove(strip_url_tokens(urls), "[.)]$"))
   repo_names <- names(REPO_PATTERNS)[map_lgl(
     REPO_PATTERNS,
     \(p) any(str_detect(str_to_lower(c(urls, das_text)), p))
@@ -231,8 +246,11 @@ das_repositories <- function(das_node, das_text) {
 
 parse_das <- function(xml) {
   node <- xml_find_first(xml, "//custom-meta[@id='data-availability']/meta-value")
+  # A few statements link a restricted record through an access token or
+  # state a password. Credentials do not enter the raw snapshot. The plain
+  # record URL and the rest of the sentence stay.
   das_text <- if (inherits(node, "xml_missing")) NA_character_ else
-    str_squish(xml_text(node))
+    remove_credentials(str_squish(xml_text(node)))
   c(
     list(has_das = !is.na(das_text), das = das_text),
     das_repositories(node, if (is.na(das_text)) "" else das_text)
@@ -245,20 +263,24 @@ parse_article_xml <- function(xml) {
 
 # Main ---------------------------------------------------------------------
 
-#' Download everything and write data-raw/ploswater.csv. Skips articles
-#' already present in the CSV, so an interrupted run resumes where it
+#' Download the articles that are not in the snapshot yet and append them
+#' to data-raw/ploswater.csv, so an interrupted run resumes where it
 #' stopped. The CSV is checkpointed every 25 articles.
+#'
+#' The snapshot is read as text and written back with the new rows appended,
+#' so the rows already in it are not re-formatted. Read with guessed column
+#' types, the publication date came back as a date and could not be combined
+#' with the new rows.
+#'
+#' Returns list(snapshot, failed), invisibly. `failed` are the DOIs whose
+#' XML could not be downloaded. The next run tries them again.
 download_ploswater <- function(raw_path = "data-raw/ploswater.csv") {
   overview <- fetch_article_list()
-  done <- if (file.exists(raw_path)) {
-    read_csv(raw_path, show_col_types = FALSE)
-  } else {
-    NULL
-  }
-  todo <- overview |> filter(!doi %in% done$doi)
+  snapshot <- if (file.exists(raw_path)) read_snapshot(raw_path)
+  todo <- overview |> filter(!doi %in% snapshot$doi)
   message(nrow(todo), " articles to download, ", nrow(overview) - nrow(todo),
           " already present")
-  results <- if (is.null(done)) list() else list(done)
+  failed <- character()
   batch <- list()
   for (i in seq_len(nrow(todo))) {
     row <- todo[i, ]
@@ -269,18 +291,34 @@ download_ploswater <- function(raw_path = "data-raw/ploswater.csv") {
         NULL
       }
     )
-    if (!is.null(metadata)) batch <- c(batch, list(bind_cols(row, metadata)))
-    if (i %% 25 == 0 || i == nrow(todo)) {
-      results <- c(results, batch)
+    if (is.null(metadata)) {
+      failed <- c(failed, row$doi)
+    } else {
+      batch <- c(batch, list(as_snapshot_text(bind_cols(row, metadata))))
+    }
+    if ((i %% 25 == 0 || i == nrow(todo)) && length(batch) > 0) {
+      new_rows <- list_rbind(batch)
       batch <- list()
-      write_csv(list_rbind(results), raw_path, na = "")
+      if (!is.null(snapshot) && !setequal(names(new_rows), names(snapshot))) {
+        stop("The downloaded columns differ from the columns of ", raw_path,
+             call. = FALSE)
+      }
+      # One row per DOI, whatever the search returned
+      snapshot <- bind_rows(snapshot, new_rows) |> distinct(doi, .keep_all = TRUE)
+      write_snapshot(snapshot, raw_path)
       message("  ", i, "/", nrow(todo), " articles done")
     }
     Sys.sleep(1)
   }
-  invisible(list_rbind(results))
+  if (length(failed) > 0) {
+    message("!! ", length(failed), " articles could not be downloaded: ",
+            paste(failed, collapse = ", "), ". The next run tries them again.")
+  }
+  invisible(list(snapshot = snapshot, failed = failed))
 }
 
 if (sys.nframe() == 0 && !interactive()) {
-  download_ploswater()
+  result <- download_ploswater()
+  # An incomplete run is a failed run for the caller (update_sources.R)
+  if (length(result$failed) > 0) quit(status = 1)
 }

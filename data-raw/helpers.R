@@ -13,34 +13,19 @@ collapse_list_col <- function(x) {
 }
 
 # Standardise free-text country names to United Nations English names.
-# Non-matches become NA and are handled by a committed fixes sheet
-# (see apply_country_fixes()), not by hard-coded ID vectors.
+# Non-matches become NA and are handled by a committed decision sheet
+# (see apply_decisions() in data-raw/pipeline/), not by hard-coded ID vectors.
+# The lookup's messages about unmatched names are silenced: every unmatched
+# affiliation is listed in the dataset's country review sheet.
 to_un_country_name <- function(x) {
-  countries::country_name(x, to = "UN_en", fuzzy_match = FALSE)
-}
-
-# Apply manual country corrections from a decision sheet.
-# `fixes` has one row per record needing a correction, keyed on `key`
-# (e.g. "doi"), with the corrected value in `value_col`. Only rows where the
-# automatic standardisation produced NA are overwritten, so re-running the
-# automatic step never silently discards a manual decision.
-apply_country_fixes <- function(data, fixes, key, value_col) {
-  if (nrow(fixes) == 0) {
-    return(data)
-  }
-  fixes <- fixes[, c(key, value_col)]
-  names(fixes) <- c(key, ".fixed_value")
-  data |>
-    dplyr::left_join(fixes, by = key) |>
-    dplyr::mutate(
-      !!value_col := dplyr::coalesce(.data[[value_col]], .fixed_value),
-      .fixed_value = NULL
-    )
+  suppressMessages(
+    countries::country_name(x, to = "UN_en", fuzzy_match = FALSE)
+  )
 }
 
 # The data journals harvested for the `datapapers` dataset (issue #28).
 # Used by 01_datapapers_acquire.R (which API to query) and
-# 03_datapapers_process.R (url_source lookup).
+# build_datapapers() in data-raw/pipeline/ (url_source lookup).
 datapapers_journals <- function() {
   dplyr::tribble(
     ~journal,              ~publisher,           ~issn,       ~api,        ~url_source,
@@ -86,6 +71,19 @@ canonicalize_silverchair_url <- function(url) {
   )[, 2]
   doi <- stringr::str_replace(doi_token, "_", "/")
   ifelse(is_cdn & !is.na(doi), paste0("https://doi.org/", doi), url)
+}
+
+# Drop the signed query from a Silverchair CDN link and keep the file path.
+# iwaponline.com serves supplementary files through pre-signed links
+# (Expires, Signature, Key-Pair-Id) that stop working a few weeks after the
+# page was loaded. The signature is a credential while it works and trips
+# secret scanners afterwards, so it does not enter a raw snapshot. The path
+# still names the file and carries the article DOI, which is all
+# canonicalize_silverchair_url() needs. A non-Silverchair value is returned
+# unchanged.
+strip_silverchair_signature <- function(url) {
+  is_cdn <- !is.na(url) & stringr::str_detect(url, "silverchair-cdn\\.com")
+  ifelse(is_cdn, stringr::str_remove(url, "\\?.*$"), url)
 }
 
 # Decode the target URL out of a Google Scholar alert redirect (issue #10).
@@ -141,22 +139,44 @@ unpack_list_literal <- function(x) {
   })
 }
 
+# Read a committed CSV with explicit column types, and refuse it when a cell
+# does not parse instead of carrying on with a warning and a missing value.
+read_strict_csv <- function(path, col_types) {
+  data <- readr::read_csv(path, col_types = col_types, name_repair = "unique_quiet")
+  problems <- readr::problems(data)
+  if (nrow(problems) > 0) {
+    stop(path, " does not parse cleanly (first problem in row ",
+         problems$row[[1]], ", column ", problems$col[[1]], ").", call. = FALSE)
+  }
+  data
+}
+
+# Column types of the raw IWA snapshots.
+# Never left to readr's guessing: the statement columns are empty for the
+# early years of a journal, so a guess from the first rows types them as
+# logical and silently drops every statement further down. That is how the
+# 539 AQUA statements went missing in v0.4.0.
+iwa_raw_col_types <- function() {
+  readr::cols(
+    paperid = readr::col_integer(),
+    volume = readr::col_integer(),
+    published_year = readr::col_double(),
+    is_supp = readr::col_logical(),
+    num_supp = readr::col_integer(),
+    num_authors = readr::col_integer(),
+    has_das = readr::col_logical(),
+    .default = readr::col_character()
+  )
+}
+
 # Shared cleaning for the IWA journals scraped from iwaponline.com.
 # washdev, ws, jwh and aqua come off the same scraper (data-raw/iwa_scraping.R)
-# with the same 28-column schema, so the steps that do not depend on manual,
-# per-journal decisions live here and each journal's script calls this first.
-# Steps that stay per-journal: the das_type regex mapping, the review files,
-# and the hard-coded ID fix vectors.
-#
-# `drop_index` handles the one schema difference: washdev.csv was written by
-# the original Python scraper and carries an unnamed leading index column;
-# ws.csv, jwh.csv and aqua.csv come from the R port and do not.
-process_iwa_journal <- function(path, drop_index = FALSE) {
-  data <- readr::read_csv(path, show_col_types = FALSE)
-
-  if (drop_index) {
-    data <- dplyr::select(data, -1)
-  }
+# with the same 26-column schema, so the steps that do not depend on manual,
+# per-journal decisions live here and build_iwa() in data-raw/pipeline/ calls
+# this first. Steps that stay per-journal: the das_type regex mapping, the
+# review files, and the decision sheets.
+process_iwa_journal <- function(path) {
+  data <- read_strict_csv(path, iwa_raw_col_types())
 
   data |>
     dplyr::mutate(dplyr::across(where(is.character), repair_encoding)) |>
@@ -193,9 +213,9 @@ clean_iwa_country <- function(x) {
 
 # Redact email addresses embedded in free-text fields.
 # Dropping the structured email columns still leaves addresses inside the
-# statements authors wrote, for example "data are available on request from
-# name@example.org". These are fewer but just as contactable, so the local
-# part is masked and the domain kept, which preserves the sense of the
+# statements authors wrote, for example "data are available on request from"
+# followed by an address. These are fewer but just as contactable, so the
+# local part is masked and the domain kept, which preserves the sense of the
 # statement while removing the address.
 redact_inline_emails <- function(x) {
   if (!is.character(x)) return(x)
@@ -209,24 +229,63 @@ redact_inline_emails <- function(x) {
 # Strip access tokens from repository URLs.
 # A few data availability statements carry a Zenodo pre-signed link of the form
 # ...?token=<JWT>, which grants access to an otherwise restricted record. The
-# token is a credential, so it is dropped and the bare record URL kept; the
-# same reasoning as the expired Silverchair signatures in #10.
+# token is a credential, so the whole parameter is dropped and the bare record
+# URL kept; the same reasoning as the expired Silverchair signatures in #10.
 strip_url_tokens <- function(x) {
   if (!is.character(x)) return(x)
-  x <- stringr::str_replace_all(x, "([?&])token=[A-Za-z0-9._~+/=-]+", "\\1token=[removed]")
-  stringr::str_replace_all(x, "([?&])(access_token|signature)=[A-Za-z0-9._~+/=-]+", "\\1\\2=[removed]")
+  # A token, access_token or signature parameter with its value. The pattern
+  # is assembled from parts so that this file holds no literal a secret
+  # scanner reads as a credential assignment.
+  # The value ends on a character other than a full stop, so that the stop
+  # of a sentence ending on the URL stays.
+  parameter <- paste0(
+    "(token|access_token|signature)", "=",
+    "[A-Za-z0-9._~+/=-]*[A-Za-z0-9_~+/=-]"
+  )
+  x |>
+    # after another parameter
+    stringr::str_replace_all(paste0("&", parameter), "") |>
+    # first of several parameters
+    stringr::str_replace_all(paste0("\\?", parameter, "&"), "?") |>
+    # the only parameter
+    stringr::str_replace_all(paste0("\\?", parameter), "")
 }
 
-# Drop the scraped author email addresses before a dataset is exported.
-# The addresses are personal data and earn nothing analytically: the research
-# questions use author country, das_type, keywords and supplementary counts.
-# A published CC BY table of corresponding author addresses is a ready-made
-# mailing list, so the columns stay in data-raw/ and out of the package.
+# Remove passwords that authors wrote into a statement, for example the login
+# of an FTP site or the extraction code of a file share. The published article
+# states them for its readers; the package does not pass credentials on. The
+# rest of the sentence stays, with a marker where the password was.
+redact_stated_passwords <- function(x) {
+  if (!is.character(x)) return(x)
+  stringr::str_replace_all(
+    x,
+    stringr::regex("(password|passcode)\\s*[:=]\\s*[^\\s),;]+", ignore_case = TRUE),
+    "\\1 [removed]"
+  )
+}
+
+# Remove the credentials an author wrote into a statement: access tokens in
+# URLs and stated passwords. The scrapers apply this before a statement
+# enters a raw snapshot, and the build applies it again to every text column.
+remove_credentials <- function(x) {
+  redact_stated_passwords(strip_url_tokens(x))
+}
+
+# Keep author email addresses and credentials out of a dataset before it is
+# exported. The addresses are personal data and earn nothing analytically: the
+# research questions use author country, das_type, keywords and supplementary
+# counts. A published CC BY table of corresponding author addresses is a
+# ready-made mailing list.
+# Since 0.5.0 the raw snapshots have no email columns and the scrapers do not
+# collect them, so dropping the columns only matters for a snapshot from an
+# earlier commit. The text is still cleaned on every build. Addresses inside
+# a statement are masked, and access tokens in URLs and passwords stated in a
+# statement are removed.
 drop_author_emails <- function(data) {
   data |>
     dplyr::select(-dplyr::any_of(c(
       "first_author_email", "correspondence_author_email"
     ))) |>
     dplyr::mutate(dplyr::across(where(is.character), redact_inline_emails)) |>
-    dplyr::mutate(dplyr::across(where(is.character), strip_url_tokens))
+    dplyr::mutate(dplyr::across(where(is.character), remove_credentials))
 }

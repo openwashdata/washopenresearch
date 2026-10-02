@@ -42,6 +42,8 @@
 washdev
 }
 \description{
-Dataset about data availability in the Journal of Water, Sanitation and Hygiene for Development
+All articles of the Journal of Water, Sanitation and Hygiene for Development, an IWA journal, from its first volume in 2011.
+The dataset is updated monthly. Each data release adds the journal issues published since the last one.
+Scraped from iwaponline.com by data-raw/iwa_scraping.R.
 }
 \keyword{datasets}

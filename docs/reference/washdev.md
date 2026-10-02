@@ -1,7 +1,10 @@
 # Dataset about data availability in the Journal of Water, Sanitation and Hygiene for Development
 
-Dataset about data availability in the Journal of Water, Sanitation and
-Hygiene for Development
+All articles of the Journal of Water, Sanitation and Hygiene for
+Development, an IWA journal, from its first volume in 2011. The dataset
+is updated monthly. Each data release adds the journal issues published
+since the last one. Scraped from iwaponline.com by
+data-raw/iwa_scraping.R.
 
 ## Usage
 
@@ -71,14 +74,10 @@ washdev
 
   Academic affiliation of the first author
 
-- first_author_affiliation_region:
+- first_author_affiliation_country:
 
-  Country or region of the first author parsed from
-  first_author_affiliation variable
-
-- first_author_email:
-
-  Email of the first author
+  Country of the first author parsed from first_author_affiliation,
+  encoded with United Nations names
 
 - first_author_orcid:
 
@@ -92,14 +91,10 @@ washdev
 
   Academic affiliation of the correspondence author
 
-- correspondence_author_affiliation_region:
+- correspondence_author_affiliation_country:
 
-  Country or region of the correspondence author parsed from
-  correspondence_author_affiliation variable
-
-- correspondence_author_email:
-
-  Email of the correspondence author
+  Country of the correspondence author parsed from
+  correspondence_author_affiliation, encoded with United Nations names
 
 - correspondence_author_orcid:
 
@@ -131,3 +126,13 @@ washdev
 - keywords:
 
   Keywords of the paper, separated by "; "
+
+- url_source:
+
+  Publisher website of the paper
+
+- doi:
+
+  DOI of the paper. Collected by the R scraper for recent articles and
+  backfilled via Crossref for legacy rows (issue \#20); NA where no
+  Crossref match was found.

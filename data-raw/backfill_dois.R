@@ -7,13 +7,33 @@
 #   Rscript data-raw/backfill_dois.R
 #
 # Requires network access to api.crossref.org. Outputs two committed files that
-# data_processing.R reads back in, so the backfill is reproducible and any
+# the build pipeline reads back in, so the backfill is reproducible and any
 # ambiguous match is visible in git rather than hidden in a hand-edit:
 #   data-raw/washdev-doi-backfill.csv       (paperid, doi)
 #   data-raw/uncnewsletter-doi-backfill.csv (paperid, doi)
 # plus review files for rows that did not match, for manual follow-up:
 #   data-raw/washdev-doi-review.csv
 #   data-raw/uncnewsletter-doi-review.csv
+
+# The two backfill sheets are frozen inputs of the build pipeline, and this
+# script overwrites both. For washdev it takes its to-do list from
+# data/washdev.rda, where the backfilled DOIs are already filled in, so a
+# second run finds only the few rows still without a DOI and would replace
+# the full sheet with matches for those alone.
+backfill_sheets <- c(
+  "data-raw/washdev-doi-backfill.csv",
+  "data-raw/uncnewsletter-doi-backfill.csv"
+)
+if (any(file.exists(backfill_sheets)) &&
+    !identical(Sys.getenv("BACKFILL_DOIS_OVERWRITE"), "yes")) {
+  stop(
+    "The DOI backfill sheets exist and are frozen inputs of the build. ",
+    "Running this script again would overwrite them; the washdev sheet ",
+    "would keep matches for the few rows still without a DOI only. ",
+    "Set BACKFILL_DOIS_OVERWRITE=yes to do that anyway.",
+    call. = FALSE
+  )
+}
 
 library(dplyr)
 library(stringr)

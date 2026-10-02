@@ -8,6 +8,9 @@
 #' `das_repo_name`. All article types are included; use `article_type`
 #' to restrict to research articles.
 #'
+#' The dataset is updated monthly. Each data release adds the articles
+#' published since the last one.
+#'
 #' @format ## `ploswater`
 #'
 #' \describe{

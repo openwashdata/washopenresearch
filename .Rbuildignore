@@ -1,9 +1,15 @@
+^renv$
+^renv\.lock$
+^\.renvignore$
+^_targets$
+^_targets\.R$
 ^data-raw$
 ^washopenresearch\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^README\.Rmd$
 ^CITATION\.cff$
+^\.zenodo\.json$
 ^vignettes/articles$
 ^_pkgdown\.yml$
 ^docs$
@@ -11,4 +17,6 @@
 ^\.github$
 ^python-scripts-lesson\.md$
 ^\.claude$
+^CLAUDE\.md$
+^CONTEXT\.md$
 ^inst/extdata$
