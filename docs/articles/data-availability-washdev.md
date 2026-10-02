@@ -19,11 +19,6 @@ best describes their data:
   corresponding author for details.
 - All relevant data are available from an online repository
 
-Using the dataset `washdev` from the `washopenresearch` data package,
-this example investigates the “Data Availability Statement” from 924
-articles published in the Journal of Water, Sanitation and Hygiene for
-Development from 2011 to 2023.
-
 ``` r
 
 # Import useful libraries
@@ -34,7 +29,59 @@ library(washopenresearch)
 library(tidyverse)
 library(ggthemes)
 library(gt)
+
+# This article looks at the articles published from 2011 to 2023. The
+# dataset has grown since, so the later years are left out here.
+washdev_2023 <- washdev |> 
+    filter(published_year <= 2023)
 ```
+
+Using the dataset `washdev` from the `washopenresearch` data package,
+this example investigates the “Data Availability Statement” from 932
+articles published in the Journal of Water, Sanitation and Hygiene for
+Development from 2011 to 2023.
+
+## Where WASH data is meant to go
+
+The WASH sector has built its own places to put data. Two of them are
+the largest. The first is mWater, a free platform where people collect
+water, sanitation, and health data with survey tools and can share it.
+mWater has run since 2012, covers 198 countries, and holds records for
+more than four million sites. The second is Project W, a catalogue built
+by the Aquaya Institute that gathers WASH datasets from more than 900
+organisations into one searchable place across 190 or more geographies.
+mWater generates data. Project W compiles data that already exists.
+
+Both platforms let researchers store or find data, but they document it
+unevenly. mWater lets you download record-level data, offers an API, and
+provides a data dictionary, so the data can be reused by machine. It
+does not assign a license to the shared public data, and it gives
+datasets no DOI or version, so a paper cannot cite an mWater dataset the
+way it cites a journal article. Project W is harder to assess. It
+started as a pilot in 2022 and is still in beta, and it requires a
+sign-in, with access granted through a waitlist rather than open
+registration. We could not confirm from its public pages whether it
+offers downloads, an API, or persistent identifiers. Its terms of use
+grant only personal, non-commercial use and set no open license on the
+datasets it indexes.
+
+The platforms exist, but WASH authors rarely point to them. We searched
+the data availability statements of 1,782 papers in this package (the
+`washdev`, `uncnewsletter`, and `ploswater` datasets) for mentions of
+thirteen WASH data platforms. Neither mWater nor Project W appears once.
+The platforms that do appear are the large household-survey programmes
+and general repositories that are not WASH-specific: the Demographic and
+Health Surveys (twelve papers), the Humanitarian Data Exchange (three
+papers), and the Multiple Indicator Cluster Surveys (two papers). So
+when WASH authors do share data through a platform, they reach for a
+general one rather than a sector platform. The eight standalone WASH
+data papers in the `datapapers` dataset tell the same story: seven
+deposit their datasets in general repositories (GBIF, IEEE DataPort,
+Figshare, Dryad, NCBI, Zenodo), one shares its data only in the article
+tables, and none uses a sector platform, even though these papers exist
+for no other reason than to publish a dataset. The sector built mWater
+and Project W to hold WASH data, and the published record so far routes
+around both. That gap is the missed opportunity this article is about.
 
 ## How is WASH research data available in the journal?
 
@@ -51,9 +98,9 @@ analysis.
 
 ``` r
 
-glimpse(washdev)
-#> Rows: 924
-#> Columns: 28
+glimpse(washdev_2023)
+#> Rows: 932
+#> Columns: 27
 #> $ paperid                                   <int> 28742, 28745, 28743, 28744, …
 #> $ volume                                    <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
 #> $ issue                                     <int> 1, 1, 1, 1, 1, 1, 1, 2, 2, 2…
@@ -64,23 +111,22 @@ glimpse(washdev)
 #> $ is_supp                                   <lgl> FALSE, FALSE, FALSE, TRUE, F…
 #> $ num_supp                                  <int> 0, 0, 0, 1, 0, 0, 0, 0, 0, 0…
 #> $ supp_file_type                            <chr> NA, NA, NA, "pdf", NA, NA, N…
-#> $ supp_url                                  <chr> NA, NA, NA, "https://iwa.sil…
+#> $ supp_url                                  <chr> NA, NA, NA, "https://doi.org…
 #> $ num_authors                               <int> 6, 5, 6, 2, 2, 2, 3, 2, 3, 8…
 #> $ first_author_name                         <chr> "Jamie Bartram", "E. Kvarnst…
 #> $ first_author_affiliation                  <chr> "Journal of Water, Sanitatio…
 #> $ first_author_affiliation_country          <chr> NA, "Sweden", "Cameroon", "I…
-#> $ first_author_email                        <chr> NA, "elisabeth.kvarnstrom@se…
 #> $ first_author_orcid                        <chr> NA, NA, NA, NA, NA, NA, NA, …
 #> $ correspondence_author_name                <chr> NA, "E. Kvarnström", "E. Soh…
 #> $ correspondence_author_affiliation         <chr> NA, "Stockholm Environment I…
 #> $ correspondence_author_affiliation_country <chr> NA, "Sweden", "Cameroon", "I…
-#> $ correspondence_author_email               <chr> NA, "elisabeth.kvarnstrom@se…
 #> $ correspondence_author_orcid               <chr> NA, NA, NA, NA, NA, NA, NA, …
 #> $ has_das                                   <lgl> FALSE, FALSE, FALSE, FALSE, …
 #> $ das                                       <chr> NA, NA, NA, NA, NA, NA, NA, …
 #> $ das_type                                  <fct> NA, NA, NA, NA, NA, NA, NA, …
 #> $ das_repo_url                              <chr> NA, NA, NA, NA, NA, NA, NA, …
 #> $ keywords                                  <chr> NA, "function-based; sanitat…
+#> $ doi                                       <chr> "10.2166/washdev.2011.0001",…
 #> $ url_source                                <chr> "iwaponline.com", "iwaponlin…
 ```
 
@@ -92,7 +138,8 @@ that do not have a DAS.
 
 ``` r
 
-washdev_das_type <- washdev |> 
+washdev_das_type <- washdev_2023 |> 
+    mutate(das_type = as.character(das_type)) |> 
     mutate(das_policy = case_when(
         published_year < 2020 ~ "pre-2020",
         TRUE ~ "2020 or later"
@@ -122,7 +169,7 @@ washdev_das_type_n
 #> 1 2020 or later available in online repository    27
 #> 2 2020 or later available in paper               217
 #> 3 2020 or later available on request              64
-#> 4 2020 or later missing                           53
+#> 4 2020 or later missing                           61
 #> 5 pre-2020      missing                          563
 ```
 
@@ -157,7 +204,7 @@ fig_das_type <- washdev_das_type_n |>
     # Style of the figure
     labs(
         title = "Data Availability Statement",
-        subtitle = "Analysis of 924 articles published in Journal of Water, Sanitation and Hygiene for Development (2011 to 2023)",
+        subtitle = paste("Analysis of", nrow(washdev_2023), "articles published in Journal of Water, Sanitation and Hygiene for Development (2011 to 2023)"),
         fill = "published year",
         y = "number of publications",
         x = "data availability statement") +
@@ -188,8 +235,8 @@ fig_das_type
   or later, when a policy was introduced that requires authors to select
   one of the three data availability statements
 
-- After that policy was introduced, we still found 15% of papers without
-  a data availability statement, while 60% of articles stated that data
+- After that policy was introduced, we still found 17% of papers without
+  a data availability statement, while 59% of articles stated that data
   was available in the paper, which could also be as supplementary
   material
 
@@ -226,7 +273,7 @@ washdev_supp_file_type_n <- washdev_das_type |>
     )) |>
     count(das_type, supp_file_type) 
 washdev_supp_file_type_n
-#> # A tibble: 16 × 3
+#> # A tibble: 17 × 3
 #>    das_type                       supp_file_type     n
 #>    <chr>                          <chr>          <int>
 #>  1 available in online repository docx              21
@@ -242,9 +289,10 @@ washdev_supp_file_type_n
 #> 11 available on request           docx              33
 #> 12 available on request           missing           29
 #> 13 available on request           pdf                2
-#> 14 missing                        docx              12
-#> 15 missing                        missing           40
-#> 16 missing                        pdf                2
+#> 14 missing                        docx              13
+#> 15 missing                        docx, xlsx         4
+#> 16 missing                        missing           42
+#> 17 missing                        pdf                3
 ```
 
 ### 2. Summary on Supplementary Material File Types
@@ -282,12 +330,13 @@ tbl_supp_type |>
 |----------------------------------------|-----|------|
 | Articles published 2020 or later       |     |      |
 | file type                              | n¹  | %    |
-| missing                                | 202 | 51.4 |
-| docx                                   | 149 | 37.9 |
-| xlsx                                   | 24  | 6.1  |
-| pdf                                    | 13  | 3.3  |
+| missing                                | 204 | 50.9 |
+| docx                                   | 150 | 37.4 |
+| xlsx                                   | 24  | 6.0  |
+| pdf                                    | 14  | 3.5  |
+| docx, xlsx                             | 4   | 1.0  |
 | pptx                                   | 4   | 1.0  |
-| png                                    | 1   | 0.3  |
+| png                                    | 1   | 0.2  |
 | ¹ One article can have multiple files. |     |      |
 
 - Half of the published articles still had no data published alongside
