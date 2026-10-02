@@ -114,6 +114,46 @@ attribution.
 library(washopenresearch)
 ```
 
+### Coverage and updates
+
+Five datasets are updated monthly. Each data release adds the journal
+issues published since the last one. `uncnewsletter` and `datapapers` are
+frozen: they are still built with every release but no longer updated. The
+table shows what each dataset covers in this version.
+
+```{r, echo=FALSE}
+# The newest journal issue in a dataset, by volume and issue number
+latest_issue <- function(data) {
+  newest <- data[data$volume == max(data$volume), ]
+  number <- suppressWarnings(as.integer(sub("-.*", "", as.character(newest$issue))))
+  paste0("Vol. ", max(data$volume), " Issue ", newest$issue[which.max(number)])
+}
+
+coverage_row <- function(name, data, updates, latest) {
+  tibble::tibble(
+    Dataset = paste0("`", name, "`"),
+    Updates = updates,
+    Articles = format(nrow(data), big.mark = ","),
+    Years = paste(range(data$published_year, na.rm = TRUE), collapse = " to "),
+    `Latest issue` = latest
+  )
+}
+
+dplyr::bind_rows(
+  coverage_row("washdev", washdev, "monthly", latest_issue(washdev)),
+  coverage_row("ws", ws, "monthly", latest_issue(ws)),
+  coverage_row("jwh", jwh, "monthly", latest_issue(jwh)),
+  coverage_row("aqua", aqua, "monthly", latest_issue(aqua)),
+  coverage_row(
+    "ploswater", ploswater, "monthly",
+    paste0(latest_issue(ploswater), ", published up to ", max(ploswater$publication_date))
+  ),
+  coverage_row("uncnewsletter", uncnewsletter, "frozen", "newsletter ceased in May 2024"),
+  coverage_row("datapapers", datapapers, "frozen", "harvested on 23 July 2026")
+) |>
+  knitr::kable(align = "llrll")
+```
+
 ### washdev
 
 The dataset `washdev` contains data on open access articles of the
@@ -285,7 +325,8 @@ readr::read_csv("data-raw/dictionary.csv") |>
 The dataset `datapapers` contains WASH-related data papers published in
 seven dedicated data journals, identified from Crossref and Europe PMC
 metadata and screened for relevance (see `data-raw/README.md` for the
-pipeline). It has `r nrow(datapapers)` observations. Because a data
+pipeline). It has `r nrow(datapapers)` observations. The dataset is
+frozen: it was harvested once and its screening is closed. Because a data
 paper exists to describe a shared dataset, `data_repo_url` and
 `data_repo` take the role that the data availability statement variables
 play in the other two datasets.
@@ -315,7 +356,7 @@ readr::read_csv("data-raw/dictionary.csv") |>
 1.  What are the top 10 countries(or regions) the first authors from in
     the *Journal of Water, Sanitation and Hygiene for Development*?
 
-```{r}
+```{r washdev_first_author_countries}
 library(washopenresearch)
 
 washdev |> 
@@ -378,7 +419,7 @@ webshot("man/figures/wc.html", "man/figures/washdev_wordcloud.png", delay = 3)
 1.  What are the top 10 source websites of the publications selected by
     the newsletter?
 
-```{r}
+```{r uncnewsletter_source_websites}
 uncnewsletter |> 
   group_by(url_source) |>
   summarise(count=n()) |>
