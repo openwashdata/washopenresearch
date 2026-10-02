@@ -94,13 +94,42 @@ does not build.
 
 | Source | Command | Raw snapshot |
 |---|---|---|
-| Journal of Water, Sanitation and Hygiene for Development | `Rscript data-raw/washdev_scraping.R` | `washdev.csv` |
-| Water Supply, Journal of Water and Health, AQUA | `Rscript data-raw/run_iwa_scrapes.R` (or `Rscript data-raw/iwa_scraping.R <ws\|jwh\|aqua>` for one journal) | `ws.csv`, `jwh.csv`, `aqua.csv` |
+| Journal of Water, Sanitation and Hygiene for Development, Water Supply, Journal of Water and Health, AQUA | `Rscript data-raw/iwa_scraping.R <washdev\|ws\|jwh\|aqua>`, one journal per run | `washdev.csv`, `ws.csv`, `jwh.csv`, `aqua.csv` |
 | PLOS Water | `Rscript data-raw/ploswater.R` | `ploswater.csv` |
 
-The IWA scrapers drive a headless Chrome session, because iwaponline.com
-blocks plain HTTP clients and throttles bursts of requests. They run slowly
-by design and can be resumed after an interruption.
+The IWA scraper drives a headless Chrome session, because iwaponline.com
+blocks plain HTTP clients and throttles bursts of requests. It runs slowly
+by design.
+
+A run of the IWA scraper is incremental:
+
+- It lists the journal's issues again from the newest known publication
+  year and merges them into the cached manifest (`<journal>_issues.csv`).
+  A year whose issue list does not load holds the manifest back, so the
+  next run asks for it again.
+- It scrapes every issue that is in the manifest but not in the raw
+  snapshot. That covers new issues and issues an earlier run lost.
+- It reads the two most recent numbered issues in the snapshot again and
+  fetches the articles that were added late.
+- An issue is stored complete or not at all. When a page does not load, or
+  loads as something other than the page asked for (the site's "Not Found"
+  page, for example), nothing of the issue is stored, the run exits with
+  status 1, and the next run tries again. No row is written for an article
+  that was not read.
+- An issue without articles is logged as permanently empty
+  (`<journal>_empty_issues.log`) only once it is two years older than the
+  newest volume, because the site lists an issue before its articles are
+  online.
+
+The functions that decide what a run fetches are in `scrape_plan.R` and are
+tested without network in `data-raw/tests/`. The snapshot is read as text
+and written back after every issue that added articles, so the rows already
+in it do not change and an interrupted run can be started again.
+
+The download links of supplementary files on iwaponline.com are signed and
+work for about three weeks. The raw snapshot keeps the file path only. The
+signed links go to `data-raw/private/<journal>-signed-supp-links.csv`,
+which is not committed, and `suppfiles_download.R` reads them there.
 
 Two sources are frozen. They are still built, but no longer updated:
 
@@ -217,9 +246,11 @@ a review sheet, the next build overwrites it.
 | `removed-keys.csv` | articles deliberately removed from a dataset, with the reason | humans (curation) |
 | `pipeline/` | build, shared and writer functions of the pipeline | code review |
 | `helpers.R` | shared helpers (strict CSV reader, country cleaning, email masking, journal and term lists) | code review |
+| `iwa_scraping.R`, `scrape_plan.R` | scraper of the four IWA journals, and the tested functions that decide what a run fetches | code review |
 | `washdev.csv`, `ws.csv`, `jwh.csv`, `aqua.csv` | raw snapshots of the iwaponline.com scrapes | scrapers |
 | `*_issues.csv` | cached list of journal issues per IWA journal | scrapers |
 | `ploswater.csv` | raw snapshot of the PLOS Water download | `ploswater.R` |
+| `private/` | signed supplement links and other files that are not committed | scrapers |
 | `unc-article-url-manual-collection.csv` | scraped URLs plus manual annotation of UNC newsletter articles | frozen |
 | `journalwash4d.xlsx`, `journalwash4d_cleaned.xlsx` | early manual collection for the washdev source; not referenced by any script, kept for provenance | frozen |
 | `datapapers_raw.csv` | committed snapshot of the Crossref and Europe PMC harvest | frozen |

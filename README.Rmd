@@ -426,9 +426,8 @@ are retrieved from the article's html using that url, rule-based, to
 find the relevant fields (for example supplementary materials) and
 extract the value.
 
-`washdev` uses `data-raw/washdev_scraping.R`. `ws`, `jwh` and `aqua` use the
-generalised `data-raw/iwa_scraping.R`, driven by
-`data-raw/run_iwa_scrapes.R`. Because the four share one schema, the
+All four journals are scraped with `data-raw/iwa_scraping.R`. Because they
+share one schema, the
 cleaning that follows is shared too: `process_iwa_journal()` in
 `data-raw/helpers.R` handles encoding repair, column harmonisation,
 country standardisation and the multi-value fields, while the data

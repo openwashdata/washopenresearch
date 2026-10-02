@@ -8,7 +8,7 @@
 !/data-raw/pipeline/
 !/data-raw/helpers.R
 !/data-raw/iwa_scraping.R
-!/data-raw/washdev_scraping.R
+!/data-raw/scrape_plan.R
 !/data-raw/ploswater.R
 !/data-raw/build.R
 !/data-raw/check_reproducible.R
