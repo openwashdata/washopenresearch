@@ -10,7 +10,7 @@
 # targets pipeline store (local cache, rebuilt from the committed inputs)
 _targets/
 
-# Transient scrape run logs (data-raw/iwa_scraping.R, run_iwa_scrapes.R)
+# Transient scrape run logs (data-raw/iwa_scraping.R)
 data-raw/*_scrape.log
 data-raw/iwa_scrapes.log
 
@@ -21,3 +21,6 @@ python-scripts-lesson.md
 # data-raw/suppfiles/manifest.csv with sha256 checksums
 data-raw/suppfiles/files/
 
+# Not for the public repository: signed supplement download links written by
+# data-raw/iwa_scraping.R, and other files that hold contact addresses
+data-raw/private/

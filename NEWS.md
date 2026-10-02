@@ -79,6 +79,34 @@
   data availability statement stay in the raw statement text, which is the
   published statement, and are masked in the datasets as before.
 
+## Data acquisition
+
+- The scraper of the IWA journals is incremental. A run lists the journal
+  issues again from the newest known publication year, scrapes the issues
+  that are missing from the raw snapshot, and reads the two most recent
+  issues again to fetch articles that were added late. An
+  issue that the site lists before its articles are online is asked for
+  again on the next run. The functions that decide what a run fetches are
+  tested without network.
+
+- The scraper stores an issue complete or not at all, and writes no row for
+  an article whose page was not read. A page counts as read only when the
+  site served the kind of page that was asked for. Its "Not Found" page
+  loads completely too and was taken for an article without authors,
+  statement or supplement, or for an issue without articles.
+
+- `washdev` is scraped by the same scraper as `ws`, `jwh` and `aqua`
+  (`data-raw/iwa_scraping.R`). The separate `data-raw/washdev_scraping.R`
+  and the runner `data-raw/run_iwa_scrapes.R` are removed. The old washdev
+  scraper read a throttled page as "no more issues" and stored an
+  article that failed to load as an empty row. The index column that the
+  first Python scraper left in `data-raw/washdev.csv` is removed. The
+  dataset `washdev` is unchanged.
+
+- The signed download links of supplementary files, which work for about
+  three weeks, are written to `data-raw/private/`, which is not committed.
+  `data-raw/suppfiles_download.R` reads them there.
+
 ## Documentation
 
 - `uncnewsletter`: the `citations` column is now described in the help page

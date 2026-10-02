@@ -34,8 +34,6 @@ iwa_das_rules <- function() {
 }
 
 # What differs between the IWA journals.
-# - drop_index: washdev.csv was written by the original Python scraper and
-#   carries an unnamed leading index column.
 # - integer_issue: washdev has no combined issues, so its issue is an integer;
 #   the other journals record combined issues such as "1-2" and keep text.
 # - split_supp_file_type: washdev lists one file type per supplement file,
@@ -43,14 +41,12 @@ iwa_das_rules <- function() {
 #   keep the scraper's " & " separator.
 iwa_config <- function(journal) {
   r_scraper_journal <- list(
-    drop_index = FALSE,
     integer_issue = FALSE,
     split_supp_file_type = FALSE,
     das_rules = iwa_das_rules()
   )
   configs <- list(
     washdev = list(
-      drop_index = TRUE,
       integer_issue = TRUE,
       split_supp_file_type = TRUE,
       das_rules = washdev_das_rules()
@@ -80,7 +76,7 @@ build_iwa <- function(raw_file, config,
                       country_fixes_file = NULL,
                       supp_type_fixes_file = NULL,
                       doi_backfill_file = NULL) {
-  data <- process_iwa_journal(raw_file, drop_index = config$drop_index)
+  data <- process_iwa_journal(raw_file)
 
   if (!is.null(country_fixes_file)) {
     data <- apply_decisions(

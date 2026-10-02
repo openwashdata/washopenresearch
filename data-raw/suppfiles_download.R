@@ -1,11 +1,15 @@
-# Download the supplementary files of the IWA journal snapshots while their
-# pre-signed CDN links are still valid (issue #47 tier 3). The links carry an
-# Expires stamp roughly 3.5 weeks after the July 2026 scrape; at the time of
-# writing (2026-08-20) about half are already dead and the rest lapse by
-# 2026-08-30. This script grabs every file whose signature is still valid.
-# Files behind expired links (and washdev's supplements, whose supp_url was
-# rewritten to article DOIs in #10) need a fresh article-page visit and are
-# collected separately.
+# Download the supplementary files of the IWA journal articles while their
+# pre-signed CDN links are still valid (issue #47 tier 3). A link carries an
+# Expires stamp roughly 3.5 weeks after the article page was scraped. This
+# script grabs every file whose signature is still valid, so run it soon
+# after a scrape.
+#
+# The signed links are not in the raw snapshots, which keep the file path
+# only. data-raw/iwa_scraping.R writes them to
+# data-raw/private/<journal>-signed-supp-links.csv, which is not committed.
+# Links from before that change (the July 2026 scrape) expired by
+# 2026-08-30. Files behind expired links need a fresh visit to the article
+# page.
 #
 # Run from the package root (resumable; already-downloaded files are skipped):
 #   Rscript data-raw/suppfiles_download.R
@@ -27,17 +31,19 @@ PAUSE <- c(2, 4)  # seconds between downloads; CDN fetches, not page scrapes
 manifest_path <- "data-raw/suppfiles/manifest.csv"
 files_root <- "data-raw/suppfiles/files"
 
-snapshots <- c(jwh = "data-raw/jwh.csv", aqua = "data-raw/aqua.csv",
-               ws = "data-raw/ws.csv")
+signed_link_files <- list.files(
+  "data-raw/private", pattern = "-signed-supp-links[.]csv$", full.names = TRUE
+)
+if (length(signed_link_files) == 0) {
+  stop("No signed supplement links in data-raw/private/. ",
+       "Run a scrape first (data-raw/update_sources.R).", call. = FALSE)
+}
 
 # One row per supplement file URL, keyed back to its paper.
-file_list <- imap_dfr(snapshots, function(path, src) {
+file_list <- map_dfr(signed_link_files, function(path) {
   read_csv(path, col_types = cols(.default = col_character())) |>
-    select(paperid, doi, supp_url) |>
-    mutate(url = str_extract_all(supp_url, "https://[^'\" \\]]+")) |>
-    select(-supp_url) |>
-    tidyr::unnest(url) |>
-    mutate(source = src)
+    select(paperid, doi, url) |>
+    mutate(source = str_remove(basename(path), "-signed-supp-links[.]csv$"))
 }) |>
   mutate(
     expires = as.numeric(str_extract(str_extract(url, "Expires=[0-9]+"),
@@ -48,6 +54,8 @@ file_list <- imap_dfr(snapshots, function(path, src) {
     local_path = file.path(files_root, source,
                            coalesce(doi_slug, "unknown"), file_name)
   ) |>
+  # A file scraped more than once has several links; the newest one counts
+  arrange(desc(expires)) |>
   distinct(url_path, .keep_all = TRUE)
 
 alive <- file_list |> filter(!is.na(expires), expires > as.numeric(Sys.time()))

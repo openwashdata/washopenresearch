@@ -175,16 +175,8 @@ iwa_raw_col_types <- function() {
 # per-journal decisions live here and build_iwa() in data-raw/pipeline/ calls
 # this first. Steps that stay per-journal: the das_type regex mapping, the
 # review files, and the decision sheets.
-#
-# `drop_index` handles the one schema difference: washdev.csv was written by
-# the original Python scraper and carries an unnamed leading index column;
-# ws.csv, jwh.csv and aqua.csv come from the R port and do not.
-process_iwa_journal <- function(path, drop_index = FALSE) {
+process_iwa_journal <- function(path) {
   data <- read_strict_csv(path, iwa_raw_col_types())
-
-  if (drop_index) {
-    data <- dplyr::select(data, -1)
-  }
 
   data |>
     dplyr::mutate(dplyr::across(where(is.character), repair_encoding)) |>
