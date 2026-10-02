@@ -41,4 +41,9 @@ relevance with a committed decision sheet. Data papers describe a shared
 dataset, so the repository link takes the role that the data availability
 statement variables play in \code{washdev} and \code{uncnewsletter}.
 }
+\details{
+This dataset is frozen. It was harvested once, on 23 July 2026, and its
+screening is closed. It is still built with every release but no longer
+updated.
+}
 \keyword{datasets}

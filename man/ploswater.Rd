@@ -53,4 +53,8 @@ interesting variation lies in \code{das_type}, \code{das_repo_url}, and
 \code{das_repo_name}. All article types are included; use \code{article_type}
 to restrict to research articles.
 }
+\details{
+The dataset is updated monthly. Each data release adds the articles
+published since the last one.
+}
 \keyword{datasets}

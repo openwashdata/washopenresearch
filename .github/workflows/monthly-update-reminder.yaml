@@ -1,0 +1,41 @@
+# Opens the issue for the monthly data update on the 5th of each month, with
+# the checklist in data-raw/monthly-data-update.md. The update itself runs by
+# hand on the maintainer's machine, because the journal site blocks requests
+# from hosted runners.
+#
+# A scheduled workflow runs from the default branch only. It can also be
+# started by hand (Actions, monthly-update-reminder, Run workflow).
+on:
+  schedule:
+    - cron: "0 6 5 * *"
+  workflow_dispatch:
+
+name: monthly-update-reminder
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  open-issue:
+    runs-on: ubuntu-latest
+
+    name: open the monthly data update issue
+
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Open the issue unless this month has one
+        run: |
+          title="Monthly data update $(date -u +%Y-%m)"
+          existing=$(gh issue list --state all --search "in:title \"$title\"" --json title --jq '.[].title')
+          if printf '%s\n' "$existing" | grep -Fxq "$title"; then
+            echo "The issue '$title' exists already."
+            exit 0
+          fi
+          gh issue create --title "$title" --assignee larnsce \
+            --body-file data-raw/monthly-data-update.md

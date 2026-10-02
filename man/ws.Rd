@@ -42,7 +42,8 @@
 ws
 }
 \description{
-Water Supply is an IWA journal covering drinking water supply, treatment and distribution. Coverage runs from 2001 to 2026.
+Water Supply is an IWA journal covering drinking water supply, treatment and distribution. Coverage starts in 2001.
+The dataset is updated monthly. Each data release adds the journal issues published since the last one.
 Scraped from iwaponline.com by data-raw/iwa_scraping.R (#32-#34).
 }
 \keyword{datasets}

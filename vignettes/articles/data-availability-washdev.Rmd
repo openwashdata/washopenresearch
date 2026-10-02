@@ -20,8 +20,6 @@ For the journal of Water, Sanitation and Hygiene for Development, 3 options are 
 * Data cannot be made publicly available; readers should contact the corresponding author for details.
 * All relevant data are available from an online repository
 
-Using the dataset `washdev` from the `washopenresearch` data package, this example investigates the "Data Availability Statement" from 924 articles published in the Journal of Water, Sanitation and Hygiene for Development from 2011 to 2023. 
-
 ```{r setup, warning=FALSE, message=FALSE}
 # Import useful libraries
 ## Package installation if you do not have them, uncomment and run the following two lines
@@ -31,7 +29,14 @@ library(washopenresearch)
 library(tidyverse)
 library(ggthemes)
 library(gt)
+
+# This article looks at the articles published from 2011 to 2023. The
+# dataset has grown since, so the later years are left out here.
+washdev_2023 <- washdev |> 
+    filter(published_year <= 2023)
 ```
+
+Using the dataset `washdev` from the `washopenresearch` data package, this example investigates the "Data Availability Statement" from `r nrow(washdev_2023)` articles published in the Journal of Water, Sanitation and Hygiene for Development from 2011 to 2023. 
 
 ## Where WASH data is meant to go
 
@@ -47,11 +52,12 @@ In 2020, the journal implemented a policy change to ask for including a data ava
 ### 1. Data Preparation
 Let's start by having an overview of the data where we can find relevant variables like `published_year`, `has_das`, `das_type` to be used for analysis.
 ```{r data_overview}
-glimpse(washdev)
+glimpse(washdev_2023)
 ```
 We prepare the data by first creating a new variable `das_policy` based on `published_year` to distinguish whether the publication is before or after the DAS policy change. Then, we modify the `das_type` to be more human-readable and add a new type `"missing` for all the publications that do not have a DAS.
 ```{r data_prep}
-washdev_das_type <- washdev |> 
+washdev_das_type <- washdev_2023 |> 
+    mutate(das_type = as.character(das_type)) |> 
     mutate(das_policy = case_when(
         published_year < 2020 ~ "pre-2020",
         TRUE ~ "2020 or later"
@@ -102,7 +108,7 @@ fig_das_type <- washdev_das_type_n |>
     # Style of the figure
     labs(
         title = "Data Availability Statement",
-        subtitle = "Analysis of 924 articles published in Journal of Water, Sanitation and Hygiene for Development (2011 to 2023)",
+        subtitle = paste("Analysis of", nrow(washdev_2023), "articles published in Journal of Water, Sanitation and Hygiene for Development (2011 to 2023)"),
         fill = "published year",
         y = "number of publications",
         x = "data availability statement") +
@@ -124,7 +130,15 @@ fig_das_type
 
 - Colors differentiate between papers published before 2020 and in 2020 or later, when a policy was introduced that requires authors to select one of the three data availability statements
 
-- After that policy was introduced, we still found 15% of papers without a data availability statement, while 60% of articles stated that data was available in the paper, which could also be as supplementary material
+```{r das_shares, include = FALSE}
+# Shares among the articles published in 2020 or later, for the text below
+after_policy <- washdev_das_type |> 
+    filter(das_policy == "2020 or later")
+share_missing <- round(100 * mean(after_policy$das_type == "missing"))
+share_in_paper <- round(100 * mean(after_policy$das_type == "available in paper"))
+```
+
+- After that policy was introduced, we still found `r share_missing`% of papers without a data availability statement, while `r share_in_paper`% of articles stated that data was available in the paper, which could also be as supplementary material
 
 ## What file types are researchers choosing for supplementary materials?
 From the above analysis, we can see that many people opt for data available within the paper or supplementary materials. What file types are researchers choosing for supplementary materials? Are they PDF reports, word documents, or spreadsheets? 

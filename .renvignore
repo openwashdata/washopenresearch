@@ -1,0 +1,17 @@
+# The lockfile covers the build pipeline and the scrapers only.
+# Everything is ignored except the files listed below, so packages used
+# for the README, the vignettes or the analysis scripts are not locked.
+/*
+!/_targets.R
+!/data-raw/
+/data-raw/*
+!/data-raw/pipeline/
+!/data-raw/helpers.R
+!/data-raw/iwa_scraping.R
+!/data-raw/scrape_plan.R
+!/data-raw/ploswater.R
+!/data-raw/build.R
+!/data-raw/check_reproducible.R
+!/data-raw/update_sources.R
+!/data-raw/run_tests.R
+!/data-raw/tests/
