@@ -42,7 +42,8 @@
 jwh
 }
 \description{
-The Journal of Water and Health is an IWA journal covering water quality and health. Coverage runs from 2003 to 2026.
+The Journal of Water and Health is an IWA journal covering water quality and health. Coverage starts in 2003.
+The dataset is updated monthly. Each data release adds the journal issues published since the last one.
 Scraped from iwaponline.com by data-raw/iwa_scraping.R (#32-#34).
 }
 \keyword{datasets}

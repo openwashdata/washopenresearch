@@ -42,6 +42,11 @@
 uncnewsletter
 }
 \description{
-Dataset about data availability in the UNC Water Newsletter
+A curated list of articles from the Research section of the newsletter
+North Carolina Water News, 2020 to 2023.
+}
+\details{
+This dataset is frozen. The newsletter ceased publication in May 2024,
+so the dataset is still built with every release but no longer updated.
 }
 \keyword{datasets}
