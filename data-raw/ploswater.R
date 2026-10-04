@@ -18,10 +18,14 @@
 #   published datasets (no list-columns, see #8).
 # - All article types are downloaded; `article_type` lets the processing
 #   step decide which to keep (opinion pieces rarely have data).
-# - Fair use of the API: stay under 300 requests/hour. A full run needs
-#   about 5 search requests plus one XML request per article (~440), with
-#   a one second pause between article downloads. The XML files come from
-#   the journal site, not the API, but the same politeness applies.
+# - Fair use: the search API's published limit is 300 requests per hour,
+#   and a full run needs about 5 search requests. The XML files come from
+#   the journal site, whose robots.txt sets a Crawl-delay of 30 seconds,
+#   so one XML request every 30 seconds; a monthly increment is a few
+#   articles. Both hosts are checked against their robots.txt before the
+#   first request, and every request identifies the project with the
+#   version and the contact address from WASHOPENRESEARCH_CONTACT (see
+#   data-raw/client.R).
 #
 # A run is incremental: it lists all articles, downloads the XML of those
 # whose DOI is not in data-raw/ploswater.csv yet, and appends them. The
@@ -45,6 +49,8 @@ library(tibble)
 source("data-raw/helpers.R")
 # For reading and writing the snapshot as text
 source("data-raw/scrape_plan.R")
+# For the identification, the robots.txt check and the pacing
+source("data-raw/client.R")
 
 SEARCH_URL <- "https://api.plos.org/search"
 ARTICLE_XML_URL <- "https://journals.plos.org/water/article/file?id=%s&type=manuscript"
@@ -74,7 +80,7 @@ REPO_PATTERNS <- c(
 #' the fields needed for the overview columns. The pages are requested in a
 #' fixed order. Without a sort the API may return an article on two pages
 #' and leave another one out.
-fetch_article_list <- function(rows_per_page = 100) {
+fetch_article_list <- function(rows_per_page = 100, policy) {
   fields <- paste(
     c("id", "title_display", "volume", "issue", "publication_date",
       "author_display", "article_type", "subject"),
@@ -92,13 +98,13 @@ fetch_article_list <- function(rows_per_page = 100) {
         rows = rows_per_page,
         start = start
       ) |>
-      req_user_agent("washopenresearch data package (openwashdata.org)") |>
+      req_user_agent(client_user_agent()) |>
       req_perform() |>
       resp_body_json()
     docs <- c(docs, resp$response$docs)
     start <- start + rows_per_page
     if (start >= resp$response$numFound) break
-    Sys.sleep(1)
+    pause_for(policy)
   }
   message("Search API returned ", length(docs), " articles")
   map(docs, function(d) {
@@ -123,7 +129,7 @@ fetch_article_list <- function(rows_per_page = 100) {
 
 fetch_article_xml <- function(doi) {
   request(sprintf(ARTICLE_XML_URL, doi)) |>
-    req_user_agent("washopenresearch data package (openwashdata.org)") |>
+    req_user_agent(client_user_agent()) |>
     req_retry(max_tries = 3) |>
     req_perform() |>
     resp_body_string() |>
@@ -275,7 +281,11 @@ parse_article_xml <- function(xml) {
 #' Returns list(snapshot, failed), invisibly. `failed` are the DOIs whose
 #' XML could not be downloaded. The next run tries them again.
 download_ploswater <- function(raw_path = "data-raw/ploswater.csv") {
-  overview <- fetch_article_list()
+  # The identification fails early when the contact address is unset
+  client_user_agent()
+  search_policy <- host_policy("api.plos.org", "/search")
+  article_policy <- host_policy("journals.plos.org", "/water/article/file")
+  overview <- fetch_article_list(policy = search_policy)
   snapshot <- if (file.exists(raw_path)) read_snapshot(raw_path)
   todo <- overview |> filter(!doi %in% snapshot$doi)
   message(nrow(todo), " articles to download, ", nrow(overview) - nrow(todo),
@@ -308,7 +318,7 @@ download_ploswater <- function(raw_path = "data-raw/ploswater.csv") {
       write_snapshot(snapshot, raw_path)
       message("  ", i, "/", nrow(todo), " articles done")
     }
-    Sys.sleep(1)
+    pause_for(article_policy)
   }
   if (length(failed) > 0) {
     message("!! ", length(failed), " articles could not be downloaded: ",

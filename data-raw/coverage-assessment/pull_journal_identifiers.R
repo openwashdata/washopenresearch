@@ -20,7 +20,8 @@ library(readr)
 library(purrr)
 library(tidyr)
 
-MAILTO <- "lars@lse.de"
+source("data-raw/client.R")
+MAILTO <- client_contact()
 API_KEY <- Sys.getenv("OPENALEX_API_KEY")
 FROM <- "1996-01-01"
 TO   <- "2026-12-31"

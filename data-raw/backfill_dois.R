@@ -41,6 +41,10 @@ library(purrr)
 library(readr)
 library(rcrossref)
 
+source("data-raw/client.R")
+# Crossref's polite pool wants a contact in the request; rcrossref sends it
+options(crossref_email = client_contact())
+
 # Normalise a title for matching: lowercase, strip punctuation and whitespace.
 # Crossref and the scraper differ on punctuation, casing, and trailing spaces,
 # so comparison is on this reduced form, not the display title.

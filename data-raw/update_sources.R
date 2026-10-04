@@ -14,8 +14,8 @@
 # in the update log, and the script exits with status 1 at the end.
 #
 # data-raw/update-log.csv gets one row per journal and run: the date, the
-# journal, the journal issues and the rows the run added, and whether the
-# scraper finished.
+# journal, the journal issues and the rows the run added, whether the
+# scraper finished, and the user agent string the run identified with.
 #
 # Slow and unattended by design: the IWA scrapers pause between pages. Run
 # from the package root and keep the machine awake:
@@ -27,6 +27,7 @@
 renv::load(quiet = TRUE)
 
 source("data-raw/scrape_plan.R")
+source("data-raw/client.R")
 
 # Seconds to wait between two IWA journals, so that a throttle tripped at
 # the end of one journal clears before the next starts.
@@ -58,6 +59,9 @@ snapshot_path <- function(journal) file.path("data-raw", paste0(journal, ".csv")
 update_sources <- function(journals = names(SOURCES), run = run_scraper,
                            cooldown = COOLDOWN_BETWEEN_JOURNALS,
                            log_path = UPDATE_LOG) {
+  # Every scraper identifies with this string; computing it here stops the
+  # whole run before the first scraper when the contact address is unset.
+  user_agent <- client_user_agent()
   rows <- list()
   for (k in seq_along(journals)) {
     journal <- journals[[k]]
@@ -71,7 +75,9 @@ update_sources <- function(journals = names(SOURCES), run = run_scraper,
       1L
     })
     after <- snapshot_counts(snapshot_path(journal))
-    row <- update_log_row(journal, before, after, finished = identical(as.integer(status), 0L))
+    row <- update_log_row(journal, before, after,
+                          finished = identical(as.integer(status), 0L),
+                          user_agent = user_agent)
     if (row$finished) {
       message("===== finished ", journal, ": ", row$issues_added, " journal issues and ",
               row$rows_added, " rows added =====")
@@ -79,7 +85,7 @@ update_sources <- function(journals = names(SOURCES), run = run_scraper,
       message("!! ", journal, " FAILED (exit status ", status, "). ", row$rows_added,
               " rows were added before it stopped. The other sources still run.")
     }
-    readr::write_csv(row, log_path, append = file.exists(log_path))
+    append_update_log(row, log_path)
     rows[[journal]] <- row
 
     next_is_same_site <- k < length(journals) &&

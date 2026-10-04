@@ -7,6 +7,7 @@
 /data-raw/*
 !/data-raw/pipeline/
 !/data-raw/helpers.R
+!/data-raw/client.R
 !/data-raw/iwa_scraping.R
 !/data-raw/scrape_plan.R
 !/data-raw/ploswater.R

@@ -168,6 +168,38 @@ Two sources are frozen. They are still built, but no longer updated:
   `apply_datapapers_decisions.R`). Screening is closed; candidates without a
   decision stay out of the build.
 
+### Identification, pacing and robots.txt
+
+Every client identifies the project:
+`washopenresearch/<version> (https://github.com/openwashdata/washopenresearch; <contact>)`,
+built by `client_user_agent()` in `data-raw/client.R` from the version in
+`DESCRIPTION` and the address in `WASHOPENRESEARCH_CONTACT`. The PLOS Water
+downloader sends it as its user agent. The IWA scraper appends it to the
+headless browser's own user agent, which stays as it is and says
+HeadlessChrome. The update command refuses to start when the address is
+unset, and records the string in `update-log.csv` with every row.
+
+Before the first request of a run, each host's `robots.txt` is read once
+(`host_policy()`): the paths the run visits are checked for this client, a
+disallowed path stops the run with the rule quoted, and a `Crawl-delay`
+becomes the minimum pause between requests to that host. On 2026-10-04,
+iwaponline.com allowed the issue and article paths and set no delay;
+journals.plos.org allowed the article file path and set a delay of 30
+seconds, so a PLOS Water increment fetches one article every 30 seconds (a
+few per month; a full download from nothing would take four hours);
+api.plos.org has no robots.txt, and its published limit of 300 requests per
+hour is far above the five a run needs.
+
+Pacing: the IWA scraper pauses a jittered 8 to 15 seconds between pages
+(`IWA_PAUSE_RANGE`), 1 to 3 seconds after each load, and five minutes
+between journals (`IWA_COOLDOWN`); the PLOS Water downloader pauses one
+second between search pages and the crawl delay between article files;
+every other client waits one second between requests unless a published
+limit says more.
+
+If a site refuses the identified client, the run fails and says so. There
+is no fallback user agent and no workaround.
+
 ## Environment
 
 The build pipeline and the scrapers run against the package versions pinned
@@ -204,6 +236,24 @@ RENV_LOCKFILE_VERSION=1 Rscript -e 'renv::load(); renv::snapshot()'
 version, source, hash). The default format copies each package's full
 `DESCRIPTION` into the lockfile, including author and maintainer email
 addresses, which do not belong in this repository.
+
+### Environment variables
+
+Set them in `~/.Renviron`. Nothing is read from the repository, and no
+address or key is committed; a test in `data-raw/tests/` scans the scripts
+for both.
+
+| Variable | Read by | Purpose, where to get it |
+|---|---|---|
+| `WASHOPENRESEARCH_CONTACT` | every client (`client.R`): the scrapers, the update command, the Crossref, Europe PMC and OpenAlex scripts | the contact address in the user agent and in Crossref's polite pool. Required; nothing is fetched without it |
+| `OPENALEX_API_KEY` | `das_in_paper_article_types.R`, the coverage assessment scripts | a registered OpenAlex key lifts the free daily budget (https://openalex.org) |
+| `OPENPOLICYFINDER_KEY` | `coverage-assessment/pull_oa_policies.R` | the Jisc Open Policy Finder API key (https://openpolicyfinder.jisc.ac.uk) |
+| `IWA_PAUSE_RANGE` | `iwa_scraping.R` | "min,max" seconds between page fetches, default `8,15` |
+| `IWA_COOLDOWN` | `update_sources.R` | seconds between two IWA journals, default 300 |
+| `BACKFILL_DOIS_OVERWRITE` | `backfill_dois.R` | `yes` to rewrite the frozen DOI backfill sheets |
+
+The routes of the article-level dataset (#76) add their keys to this table
+as they arrive.
 
 ## Sheets
 

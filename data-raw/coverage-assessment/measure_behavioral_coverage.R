@@ -31,7 +31,8 @@ library(readr)
 library(purrr)
 library(stringr)
 
-MAILTO <- "lars@lse.de"
+source("data-raw/client.R")
+MAILTO <- client_contact()
 API_KEY <- Sys.getenv("OPENALEX_API_KEY")
 
 DIR <- "data-raw/coverage-assessment"

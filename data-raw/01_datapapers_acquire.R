@@ -21,6 +21,13 @@ library(rcrossref)
 library(europepmc)
 
 source("data-raw/helpers.R")
+source("data-raw/client.R")
+
+# Crossref's polite pool wants a contact in the request; rcrossref sends
+# the address set here. Europe PMC is called through httr, which sends
+# the identifying user agent set here. Both come from the environment.
+options(crossref_email = client_contact())
+httr::set_config(httr::user_agent(client_user_agent()))
 
 journals <- datapapers_journals()
 search_terms <- datapapers_search_terms()

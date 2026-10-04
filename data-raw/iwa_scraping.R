@@ -4,8 +4,13 @@
 # One code path for all four journals. Only the journal's slug, name and
 # start year differ (see JOURNALS). The scraper drives a headless Chrome
 # session via {chromote}, because iwaponline.com sits behind Cloudflare and
-# blocks plain HTTP clients. Overriding the "HeadlessChrome" user agent is
-# enough to pass the challenge.
+# blocks plain HTTP clients. The session says what it is: the browser's own
+# user agent, headless as it is, followed by the project's identification
+# (version and contact address, see data-raw/client.R). Before the first
+# page, the site's robots.txt is checked for the issue and article paths;
+# a disallowed path stops the run. If the site refuses the identified
+# session, the run fails and the next run tries again; there is no
+# workaround and no other user agent.
 #
 # A run is incremental. What it fetches is decided by the functions in
 # data-raw/scrape_plan.R, which are tested without network:
@@ -63,8 +68,11 @@ library(tibble)
 # For the helpers that keep addresses and credentials out of the raw snapshot
 source("data-raw/helpers.R")
 source("data-raw/scrape_plan.R")
+# For the identification, the robots.txt check and the pacing
+source("data-raw/client.R")
 
 SITE_ROOT <- "https://iwaponline.com"
+SITE_HOST <- "iwaponline.com"
 DAS_ONLINE_BOILERPLATE <-
   "All relevant data are available from an online repository or repositories"
 
@@ -95,12 +103,24 @@ JOURNALS <- list(
 
 start_browser <- function() {
   session <- ChromoteSession$new()
+  # The browser's own user agent, headless as it is, plus who we are
   ua <- session$Browser$getVersion()$userAgent
   session$Network$setUserAgentOverride(
-    userAgent = gsub("HeadlessChrome", "Chrome", ua)
+    userAgent = paste(ua, client_user_agent())
   )
   session
 }
+
+# The paths a run of one journal visits, for the robots.txt check: the
+# issue browse page, a volume's issue list, an issue's table of contents
+# and an article page.
+iwa_paths <- function(slug) {
+  sprintf(c("/%s/issue", "/%s/issue/volume/1", "/%s/issue/1/1", "/%s/article/1/1/1/1/title"), slug)
+}
+
+# The host's policy for the current run, set by scrape_iwa_journal(); its
+# pause is the floor under polite_pause() when the site sets a Crawl-delay.
+HOST_POLICY <- NULL
 
 # Silverchair throttles bursts of requests with a "Validate User" interstitial
 # (distinct from the "Just a moment" Cloudflare challenge). Once tripped it
@@ -118,7 +138,10 @@ PAUSE_RANGE <- {
   as.numeric(strsplit(raw, ",")[[1]])
 }
 
-polite_pause <- function() Sys.sleep(runif(1, PAUSE_RANGE[1], PAUSE_RANGE[2]))
+polite_pause <- function() {
+  floor <- if (is.null(HOST_POLICY)) 0 else HOST_POLICY$pause
+  Sys.sleep(max(runif(1, PAUSE_RANGE[1], PAUSE_RANGE[2]), floor))
+}
 
 #' Navigate to a URL and return the rendered HTML.
 #'
@@ -561,6 +584,8 @@ scrape_iwa_journal <- function(cfg, only = NULL, max_issues = Inf,
   manifest_path <- file.path(data_dir, paste0(cfg$slug, "_issues.csv"))
   empty_log <- file.path(data_dir, paste0(cfg$slug, "_empty_issues.log"))
 
+  # Identification and robots.txt first; both stop the run before any page
+  HOST_POLICY <<- host_policy(SITE_HOST, iwa_paths(cfg$slug), default_pause = PAUSE_RANGE[1])
   session <- start_browser()
   on.exit(try(session$parent$close(), silent = TRUE), add = TRUE)
 
