@@ -34,31 +34,27 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>washopenresearch</h1>
-      <small class="dont-index">Source: <a href="https://github.com/openwashdata/washopenresearch/blob/HEAD/CLAUDE.md"><code>CLAUDE.md</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/openwashdata/washopenresearch/blob/HEAD/CONTEXT.md"><code>CONTEXT.md</code></a></small>
     </div>
 
 <div id="washopenresearch" class="section level1">
 
+<p>The package that records, for scientific articles in water, sanitation and hygiene (WASH) research, whether and how the authors made their data available. Articles enter either because their journal is indexed whole or because a DOI list found them one by one.</p>
 <div class="section level2">
-<h2 id="agent-skills">Agent skills<a class="anchor" aria-label="anchor" href="#agent-skills"></a></h2>
-<p>Configured for the <code>to-spec</code>, <code>to-tickets</code> and <code>implement</code> skills.</p>
-<div class="section level3">
-<h3 id="issue-tracker">Issue tracker<a class="anchor" aria-label="anchor" href="#issue-tracker"></a></h3>
-<p>Issues live in GitHub Issues at <code>openwashdata/washopenresearch</code> (via the <code>gh</code> CLI). See <code>docs/agents/issue-tracker.md</code>.</p>
-</div>
-<div class="section level3">
-<h3 id="triage-labels">Triage labels<a class="anchor" aria-label="anchor" href="#triage-labels"></a></h3>
-<p>Only the <code>ready-for-agent</code> role is in use, under its default label name. See <code>docs/agents/triage-labels.md</code>.</p>
-</div>
-<div class="section level3">
-<h3 id="domain-docs">Domain docs<a class="anchor" aria-label="anchor" href="#domain-docs"></a></h3>
-<p>Single-context: one <code>CONTEXT.md</code> at the repo root and ADRs in <code>docs/adr/</code>. See <code>docs/agents/domain.md</code>.</p>
-</div>
+<h2 id="language">Language<a class="anchor" aria-label="anchor" href="#language"></a></h2>
+<p><strong>Whole-journal dataset</strong>: A dataset that holds every article of one journal, scraped or fetched from the journal itself (washdev, ws, jwh, aqua, ploswater). <em>Avoid</em>: journal dataset, curated dataset, filtered slice</p>
+<p><strong>Article-level dataset</strong>: The dataset of articles found by the DOI list, wherever they were published (working name <code>washarticles</code>). An article in a whole-journal dataset is never in it. <em>Avoid</em>: corpus, bibliometric dataset, washbib data</p>
+<p><strong>DOI list release</strong>: A tagged version of the list of WASH article DOIs that openwashdata/washbib publishes, with the signals and the tier per DOI. The article-level dataset records which release it consumed. <em>Avoid</em>: discovery output, candidate list (that is the washbib intermediate)</p>
+<p><strong>Signal</strong>: One of the independent ways washbib recognises a WASH article: keyword match in title and abstract, authorship by a retained researcher, two or more references to washdev or ploswater articles. <em>Avoid</em>: filter, criterion</p>
+<p><strong>Tier</strong>: The class of a DOI by how many signals fired: A for two or more, B for the keyword signal alone, C for one of the other two alone. Tier C is listed but not fetched until reviewed. <em>Avoid</em>: confidence, rank</p>
+<p><strong>Route</strong>: One sanctioned way of fetching an article’s statement and supplement facts, tried in a fixed order (PLOS API, Europe PMC, Springer Nature, MDPI, Elsevier, Wiley, ACS by agreement, open access copy). Every row says which route produced it. <em>Avoid</em>: source, scraper, backend</p>
+<p><strong>Not retrieved</strong>: The recorded outcome for a DOI that no route reached. It is a finding about publisher openness, reported in the coverage table, never a dropped row. <em>Avoid</em>: missing, failed, skipped</p>
+<p><strong>Candidate</strong>: A work that at least one signal found, before tiering and validation decide whether it enters the DOI list. Lives in washbib. <em>Avoid</em>: hit, match</p>
+<p><strong>Overlap</strong>: An article that is both in a whole-journal dataset and on the DOI list. It stays in the whole-journal dataset only, and the article-level coverage table counts it. <em>Avoid</em>: duplicate</p>
 </div>
 </div>
 
-  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
-    </nav></aside></div>
+  </main></div>
 
 
     <footer><div class="pkgdown-footer-left">

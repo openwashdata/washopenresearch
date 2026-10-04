@@ -8,9 +8,7 @@
 <title>Missed Opportunity: where is WASH research data gone? • washopenresearch</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/Atkinson_Hyperlegible_Next-0.4.10/font.css" rel="stylesheet">
-<link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Missed Opportunity: where is WASH research data gone?">
 <script defer data-domain="openwashdata.github.io" src="https://plausible.io/js/script.js"></script>
@@ -107,7 +105,7 @@ corresponding author for details.</li>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">published_year</span> <span class="op">&lt;=</span> <span class="fl">2023</span><span class="op">)</span></span></code></pre></div>
 <p>Using the dataset <code>washdev</code> from the
 <code>washopenresearch</code> data package, this example investigates
-the “Data Availability Statement” from 932 articles published in the
+the “Data Availability Statement” from 933 articles published in the
 Journal of Water, Sanitation and Hygiene for Development from 2011 to
 2023.</p>
 </div>
@@ -169,7 +167,7 @@ relevant variables like <code>published_year</code>,
 <code>has_das</code>, <code>das_type</code> to be used for analysis.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">washdev_2023</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Rows: 932</span></span>
+<span><span class="co">#&gt; Rows: 933</span></span>
 <span><span class="co">#&gt; Columns: 27</span></span>
 <span><span class="co">#&gt; $ paperid                                   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 28742<span style="color: #949494;">, </span>28745<span style="color: #949494;">, </span>28743<span style="color: #949494;">, </span>28744<span style="color: #949494;">, </span>…</span></span>
 <span><span class="co">#&gt; $ volume                                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1…</span></span>
@@ -230,9 +228,9 @@ policy year.</p>
 <span><span class="co">#&gt;   das_policy    das_type                           n</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2020 or later available in online repository    27</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2020 or later available in paper               217</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2020 or later available in paper               219</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2020 or later available on request              64</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2020 or later missing                           61</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2020 or later missing                           60</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> pre-2020      missing                          563</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -290,7 +288,7 @@ and the number of publications on the horizontal axis</p></li>
 <li><p>Colors differentiate between papers published before 2020 and in
 2020 or later, when a policy was introduced that requires authors to
 select one of the three data availability statements</p></li>
-<li><p>After that policy was introduced, we still found 17% of papers
+<li><p>After that policy was introduced, we still found 16% of papers
 without a data availability statement, while 59% of articles stated that
 data was available in the paper, which could also be as supplementary
 material</p></li>
@@ -337,8 +335,8 @@ stores the file types of an article as a single string separated by
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> available in online repository missing            8</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> available in online repository pdf                2</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> available in online repository xlsx               2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> available in paper             docx              83</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> available in paper             missing          125</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> available in paper             docx              84</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> available in paper             missing          126</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> available in paper             pdf                7</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> available in paper             png                1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> available in paper             pptx               4</span></span>
@@ -346,7 +344,7 @@ stores the file types of an article as a single string separated by
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> available on request           docx              33</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> available on request           missing           29</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> available on request           pdf                2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> missing                        docx              13</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> missing                        docx              12</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> missing                        docx, xlsx         4</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> missing                        missing           42</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> missing                        pdf                3</span></span></code></pre></div>
@@ -843,13 +841,13 @@ used in the supplementary materials.</p>
 <tbody class="gt_table_body">
 <tr>
 <td headers="supp_file_type" class="gt_row gt_left">missing</td>
-<td headers="n" class="gt_row gt_right">204</td>
-<td headers="perc" class="gt_row gt_right">50.9</td>
+<td headers="n" class="gt_row gt_right">205</td>
+<td headers="perc" class="gt_row gt_right">51.0</td>
 </tr>
 <tr>
 <td headers="supp_file_type" class="gt_row gt_left">docx</td>
 <td headers="n" class="gt_row gt_right">150</td>
-<td headers="perc" class="gt_row gt_right">37.4</td>
+<td headers="perc" class="gt_row gt_right">37.3</td>
 </tr>
 <tr>
 <td headers="supp_file_type" class="gt_row gt_left">xlsx</td>

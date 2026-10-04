@@ -1,5 +1,34 @@
 # Changelog
 
+## washopenresearch (development version)
+
+### Bug fixes
+
+- `washdev`: eight articles had no author data, and their rows could not
+  be told apart from a failed scrape, because the earlier scraper wrote
+  the same row in both cases. All eight were scraped again with the
+  scraper that writes a row only for a page it has read
+  ([\#72](https://github.com/openwashdata/washopenresearch/issues/72)).
+
+  - Article 99218 (volume 13, issue 12) was incomplete. It now has its
+    nine authors, its data availability statement (“in paper”), its
+    keywords and the countries of its authors.
+  - The corrigendum 96121 (volume 13, issue 7) now has its six authors,
+    the name and ORCID iD of its first author, and its DOI.
+  - Six rows are confirmed as they were: the two letters to the editor
+    30083 and 30084, the corrigendum 30156, the erratum 73058, the
+    editorial 80712 and the obituary 90481. Their pages have no author
+    card and no data availability statement.
+  - The DOI of the letter 30084 is corrected to
+    10.2166/washdev.2014.103. The title search that filled missing DOIs
+    had given it the DOI of the other letter with the same title.
+
+### New data
+
+- `washdev`: one article of volume 13, issue 12 that the journal added
+  to the issue after the first scrape is new (paperid 99266). The
+  dataset has 1,174 articles.
+
 ## washopenresearch 0.5.0
 
 This release makes the build of the datasets reproducible and prepares
