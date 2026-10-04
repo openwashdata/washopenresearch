@@ -34,7 +34,7 @@ library(stringr)
 MAILTO <- "lars@lse.de"
 API_KEY <- Sys.getenv("OPENALEX_API_KEY")
 
-DIR <- "data-raw/washbiblio"
+DIR <- "data-raw/coverage-assessment"
 CACHE <- file.path(DIR, "cache")
 OSI_ZIP <- file.path(CACHE, "PLOS-OSI-Dataset_v11.zip")
 OSI_PLOS <- file.path(CACHE, "Data files", "PLOS-Dataset_v11_Jun26.csv")
@@ -164,7 +164,7 @@ aaas_counts <- if (!file.exists(AAAS_CSV)) {
 
 # --- Assemble ---------------------------------------------------------------
 
-share <- read_csv(file.path(DIR, "journal_wash_share.csv"),
+share <- read_csv("data-raw/journal_wash_share.csv",
                   show_col_types = FALSE)
 
 out <- journals |>

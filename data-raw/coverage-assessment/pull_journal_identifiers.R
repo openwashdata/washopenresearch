@@ -25,7 +25,7 @@ API_KEY <- Sys.getenv("OPENALEX_API_KEY")
 FROM <- "1996-01-01"
 TO   <- "2026-12-31"
 
-DIR <- "data-raw/washbiblio"
+DIR <- "data-raw/coverage-assessment"
 CACHE <- file.path(DIR, "cache")
 dir.create(CACHE, showWarnings = FALSE)
 
@@ -96,7 +96,7 @@ fetch_oa_mix <- function(sid) {
   ))
 }
 
-journals <- read_csv(file.path(DIR, "journal_wash_share.csv"),
+journals <- read_csv("data-raw/journal_wash_share.csv",
                      show_col_types = FALSE)
 
 identifiers <- step_cache("identifiers_sources", \() {

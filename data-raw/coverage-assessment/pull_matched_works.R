@@ -18,7 +18,7 @@
 # reruns free; delete cache/matched_*.rds to force a refresh.
 #
 # Run from the package root:
-#   Rscript data-raw/washbiblio/pull_matched_works.R
+#   Rscript data-raw/coverage-assessment/pull_matched_works.R
 
 library(httr)
 library(dplyr)
@@ -27,7 +27,7 @@ library(readr)
 library(stringr)
 library(tibble)
 
-DIR <- "data-raw/washbiblio"
+DIR <- "data-raw/coverage-assessment"
 CACHE <- file.path(DIR, "cache")
 MAILTO <- "lars@lse.de"
 API_KEY <- Sys.getenv("OPENALEX_API_KEY")

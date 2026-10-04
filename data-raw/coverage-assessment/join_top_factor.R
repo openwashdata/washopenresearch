@@ -20,7 +20,7 @@ library(purrr)
 library(tidyr)
 library(stringr)
 
-DIR <- "data-raw/washbiblio"
+DIR <- "data-raw/coverage-assessment"
 CACHE <- file.path(DIR, "cache")
 TOP_URL <- "https://osf.io/download/qatkz/"
 TOP_CSV <- file.path(CACHE, "top-factor.csv")
