@@ -200,6 +200,11 @@ limit says more.
 If a site refuses the identified client, the run fails and says so. There
 is no fallback user agent and no workaround.
 
+What a scraper writes is already clean: an address inside a statement or
+an affiliation is masked to `[email removed]@<domain>` and credentials in
+links are dropped before the row reaches the raw snapshot, so the
+snapshots hold no personal address at any commit (#94).
+
 ## Environment
 
 The build pipeline and the scrapers run against the package versions pinned

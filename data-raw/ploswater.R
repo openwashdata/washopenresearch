@@ -7,7 +7,8 @@
 # The XML carries the data availability statement, supplementary material
 # entries, affiliations, ORCIDs, and the correspondence author. Credentials
 # inside a statement (access tokens in URLs, stated passwords) are removed.
-# Author email addresses are not collected.
+# Author email addresses are not collected, and an address inside a
+# statement is masked before the row is written.
 #
 # Notes:
 # - PLOS Water has no author keywords in the XML for most articles; the
@@ -256,7 +257,8 @@ parse_das <- function(xml) {
   # state a password. Credentials do not enter the raw snapshot. The plain
   # record URL and the rest of the sentence stay.
   das_text <- if (inherits(node, "xml_missing")) NA_character_ else
-    remove_credentials(str_squish(xml_text(node)))
+    # Credentials and addresses inside the statement never reach the snapshot
+    redact_inline_emails(remove_credentials(str_squish(xml_text(node))))
   c(
     list(has_das = !is.na(das_text), das = das_text),
     das_repositories(node, if (is.na(das_text)) "" else das_text)

@@ -332,7 +332,8 @@ parse_das <- function(page) {
       page, sprintf("div[data-section-parent-id='%s']", section_id)
     )
     if (node_exists(body)) {
-      das_text <- remove_credentials(str_trim(html_text(body)))
+      # Credentials and addresses inside the statement never reach the snapshot
+      das_text <- redact_inline_emails(remove_credentials(str_trim(html_text(body))))
     }
   }
   das_type <- if (!is.na(das_text) && startsWith(das_text, DAS_ONLINE_BOILERPLATE)) {
