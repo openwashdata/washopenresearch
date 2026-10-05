@@ -1,5 +1,17 @@
 # washopenresearch (development version)
 
+## Personal data
+
+- The git history was rewritten on 2026-10-05 to remove the author email
+  addresses that the raw snapshots and the dataset exports of the versions
+  before 0.4.0 carried (#94). In every earlier commit the two email columns
+  are blank and addresses inside text read `[email removed]@<domain>`; the
+  datasets of 0.4.0 and later never had the columns, and the raw file of
+  `uncnewsletter` lost them on 2026-10-04. Every commit hash changed, so a
+  clone made before the rewrite has to be cloned again. The file of the
+  Zenodo archive of v0.0.1, a source archive of that tag, still holds the
+  addresses until Zenodo removes it on the maintainer's request.
+
 ## Bug fixes
 
 - `washdev`: eight articles had no author data, and their rows could not be
