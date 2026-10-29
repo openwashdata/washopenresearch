@@ -24,3 +24,4 @@ data-raw/suppfiles/files/
 # Not for the public repository: signed supplement download links written by
 # data-raw/iwa_scraping.R, and other files that hold contact addresses
 data-raw/private/
+docs/
