@@ -25,7 +25,7 @@ Suggests:
     testthat (>= 3.0.0)
 LazyData: true
 Config/testthat/edition: 3
-Config/Needs/website: rmarkdown, tidyverse
+Config/Needs/website: rmarkdown, tidyverse, ggthemes, gt, scales
 Date: 2026-10-02
 URL: https://github.com/openwashdata/washopenresearch
 BugReports: https://github.com/openwashdata/washopenresearch/issues
