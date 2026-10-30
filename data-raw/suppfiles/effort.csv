@@ -1,0 +1,6 @@
+"doi","date","step","actor","minutes","note"
+"10.2166/wh.2024.270","2026-10-30","table screen (B3 and B5 preview of two candidates)","agent","10","pandoc and rvest preview of wh.2024.270 and wh.2025.343"
+"10.2166/wh.2024.270","2026-10-30","decisions (dataset, repository, name)","Lars","5",""
+"10.2166/wh.2024.270","2026-10-30","stage B and extraction (processing script, fidelity checks)","agent","20",""
+"10.2166/wh.2024.270","2026-10-30","documentation draft (dictionary, roxygen, README, site, citation files)","agent","15","own commit b2ca46a in burigangaamr for the draft count"
+"10.2166/wh.2024.270","2026-10-30","repository and CI (workflows, branch protection, site dependency)","agent","10",""
