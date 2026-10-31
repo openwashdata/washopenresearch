@@ -256,7 +256,7 @@ updated.
 ### New features
 
 - New function
-  [`das_in_paper_support()`](https://github.com/openwashdata/washopenresearch/reference/das_in_paper_support.md)
+  [`das_in_paper_support()`](https://openwashdata.github.io/washopenresearch/reference/das_in_paper_support.md)
   classifies how a “data in paper” data availability statement is backed
   by the recorded supplement fields
   ([\#47](https://github.com/openwashdata/washopenresearch/issues/47)).

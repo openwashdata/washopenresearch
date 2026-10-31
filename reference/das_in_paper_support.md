@@ -39,7 +39,7 @@ the raw sentence in `das_type`). Papers without the claim get `NA`.
 
 Claims are classified by the strongest attachment that could carry the
 data, using the same format tiers as
-[`score_fair()`](https://github.com/openwashdata/washopenresearch/reference/score_fair.md):
+[`score_fair()`](https://openwashdata.github.io/washopenresearch/reference/score_fair.md):
 
 - `"open supplement"`: an open machine-readable format is attached (csv,
   txt, tsv, json, xml).
