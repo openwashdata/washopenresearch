@@ -1,10 +1,19 @@
 
-url: https://github.com/openwashdata/washopenresearch
+url: https://openwashdata.github.io/washopenresearch/
 template:
   bootstrap: 5
   includes:
     in_header: |
       <script defer data-domain="openwashdata.github.io" src="https://plausible.io/js/script.js"></script>
+
+navbar:
+  structure:
+    right: [search, home, github, lightswitch]
+  components:
+    home:
+      text: openwashdata.org
+      href: https://openwashdata.org
+      aria-label: openwashdata website
 
 home:
   links:
@@ -12,11 +21,14 @@ home:
       text: GitHub repository
       href: https://github.com/openwashdata/washopenresearch
   sidebar:
-    structure: [links, citation, authors, dev, custom]
+    structure: [links, citation, authors, dev, custom, community]
     components:
       custom:
         title: Funding
         text: This project was funded by the [Open Research Data Program of the ETH Board](https://ethrat.ch/en/eth-domain/open-research-data/).
+      community:
+        title: openwashdata
+        text: This package is part of [openwashdata](https://openwashdata.org). Browse the [data catalogue](https://openwashdata.org/pages/gallery/data/) or get the [newsletter](https://openwashdata.org/pages/newsletter/).
 
 authors:
   footer:
@@ -27,3 +39,11 @@ authors:
     before: "So *who* does the work?"
     after: "Thanks all!"
 
+
+footer:
+  structure:
+    left: [developed_by, publisher]
+    right: [washr, built_with]
+  components:
+    publisher: Published by [openwashdata](https://openwashdata.org), a project of [Global Health Engineering](https://ghe.ethz.ch/) at ETH Zurich.
+    washr: Package built with [washr](https://openwashdata.github.io/washr/) 1.2.1.
