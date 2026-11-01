@@ -25,7 +25,7 @@ library(tidyverse)
 library(wordcloud2)
 ```
 
-# washopenresearch
+# washopenresearch <a href="https://openwashdata.org"><img src="man/figures/logo.png" align="right" width="120" alt="openwashdata" /></a>
 
 <!-- badges: start -->
 
@@ -35,8 +35,6 @@ library(wordcloud2)
 [![DOI](https://zenodo.org/badge/734215029.svg)](https://zenodo.org/doi/10.5281/zenodo.11185699)
 
 <!-- badges: end -->
-
-A data package published by [openwashdata](https://openwashdata.org).
 
 The goal of washopenresearch is to provide an overview of open research
 data related to Water Sanitation and Hygiene (WASH). The current version
@@ -511,6 +509,8 @@ Data are available as
 [CC-BY](https://github.com/openwashdata/washopenresearch/blob/main/LICENSE.md).
 
 ## Citation
+
+Published by openwashdata, <https://openwashdata.org>.
 
 Please cite this package using:
 

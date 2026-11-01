@@ -1,10 +1,16 @@
 
 url: https://openwashdata.github.io/washopenresearch/
 template:
+  bslib:
+    brand: _brand.yml
   bootstrap: 5
   includes:
     in_header: |
       <script defer data-domain="openwashdata.github.io" src="https://plausible.io/js/script.js"></script>
+  opengraph:
+    image:
+      src: https://raw.githubusercontent.com/openwashdata/brand/v1.1.0/assets/social-preview.png
+      alt: openwashdata, social preview image
 
 navbar:
   structure:
@@ -46,4 +52,4 @@ footer:
     right: [washr, built_with]
   components:
     publisher: Published by [openwashdata](https://openwashdata.org), a project of [Global Health Engineering](https://ghe.ethz.ch/) at ETH Zurich.
-    washr: Package built with [washr](https://openwashdata.github.io/washr/) 1.2.1.
+    washr: Package built with [washr](https://openwashdata.github.io/washr/) 1.2.2.

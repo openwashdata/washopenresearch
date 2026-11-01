@@ -20,3 +20,5 @@
 ^CLAUDE\.md$
 ^CONTEXT\.md$
 ^inst/extdata$
+^_brand\.yml$
+^logos$
