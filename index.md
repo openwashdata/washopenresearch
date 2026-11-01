@@ -1,7 +1,5 @@
 # washopenresearch
 
-A data package published by [openwashdata](https://openwashdata.org).
-
 The goal of washopenresearch is to provide an overview of open research
 data related to Water Sanitation and Hygiene (WASH). The current version
 contains seven datasets from the following sources:
@@ -638,6 +636,8 @@ Data are available as
 [CC-BY](https://github.com/openwashdata/washopenresearch/blob/main/LICENSE.md).
 
 ## Citation
+
+Published by openwashdata, <https://openwashdata.org>.
 
 Please cite this package using:
 

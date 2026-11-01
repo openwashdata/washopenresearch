@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   articles/data-availability-washdev: data-availability-washdev.html
   articles/examples: examples.html
-last_built: 2026-10-31T22:01Z
+last_built: 2026-11-01T09:16Z
 urls:
   reference: https://openwashdata.github.io/washopenresearch/reference
   article: https://openwashdata.github.io/washopenresearch/articles
