@@ -43,4 +43,4 @@ Until 2026-10-04 these files lived in `data-raw/washbiblio/`, next to the
 staging of the bibliometric corpus. That staging (the ranking harvest, the
 corpus schema, the three ranking tables) moved to openwashdata/washbib, and
 the journal share table it produced stays at `data-raw/journal_wash_share.csv`
-as the record of the #18 decision (see `docs/adr/0001-journal-share-governs-whole-journal-indexing.md`).
+as the record of the #18 decision (see `dev/adr/0001-journal-share-governs-whole-journal-indexing.md`).

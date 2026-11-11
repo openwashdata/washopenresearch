@@ -399,7 +399,7 @@ a review sheet, the next build overwrites it.
 | `washdev-country-fixes.csv`, `washdev-supp-type-fixes.csv`, `uncnewsletter-supp-fixes.csv` | decision sheets keyed on `paperid` | humans (curation) |
 | `ploswater-das-fixes.csv` | decision sheet of `das_type`, keyed on `doi` | humans (curation) |
 | `*-doi-backfill.csv`, `*-doi-review.csv` | Crossref DOI matches and the rows that did not match | frozen |
-| `journal_wash_share.csv` | the measured 1996 to 2026 WASH share and the indexing decision per candidate journal (#18, `docs/adr/0001`), written once on 2026-07-23 | frozen |
+| `journal_wash_share.csv` | the measured 1996 to 2026 WASH share and the indexing decision per candidate journal (#18, `dev/adr/0001`), written once on 2026-07-23 | frozen |
 | `*-das-review.csv`, `*-country-review.csv` | review sheets | the build |
 | `dictionary.csv` | data dictionary rendered in the README and pkgdown site | with each schema change |
 
