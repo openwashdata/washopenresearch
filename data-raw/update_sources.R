@@ -15,7 +15,8 @@
 #
 # data-raw/update-log.csv gets one row per journal and run: the date, the
 # journal, the journal issues and the rows the run added, whether the
-# scraper finished, and the user agent string the run identified with.
+# scraper finished, and the user agent string the run identified with,
+# without the contact address.
 #
 # Slow and unattended by design: the IWA scrapers pause between pages. Run
 # from the package root and keep the machine awake:
@@ -61,6 +62,7 @@ update_sources <- function(journals = names(SOURCES), run = run_scraper,
                            log_path = UPDATE_LOG) {
   # Every scraper identifies with this string; computing it here stops the
   # whole run before the first scraper when the contact address is unset.
+  # The log row keeps the string without the address (update_log_row()).
   user_agent <- client_user_agent()
   rows <- list()
   for (k in seq_along(journals)) {

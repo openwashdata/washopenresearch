@@ -37,3 +37,39 @@ test_that("a new log starts with the full header", {
   append_update_log(row, path)
   expect_equal(readLines(path)[1], "date,journal,issues_added,rows_added,finished,user_agent")
 })
+
+test_that("the update log row holds the user agent without the contact address", {
+  # Assembled from parts, so that this file holds no address
+  contact <- paste0("role", "@", "example.org")
+  row <- update_log_row(
+    "ploswater", list(issues = 0L, rows = 0L), list(issues = 1L, rows = 2L),
+    finished = TRUE, date = as.Date("2026-11-11"),
+    user_agent = paste0("washopenresearch/0.6.0 (https://github.com/openwashdata/washopenresearch; ", contact, ")")
+  )
+  expect_equal(
+    row$user_agent,
+    "washopenresearch/0.6.0 (https://github.com/openwashdata/washopenresearch)"
+  )
+  expect_false(grepl("@", row$user_agent, fixed = TRUE))
+})
+
+test_that("the browser string of the IWA scraper loses the address too", {
+  contact <- paste0("role", "@", "example.org")
+  browser <- paste0("Mozilla/5.0 HeadlessChrome/154.0.0.0 washopenresearch/0.6.0 (https://x.org; ", contact, ")")
+  expect_equal(
+    without_contact(browser),
+    "Mozilla/5.0 HeadlessChrome/154.0.0.0 washopenresearch/0.6.0 (https://x.org)"
+  )
+})
+
+test_that("a string without an address and a missing string stay as they are", {
+  expect_equal(without_contact("washopenresearch/0.5.0 (x; y)"), "washopenresearch/0.5.0 (x; y)")
+  expect_true(is.na(without_contact(NA_character_)))
+})
+
+test_that("the committed update log holds no address", {
+  withr::local_dir("../../..")
+  path <- "data-raw/update-log.csv"
+  skip_if_not(file.exists(path))
+  expect_false(any(grepl("@", readLines(path), fixed = TRUE)))
+})

@@ -146,7 +146,8 @@ snapshot_counts <- function(path) {
 # one journal, from snapshot_counts() before and after the run. `finished`
 # is FALSE when the scraper stopped with an error; what it added until then
 # is in the snapshot and is counted. `user_agent` is the string the run
-# identified with (data-raw/client.R).
+# identified with (data-raw/client.R), without the contact address: the
+# request carries the address, the committed log does not.
 update_log_row <- function(journal, before, after, finished, date = Sys.Date(),
                            user_agent = NA_character_) {
   tibble::tibble(
@@ -155,8 +156,16 @@ update_log_row <- function(journal, before, after, finished, date = Sys.Date(),
     issues_added = after$issues - before$issues,
     rows_added = after$rows - before$rows,
     finished = finished,
-    user_agent = user_agent
+    user_agent = without_contact(user_agent)
   )
+}
+
+# The identification string without the contact address, for the update
+# log: "washopenresearch/0.6.0 (https://...; <address>)" becomes
+# "washopenresearch/0.6.0 (https://...)". The log is committed, and no
+# address is committed. A string without an address stays as it is.
+without_contact <- function(user_agent) {
+  gsub("[;,]?\\s*[^\\s;,()]+@[^\\s;,()]+", "", user_agent, perl = TRUE)
 }
 
 # Append a row to the update log. A log written before the user_agent
