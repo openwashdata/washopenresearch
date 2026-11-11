@@ -1,7 +1,7 @@
 #' Dataset about data availability in the journal Water Supply
 #'
 #' Water Supply is an IWA journal covering drinking water supply, treatment and distribution. Coverage starts in 2001.
-#' The dataset is updated monthly. Each data release adds the journal issues published since the last one.
+#' Updates are on hold since October 2026, until IWA Publishing permits the client of this project. The dataset holds the journal issues collected up to version 0.5.0.
 #' Scraped from iwaponline.com by data-raw/iwa_scraping.R (#32-#34).
 #'
 #' @format ## `ws`

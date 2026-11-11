@@ -1,7 +1,7 @@
 #' Dataset about data availability in the Journal of Water, Sanitation and Hygiene for Development
 #'
 #' All articles of the Journal of Water, Sanitation and Hygiene for Development, an IWA journal, from its first volume in 2011.
-#' The dataset is updated monthly. Each data release adds the journal issues published since the last one.
+#' Updates are on hold since October 2026, until IWA Publishing permits the client of this project. The dataset holds the journal issues collected up to version 0.5.0.
 #' Scraped from iwaponline.com by data-raw/iwa_scraping.R.
 #'
 #' @format ## `washdev`

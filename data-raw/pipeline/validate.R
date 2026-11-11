@@ -21,7 +21,8 @@ released_dataset <- function(name) {
   if (!is.null(attr(tag, "status")) || length(tag) != 1) {
     stop(
       "No release tag found, so the gate cannot tell whether an article ",
-      "was lost since the last release. Fetch the tags (git fetch --tags).",
+      "was lost since the last release. Fetch the tags ",
+      "(git fetch origin --tags --force).",
       call. = FALSE
     )
   }
