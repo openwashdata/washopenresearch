@@ -1,5 +1,5 @@
 # What Crossref and Europe PMC carry for the four IWA journals (#90).
-# Read-only exploration behind dev/adr/0002-api-routes-for-the-iwa-journals.md.
+# Read-only exploration behind adr/0002-api-routes-for-the-iwa-journals.md.
 # Identified client (WASHOPENRESEARCH_CONTACT), Crossref through the polite
 # pool, Europe PMC at the 10 seconds its robots.txt asks for, one PDF link
 # request per journal. Writes the tables in this folder. Run from the

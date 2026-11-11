@@ -14,4 +14,4 @@ Only the `ready-for-agent` role is in use, under its default label name.
 
 ### Domain docs
 
-Single-context: one `CONTEXT.md` at the repo root and ADRs in `dev/adr/`. `docs/` is the build folder of the package site and is not committed, so nothing is kept there.
+Single-context: one `CONTEXT.md` at the repo root and ADRs in `adr/`. `docs/` is the build folder of the package site and is not committed, so nothing is kept there.
