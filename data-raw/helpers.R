@@ -17,10 +17,69 @@ collapse_list_col <- function(x) {
 # (see apply_decisions() in data-raw/pipeline/), not by hard-coded ID vectors.
 # The lookup's messages about unmatched names are silenced: every unmatched
 # affiliation is listed in the dataset's country review sheet.
+#
+# A value the lookup does not know gets two more tries, in this order, and
+# a value the lookup knows is never touched by them:
+# 1. with typographic apostrophes written as the plain one ("People\u2019s"
+#    reads "People's"), because the lookup knows some names in one form only;
+# 2. with the country taken from the end of the value, for an affiliation
+#    whose last comma is missing ("Texas United States of America"). See
+#    country_at_end().
 to_un_country_name <- function(x) {
+  result <- lookup_un_country_name(x)
+  retry <- is.na(result) & !is.na(x)
+  if (any(retry)) {
+    plain <- plain_apostrophes(x[retry])
+    found <- lookup_un_country_name(plain)
+    found[is.na(found)] <- country_at_end(plain[is.na(found)])
+    result[retry] <- found
+  }
+  result
+}
+
+# The lookup itself: exact matches only, NA for a name it does not know.
+lookup_un_country_name <- function(x) {
   suppressMessages(
     countries::country_name(x, to = "UN_en", fuzzy_match = FALSE)
   )
+}
+
+# Typographic apostrophes and accents used as apostrophes, as the plain one.
+plain_apostrophes <- function(x) {
+  gsub("[\u2018\u2019\u02BC\u0060\u00B4]", "'", x)
+}
+
+# Words that tie a country name to what stands before it. A country name at
+# the end of a value does not count when one of them precedes it: "New
+# Mexico" is not Mexico, "University of Georgia" is not Georgia, and a
+# misspelt "... and Northern Ireland" is not Ireland.
+COUNTRY_NAME_JOINERS <- c(
+  "and", "of", "the", "de", "del", "la", "new", "north", "northern", "south",
+  "southern", "east", "eastern", "west", "western", "central", "saint", "st",
+  "great", "republic", "democratic", "people's", "united", "federal",
+  "islamic", "arab", "american", "british", "french", "dutch", "papua",
+  "equatorial"
+)
+
+# The UN name of the country a value ends with, or NA. The longest run of
+# words at the end of the value that the lookup knows wins, unless the word
+# before it is one of COUNTRY_NAME_JOINERS. The value as a whole is not
+# tried; to_un_country_name() has done that.
+country_at_end <- function(x, max_words = 8) {
+  out <- rep(NA_character_, length(x))
+  words <- strsplit(trimws(x), "\\s+")
+  for (i in seq_along(x)) {
+    w <- words[[i]]
+    n <- length(w)
+    if (is.na(x[i]) || n < 2) next
+    starts <- seq(max(2, n - max_words + 1), n)
+    candidates <- vapply(starts, function(k) paste(w[k:n], collapse = " "), character(1))
+    names_found <- lookup_un_country_name(candidates)
+    before <- tolower(gsub("[.,;:()]", "", w[starts - 1]))
+    usable <- !is.na(names_found) & !before %in% COUNTRY_NAME_JOINERS
+    if (any(usable)) out[i] <- names_found[which(usable)[1]]
+  }
+  out
 }
 
 # The data journals harvested for the `datapapers` dataset (issue #28).
