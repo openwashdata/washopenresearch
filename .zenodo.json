@@ -1,6 +1,6 @@
 {
   "title": "Dataset about open research data information in Water, Sanitation, and Hygiene",
-  "description": "The goal of washopenresearch is to provide an overview of open research data related to Water Sanitation and Hygiene (WASH). The package provides access to seven datasets: `washdev`, `ws`, `jwh`, `aqua`, `uncnewsletter`, `ploswater`, and `datapapers`. Each dataset collects information on scientific articles about (1) article metadata (e.g. title, first author, correspondence author), (2) supplementary material information, (3) data availability statement, and (4) semantic information (e.g. keywords).",
+  "description": "<p>The goal of washopenresearch is to provide an overview of open research data related to Water Sanitation and Hygiene (WASH). The package provides access to seven datasets: `washdev`, `ws`, `jwh`, `aqua`, `uncnewsletter`, `ploswater`, and `datapapers`. Each dataset collects information on scientific articles about (1) article metadata (e.g. title, first author, correspondence author), (2) supplementary material information, (3) data availability statement, and (4) semantic information (e.g. keywords).<\/p><p>Explore the data on a curated website: <a href=\"https://openwashdata.github.io/washopenresearch/\">https://openwashdata.github.io/washopenresearch/<\/a><\/p>",
   "upload_type": "dataset",
   "creators": [
     {
@@ -22,10 +22,21 @@
   ],
   "license": "cc-by-4.0",
   "keywords": ["open-data", "open-research-data", "open-science", "openwashdata", "sanitation", "wash"],
-  "version": "0.5.0",
+  "version": "0.6.0",
   "communities": [
     {
       "identifier": "openwashdata"
+    }
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/openwashdata/washopenresearch",
+      "relation": "isSupplementTo"
+    },
+    {
+      "identifier": "https://openwashdata.github.io/washopenresearch/",
+      "relation": "isDocumentedBy",
+      "resource_type": "other"
     }
   ]
 }
