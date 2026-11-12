@@ -96,8 +96,8 @@ library(washopenresearch)
 published since the last one. The four datasets of the IWA journals
 (`washdev`, `ws`, `jwh`, `aqua`) are on hold since October 2026. The
 journal site refuses the client of this project since it identifies
-itself, and a permission request to IWA Publishing is open. Until it is
-answered, these datasets hold the journal issues of version 0.5.0.
+itself, and a request to IWA Publishing for access is in preparation. Until
+access is settled, these datasets hold the journal issues of version 0.5.0.
 `uncnewsletter` and `datapapers` are frozen. They are still built with
 every release but no longer updated. The table shows what each dataset
 covers in this version.

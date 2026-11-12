@@ -3,9 +3,9 @@
 The first monthly data update. It adds 47 articles to `ploswater`. The four
 IWA journals (`washdev`, `ws`, `jwh`, `aqua`) were not updated in this
 release: since the scraper identifies itself, iwaponline.com refuses it,
-and the project does not fetch with a false user agent. A permission
-request went to IWA Publishing on 2026-10-05 and is not answered yet. Until
-it is, these four datasets hold the journal issues of version 0.5.0, and
+and the project does not fetch with a false user agent. A request to
+IWA Publishing for access is in preparation. Until access is settled,
+these four datasets hold the journal issues of version 0.5.0, and
 Water Supply volume 3, issue 4 stays missing from `ws`.
 
 ## Coverage

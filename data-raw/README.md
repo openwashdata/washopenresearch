@@ -118,8 +118,8 @@ articles are new. Naming sources runs a subset, for example
 Since 2026-10-05 the four IWA journals (`washdev`, `jwh`, `aqua`, `ws`) are
 not updated. iwaponline.com serves its challenge page to the scraper since
 the scraper identifies itself (#78), and the project does not fetch with a
-false user agent. A permission request went to IWA Publishing on
-2026-10-05. Until it is answered, the monthly update runs
+false user agent. A request to IWA Publishing for access is in
+preparation. Until access is settled, the monthly update runs
 `update_sources.R ploswater`, the four snapshots stay as they are, and the
 datasets of these journals keep the articles of version 0.5.0. Do not run
 the IWA scraper to see whether the site lets it through: every attempt
