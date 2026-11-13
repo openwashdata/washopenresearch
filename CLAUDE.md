@@ -6,12 +6,12 @@ Configured for the `to-spec`, `to-tickets` and `implement` skills.
 
 ### Issue tracker
 
-Issues live in GitHub Issues at `openwashdata/washopenresearch` (via the `gh` CLI). See `docs/agents/issue-tracker.md`.
+Issues live in GitHub Issues at `openwashdata/washopenresearch` (via the `gh` CLI).
 
 ### Triage labels
 
-Only the `ready-for-agent` role is in use, under its default label name. See `docs/agents/triage-labels.md`.
+Only the `ready-for-agent` role is in use, under its default label name.
 
 ### Domain docs
 
-Single-context: one `CONTEXT.md` at the repo root and ADRs in `docs/adr/`. See `docs/agents/domain.md`.
+Single-context: one `CONTEXT.md` at the repo root and ADRs in `adr/`. `docs/` is the build folder of the package site and is not committed, so nothing is kept there.

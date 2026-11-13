@@ -34,7 +34,7 @@ if (!nzchar(OPF_KEY)) {
        "and restart R (or run readRenviron('~/.Renviron')).")
 }
 
-DIR <- "data-raw/washbiblio"
+DIR <- "data-raw/coverage-assessment"
 OPF_CACHE <- file.path(DIR, "cache", "opf")
 dir.create(OPF_CACHE, recursive = TRUE, showWarnings = FALSE)
 

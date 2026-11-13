@@ -17,8 +17,9 @@ All scripts are run **from the package root** and are non-interactive.
 ## Run order
 
 1. Acquisition, when new articles are wanted:
-   `caffeinate -i Rscript data-raw/update_sources.R` (see "Acquisition").
-   The run adds to the raw snapshot of each live source.
+   `caffeinate -i Rscript data-raw/update_sources.R ploswater` (see
+   "Acquisition"; the four IWA journals are on hold). The run adds to the
+   raw snapshot of each source it is given.
 2. `Rscript data-raw/build.R`: rebuilds the datasets, exports and review
    sheets from the snapshots and sheets.
 3. Read the review sheets. To act on a row, add it to a decision sheet and
@@ -52,7 +53,7 @@ live in `data-raw/pipeline/`, one build function per dataset.
 | `ws` | `ws.csv` | none | `build_iwa()` |
 | `jwh` | `jwh.csv` | none | `build_iwa()` |
 | `aqua` | `aqua.csv` | none | `build_iwa()` |
-| `ploswater` | `ploswater.csv` | none | `build_ploswater()` |
+| `ploswater` | `ploswater.csv` | `ploswater-das-fixes.csv` | `build_ploswater()` |
 | `uncnewsletter` | `unc-article-url-manual-collection.csv` | `uncnewsletter-supp-fixes.csv`, `uncnewsletter-doi-backfill.csv` | `build_uncnewsletter()` |
 | `datapapers` | `datapapers_raw.csv` | `datapapers_screening.csv`, `datapapers_country_fixes.csv`, `datapapers_repo_fixes.csv` | `build_datapapers()` |
 
@@ -76,6 +77,12 @@ written. The build stops, naming every broken rule, when a dataset
 - lost an article that was in the last release. An article may only leave a
   dataset through a row in `removed-keys.csv` (dataset, key, reason).
 
+The last release is the nearest version tag in the history of the current
+commit, so the build needs the tags: `git fetch origin --tags --force`. The
+`--force` matters in a clone that still has the tags from before the
+history rewrite of 2026-10-05. Without it git refuses to move them, and the
+build stops with "No release tag found".
+
 The rules are tested in `data-raw/tests/`; run them with
 `Rscript data-raw/run_tests.R`.
 
@@ -94,14 +101,31 @@ does not build.
 ## Acquisition
 
 ``` sh
-caffeinate -i Rscript data-raw/update_sources.R
+caffeinate -i Rscript data-raw/update_sources.R ploswater
 ```
 
-This one command is the monthly acquisition. It runs the four IWA journals
-one after the other, with a cooldown of five minutes in between, then PLOS
-Water. `caffeinate -i` keeps the Mac awake; the run takes hours when many
+This one command is the monthly acquisition. For now it is run for PLOS
+Water only, because the four IWA journals are on hold (next section).
+Without a source name the command runs the four IWA journals one after the
+other, with a cooldown of five minutes in between, then PLOS Water.
+`caffeinate -i` keeps the Mac awake. A PLOS Water increment of 50 articles
+takes 25 minutes, and a run of the IWA journals takes hours when many
 articles are new. Naming sources runs a subset, for example
 `Rscript data-raw/update_sources.R jwh ploswater`.
+
+### IWA journals on hold
+
+Since 2026-10-05 the four IWA journals (`washdev`, `jwh`, `aqua`, `ws`) are
+not updated. iwaponline.com serves its challenge page to the scraper since
+the scraper identifies itself (#78), and the project does not fetch with a
+false user agent. A request to IWA Publishing for access is in
+preparation. Until access is settled, the monthly update runs
+`update_sources.R ploswater`, the four snapshots stay as they are, and the
+datasets of these journals keep the articles of version 0.5.0. Do not run
+the IWA scraper to see whether the site lets it through: every attempt
+sends requests the site has refused. When permission arrives, remove this
+section and the source name from the commands above and in
+`monthly-data-update.md`.
 
 | Source | Scraper, run by the update command | Raw snapshot |
 |---|---|---|
@@ -115,9 +139,12 @@ exits with status 1 at the end. Run the command again to continue; every
 scraper picks up where it stopped.
 
 `update-log.csv` gets one row per journal and run: `date`, `journal`,
-`issues_added`, `rows_added`, and `finished` (`FALSE` when the scraper
-stopped with an error or could not read every page). The release notes of a
-monthly update take their coverage table from it.
+`issues_added`, `rows_added`, `finished` (`FALSE` when the scraper
+stopped with an error or could not read every page) and `user_agent` (the
+string the run identified with, without the contact address). For PLOS
+Water, which has no numbered table of contents to visit, `issues_added`
+counts the volume and issue pairs that are new in the snapshot. The release
+notes of a monthly update take their rows from it.
 
 The IWA scraper drives a headless Chrome session, because iwaponline.com
 blocks plain HTTP clients and throttles bursts of requests. It runs slowly
@@ -168,6 +195,46 @@ Two sources are frozen. They are still built, but no longer updated:
   `apply_datapapers_decisions.R`). Screening is closed; candidates without a
   decision stay out of the build.
 
+### Identification, pacing and robots.txt
+
+Every client identifies the project:
+`washopenresearch/<version> (https://github.com/openwashdata/washopenresearch; <contact>)`,
+built by `client_user_agent()` in `data-raw/client.R` from the version in
+`DESCRIPTION` and the address in `WASHOPENRESEARCH_CONTACT`. The PLOS Water
+downloader sends it as its user agent. The IWA scraper appends it to the
+headless browser's own user agent, which stays as it is and says
+HeadlessChrome. The update command refuses to start when the address is
+unset, and records the string in `update-log.csv` with every row. The log
+is committed, so it gets the string without the address
+(`without_contact()` in `data-raw/scrape_plan.R`): the project name, the
+version and the repository address.
+
+Before the first request of a run, each host's `robots.txt` is read once
+(`host_policy()`): the paths the run visits are checked for this client, a
+disallowed path stops the run with the rule quoted, and a `Crawl-delay`
+becomes the minimum pause between requests to that host. On 2026-10-04,
+iwaponline.com allowed the issue and article paths and set no delay;
+journals.plos.org allowed the article file path and set a delay of 30
+seconds, so a PLOS Water increment fetches one article every 30 seconds (a
+few per month; a full download from nothing would take four hours);
+api.plos.org has no robots.txt, and its published limit of 300 requests per
+hour is far above the five a run needs.
+
+Pacing: the IWA scraper pauses a jittered 8 to 15 seconds between pages
+(`IWA_PAUSE_RANGE`), 1 to 3 seconds after each load, and five minutes
+between journals (`IWA_COOLDOWN`); the PLOS Water downloader pauses one
+second between search pages and the crawl delay between article files;
+every other client waits one second between requests unless a published
+limit says more.
+
+If a site refuses the identified client, the run fails and says so. There
+is no fallback user agent and no workaround.
+
+What a scraper writes is already clean: an address inside a statement or
+an affiliation is masked to `[email removed]@<domain>` and credentials in
+links are dropped before the row reaches the raw snapshot, so the
+snapshots hold no personal address at any commit (#94).
+
 ## Environment
 
 The build pipeline and the scrapers run against the package versions pinned
@@ -182,7 +249,11 @@ sessions are unaffected. Scripts that need the pinned packages call
 without it.
 
 Restore the pinned packages once after cloning, and again whenever
-`renv.lock` changes:
+`renv.lock` changes. renv keeps the library of a project under a name
+derived from the path of the clone and the R version, so a clone that was
+moved, or a new R version, starts with an empty library and needs the
+restore too. `Rscript -e 'renv::load(); renv::status()'` tells: it lists
+the packages that are recorded but not installed.
 
 ``` sh
 Rscript -e 'renv::load(); renv::restore()'
@@ -205,6 +276,24 @@ version, source, hash). The default format copies each package's full
 `DESCRIPTION` into the lockfile, including author and maintainer email
 addresses, which do not belong in this repository.
 
+### Environment variables
+
+Set them in `~/.Renviron`. Nothing is read from the repository, and no
+address or key is committed; a test in `data-raw/tests/` scans the scripts
+for both.
+
+| Variable | Read by | Purpose, where to get it |
+|---|---|---|
+| `WASHOPENRESEARCH_CONTACT` | every client (`client.R`): the scrapers, the update command, the Crossref, Europe PMC and OpenAlex scripts | the contact address in the user agent and in Crossref's polite pool. Required; nothing is fetched without it |
+| `OPENALEX_API_KEY` | `das_in_paper_article_types.R`, the coverage assessment scripts | a registered OpenAlex key lifts the free daily budget (https://openalex.org) |
+| `OPENPOLICYFINDER_KEY` | `coverage-assessment/pull_oa_policies.R` | the Jisc Open Policy Finder API key (https://openpolicyfinder.jisc.ac.uk) |
+| `IWA_PAUSE_RANGE` | `iwa_scraping.R` | "min,max" seconds between page fetches, default `8,15` |
+| `IWA_COOLDOWN` | `update_sources.R` | seconds between two IWA journals, default 300 |
+| `BACKFILL_DOIS_OVERWRITE` | `backfill_dois.R` | `yes` to rewrite the frozen DOI backfill sheets |
+
+The routes of the article-level dataset (#76) add their keys to this table
+as they arrive.
+
 ## Sheets
 
 Three kinds of CSV sheet sit next to the raw snapshots. They differ in who
@@ -217,9 +306,25 @@ writes them.
 | Review sheet | the build | no | `*-das-review.csv`, `*-country-review.csv` |
 
 **Decision sheets** hold manual corrections, one row per article, keyed on
-`paperid` (or on `doi` for `datapapers`). A filled cell replaces the built
-value; an empty cell means no decision for that column. The build stops when
-a sheet repeats a key or names an article the dataset does not have.
+`paperid` (or on `doi` for `ploswater` and `datapapers`). A filled cell
+replaces the built value; an empty cell means no decision for that column.
+The build stops when a sheet repeats a key or names an article the dataset
+does not have.
+
+Which sheet takes which decision:
+
+| Dataset | Country of an affiliation | `das_type` of a statement | Other |
+|---|---|---|---|
+| `washdev` | `washdev-country-fixes.csv` | none | `washdev-supp-type-fixes.csv` |
+| `ws`, `jwh`, `aqua` | none | none | none |
+| `ploswater` | none | `ploswater-das-fixes.csv` (`doi`, `das_type`, `reason`) | none |
+| `uncnewsletter` | none | none | `uncnewsletter-supp-fixes.csv` |
+| `datapapers` | `datapapers_country_fixes.csv` | none | `datapapers_repo_fixes.csv` |
+
+Where the table says "none", a review row can only be settled by a rule in
+the pipeline code or by adding a sheet of that kind for the dataset. In
+`ploswater-das-fixes.csv` the `das_type` must be one of the five shared
+levels, and `reason` says in a sentence why the statement was decided so.
 
 **Frozen inputs** are the Crossref DOI matches written by `backfill_dois.R`.
 The script refuses to run again, because it would overwrite both sheets,
@@ -228,7 +333,12 @@ Setting `BACKFILL_DOIS_OVERWRITE=yes` lifts the refusal.
 
 **Review sheets** list what the automatic steps could not resolve: data
 availability statements no rule mapped to a `das_type`, and affiliations
-whose country could not be standardised. Nothing is reclassified silently.
+whose country could not be standardised. The country lookup
+(`to_un_country_name()` in `helpers.R`) takes a value it knows as it is.
+For a value it does not know it reads typographic apostrophes as plain
+ones, and then looks for a country name at the end of the value, which
+settles an affiliation whose last comma is missing or whose country
+follows a postcode. Nothing is reclassified silently.
 To act on a row, add a decision to a decision sheet and rebuild; never edit
 a review sheet, the next build overwrites it.
 
@@ -272,7 +382,7 @@ a review sheet, the next build overwrites it.
 | `run_tests.R`, `tests/` | tests of the pipeline code | code review |
 | `removed-keys.csv` | articles deliberately removed from a dataset, with the reason | humans (curation) |
 | `pipeline/` | build, shared and writer functions of the pipeline | code review |
-| `helpers.R` | shared helpers (strict CSV reader, country cleaning, email masking, journal and term lists) | code review |
+| `helpers.R` | shared helpers (strict CSV reader, country lookup and cleaning, email masking, journal and term lists) | code review |
 | `update_sources.R` | entry point of the monthly acquisition | code review |
 | `monthly-data-update.md` | checklist of the monthly data update; a workflow opens it as an issue on the 5th of each month | code review |
 | `update-log.csv` | what each acquisition run added, one row per journal and run | `update_sources.R` |
@@ -287,10 +397,12 @@ a review sheet, the next build overwrites it.
 | `datapapers_screening.csv` | one row per candidate: `doi, title, journal, published_year, auto_relevant, include, reason` | frozen |
 | `datapapers_country_fixes.csv`, `datapapers_repo_fixes.csv` | corrections for data papers, keyed on `doi` | humans (curation) |
 | `washdev-country-fixes.csv`, `washdev-supp-type-fixes.csv`, `uncnewsletter-supp-fixes.csv` | decision sheets keyed on `paperid` | humans (curation) |
+| `ploswater-das-fixes.csv` | decision sheet of `das_type`, keyed on `doi` | humans (curation) |
 | `*-doi-backfill.csv`, `*-doi-review.csv` | Crossref DOI matches and the rows that did not match | frozen |
+| `journal_wash_share.csv` | the measured 1996 to 2026 WASH share and the indexing decision per candidate journal (#18, `adr/0001`), written once on 2026-07-23 | frozen |
 | `*-das-review.csv`, `*-country-review.csv` | review sheets | the build |
 | `dictionary.csv` | data dictionary rendered in the README and pkgdown site | with each schema change |
 
 The remaining scripts (`fair_scores.R`, `das_in_paper_*.R`, `suppfiles_*.R`,
-`washbiblio/`, `platforms/`) are analyses that read the built datasets. They
-are not part of the build pipeline.
+`coverage-assessment/`, `platforms/`) are analyses that read the built datasets.
+They are not part of the build pipeline.

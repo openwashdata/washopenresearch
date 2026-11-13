@@ -20,7 +20,9 @@ ploswater_raw_col_types <- function() {
 # PLOS statements are free-form; these rules map them onto the das_type
 # levels shared with the other datasets. Precedence: no data generated >
 # online repository > in paper > on request > not shareable. A statement no
-# rule catches stays NA and is listed in the review sheet.
+# rule catches stays NA and is listed in the review sheet. A statement the
+# rules cannot settle is decided by hand in the decision sheet
+# data-raw/ploswater-das-fixes.csv, see apply_ploswater_das_fixes().
 classify_ploswater_das <- function(has_das, das, das_repo_url) {
   detect <- function(pattern) {
     stringr::str_detect(das, stringr::regex(pattern, ignore_case = TRUE))
@@ -40,10 +42,27 @@ classify_ploswater_das <- function(has_das, das, das_repo_url) {
   factor(das_type, levels = das_type_levels())
 }
 
-# Build the dataset: the shared column layout, the das_type classification
-# and standardised countries.
-build_ploswater <- function(raw_file) {
-  read_strict_csv(raw_file, ploswater_raw_col_types()) |>
+# Apply the decision sheet of das_type (columns doi, das_type, reason): the
+# das_type of a listed article replaces the classified one. The value must
+# be one of the shared levels; `reason` says why, for the reader of the
+# sheet, and is not used.
+apply_ploswater_das_fixes <- function(data, das_fixes_file) {
+  sheet <- read_doi_sheet(das_fixes_file, data)
+  unknown <- setdiff(sheet$das_type[!is.na(sheet$das_type)], das_type_levels())
+  if (length(unknown) > 0) {
+    stop(das_fixes_file, " has a das_type that is not one of the shared levels: ",
+         paste(unknown, collapse = ", "), call. = FALSE)
+  }
+  data$das_type <- as.character(data$das_type)
+  data <- apply_decisions(data, sheet, "das_type", key = "doi")
+  data$das_type <- factor(data$das_type, levels = das_type_levels())
+  data
+}
+
+# Build the dataset: the shared column layout, the das_type classification,
+# the decisions of the das_type decision sheet and standardised countries.
+build_ploswater <- function(raw_file, das_fixes_file) {
+  data <- read_strict_csv(raw_file, ploswater_raw_col_types()) |>
     # Same column layout as the other datasets; PLOS has no site-specific
     # article number, so the DOI is the identifier.
     dplyr::mutate(paperid = doi, url_source = "journals.plos.org") |>
@@ -64,4 +83,5 @@ build_ploswater <- function(raw_file) {
         to_un_country_name(correspondence_author_affiliation_country)
     ) |>
     drop_author_emails()
+  apply_ploswater_das_fixes(data, das_fixes_file)
 }

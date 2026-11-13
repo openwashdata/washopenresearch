@@ -1,7 +1,7 @@
 #' Dataset about data availability in the journal AQUA
 #'
 #' AQUA - Water Infrastructure, Ecosystems and Society is an IWA journal. Coverage starts in 1998, the first year in the journal's online archive. The journal changed its title during this period; the dataset uses the current title for every year.
-#' The dataset is updated monthly. Each data release adds the journal issues published since the last one.
+#' Updates are on hold since October 2026, until IWA Publishing permits the client of this project. The dataset holds the journal issues collected up to version 0.5.0.
 #' Scraped from iwaponline.com by data-raw/iwa_scraping.R (#33).
 #'
 #' @format ## `aqua`

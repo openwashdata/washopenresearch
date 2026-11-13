@@ -25,7 +25,8 @@ library(httr)
 
 devtools::load_all(quiet = TRUE)
 
-MAILTO <- "lars@lse.de"
+source("data-raw/client.R")
+MAILTO <- client_contact()
 API_KEY <- Sys.getenv("OPENALEX_API_KEY")
 
 read_iwa <- function(path) {

@@ -15,7 +15,7 @@
 library(dplyr)
 library(readr)
 
-DIR <- "data-raw/washbiblio"
+DIR <- "data-raw/coverage-assessment"
 
 identifiers <- read_csv(file.path(DIR, "journal-identifiers.csv"),
                         show_col_types = FALSE)

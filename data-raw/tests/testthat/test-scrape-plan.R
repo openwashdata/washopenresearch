@@ -218,7 +218,8 @@ test_that("the update log records what a run added", {
     update_log_row("ws", before, after, finished = TRUE, date = as.Date("2026-11-05")),
     tibble::tibble(
       date = "2026-11-05", journal = "ws",
-      issues_added = 1L, rows_added = 3L, finished = TRUE
+      issues_added = 1L, rows_added = 3L, finished = TRUE,
+      user_agent = NA_character_
     )
   )
 })

@@ -93,6 +93,10 @@ list(
     format = "file"
   ),
   tar_target(
+    ploswater_das_fixes_file, "data-raw/ploswater-das-fixes.csv",
+    format = "file"
+  ),
+  tar_target(
     uncnewsletter_supp_fixes_file, "data-raw/uncnewsletter-supp-fixes.csv",
     format = "file"
   ),
@@ -133,7 +137,10 @@ list(
   dataset_target("ws", build_iwa(ws_raw_file, iwa_config("ws"))),
   dataset_target("jwh", build_iwa(jwh_raw_file, iwa_config("jwh"))),
   dataset_target("aqua", build_iwa(aqua_raw_file, iwa_config("aqua"))),
-  dataset_target("ploswater", build_ploswater(ploswater_raw_file)),
+  dataset_target(
+    "ploswater",
+    build_ploswater(ploswater_raw_file, das_fixes_file = ploswater_das_fixes_file)
+  ),
   dataset_target(
     "uncnewsletter",
     build_uncnewsletter(

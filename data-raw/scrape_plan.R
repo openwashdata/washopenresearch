@@ -145,13 +145,51 @@ snapshot_counts <- function(path) {
 # One row of data-raw/update-log.csv: what a run added to the snapshot of
 # one journal, from snapshot_counts() before and after the run. `finished`
 # is FALSE when the scraper stopped with an error; what it added until then
-# is in the snapshot and is counted.
-update_log_row <- function(journal, before, after, finished, date = Sys.Date()) {
+# is in the snapshot and is counted. `user_agent` is the string the run
+# identified with (data-raw/client.R), without the contact address: the
+# request carries the address, the committed log does not.
+update_log_row <- function(journal, before, after, finished, date = Sys.Date(),
+                           user_agent = NA_character_) {
   tibble::tibble(
     date = as.character(date),
     journal = journal,
     issues_added = after$issues - before$issues,
     rows_added = after$rows - before$rows,
-    finished = finished
+    finished = finished,
+    user_agent = without_contact(user_agent)
   )
+}
+
+# The identification string without the contact address, for the update
+# log: "washopenresearch/0.6.0 (https://...; <address>)" becomes
+# "washopenresearch/0.6.0 (https://...)". The log is committed, and no
+# address is committed. A string without an address stays as it is.
+without_contact <- function(user_agent) {
+  gsub("[;,]?\\s*[^\\s;,()]+@[^\\s;,()]+", "", user_agent, perl = TRUE)
+}
+
+# Append a row to the update log. A log written before the user_agent
+# column existed is read, given the column (NA for its rows) and written
+# again, so the file always has one header that fits every row.
+append_update_log <- function(row, path) {
+  if (!file.exists(path)) {
+    readr::write_csv(row, path)
+    return(invisible(row))
+  }
+  header <- names(readr::read_csv(path, n_max = 0, show_col_types = FALSE))
+  if (setequal(header, names(row))) {
+    readr::write_csv(row[header], path, append = TRUE)
+    return(invisible(row))
+  }
+  old <- readr::read_csv(
+    path, show_col_types = FALSE,
+    col_types = readr::cols(.default = readr::col_character())
+  )
+  for (missing in setdiff(names(row), names(old))) old[[missing]] <- NA_character_
+  combined <- dplyr::bind_rows(
+    dplyr::mutate(old, dplyr::across(dplyr::everything(), as.character)),
+    dplyr::mutate(row, dplyr::across(dplyr::everything(), as.character))
+  )
+  readr::write_csv(combined[names(row)], path)
+  invisible(row)
 }

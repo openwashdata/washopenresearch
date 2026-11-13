@@ -11,6 +11,7 @@ renv::load(quiet = TRUE)
 
 source("data-raw/helpers.R")
 source("data-raw/scrape_plan.R")
+source("data-raw/client.R")
 for (file in list.files("data-raw/pipeline", pattern = "[.]R$", full.names = TRUE)) {
   source(file)
 }

@@ -1,3 +1,102 @@
+# washopenresearch 0.6.0
+
+The first monthly data update. It adds 47 articles to `ploswater`. The four
+IWA journals (`washdev`, `ws`, `jwh`, `aqua`) were not updated in this
+release: since the scraper identifies itself, iwaponline.com refuses it,
+and the project does not fetch with a false user agent. A request to
+IWA Publishing for access is in preparation. Until access is settled,
+these four datasets hold the journal issues of version 0.5.0, and
+Water Supply volume 3, issue 4 stays missing from `ws`.
+
+## Coverage
+
+| Dataset | Updates | Articles | Years | Latest issue |
+|---|---|---:|---|---|
+| `washdev` | on hold | 1,174 | 2011 to 2026 | Vol. 16 Issue 6 |
+| `ws` | on hold | 4,884 | 2001 to 2026 | Vol. 26 Issue 6 |
+| `jwh` | on hold | 2,013 | 2003 to 2026 | Vol. 24 Issue 6 |
+| `aqua` | on hold | 1,819 | 1998 to 2026 | Vol. 75 Issue 6 |
+| `ploswater` | monthly | 481 | 2022 to 2026 | Vol. 5 Issue 11, published up to 2026-11-06 |
+| `uncnewsletter` | frozen | 173 | 2020 to 2023 | newsletter ceased in May 2024 |
+| `datapapers` | frozen | 8 | 2018 to 2025 | harvested on 23 July 2026 |
+
+What the update command added, from `data-raw/update-log.csv`:
+
+| Date | Journal | Issues added | Articles added | Finished |
+|---|---|---:|---:|---|
+| 2026-11-11 | `ploswater` | 4 | 47 | yes |
+
+## New data
+
+- `ploswater`: 47 articles are new, 434 become 481. 45 of them were
+  published between July and 6 November 2026 in volume 5 (36 research
+  articles, 4 essays, 3 opinions, 2 corrections, 1 retraction and 1 review
+  in all 47). The other two are articles that the unsorted paging of the
+  first download had skipped: 10.1371/journal.pwat.0000223 (volume 3,
+  issue 7) and 10.1371/journal.pwat.0000302 (volume 5, issue 5).
+- `washdev`: one article of volume 13, issue 12 that the journal added to
+  the issue after the first scrape is new (paperid 99266). The dataset has
+  1,174 articles.
+
+## Changes
+
+- Countries: the country lookup now reads a typographic apostrophe as a
+  plain one, and finds a country name at the end of an affiliation where a
+  region or a postcode stands before it without a comma ("Texas United
+  States of America", "NSW 2007 Australia"). A value the lookup already knew is
+  unchanged. 101 articles gain the country of the first author, the
+  correspondence author or both, where it was missing before: 60 in `ws`,
+  23 in `aqua`, 13 in `jwh`, 3 in `ploswater` and 2 in `washdev`. No
+  country value that was set before changed.
+- `ploswater`: the statements of 10.1371/journal.pwat.0000524 and
+  10.1371/journal.pwat.0000527 are classified "on request" by decision,
+  recorded in the new decision sheet `data-raw/ploswater-das-fixes.csv`.
+  Both restrict the data for ethical reasons and send requests to an ethics
+  committee.
+
+## Data acquisition
+
+- The update log `data-raw/update-log.csv` records the identification
+  string of a run without the contact address. The requests still carry
+  the address.
+- The checklist of the monthly update and `data-raw/README.md` are
+  corrected after the first run: the update fetches PLOS Water only while
+  the IWA journals are on hold, the release tags are fetched with
+  `--force`, the packages are restored when the project library is empty,
+  and each dataset's decision sheets are listed.
+
+## Personal data
+
+- The git history was rewritten on 2026-10-05 to remove the author email
+  addresses that the raw snapshots and the dataset exports of the versions
+  before 0.4.0 carried (#94). In every earlier commit the two email columns
+  are blank and addresses inside text read `[email removed]@<domain>`; the
+  datasets of 0.4.0 and later never had the columns, and the raw file of
+  `uncnewsletter` lost them on 2026-10-04. Every commit hash changed, so a
+  clone made before the rewrite has to be cloned again. The file of the
+  Zenodo archive of v0.0.1, a source archive of that tag, still holds the
+  addresses until Zenodo removes it on the maintainer's request.
+
+## Bug fixes
+
+- `washdev`: eight articles had no author data, and their rows could not be
+  told apart from a failed scrape, because the earlier scraper wrote the
+  same row in both cases. All eight were scraped again with the scraper
+  that writes a row only for a page it has read (#72).
+
+  - Article 99218 (volume 13, issue 12) was incomplete. It now has its nine
+    authors, its data availability statement ("in paper"), its keywords and
+    the countries of its authors.
+  - The corrigendum 96121 (volume 13, issue 7) now has its six authors, the
+    name and ORCID iD of its first author, and its DOI.
+  - Six rows are confirmed as they were: the two letters to the editor
+    30083 and 30084, the corrigendum 30156, the erratum 73058, the
+    editorial 80712 and the obituary 90481. Their pages have no author card
+    and no data availability statement.
+  - The DOI of the letter 30084 is corrected to 10.2166/washdev.2014.103.
+    The title search that filled missing DOIs had given it the DOI of the
+    other letter with the same title.
+
 # washopenresearch 0.5.0
 
 This release makes the build of the datasets reproducible and prepares
