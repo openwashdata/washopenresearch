@@ -81,18 +81,23 @@ library(washopenresearch)
 
 ### Coverage and updates
 
-Five datasets are updated monthly. Each data release adds the journal
-issues published since the last one. `uncnewsletter` and `datapapers`
-are frozen: they are still built with every release but no longer
-updated. The table shows what each dataset covers in this version.
+`ploswater` is updated monthly: each data release adds the articles
+published since the last one. The four datasets of the IWA journals
+(`washdev`, `ws`, `jwh`, `aqua`) are on hold since October 2026. The
+journal site refuses the client of this project since it identifies
+itself, and a request to IWA Publishing for access is in preparation.
+Until access is settled, these datasets hold the journal issues of
+version 0.5.0. `uncnewsletter` and `datapapers` are frozen. They are
+still built with every release but no longer updated. The table shows
+what each dataset covers in this version.
 
 | Dataset | Updates | Articles | Years | Latest issue |
 |:---|:---|---:|:---|:---|
-| `washdev` | monthly | 1,173 | 2011 to 2026 | Vol. 16 Issue 6 |
-| `ws` | monthly | 4,884 | 2001 to 2026 | Vol. 26 Issue 6 |
-| `jwh` | monthly | 2,013 | 2003 to 2026 | Vol. 24 Issue 6 |
-| `aqua` | monthly | 1,819 | 1998 to 2026 | Vol. 75 Issue 6 |
-| `ploswater` | monthly | 434 | 2022 to 2026 | Vol. 5 Issue 7, published up to 2026-07-06 |
+| `washdev` | on hold | 1,174 | 2011 to 2026 | Vol. 16 Issue 6 |
+| `ws` | on hold | 4,884 | 2001 to 2026 | Vol. 26 Issue 6 |
+| `jwh` | on hold | 2,013 | 2003 to 2026 | Vol. 24 Issue 6 |
+| `aqua` | on hold | 1,819 | 1998 to 2026 | Vol. 75 Issue 6 |
+| `ploswater` | monthly | 481 | 2022 to 2026 | Vol. 5 Issue 11, published up to 2026-11-06 |
 | `uncnewsletter` | frozen | 173 | 2020 to 2023 | newsletter ceased in May 2024 |
 | `datapapers` | frozen | 8 | 2018 to 2025 | harvested on 23 July 2026 |
 
@@ -100,7 +105,7 @@ updated. The table shows what each dataset covers in this version.
 
 The dataset `washdev` contains data on open access articles of the
 *Journal of Water, Sanitation & Hygiene for Development* (Vol. 1 Issue 1
-to Vol. 16 Issue 6). It has 1173 observations from March 2011 to 2026.
+to Vol. 16 Issue 6). It has 1174 observations from March 2011 to 2026.
 
 ``` r
 
@@ -371,7 +376,7 @@ For an overview of the variable descriptions, see the following table.
 The dataset `ploswater` contains data on all articles of the journal
 [*PLOS Water*](https://journals.plos.org/water/) from its first volume
 (2022) onward, collected through the public PLOS API rather than web
-scraping. It has 434 observations. Data availability statements are
+scraping. It has 481 observations. Data availability statements are
 mandatory at PLOS, so the interesting variation lies in `das_type`,
 `das_repo_url`, and `das_repo_name`, which describe how and where the
 data behind each article is stored. All article types are included; use
@@ -630,6 +635,43 @@ annotator follows the guide to fill in the value on an collaborative
 spreadsheet. The guide is converted into the data dictionary for this
 dataset.
 
+## Data acquisition, legal basis and ethics
+
+**What is collected, from where.** For each article: bibliographic
+metadata, the data availability statement, the supplementary material
+facts, author names, affiliations and ORCID iDs, and keywords. PLOS
+Water comes from the PLOS search API and the article XML. The four IWA
+journals come from paced crawling of open access article pages on
+iwaponline.com, which offers no API; IWA’s rights page states that its
+open access licences allow crawling. `datapapers` came from the Crossref
+and Europe PMC APIs, `uncnewsletter` from the newsletter archive by
+hand; both are frozen.
+
+**What is not collected.** Author email addresses left the datasets in
+0.4.0 and the raw snapshots in 0.5.0; earlier releases and the git
+history still carry them (#94 plans their removal). Access tokens,
+passwords and signed links inside statements are removed before storage.
+
+**Legal basis.** Reproduction for scientific research under Article 24d
+of the Swiss Copyright Act (the package is maintained in Switzerland)
+and, in the publishers’ jurisdictions, text and data mining for research
+under Articles 3 and 4 of EU Directive 2019/790 and section 29A of the
+UK Copyright, Designs and Patents Act. The data are bibliographic facts
+under CC BY 4.0. Abstracts in `datapapers` keep the licence of their
+article; Data in Brief articles can be CC BY-NC-ND.
+
+**How the clients behave.** Every client identifies the project, version
+and contact address, checks each host’s robots.txt before a run, honours
+its crawl delay and paces its requests. No client presents a false user
+agent; a site that refuses the identified client stops the run. Details
+in `data-raw/README.md`.
+
+**Personal data kept, and corrections.** Names, affiliations and ORCID
+iDs stay because the research questions use author country and
+attribution. To correct or remove an entry, write to the maintainer
+named in `DESCRIPTION` or open an issue; the change lands in the next
+release.
+
 ## License
 
 Data are available as
@@ -662,6 +704,6 @@ citation("washopenresearch")
 #>     url = {https://github.com/openwashdata/washopenresearch},
 #>     abstract = {The goal of washopenresearch is to provide an overview of open research data related to Water Sanitation and Hygiene (WASH). The package provides access to seven datasets: `washdev`, `ws`, `jwh`, `aqua`, `uncnewsletter`, `ploswater`, and `datapapers`. Each dataset collects information on scientific articles about (1) article metadata (e.g. title, first author, correspondence author), (2) supplementary material information, (3) data availability statement, and (4) semantic information (e.g. keywords).},
 #>     keywords = {open-data,open-research-data,open-science,openwashdata,sanitation,wash},
-#>     version = {0.5.0},
+#>     version = {0.6.0},
 #>   }
 ```

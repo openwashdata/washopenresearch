@@ -64,7 +64,7 @@ classified <- das_in_paper_support(washdev)
 table(classified$das_in_paper_support, useNA = "ifany")
 #> 
 #>           no supplement   structured supplement unstructured supplement 
-#>                     212                     139                      12 
+#>                     213                     140                      12 
 #>                    <NA> 
-#>                     810 
+#>                     809 
 ```

@@ -37,7 +37,7 @@ washdev_2023 <- washdev |>
 ```
 
 Using the dataset `washdev` from the `washopenresearch` data package,
-this example investigates the “Data Availability Statement” from 932
+this example investigates the “Data Availability Statement” from 933
 articles published in the Journal of Water, Sanitation and Hygiene for
 Development from 2011 to 2023.
 
@@ -99,7 +99,7 @@ analysis.
 ``` r
 
 glimpse(washdev_2023)
-#> Rows: 932
+#> Rows: 933
 #> Columns: 27
 #> $ paperid                                   <int> 28742, 28745, 28743, 28744, …
 #> $ volume                                    <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
@@ -167,9 +167,9 @@ washdev_das_type_n
 #>   das_policy    das_type                           n
 #>   <chr>         <chr>                          <int>
 #> 1 2020 or later available in online repository    27
-#> 2 2020 or later available in paper               217
+#> 2 2020 or later available in paper               219
 #> 3 2020 or later available on request              64
-#> 4 2020 or later missing                           61
+#> 4 2020 or later missing                           60
 #> 5 pre-2020      missing                          563
 ```
 
@@ -235,7 +235,7 @@ fig_das_type
   or later, when a policy was introduced that requires authors to select
   one of the three data availability statements
 
-- After that policy was introduced, we still found 17% of papers without
+- After that policy was introduced, we still found 16% of papers without
   a data availability statement, while 59% of articles stated that data
   was available in the paper, which could also be as supplementary
   material
@@ -280,8 +280,8 @@ washdev_supp_file_type_n
 #>  2 available in online repository missing            8
 #>  3 available in online repository pdf                2
 #>  4 available in online repository xlsx               2
-#>  5 available in paper             docx              83
-#>  6 available in paper             missing          125
+#>  5 available in paper             docx              84
+#>  6 available in paper             missing          126
 #>  7 available in paper             pdf                7
 #>  8 available in paper             png                1
 #>  9 available in paper             pptx               4
@@ -289,7 +289,7 @@ washdev_supp_file_type_n
 #> 11 available on request           docx              33
 #> 12 available on request           missing           29
 #> 13 available on request           pdf                2
-#> 14 missing                        docx              13
+#> 14 missing                        docx              12
 #> 15 missing                        docx, xlsx         4
 #> 16 missing                        missing           42
 #> 17 missing                        pdf                3
@@ -330,8 +330,8 @@ tbl_supp_type |>
 |----------------------------------------|-----|------|
 | Articles published 2020 or later       |     |      |
 | file type                              | n¹  | %    |
-| missing                                | 204 | 50.9 |
-| docx                                   | 150 | 37.4 |
+| missing                                | 205 | 51.0 |
+| docx                                   | 150 | 37.3 |
 | xlsx                                   | 24  | 6.0  |
 | pdf                                    | 14  | 3.5  |
 | docx, xlsx                             | 4   | 1.0  |

@@ -43,14 +43,12 @@ ggplot(data = washdev, aes(x = num_authors)) +
   labs(title = "Number of authors",
        subtitle = "from publications of The Journal of Water Sanitation and Hygiene for Development",
        x = "Number of Authors", y = "Count")
-#> Warning: Removed 1 row containing non-finite outside the scale range
-#> (`stat_bin()`).
 ```
 
 ![](examples_files/figure-html/num_author-1.png)
 
 Are first author and correspondence author from the same country? Yes,
-only 54 are from different countries.
+only 55 are from different countries.
 
 What are the top 10 countries(or regions) the first authors from?
 

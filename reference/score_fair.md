@@ -90,5 +90,5 @@ scored <- score_fair(ploswater)
 table(scored$fair_total)
 #> 
 #>   0   2   3   4   5   6   7   8 
-#>  94  11  27  47 136  45  71   3 
+#> 105  12  30  49 147  54  81   3 
 ```
